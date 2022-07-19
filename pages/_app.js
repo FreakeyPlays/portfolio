@@ -2,12 +2,12 @@ import '../styles/globals.css'
 import Font from '../components/font'
 import MainLayout from '../components/layouts/main'
 
-const Portfolio = ({ Component, pageProps, router }) => {
+const Portfolio = ({ Component, pageProps }) => {
   return (
     <>
       <Font />
       <MainLayout>
-        <Component {...pageProps} key={router.route} />
+        <Component {...pageProps} />
       </MainLayout>
     </>
   )

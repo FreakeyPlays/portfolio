@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import NavBar from '../navbar'
 
 const Main = ({ children }) => {
   return (
@@ -30,7 +31,11 @@ const Main = ({ children }) => {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
 
-      <div>{children}</div>
+      <NavBar />
+
+      <main id="main_container" className="overflow-x-hidden">
+        {children}
+      </main>
     </div>
   )
 }
