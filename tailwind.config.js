@@ -19,7 +19,8 @@ module.exports = {
       },
       colors: {
         "l-bg": "#FFFFFF",
-        "d-bg": "#212124"
+        "d-bg": "#212124",
+        "primary": "#81B622"
       }
     },
     screens: {
