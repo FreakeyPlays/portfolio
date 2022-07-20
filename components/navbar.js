@@ -38,13 +38,13 @@ const NavBar = () => {
 
     return(
         <>
-            <div className="w-24 xl:w-[90vw] h-[80vh] xl:h-24 max-h-[calc(1080px-256px)] fixed rounded-xl rainbow_gradient opacity-50 filter blur-3xl 
+            <div className="w-24 xl:w-[90vw] h-[80vh] xl:h-24 max-h-[calc(1080px-256px)] fixed rounded-xl rainbow_gradient opacity-40 filter blur-3xl 
                             right-0 xl:right-1/2 bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-[-50%] xl:translate-x-[50%] mr-8">
             </div>
             <nav className="w-32 xl:w-[90vw] h-[80vh] xl:h-24 max-h-[calc(1080px-256px)] fixed flex flex-col xl:flex-row right-0 xl:right-1/2 
                             xl:translate-x-[50%] bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-0 mr-8 xl:mr-0 xl:mb-8 rounded-2xl
-                          bg-white bg-opacity-30 bg-clip-padding backdrop-filter backdrop-blur-xl outline outline-2 outline-white 
-                            outline-offset-8"
+                            bg-gradient-to-br from-[#ffffff26] to-[#ffffff0d] border-[1px] border-[#ffffff2e] border-solid bg-clip-padding 
+                            backdrop-filter backdrop-blur-xl shadow-md outline outline-2 outline-white outline-offset-8"
             >
                 <div className="w-32 xl:w-24 h-32 xl:h-24 flex flex-col justify-center items-center">
                     <Link href="/">
