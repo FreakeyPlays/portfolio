@@ -8,7 +8,19 @@
   }
 }
 
-.active::before{
+.text-format {
+  @apply text-black dark:text-white opacity-[87%];
+}
+
+.Typewriter {
+  @apply dark:text-white text-6xl xl:text-5xl md:text-3xl font-bold text-format;
+}
+
+.Typewriter span span {
+  @apply text-l-primary dark:text-d-primary;
+}
+
+.active::before {
   width: 100% !important;
   right: auto;
   left: 0;

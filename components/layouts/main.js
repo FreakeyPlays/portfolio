@@ -3,7 +3,7 @@ import NavBar from '../navbar'
 
 const Main = ({ children }) => {
   return (
-    <div>
+    <main className="">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -33,10 +33,10 @@ const Main = ({ children }) => {
 
       <NavBar />
 
-      <main id="main_container" className="overflow-x-hidden">
+      <div id="main_container" className="overflow-x-hidden">
         {children}
-      </main>
-    </div>
+      </div>
+    </main>
   )
 }
 
