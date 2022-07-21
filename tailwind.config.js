@@ -1,9 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   darkMode: "class",
   content: [
-    './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}'
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
@@ -17,10 +17,15 @@ module.exports = {
           "100%": { width: "0", left: "auto", right: "0" }
         }
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
+      },
       colors: {
-        "l-bg": "#FFFFFF",
-        "d-bg": "#212124",
-        "primary": "#81B622"
+        "l-bg": "#D3D3D1",
+        "d-bg": "#141616",
+        "l-primary": "#81B622",
+        "d-primary": "#8bc225",
+        "comment": "#7D7F80"
       }
     },
     screens: {

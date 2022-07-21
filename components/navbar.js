@@ -19,7 +19,8 @@ const NavItem = ( {link} ) => {
         <div className="w-24" data-section={link}>
             <Link href={"#" + link}>
                 <a className="text-white font-bold relative uppercase before:content-[''] before:absolute
-                                before:w-full before:h-1 before:bg-primary before:top-[60%] before:translate-y-[-50%]
+                                before:w-full before:h-1 before:bg-l-primary before:dark:bg-d-primary 
+                                before:top-[60%] before:translate-y-[-50%]
                                 before:animate-[out_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
                                 hover:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
                                 focus:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]"> 
@@ -49,7 +50,7 @@ const NavBar = () => {
                 <div className="w-32 xl:w-24 h-32 xl:h-24 flex flex-col justify-center items-center">
                     <Link href="/">
                         <a className="w-24 xl:w-16 h-24 xl:h-16 p-1 rounded-full border-4 border-solid border-white drop-shadow-xl 
-                                    hover:border-primary focus:border-primary">
+                                      hover:border-l-primary focus:border-l-primary dark:hover:border-d-primary dark:focus:border-d-primary">
                             <Image 
                                 src="/images/profile_image.png"
                                 alt="Profile image"
