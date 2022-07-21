@@ -5,7 +5,7 @@ const Main = ({ children }) => {
   return (
     <div>
       <Head>
-        <meta name="viewport" content="width-device-widh, inital-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="My personal developer Portfolio. Here you can learn something about me and my skills."
