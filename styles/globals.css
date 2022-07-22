@@ -12,6 +12,18 @@
   @apply text-black dark:text-white opacity-[87%];
 }
 
+.paragraph{
+  @apply text-format text-xl xl:text-lg md:text-base
+}
+
+.voxel-sizes{
+  @apply h-[640px] w-[640px] xl:h-[480px] xl:w-[480px] md:h-[280px] md:w-[280px]
+}
+
+.section{
+  @apply w-full h-screen flex flex-col justify-center
+}
+
 .Typewriter {
   @apply dark:text-white text-6xl xl:text-5xl md:text-3xl font-bold text-format;
 }

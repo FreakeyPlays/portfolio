@@ -3,7 +3,7 @@ import NavBar from '../navbar'
 
 const Main = ({ children }) => {
   return (
-    <main className="">
+    <main>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
