@@ -9,8 +9,8 @@
 }
 
 :root{
-  --career-indicator: 60px;
-  --career-left: 0px
+  --list-indicator: 60px;
+  --list-left: 0px
 }
 
 .text-format {
