@@ -28,7 +28,7 @@ const NavItem = ({ link }) => {
         <a
           className="text-white font-bold relative uppercase before:content-[''] before:absolute
                        before:w-full before:h-1 before:bg-l-primary before:dark:bg-d-primary 
-                       before:top-[60%] before:translate-y-[-50%]
+                       before:top-[55%] before:translate-y-[-50%]
                        before:animate-[out_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
                        hover:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
                        focus:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]"
