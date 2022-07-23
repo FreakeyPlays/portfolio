@@ -26,6 +26,12 @@ module.exports = {
         'l-primary': '#81B622',
         'd-primary': '#8bc225',
         comment: '#7D7F80'
+      },
+      height: {
+        'career-indicator': 'var(--career-indicator)'
+      },
+      inset: {
+        'career': 'var(--career-left)'
       }
     },
     screens: {

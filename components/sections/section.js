@@ -1,7 +1,7 @@
 const Section = ( {children, title} ) => {
     return(
         <div id={title} className="section">
-            <div className="w-fit relative">
+            <div className="w-fit relative mb-4">
                 <h1 
                     className="text-l-primary dark:text-d-primary opacity-[87%] font-bold uppercase text-5xl 
                                  lg:text-3xl sm:text-xl after:content-[''] after:bg-d-bg after:dark:bg-l-bg 

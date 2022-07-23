@@ -8,6 +8,11 @@
   }
 }
 
+:root{
+  --career-indicator: 60px;
+  --career-left: 0px
+}
+
 .text-format {
   @apply text-black dark:text-white opacity-[87%];
 }
