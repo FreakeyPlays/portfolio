@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Footer from '../footer'
 import NavBar from '../navbar'
+import ThemeToggle from '../themeToggle'
 
 const Main = ({ children }) => {
   return (
@@ -40,6 +41,7 @@ const Main = ({ children }) => {
                    bg-[radial-gradient(rgba(100,100,100,0.25)_15%,transparent_15%)] 
                    px-64 xl:px-32 md:px-6 min-h-screen"
       >
+        <ThemeToggle />
         {children}
         <Footer />
       </div>
