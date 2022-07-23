@@ -1,9 +1,10 @@
 import Head from 'next/head'
+import Footer from '../footer'
 import NavBar from '../navbar'
 
 const Main = ({ children }) => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -33,8 +34,14 @@ const Main = ({ children }) => {
 
       <NavBar />
 
-      <div id="main_container" className="overflow-x-hidden">
+      <div 
+        id="main_container" 
+        className="w-screen h-fit bg-l-bg dark:bg-d-bg bg-[length:1vh_1vh] 
+                   bg-[radial-gradient(rgba(100,100,100,0.25)_15%,transparent_15%)] 
+                   px-64 xl:px-32 md:px-6"
+      >
         {children}
+        <Footer />
       </div>
     </main>
   )
