@@ -33,7 +33,7 @@ const ThemeToggle = () => {
                 <input 
                     type="checkbox" 
                     className="opacity-0 w-0 h-0 peer"
-                    checked={checked}
+                    defaultChecked={checked}
                     onClick={() => toggleTheme()}
                 />
                 <span 
