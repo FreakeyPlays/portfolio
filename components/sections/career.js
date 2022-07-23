@@ -15,7 +15,6 @@ const Career = () => {
                            after:content-[''] after:h-career-indicator after:w-1 after:top-career after:bg-l-primary after:dark:bg-d-primary 
                            after:absolute after:left-full after:-translate-x-1/2 after:rounded after:transition-all after:ease-in-out 
                            after:duration-500"
-                onScroll={e => console.log(e)}
                 >
                 {(Object.entries(careerContent) || []).map(( [key] ) => {
                     return(
