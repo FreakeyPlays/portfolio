@@ -30,7 +30,7 @@
 }
 
 .voxel-sizes{
-  @apply h-[640px] w-[640px] xl:h-[480px] xl:w-[480px] md:h-[280px] md:w-[280px]
+  @apply h-[640px] w-[640px] xl:h-[480px] xl:w-[480px] md:h-[320px] md:w-[320px]
 }
 
 .section{
