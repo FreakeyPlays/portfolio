@@ -38,8 +38,8 @@ const ThemeToggle = () => {
                 />
                 <span 
                     className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#f4f4f5] duration-500 rounded-[30px]
-                            before:content-[''] before:absolute before:h-6 before:w-6 before:rounded-full before:left-[0.3rem]
-                            before:bottom-[0.3rem] before:bg-gradient-to-br before:from-[#ffd000] before:to-[#ff8c00]
+                            before:content-[''] before:absolute before:h-6 before:w-6 before:rounded-full before:left-[0.25rem]
+                            before:bottom-[0.25rem] before:bg-gradient-to-br before:from-[#ffd000] before:to-[#ff8c00]
                             before:duration-500 peer-checked:bg-[#303136] peer-checked:before:translate-x-6
                             peer-checked:before:from-[#303136] peer-checked:before:to-[#303136] 
                             peer-checked:before:shadow-[inset_-3px_-2px_5px_-2px_#8983f7,inset_-10px_-5px_0_0_#a3dafb]"
