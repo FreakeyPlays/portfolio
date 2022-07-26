@@ -28,7 +28,7 @@ const ThemeToggle = () => {
     }
 
     return(
-        <div className="absolute mt-8">
+        <div className="absolute mt-8 z-10">
             <label className="text-[17px] relative inline-block w-14 h-8">
                 <input 
                     type="checkbox" 
