@@ -1,23 +1,23 @@
 {
-    "university": {
-        "title": "Software Engineer and Media Computer (B.Eng)",
-        "institute": "Hochschule Esslingen",
-        "startDate": "Sep 2020",
-        "endDate": "today",
-        "text": "At the University, I am learning specific subjects regarding Software Engineering and Media Computing. Here I learned new technologies like C/C++, Python and React."
-    },
-    "abitur": {
-        "title": "Technical College Entrance Qualification",
-        "institute": "Gottlieb-Daimler-Schule 2",
-        "startDate": "Sep 2017",
-        "endDate": "Jun 2019",
-        "text": "At College, I extended my knowledge from my High School. Additionally, I learned new subjects like Informatics and Web Development (HTML,CSS,JS). I also learned to use the Adobe Software like PhotoShop, Illustrator and InDesign."
-    },
-    "secondary school": {
-        "title": "High School Diploma",
-        "institute": "Realschule Ditzingen",
-        "startDate": "Sep 2011",
-        "endDate": "Jun 2017",
-        "text": "In High school I learned the basic subjects like Math, English, German and also completed the ECDL-certificate. Here I learned how to use the Microsoft Office Software like Excel, Word and PowerPoint."
-    }
+  "university": {
+    "title": "Software Engineer and Media Computer (B.Eng)",
+    "institute": "Hochschule Esslingen",
+    "startDate": "Sep 2020",
+    "endDate": "today",
+    "text": "At the University, I am learning specific subjects regarding Software Engineering and Media Computing. Here I learned new technologies like C/C++, Python and React."
+  },
+  "abitur": {
+    "title": "Technical College Entrance Qualification",
+    "institute": "Gottlieb-Daimler-Schule 2",
+    "startDate": "Sep 2017",
+    "endDate": "Jun 2019",
+    "text": "At College, I extended my knowledge from my High School. Additionally, I learned new subjects like Informatics and Web Development (HTML,CSS,JS). I also learned to use the Adobe Software like PhotoShop, Illustrator and InDesign."
+  },
+  "secondary school": {
+    "title": "High School Diploma",
+    "institute": "Realschule Ditzingen",
+    "startDate": "Sep 2011",
+    "endDate": "Jun 2017",
+    "text": "In High school I learned the basic subjects like Math, English, German and also completed the ECDL-certificate. Here I learned how to use the Microsoft Office Software like Excel, Word and PowerPoint."
+  }
 }

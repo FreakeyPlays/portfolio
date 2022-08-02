@@ -28,8 +28,7 @@ const Intro = () => {
           Currently, I am studying software engineering and media computing at
           University
           <br />
-          Esslingen. My interests are software development and game
-          development.
+          Esslingen. My interests are software development and game development.
         </div>
       </div>
     </div>

@@ -2,9 +2,7 @@ import { forwardRef } from 'react'
 
 export const ModelLoader = () => {
   return (
-    <div
-      className="flex justify-center items-center voxel-sizes"
-    >
+    <div className="flex justify-center items-center voxel-sizes">
       <div
         className="w-8 h-8 border-4 border-white border-solid rounded-full animate-spin border-t-transparent"
         role="status"

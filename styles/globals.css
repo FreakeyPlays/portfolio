@@ -8,42 +8,42 @@
   }
 }
 
-:root{
+:root {
   --list-indicator: 60px;
-  --list-left: 0px
+  --list-left: 0px;
 }
 
 .text-format {
   @apply text-black dark:text-white opacity-[87%];
 }
 
-.paragraph{
-  @apply text-format text-xl xl:text-lg md:text-base
+.paragraph {
+  @apply text-format text-xl xl:text-lg md:text-base;
 }
 
-.text-footer{
-  @apply text-format text-lg md:text-base sm:text-sm font-bold
+.text-footer {
+  @apply text-format text-lg md:text-base sm:text-sm font-bold;
 }
 
-.text-footer-copyright{
-  @apply text-format text-base md:text-xs
+.text-footer-copyright {
+  @apply text-format text-base md:text-xs;
 }
 
-.voxel-sizes{
-  @apply h-[640px] w-[640px] xl:h-[480px] xl:w-[480px] md:h-[320px] md:w-[320px]
+.voxel-sizes {
+  @apply h-[640px] w-[640px] xl:h-[480px] xl:w-[480px] md:h-[320px] md:w-[320px];
 }
 
-.section{
-  @apply w-full h-screen flex flex-col justify-center
+.section {
+  @apply w-full h-screen flex flex-col justify-center;
 }
 
-.hover-effect{
+.hover-effect {
   @apply before:content-[''] before:absolute
   before:w-full before:h-[3px] before:bg-l-primary before:dark:bg-d-primary 
   before:top-[50%] before:translate-y-[-50%]
   before:animate-[out_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
   hover:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
-  focus:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both]
+  focus:before:animate-[in_0.2s_cubic-bezier(1,0,0.58,0.97)_1_both];
 }
 
 .Typewriter {
@@ -101,7 +101,7 @@ html::-webkit-scrollbar {
 }
 
 html::-webkit-scrollbar-track {
-  background-color: #D3D3D1;
+  background-color: #d3d3d1;
 }
 
 html.dark::-webkit-scrollbar-track {
