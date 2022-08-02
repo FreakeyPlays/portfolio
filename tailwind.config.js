@@ -25,13 +25,14 @@ module.exports = {
         'd-bg': '#141616',
         'l-primary': '#81B622',
         'd-primary': '#8bc225',
-        'comment': '#7D7F80'
+        comment: '#7D7F80',
+        languageColor: 'var(--languageColor)'
       },
       height: {
         'list-indicator': 'var(--list-indicator)'
       },
       inset: {
-        'list': 'var(--list-left)'
+        list: 'var(--list-left)'
       }
     },
     screens: {
