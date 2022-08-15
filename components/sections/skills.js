@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import Image from 'next/image'
+import { useState } from 'react'
 import Section from './section'
 import skillsContent from './skills.content.json'
 
@@ -13,10 +13,10 @@ const Skills = () => {
       <div className="w-3/4 lg:w-full flex flex-row">
         <div
           className="border-r-2 border-d-bg dark:border-l-bg border-opacity-50 dark:border-opacity-50 
-                               border-solid overflow-x-show flex flex-col w-[160px] relative h-fit
-                               after:content-[''] after:h-list-indicator after:w-1 after:top-list after:bg-l-primary after:dark:bg-d-primary 
-                               after:absolute after:left-full after:-translate-x-1/2 after:rounded after:transition-all after:ease-in-out 
-                               after:duration-500"
+                     border-solid overflow-x-show flex flex-col w-[160px] relative h-fit
+                     after:content-[''] after:h-list-indicator after:w-1 after:top-list after:bg-l-primary after:dark:bg-d-primary 
+                     after:absolute after:left-full after:-translate-x-1/2 after:rounded after:transition-all after:ease-in-out 
+                     after:duration-500"
         >
           {(Object.entries(skillsContent) || []).map(([key]) => {
             return (
@@ -46,12 +46,10 @@ const Skills = () => {
               <div
                 key={'content-' + key}
                 className={`text-format grid grid-cols-[repeat(auto-fit,minmax(32px,128px))] gap-4 
-                                        md:grid-cols-[repeat(auto-fit,48px)]
-                                        ${
-                                          key.toString() === selectedSection
-                                            ? ''
-                                            : 'hidden'
-                                        }`}
+                            md:grid-cols-[repeat(auto-fit,48px)]
+                            ${
+                              key.toString() === selectedSection ? '' : 'hidden'
+                            }`}
               >
                 {(Object.entries(value) || []).map(
                   ([secondKey, secondValue]) => {
@@ -59,9 +57,9 @@ const Skills = () => {
                       <div
                         key={'item-' + secondKey}
                         className="bg-gradient-to-t from-l-bg dark:from-d-bg to-[#ebebea99] dark:to-[#24272799] 
-                                                   p-4 md:p-2 rounded-xl flex flex-col gap-2 justify-between items-center border-solid border-[1px] 
-                                                   border-l-bg dark:border-d-bg divide-y-2 divide-comment
-                                                    lg:divide-y-0 shadow"
+                                   p-4 md:p-2 rounded-xl flex flex-col gap-2 justify-between items-center 
+                                   border-solid border-[1px] border-l-bg dark:border-d-bg divide-y-2 
+                                   divide-comment lg:divide-y-0 shadow"
                       >
                         <Image
                           src={secondValue}

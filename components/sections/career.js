@@ -12,10 +12,10 @@ const Career = () => {
       <div className="w-3/4 md:w-full flex flex-row">
         <div
           className="border-r-2 border-d-bg dark:border-l-bg border-opacity-50 dark:border-opacity-50 
-                           border-solid overflow-x-show flex flex-col w-[160px] relative h-fit
-                           after:content-[''] after:h-list-indicator after:w-1 after:top-list after:bg-l-primary after:dark:bg-d-primary 
-                           after:absolute after:left-full after:-translate-x-1/2 after:rounded after:transition-all after:ease-in-out 
-                           after:duration-500"
+                     border-solid overflow-x-show flex flex-col w-[160px] relative h-fit after:content-[''] 
+                     after:h-list-indicator after:w-1 after:top-list after:bg-l-primary after:dark:bg-d-primary 
+                     after:absolute after:left-full after:-translate-x-1/2 after:rounded after:transition-all 
+                     after:ease-in-out after:duration-500"
         >
           {(Object.entries(careerContent) || []).map(([key]) => {
             return (

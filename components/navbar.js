@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 import {
   IoLogoGithub,
   IoLogoLinkedin,
-  IoLogoXing,
-  IoLogoTwitter
+  IoLogoTwitter,
+  IoLogoXing
 } from 'react-icons/io'
 import { enableNavBarLogic } from '../lib/navLogic'
 

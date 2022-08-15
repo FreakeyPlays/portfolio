@@ -1,7 +1,7 @@
-import { IoIosStar, IoIosGitNetwork, IoIosLink } from 'react-icons/io'
-import Clamp from 'react-multiline-clamp'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { IoIosGitNetwork, IoIosLink, IoIosStar } from 'react-icons/io'
+import Clamp from 'react-multiline-clamp'
 
 const RepoCount = ({ Icon, count }) => {
   return (
@@ -27,8 +27,8 @@ const GitCard = ({ rep }) => {
     <div
       key={rep.repo}
       className="w-full h-full rounded-xl bg-gradient-to-t from-l-bg dark:from-d-bg to-[#ebebea99] dark:to-[#24272799] top-0
-                       border-solid border-2 border-l-bg dark:border-d-bg flex flex-col text-forma aspect-square overflow-hidden
-                       relative hover:-top-2 transition-all duration-500 ease-in-out shadow-lg dark:shadow-[#33333381]"
+                 border-solid border-2 border-l-bg dark:border-d-bg flex flex-col text-forma aspect-square overflow-hidden
+                 relative hover:-top-2 transition-all duration-500 ease-in-out shadow-lg dark:shadow-[#33333381]"
     >
       <div className="relative w-full h-full">
         <Link href={rep.link}>

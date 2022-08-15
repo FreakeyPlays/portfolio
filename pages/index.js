@@ -1,6 +1,6 @@
 import Intro from '../components/intro'
-import Skills from '../components/sections/skills'
 import Career from '../components/sections/career'
+import Skills from '../components/sections/skills'
 import Work from '../components/sections/work'
 
 const Page = ({ repos }) => {

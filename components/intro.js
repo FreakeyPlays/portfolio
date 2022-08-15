@@ -1,5 +1,5 @@
-import TypewriterComponent from 'typewriter-effect'
 import dynamic from 'next/dynamic'
+import TypewriterComponent from 'typewriter-effect'
 import Loader from './VoxelModelLoader'
 
 const LazyVoxelModel = dynamic(() => import('./voxelModel'), {
