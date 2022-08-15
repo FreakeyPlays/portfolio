@@ -49,7 +49,7 @@ const NavBar = () => {
     <>
       <div
         className="w-24 xl:w-[90vw] h-[80vh] xl:h-24 max-h-[calc(1080px-256px)] fixed rounded-xl rainbow_gradient opacity-40 filter blur-3xl 
-                   right-0 xl:right-1/2 bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-[-50%] xl:translate-x-[50%] mr-8"
+                   right-0 xl:right-1/2 bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-[-50%] xl:translate-x-[50%] mr-8 lg:-mb-8"
       ></div>
       <nav
         className="w-32 xl:w-[90vw] h-[80vh] xl:h-24 lg:h-16 max-h-[calc(1080px-256px)] fixed flex flex-col xl:flex-row right-0 xl:right-1/2 
