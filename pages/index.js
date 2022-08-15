@@ -17,14 +17,23 @@ const Page = ({ repos }) => {
 export default Page
 
 export async function getServerSideProps() {
-  const res = await fetch(
+  const PinnedReposRes = await fetch(
     'https://gh-pinned-repos.egoist.sh/?username=FreakeyPlays'
   )
-  const data = await res.json()
+  const PinnedReposData = await PinnedReposRes.json()
+
+  for (let PinnedRep of PinnedReposData) {
+    const SocialPreview = await fetch(
+      'https://oge.vercel.app/api?url=' + PinnedRep.link
+    )
+    const SocialPreviewData = await SocialPreview.json()
+
+    PinnedRep.image = SocialPreviewData.og.image
+  }
 
   return {
     props: {
-      repos: data
+      repos: PinnedReposData
     }
   }
 }
