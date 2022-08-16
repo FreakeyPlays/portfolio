@@ -74,6 +74,9 @@ const VoxelModel = () => {
       const controls = new OrbitControls(camera, renderer.domElement)
       controls.autoRotate = true
       controls.target = target
+      controls.minZoom = 0.5
+      controls.maxZoom = 1.5
+      controls.maxDistance = 2
       setControls(controls)
 
       loadGLTFModel(scene, '/model.glb', {
