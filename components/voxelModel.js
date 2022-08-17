@@ -76,7 +76,6 @@ const VoxelModel = () => {
       controls.target = target
       controls.minZoom = 0.5
       controls.maxZoom = 1.5
-      controls.maxDistance = 2
       setControls(controls)
 
       loadGLTFModel(scene, '/model.glb', {
