@@ -14,7 +14,7 @@ const Intro = () => {
   const animationRef = useRef(null)
 
   return (
-    <div className="section">
+    <div id="about" className="section">
       <LazyVoxelModel />
       <motion.div
         ref={animationRef}
