@@ -13,6 +13,7 @@
   "author": "Christoph Merck",
   "license": "MIT",
   "dependencies": {
+    "framer-motion": "^7.1.2",
     "next": "^12.2.2",
     "next-themes": "^0.2.0",
     "react": "^18.2.0",
