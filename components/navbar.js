@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
@@ -7,6 +8,7 @@ import {
   IoLogoTwitter,
   IoLogoXing
 } from 'react-icons/io'
+import { fadeInGradient, fadeInNavbar } from '../lib/motionAnimations'
 import { enableNavBarLogic } from '../lib/navLogic'
 
 const SocialIconLink = ({ Component, uri, hover }) => {
@@ -46,12 +48,20 @@ const NavBar = () => {
 
   return (
     <>
-      <div
+      <motion.div
         className="w-24 xl:w-[90vw] h-[80vh] xl:h-24 max-h-[calc(1080px-256px)] fixed rounded-xl rainbow_gradient opacity-60 filter blur-3xl 
                    right-0 xl:right-1/2 bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-[-50%] xl:translate-x-[50%] mr-8 lg:-mb-8
                    dark:opacity-40"
-      ></div>
-      <nav
+        variants={fadeInGradient}
+        initial="hidden"
+        animate="visible"
+        viewport={{ once: true }}
+      ></motion.div>
+      <motion.nav
+        variants={fadeInNavbar}
+        initial="hidden"
+        animate="visible"
+        viewport={{ once: true }}
         className="w-32 xl:w-[90vw] h-[80vh] xl:h-24 lg:h-16 max-h-[calc(1080px-256px)] fixed flex flex-col xl:flex-row right-0 xl:right-1/2 
                    xl:translate-x-[50%] bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-0 mr-8 xl:mr-0 xl:mb-8 rounded-2xl
                    bg-gradient-to-br from-[#ffffff26] to-[#ffffff0d] border-[1px] border-[#ffffff2e] border-solid bg-clip-padding 
@@ -113,7 +123,7 @@ const NavBar = () => {
             />
           </div>
         </div>
-      </nav>
+      </motion.nav>
     </>
   )
 }

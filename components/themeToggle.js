@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { fadeInToggle } from '../lib/motionAnimations'
 
 const ThemeToggle = () => {
   const { systemTheme, theme, setTheme } = useTheme()
@@ -25,7 +27,13 @@ const ThemeToggle = () => {
   }
 
   return (
-    <div className="absolute mt-8 z-10">
+    <motion.div
+      className="absolute mt-8 z-10"
+      variants={fadeInToggle}
+      initial="hidden"
+      animate="visible"
+      viewport={{ once: true }}
+    >
       <label className="text-[17px] relative inline-block w-14 h-8">
         <input
           type="checkbox"
@@ -42,7 +50,7 @@ const ThemeToggle = () => {
                      peer-checked:before:shadow-[inset_-3px_-2px_5px_-2px_#8983f7,inset_-10px_-5px_0_0_#a3dafb]"
         ></span>
       </label>
-    </div>
+    </motion.div>
   )
 }
 
