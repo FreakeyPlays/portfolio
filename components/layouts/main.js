@@ -8,13 +8,10 @@ const Main = ({ children }) => {
     <main className="overflow-x-hidden">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="My personal developer Portfolio. Here you can learn something about me and my skills."
-        />
+        <meta name="description" content="Chris's Portfolio" />
         <meta name="author" content="Christoph Merck" />
         <meta name="author" content="FreakeyPlays" />
-        <meta name="twitter:title" content="Christoph Merck Portfolio" />
+        <meta name="twitter:title" content="Chris's Portfolio" />
         <meta
           name="twitter:card"
           content="https://www.chrismerck.me/card.png"
