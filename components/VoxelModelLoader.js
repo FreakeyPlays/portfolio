@@ -15,7 +15,7 @@ export const ModelContainer = forwardRef(({ children }, ref) => {
   return (
     <div
       ref={ref}
-      className="voxel-sizes relative
+      className="voxel-sizes relative w-[640px] h-[640px] overflow-hidden
                  mt-[-120px] xl:mt-[-90px] md:mt-[-60px] 
                  mb-[-200px] xl:mb-[-140px] md:mb-[-40px] 
                  ml-[-120px] xl:ml-[-60px] md:ml-[-20px]"
