@@ -2,12 +2,13 @@
 
 <p align="center">My Portfolio Website <a href="https://www.chrismerck.me" target="_blank">chrismerck.me</a> build with NextJS</p>
 
-<img width="1306" alt="Portfolio-Intro" src="https://user-images.githubusercontent.com/78086475/153732075-70ace3b9-880d-4c3f-bed3-4a358291ab5c.jpg">
+<img width="1306" alt="Portfolio-Intro" src="https://user-images.githubusercontent.com/78086475/180620680-6ed52e1b-ece5-420f-8c43-48e80110dc2f.png">
 
 ## :books: Stack
 
 - [NextJS](https://nextjs.org) - A React framework which supports many features like server-side rendering, etc.
 - [tailwindcss](https://tailwindcss.com/) - A utility-first CSS framework which provides you CSS helper classes
+- [Framer Motion](https://www.framer.com/motion/) - A production-ready motion library for React.
 - [ThreeJS](https://threejs.org) - A JavaScript 3D Library
 
 ## :label: Structure
@@ -41,3 +42,14 @@ npm or yarn install
 ```
 npm run dev
 ```
+
+## :link: API's
+
+- [GitHUb API](https://docs.github.com/en/rest)
+- [gh-pinned-repos](https://github.com/egoist/gh-pinned-repos)
+
+## :sparkles: Inspirations
+
+- Takuya Matsuyama - [craftz.dog](https://www.craftz.dog/)
+- Gazi Jarin - [jarin.me](https://jarin.me/)
+- Delba de Oliveira - [delba.dev](https://delba.dev/)
