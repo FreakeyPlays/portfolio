@@ -65,7 +65,7 @@ const NavBar = () => {
         className="w-32 xl:w-[90vw] h-[80vh] xl:h-24 lg:h-16 max-h-[calc(1080px-256px)] fixed flex flex-col xl:flex-row right-0 xl:right-1/2 
                    xl:translate-x-[50%] bottom-1/2 xl:bottom-0 translate-y-[50%] xl:translate-y-0 mr-8 xl:mr-0 xl:mb-8 rounded-2xl
                    bg-gradient-to-br from-[#ffffff26] to-[#ffffff0d] border-[1px] border-[#ffffff2e] border-solid bg-clip-padding 
-                   backdrop-filter backdrop-blur-xl shadow-md outline outline-2 outline-white outline-offset-8 z-50"
+                   backdrop-filter backdrop-blur-xl shadow-md outline outline-2 outline-white outline-offset-8 z-50 translate-z-0"
       >
         <div className="w-32 xl:w-24 h-32 xl:h-24 flex flex-col justify-center items-center lg:hidden">
           <Link href="/">
