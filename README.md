@@ -45,7 +45,7 @@ npm run dev
 
 ## :link: API's
 
-- [GitHUb API](https://docs.github.com/en/rest)
+- [GitHub API](https://docs.github.com/en/rest)
 - [gh-pinned-repos](https://github.com/egoist/gh-pinned-repos)
 
 ## :sparkles: Inspirations
