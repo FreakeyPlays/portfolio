@@ -1,17 +1,17 @@
 import Head from 'next/head'
+import Footer from '../footer'
+import NavBar from '../navbar'
+import ThemeToggle from '../themeToggle'
 
 const Main = ({ children }) => {
   return (
-    <div>
+    <main className="overflow-x-hidden">
       <Head>
-        <meta name="viewport" content="width-device-widh, inital-scale=1" />
-        <meta
-          name="description"
-          content="My personal developer Portfolio. Here you can learn something about me and my skills."
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Chris's Portfolio" />
         <meta name="author" content="Christoph Merck" />
         <meta name="author" content="FreakeyPlays" />
-        <meta name="twitter:title" content="Christoph Merck Portfolio" />
+        <meta name="twitter:title" content="Chris's Portfolio" />
         <meta
           name="twitter:card"
           content="https://www.chrismerck.me/card.png"
@@ -30,8 +30,19 @@ const Main = ({ children }) => {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
 
-      <div>{children}</div>
-    </div>
+      <NavBar />
+
+      <div
+        id="main_container"
+        className="w-screen h-fit bg-l-bg dark:bg-d-bg bg-[length:1vh_1vh] 
+                   bg-[radial-gradient(rgba(100,100,100,0.25)_15%,transparent_15%)] 
+                   px-64 xl:px-32 md:px-6 min-h-screen"
+      >
+        <ThemeToggle />
+        {children}
+        <Footer />
+      </div>
+    </main>
   )
 }
 
