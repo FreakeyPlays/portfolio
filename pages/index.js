@@ -18,7 +18,7 @@ export default Page
 
 export async function getServerSideProps() {
   const PinnedReposRes = await fetch(
-    'https://gh-pinned-repos.egoist.sh/?username=FreakeyPlays'
+    'https://gh-pinned-repos.egoist.dev/?username=FreakeyPlays'
   )
   const PinnedReposData = await PinnedReposRes.json()
 
