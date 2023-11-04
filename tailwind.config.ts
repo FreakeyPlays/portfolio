@@ -57,7 +57,7 @@ export default {
         900: 'hsl(var(--secondary-900) / <alpha-value>)',
         950: 'hsl(var(--secondary-950) / <alpha-value>)',
       },
-      accent: {
+      tertiary: {
         50: 'hsl(var(--accent-50) / <alpha-value>)',
         100: 'hsl(var(--accent-100) / <alpha-value>)',
         200: 'hsl(var(--accent-200) / <alpha-value>)',
