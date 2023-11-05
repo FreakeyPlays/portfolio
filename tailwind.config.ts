@@ -74,70 +74,25 @@ export default {
       },
     },
     screens: {
-      mobile: {'max': '840px'},
-      tablet: {'max': '1280px'},
+      mobile: { max: '840px' },
+      tablet: { max: '1280px' },
     },
     fontSize: {
-      'display-large': [
-        '3.563rem',
-        { lineHeight: '4rem', letterSpacing: '-0.016rem' },
-      ],
-      'display-medium': [
-        '2.813rem',
-        { lineHeight: '3.25rem', letterSpacing: '0rem' },
-      ],
-      'display-small': [
-        '2.25rem',
-        { lineHeight: '2.75rem', letterSpacing: '0rem' },
-      ],
-      'headline-large': [
-        '2rem',
-        { lineHeight: '2.5rem', letterSpacing: '0rem' },
-      ],
-      'headline-medium': [
-        '1.75rem',
-        { lineHeight: '2.25rem', letterSpacing: '0rem' },
-      ],
-      'headline-small': [
-        '1.5rem',
-        { lineHeight: '2rem', letterSpacing: '0.031rem' },
-      ],
-      'body-large': [
-        '1rem',
-        { lineHeight: '1.5rem', letterSpacing: '0.031rem' },
-      ],
-      'body-medium': [
-        '0.875rem',
-        { lineHeight: '1.25rem', letterSpacing: '0.016rem' },
-      ],
-      'body-small': [
-        '0.75rem',
-        { lineHeight: '1rem', letterSpacing: '0.025rem' },
-      ],
-      'label-large': [
-        '0.875rem',
-        { lineHeight: '1.25rem', letterSpacing: '0.006rem' },
-      ],
-      'label-medium': [
-        '0.75rem',
-        { lineHeight: '1rem', letterSpacing: '0.031rem' },
-      ],
-      'label-small': [
-        '0.688rem',
-        { lineHeight: '1rem', letterSpacing: '0.031rem' },
-      ],
-      'title-large': [
-        '1.375rem',
-        { lineHeight: '1.75rem', letterSpacing: '0rem' },
-      ],
-      'title-medium': [
-        '1rem',
-        { lineHeight: '1.5rem', letterSpacing: '0.009rem' },
-      ],
-      'title-small': [
-        '0.875rem',
-        { lineHeight: '1.25rem', letterSpacing: '0.006rem' },
-      ],
+      'display-large': ['3.563rem', { lineHeight: '4rem', letterSpacing: '-0.016rem' }],
+      'display-medium': ['2.813rem', { lineHeight: '3.25rem', letterSpacing: '0rem' }],
+      'display-small': ['2.25rem', { lineHeight: '2.75rem', letterSpacing: '0rem' }],
+      'headline-large': ['2rem', { lineHeight: '2.5rem', letterSpacing: '0rem' }],
+      'headline-medium': ['1.75rem', { lineHeight: '2.25rem', letterSpacing: '0rem' }],
+      'headline-small': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0.031rem' }],
+      'body-large': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.031rem' }],
+      'body-medium': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.016rem' }],
+      'body-small': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.025rem' }],
+      'label-large': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.006rem' }],
+      'label-medium': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.031rem' }],
+      'label-small': ['0.688rem', { lineHeight: '1rem', letterSpacing: '0.031rem' }],
+      'title-large': ['1.375rem', { lineHeight: '1.75rem', letterSpacing: '0rem' }],
+      'title-medium': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.009rem' }],
+      'title-small': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.006rem' }],
     },
     fontFamily: {
       sans: ["'GeistVF', sans-serif", ...defaultTheme.fontFamily.sans],
