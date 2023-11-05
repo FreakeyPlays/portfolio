@@ -12,7 +12,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint . --ext .ts,.js,.astro",
-    "lint:fix": "eslint . --fix --ext .ts,.js,.astro"
+    "lint:fix": "eslint . --fix --ext .ts,.js,.astro",
+    "format": "prettier .",
+    "format:write": "prettier . --write"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.0",
