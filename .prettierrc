@@ -1,12 +1,22 @@
 {
+  "printWidth": 120,
   "tabWidth": 2,
   "semi": true,
   "trailingComma": "all",
   "bracketSpacing": true,
   "singleQuote": true,
   "bracketSameLine": false,
-  "tailwindFunctions": ["clsx", "cn", "twMerge"],
-  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "endOfLine": "auto",
+  "useTabs": false,
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindFunctions": [
+    "clsx",
+    "cn",
+    "twMerge"
+  ],
   "overrides": [
     {
       "files": "*.astro",
