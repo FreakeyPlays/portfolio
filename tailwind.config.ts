@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -137,7 +139,11 @@ export default {
         { lineHeight: '1.25rem', letterSpacing: '0.006rem' },
       ],
     },
-    fontFamily: {},
+    fontFamily: {
+      sans: ["'GeistVF', sans-serif", ...defaultTheme.fontFamily.sans],
+      mono: ["'Inter', monospace", ...defaultTheme.fontFamily.mono],
+      code: ["'Source Code Pro', monospace", ...defaultTheme.fontFamily.mono],
+    },
   },
   plugins: [],
 };
