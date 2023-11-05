@@ -8,15 +8,8 @@
   "bracketSameLine": false,
   "endOfLine": "auto",
   "useTabs": false,
-  "plugins": [
-    "prettier-plugin-astro",
-    "prettier-plugin-tailwindcss"
-  ],
-  "tailwindFunctions": [
-    "clsx",
-    "cn",
-    "twMerge"
-  ],
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "tailwindFunctions": ["clsx", "cn", "twMerge"],
   "overrides": [
     {
       "files": "*.astro",
