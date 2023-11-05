@@ -4,5 +4,15 @@
   "trailingComma": "all",
   "bracketSpacing": true,
   "singleQuote": true,
-  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"]
+  "bracketSameLine": false,
+  "tailwindFunctions": ["clsx", "cn", "twMerge"],
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
 }
