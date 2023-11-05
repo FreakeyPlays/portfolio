@@ -74,8 +74,8 @@ export default {
       },
     },
     screens: {
-      mobile: '840px',
-      tablet: '1280px',
+      mobile: {'max': '840px'},
+      tablet: {'max': '1280px'},
     },
     fontSize: {
       'display-large': [
