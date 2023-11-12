@@ -27,6 +27,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@savvywombat/tailwindcss-grid-areas": "^3.1.0",
     "@typescript-eslint/parser": "^6.9.1",
     "eslint": "^8.52.0",
     "eslint-plugin-astro": "^0.29.1",
