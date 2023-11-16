@@ -94,11 +94,48 @@ export default {
       'title-medium': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.009rem' }],
       'title-small': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.006rem' }],
     },
+    gridTemplateColumns: {
+      lg:
+        '[full-start] 1fr [aside-left-start] minmax(auto, 240px) [aside-left-end extra-start] 32px ' +
+        '[content-start] min(680px, 100%) [content-end] ' +
+        '32px [extra-end aside-right-start] minmax(auto, 240px) [aside-right-end] 1fr [full-end]',
+      sm: '12px 12px auto 12px 12px',
+    },
+    gridTemplateAreas: {
+      sm: [
+        '. . aside-left . .',
+        '. extra extra extra .',
+        '. . content . .',
+        '. . aside-right . .',
+        'full full full full full',
+      ],
+    },
+    gridColumn: {
+      content: 'content',
+      extra: 'extra',
+      'aside-left': 'aside-left',
+      'aside-right': 'aside-right',
+      full: 'full',
+    },
+    gridColumnStart: {
+      full: 'full-start',
+      'aside-left': 'aside-left-start',
+      extra: 'extra-start',
+      content: 'content-start',
+      'aside-right': 'aside-right-start',
+    },
+    gridColumnEnd: {
+      full: 'full-end',
+      'aside-left': 'aside-left-end',
+      extra: 'extra-end',
+      content: 'content-end',
+      'aside-right': 'aside-right-end',
+    },
     fontFamily: {
       sans: ["'GeistVF', sans-serif", ...defaultTheme.fontFamily.sans],
       mono: ["'Inter', monospace", ...defaultTheme.fontFamily.mono],
       code: ["'Source Code Pro', monospace", ...defaultTheme.fontFamily.mono],
     },
   },
-  plugins: [],
+  plugins: [require('@savvywombat/tailwindcss-grid-areas')],
 };
