@@ -1,5 +1,6 @@
 ---
 import Head from '@components/Head.astro';
+import { siteTitle } from '@constants';
 
 interface Props {
   title?: string;
@@ -8,7 +9,7 @@ interface Props {
 
 const defaultDescription = 'Hi, and welcome to my portfolio! Dive into my skills, check out the cool projects ' +
   'I\'ve been working on, or read my blog, where I share my knowledge and cool topics in the tech world.';
-const { title, description = defaultDescription } = Astro.props;
+const { title = siteTitle, description = defaultDescription } = Astro.props;
 ---
 
 <html lang='en'>
