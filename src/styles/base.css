@@ -9,6 +9,12 @@
     font-display: swap;
     src: url('/fonts/GeistVF.woff2') format('woff2') tech('variables');
   }
+  @font-face {
+    font-family: 'MonaspaceVF';
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('/fonts/MonaspaceArgonVF.woff2') format('woff2') tech('variables');
+  }
 
   :root {
     --text-50: 0deg 0% 95%;

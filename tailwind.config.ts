@@ -134,7 +134,7 @@ export default {
     fontFamily: {
       sans: ["'GeistVF', sans-serif", ...defaultTheme.fontFamily.sans],
       mono: ["'Inter', monospace", ...defaultTheme.fontFamily.mono],
-      code: ["'Source Code Pro', monospace", ...defaultTheme.fontFamily.mono],
+      code: ["'MonaspaceVF', monospace", ...defaultTheme.fontFamily.mono],
     },
   },
   plugins: [require('@savvywombat/tailwindcss-grid-areas')],
