@@ -1,0 +1,19 @@
+---
+import Head from '@components/Head.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const defaultDescription = 'Hi, and welcome to my portfolio! Dive into my skills, check out the cool projects ' +
+  'I\'ve been working on, or read my blog, where I share my knowledge and cool topics in the tech world.';
+const { title, description = defaultDescription } = Astro.props;
+---
+
+<html lang='en'>
+<Head {title} {description} />
+<body class='bg-background-900 grid grid-cols-lg auto-rows-min gap-4 mobile:grid-cols-sm mobile:grid-areas-sm'>
+<slot />
+</body>
+</html>

@@ -1,19 +1,8 @@
 ---
 import '../styles/base.css';
+import MainLayout from '@layouts/MainLayout.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&family=Source+Code+Pro&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<MainLayout>
+  <h1>Astro</h1>
+</MainLayout>

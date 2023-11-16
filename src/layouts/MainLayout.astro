@@ -1,0 +1,15 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { siteTitle } from '@constants';
+
+interface Props {
+  title?: string,
+  description: string
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title ? `${title} | ${siteTitle}` : siteTitle} {description}>
+  <slot />
+</BaseLayout>
