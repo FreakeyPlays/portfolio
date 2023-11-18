@@ -4,16 +4,35 @@
 
 @layer base {
   @font-face {
-    font-family: 'GeistVF';
-    font-weight: 100 900;
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
-    src: url('/fonts/GeistVF.woff2') format('woff2') tech('variables');
   }
+
   @font-face {
-    font-family: 'MonaspaceVF';
-    font-weight: 200 800;
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
     font-display: swap;
-    src: url('/fonts/MonaspaceArgonVF.woff2') format('woff2') tech('variables');
+  }
+
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
   }
 
   :root {
