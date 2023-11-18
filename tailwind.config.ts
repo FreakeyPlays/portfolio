@@ -132,9 +132,9 @@ export default {
       'aside-right': 'aside-right-end',
     },
     fontFamily: {
-      sans: ["'GeistVF', sans-serif", ...defaultTheme.fontFamily.sans],
-      mono: ["'Inter', monospace", ...defaultTheme.fontFamily.mono],
-      code: ["'Source Code Pro', monospace", ...defaultTheme.fontFamily.mono],
+      geist: ["'Geist', sans-serif", ...defaultTheme.fontFamily.sans],
+      inter: ["'Inter', sans-serif", ...defaultTheme.fontFamily.mono],
+      code: [...defaultTheme.fontFamily.mono],
     },
   },
   plugins: [require('@savvywombat/tailwindcss-grid-areas')],
