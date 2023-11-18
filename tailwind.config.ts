@@ -132,8 +132,8 @@ export default {
       'aside-right': 'aside-right-end',
     },
     fontFamily: {
-      oswald: ["'Oswald', sans-serif", ...defaultTheme.fontFamily.sans],
-      montserrat: ["'Montserrat', sans-serif", ...defaultTheme.fontFamily.mono],
+      oswald: ["'Geist', sans-serif", ...defaultTheme.fontFamily.sans],
+      montserrat: ["'Inter', sans-serif", ...defaultTheme.fontFamily.mono],
       code: [...defaultTheme.fontFamily.mono],
     },
   },
