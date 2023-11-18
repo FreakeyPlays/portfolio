@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  /*noinspection CssUnknownTarget*/
   @font-face {
     font-family: 'Geist';
     src: url('/fonts/Geist-Regular.woff2') format('woff2');
@@ -11,6 +12,7 @@
     font-display: swap;
   }
 
+  /*noinspection CssUnknownTarget*/
   @font-face {
     font-family: 'Geist';
     src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
@@ -19,6 +21,7 @@
     font-display: swap;
   }
 
+  /*noinspection CssUnknownTarget*/
   @font-face {
     font-family: 'Oswald';
     src: url('/fonts/Inter-Medium.woff2') format('woff2');
@@ -27,6 +30,7 @@
     font-display: swap;
   }
 
+  /*noinspection CssUnknownTarget*/
   @font-face {
     font-family: 'Oswald';
     src: url('/fonts/Inter-Regular.woff2') format('woff2');
