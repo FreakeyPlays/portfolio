@@ -144,6 +144,16 @@ export default {
       },
       scrim: 'hsl(var(--scrim) / <alpha-value>)',
     },
+    borderRadius: {
+      none: '0px',
+      xs: '4px',
+      sm: '8px',
+      md: '12px',
+      DEFAULT: '12px',
+      lg: '16px',
+      xl: '28px',
+      full: '9999px',
+    },
     screens: {
       mobile: { max: '840px' },
       tablet: { max: '1280px' },
