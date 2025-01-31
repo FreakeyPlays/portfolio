@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  # website:
+  #   image: node:18-alpine
+  #   ports:
+  #     - "6489:6489"
+  #   volumes:
+  #     - ./website:/home/node/app
+  #     - website-node-modules:/home/node/app/node_modules
+  #   working_dir: /home/node/app/
+  #   command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
+  #   depends_on:
+  #     - payload
+  #   env_file:
+  #     - ./website/.env
+
+  # payload:
+  #   image: node:18-alpine
+  #   ports:
+  #     - "4863:4863"
+  #   volumes:
+  #     - ./cms:/home/node/app
+  #     - cms-node-modules:/home/node/app/node_modules
+  #   working_dir: /home/node/app/
+  #   command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
+  #   depends_on:
+  #     - mongo
+  #   env_file:
+  #     - ./cms/.env
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "4979:27017"
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+    logging:
+      driver: none
+
+volumes:
+  data:
+  # cms-node-modules:
+  # website-node-modules:

@@ -1,0 +1,11 @@
+**/payload-types.ts
+.tmp
+**/.git
+**/.pnp.*
+**/build
+**/dist/**
+**/node_modules
+**/temp
+**/docs/**
+tsconfig.json
+*.hbs

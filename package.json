@@ -1,0 +1,19 @@
+{
+  "name": "portfolio",
+  "version": "1.1.0",
+  "description": "My Portfolio",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format:check": "prettier \"**/*.{ts,tsx,md}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "3.4.2",
+    "turbo": "2.4.0"
+  },
+  "author": "Christoph Merck",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.4"
+}
