@@ -1,0 +1,59 @@
+---
+import Favicon from '@components/meta/Favicon.astro';
+import SEO, { type Image } from '@components/meta/SEO.astro';
+import siteInfo from '@data/siteInfo';
+
+export type Props = {
+  title?: string;
+  rawTitle?: string;
+  description?: string;
+  image?: Image;
+  canonicalURL?: URL | null;
+  pageType?: 'website' | 'article';
+  author?: string;
+  keywords?: string[];
+};
+
+const {
+  rawTitle,
+  description = siteInfo.description,
+  image = siteInfo.image,
+  canonicalURL = new URL(Astro.request.url, Astro.site),
+  pageType = 'website',
+  author = siteInfo.author,
+  keywords,
+} = Astro.props;
+
+const title = rawTitle ?? [Astro.props.title, siteInfo.name].filter(Boolean).join(' | ');
+const resolvedImage: Image = {
+  src: new URL(image.src, Astro.site).toString(),
+  alt: image.alt,
+};
+---
+
+<!-- High Priority Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#FFFFFF" />
+
+<!-- Low Priority Global Metadata -->
+<Favicon />
+<link rel="mask-icon" href="/favicon.svg" color="#8BC225" />
+<!--
+TODO: Implement Sitemap and RSS feed
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" /> 
+-->
+
+<SEO
+  name={siteInfo.name}
+  title={title}
+  description={description}
+  image={resolvedImage}
+  og={{ type: pageType }}
+  canonicalURL={canonicalURL}
+  author={author}
+  keywords={keywords}
+/>

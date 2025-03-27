@@ -1,0 +1,30 @@
+---
+import BaseHead, { type Props as HeadProps } from '@components/meta/BaseHead.astro';
+import '@styles/global.css';
+
+interface Props extends HeadProps {
+  class?: string;
+  bgClass?: string;
+}
+
+const { bgClass, ...head } = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class:list={['overflow-x-hidden break-words [word-break:break-word]', bgClass, Astro.props.class]}
+>
+  <head>
+    <BaseHead {...head} />
+  </head>
+  <body class="grid grid-rows-[auto_1fr_auto] min-h-screen max-w-screen overflow-x-hidden">
+    <div id="nav" class="inset-x-0 top-0 z-20 max-h-screen"></div>
+
+    <main id="main" class="relative z-10">
+      <slot />
+    </main>
+
+    <div id="footer" class="inset-x-0 bottom-0 z-20 max-h-screen"></div>
+  </body>
+</html>
