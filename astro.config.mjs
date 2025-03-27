@@ -4,8 +4,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://chrismerck.dev',
   vite: {
-    // @ts-expect-error Vite API look to be broken.
     plugins: [tailwindcss()],
   },
 });
