@@ -14,7 +14,8 @@
     "format:fix": "prettier  --write ."
   },
   "dependencies": {
-    "astro": "^5.5.5"
+    "astro": "^5.5.5",
+    "astro-icon": "^1.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
