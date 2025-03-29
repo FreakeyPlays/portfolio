@@ -1,4 +1,5 @@
 ---
+import Filter from '@components/Filter.astro';
 import BaseHead, { type Props as HeadProps } from '@components/meta/BaseHead.astro';
 import '@styles/global.css';
 
@@ -18,7 +19,10 @@ const { bgClass, ...head } = Astro.props;
   <head>
     <BaseHead {...head} />
   </head>
-  <body class="grid grid-rows-[auto_1fr_auto] min-h-screen max-w-screen overflow-x-hidden">
+  <body
+    class="bg-stone-950 relative grid grid-rows-[auto_1fr_auto] min-h-screen max-w-screen overflow-x-hidden"
+  >
+    <Filter />
     <div id="nav" class="inset-x-0 top-0 z-20 max-h-screen"></div>
 
     <main id="main" class="relative z-10">

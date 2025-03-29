@@ -1,0 +1,21 @@
+---
+import filmScratch from '@assets/film_scratch.jpg';
+import { Image } from 'astro:assets';
+---
+
+<div class="fixed inset-0">
+  <svg
+    class="pointer-events-none isolate opacity-20 mix-blend-soft-light"
+    width="100%"
+    height="100%"
+    ><filter id="noise"
+      ><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"
+      ></feTurbulence></filter
+    ><rect width="100%" height="100%" filter="url(#noise)"></rect></svg
+  >
+  <Image
+    src={filmScratch}
+    alt="scratch filter"
+    class="absolute inset-0 object-cover w-full h-full mix-blend-difference opacity-20"
+  />
+</div>
