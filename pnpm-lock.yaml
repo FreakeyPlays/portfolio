@@ -30,6 +30,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.17
         version: 4.0.17(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.0))
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      prettier-plugin-astro:
+        specifier: ^0.14.1
+        version: 0.14.1
       tailwindcss:
         specifier: ^4.0.17
         version: 4.0.17
@@ -4240,13 +4246,11 @@ snapshots:
       '@astrojs/compiler': 2.11.0
       prettier: 3.5.3
       sass-formatter: 0.7.9
-    optional: true
 
   prettier@2.8.7:
     optional: true
 
-  prettier@3.5.3:
-    optional: true
+  prettier@3.5.3: {}
 
   prismjs@1.30.0: {}
 
@@ -4415,15 +4419,13 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  s.color@0.0.15:
-    optional: true
+  s.color@0.0.15: {}
 
   safer-buffer@2.1.2: {}
 
   sass-formatter@0.7.9:
     dependencies:
       suf-log: 2.5.3
-    optional: true
 
   sax@1.4.1: {}
 
@@ -4517,7 +4519,6 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
-    optional: true
 
   svgo@3.3.2:
     dependencies:
