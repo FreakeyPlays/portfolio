@@ -1,0 +1,91 @@
+---
+const links = [
+  {
+    label: '/about',
+    url: '#about',
+    samePage: true,
+  },
+  {
+    label: '/skills',
+    url: '#skills',
+    samePage: true,
+  },
+  {
+    label: '/career',
+    url: '#career',
+    samePage: true,
+  },
+  {
+    label: '/projects',
+    url: '#projects',
+    samePage: true,
+  },
+  {
+    label: '/blog',
+    url: '/blog',
+    samePage: false,
+  },
+];
+---
+
+<nav
+  aria-label="Primary"
+  class="mx-2 h-16 px-8 rounded-full bg-gray-200/20 sticky top-4 backdrop-blur-sm shadow-xl col-[image]! border border-white/20 flex items-center justify-between"
+>
+  <div>
+    {
+      links.map((el) => (
+        <a
+          href={el.url}
+          data-home-link={el.samePage}
+          class="text-lg font-bold pr-2 inline-block transition-transform hover:text-neutral-300 active:translate-y-0.5"
+        >
+          {el.label}
+        </a>
+      ))
+    }
+  </div>
+  <div class="bg-red-500 w-12 h-12"></div>
+</nav>
+
+<script>
+  const navLinks: NodeListOf<HTMLAnchorElement> =
+    document.querySelectorAll('[data-home-link="true"]');
+  const sectionMap: Map<HTMLElement, HTMLAnchorElement> = new Map();
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    const id = href.slice(1);
+    const section = document.getElementById(id);
+    if (section) {
+      sectionMap.set(section, link);
+    }
+  });
+
+  if (sectionMap.size > 0) {
+    let currentActive: HTMLAnchorElement | null = null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const newActive = sectionMap.get(entry.target as HTMLElement);
+            if (newActive && newActive !== currentActive) {
+              if (currentActive) currentActive.classList.remove('active-nav-link');
+              newActive.classList.add('active-nav-link');
+              currentActive = newActive;
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.6,
+        rootMargin: '0px 0px -20% 0px',
+      }
+    );
+
+    sectionMap.forEach((_, section) => observer.observe(section));
+  }
+</script>

@@ -14,3 +14,8 @@
     [annotation-start aside-left-start aside-right-start] 1fr [aside-right-end aside-left-end
     annotation-end] 1rem [content-end] 1rem [image-end extra-end] 1rem [full-end];
 }
+
+.active-nav-link {
+  -webkit-text-stroke: 1px var(--color-lime-400);
+  @apply text-transparent;
+}
