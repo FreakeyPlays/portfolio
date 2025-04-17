@@ -2,6 +2,7 @@
 import Favicon from '@components/meta/Favicon.astro';
 import SEO, { type Image } from '@components/meta/SEO.astro';
 import siteInfo from '@data/siteInfo';
+import { Font } from 'astro:assets';
 
 export type Props = {
   title?: string;
@@ -37,6 +38,8 @@ const resolvedImage: Image = {
 <title>{title}</title>
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#FFFFFF" />
+<Font cssVariable="--font-sans" preload />
+<Font cssVariable="--font-serif" preload />
 
 {/* Low Priority Global Metadata */}
 <Favicon />
