@@ -30,9 +30,14 @@ const links = [
 
 <nav
   aria-label="Primary"
-  class="mx-2 h-16 px-8 rounded-full bg-gray-200/20 sticky top-4 backdrop-blur-sm shadow-xl col-[image]! border border-white/20 flex items-center justify-between"
+  class="mx-2 h-16 p-2 pr-8 isolate rounded-full overflow-hidden bg-gray-200/20 sticky top-4 backdrop-blur-sm shadow-xl col-[image]! border border-white/20 flex items-center justify-between"
 >
-  <ul class="flex gap-4">
+  <div
+    class="filter-[url(#noise)] absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none"
+  >
+  </div>
+  <a class="bg-gradient-to-tr z-10 from-lime-400 to-green-600 w-12 h-12 rounded-full" href="/"></a>
+  <ul class="flex gap-4 z-10">
     {
       links.map((el) => (
         <li class="has-[.active-nav-link]:bg-gradient-to-br has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text">
@@ -47,7 +52,6 @@ const links = [
       ))
     }
   </ul>
-  <div class="bg-red-500 w-12 h-12"></div>
 </nav>
 
 <script>
