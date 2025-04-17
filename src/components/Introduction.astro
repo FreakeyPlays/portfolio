@@ -4,11 +4,13 @@ import Typewriter from 'astro-typewriter';
 ---
 
 <div id="about" class="scroll-m-32">
-  <h1 class="text-4xl font-extrabold font-serif">
-    Hey, I'm <Typewriter
-      class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
-      messages={['Chris', 'a Developer', 'building clean, scalable web apps']}
-    />
+  <h1 class="text-4xl font-extrabold font-serif h-10 relative">
+    <span class="absolute bottom-0"
+      >Hey, I'm <Typewriter
+        class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent cursor"
+        messages={['Chris', 'a Developer', 'building clean, scalable web apps']}
+      /></span
+    >
   </h1>
   <p class="text-xl text-gray-400 font-serif font-medium">Software Engineer and Media Computer</p>
   <p class="text-lg mt-4">
