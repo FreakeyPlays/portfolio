@@ -1,10 +1,22 @@
 ---
-import Introduction from '@components/Introduction.astro';
 import Navigation from '@components/Navigation.astro';
+import Career from '@components/sections/Career.astro';
+import Introduction from '@components/sections/Introduction.astro';
+import Projects from '@components/sections/Projects.astro';
+import Skills from '@components/sections/Skills.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
+  <div
+    class="bg-gray-400 rounded-2xl grid place-content-center col-[extra]! aspect-square sm:aspect-video"
+  >
+    <h2 class="text-4xl font-extrabold font-serif text-neutral-800">WIP</h2>
+    <p class="text-xl font-serif text-neutral-800">3D Model</p>
+  </div>
   <Introduction />
   <Navigation />
+  <Skills />
+  <Career />
+  <Projects />
 </BaseLayout>
