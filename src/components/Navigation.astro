@@ -32,19 +32,21 @@ const links = [
   aria-label="Primary"
   class="mx-2 h-16 px-8 rounded-full bg-gray-200/20 sticky top-4 backdrop-blur-sm shadow-xl col-[image]! border border-white/20 flex items-center justify-between"
 >
-  <div>
+  <ul class="flex gap-4">
     {
       links.map((el) => (
-        <a
-          href={el.url}
-          data-home-link={el.samePage}
-          class="text-lg font-bold pr-2 inline-block transition-transform hover:text-neutral-300 active:translate-y-0.5"
-        >
-          {el.label}
-        </a>
+        <li class="has-[.active-nav-link]:bg-gradient-to-br has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text">
+          <a
+            href={el.url}
+            data-home-link={el.samePage}
+            class="text-lg font-bold inline-block transition-transform hover:text-neutral-300 active:translate-y-0.5"
+          >
+            {el.label}
+          </a>
+        </li>
       ))
     }
-  </div>
+  </ul>
   <div class="bg-red-500 w-12 h-12"></div>
 </nav>
 
