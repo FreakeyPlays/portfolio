@@ -1,4 +1,5 @@
 ---
+import HighlightLink from '@components/HighlightLink.astro';
 import Typewriter from 'astro-typewriter';
 ---
 
@@ -12,14 +13,14 @@ import Typewriter from 'astro-typewriter';
   <p class="text-xl text-gray-400 font-serif font-medium">Software Engineer and Media Computer</p>
   <p class="text-lg mt-4">
     I'm a software engineer and media computing specialist with a passion for crafting clean,
-    scalable web applications. Currently, I'm pursuing my Master’s degree <a
-      class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
+    scalable web applications. Currently, I'm pursuing my Master’s degree <HighlightLink
       href="https://www.hdm-stuttgart.de/"
-      target="_blank">@Hochschule der Medien</a
-    > in Stuttgart while working <a
-      class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
+      target="_blank"
+      rel="noopener noreferrer">@Hochschule der Medien</HighlightLink
+    > while working <HighlightLink
       href="https://pep.digital"
-      target="_blank">@pep.digital</a
+      target="_blank"
+      rel="noopener noreferrer">@pep.digital</HighlightLink
     > in Esslingen.
   </p>
   <p class="text-lg mt-2">
