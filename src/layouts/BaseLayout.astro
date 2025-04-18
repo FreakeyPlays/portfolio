@@ -20,13 +20,13 @@ const { bgClass, ...head } = Astro.props;
     <BaseHead {...head} />
   </head>
   <body
-    class="bg-stone-950 prose-stone prose-invert text-neutral-200 selection:bg-lime-700/80 relative grid grid-rows-[1fr_auto] min-h-screen max-w-screen"
+    class="antialiased bg-stone-950 prose-stone prose-invert text-neutral-200 selection:bg-lime-700/80 relative grid grid-rows-[1fr_auto] min-h-screen max-w-screen"
   >
     <Filter />
 
     <main
       id="main"
-      class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) [&>*]:col-[content] [&>*]:my-4"
+      class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) *:col-[content] *:my-4"
     >
       <slot />
     </main>
