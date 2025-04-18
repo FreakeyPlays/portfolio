@@ -1,0 +1,39 @@
+---
+import MarqueeItem from './MarqueeItem.astro';
+
+interface Props {
+  skills: (((_props: astroHTML.JSX.SVGAttributes) => any) & ImageMetadata)[];
+  direction?: 'forwards' | 'reverse';
+  speed?: number;
+  gap?: number;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  skills,
+  direction = 'forwards',
+  speed = 5,
+  gap = 8,
+  ariaLabel,
+  class: className,
+} = Astro.props;
+---
+
+<div aria-label={ariaLabel} class:list={['@container overflow-hidden', className]}>
+  <ul
+    class="grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
+  >
+    {skills.map((skill, i) => <MarqueeItem skill={skill} index={i} />)}
+  </ul>
+</div>
+
+<style
+  define:vars={{
+    speed: `${speed}s`,
+    direction: direction,
+    marqueeItems: `${skills.length}`,
+    itemGap: `${gap}px`,
+    itemWidth: `calc(100cqw / calc(var(--marqueeItems) - var(--reducedMotion)) - var(--itemGap))`,
+  }}
+></style>

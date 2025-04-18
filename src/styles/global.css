@@ -19,3 +19,18 @@
   color: var(--color-neutral-200);
   width: 0.15em;
 }
+
+.animate-marquee-move {
+  animation: marquee-move var(--speed, 5s) linear infinite var(--direction, forwards)
+    var(--delay, 3s);
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
+}
+
+@utility pause-animation {
+  animation-play-state: paused;
+}
