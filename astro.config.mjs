@@ -25,6 +25,14 @@ export default defineConfig({
     ],
   },
 
+  redirects: {
+    '/projects': '/#projects',
+    '/career': '/#career',
+    '/education': '/#education',
+    '/skills': '/#skills',
+    '/about': '/#about',
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
