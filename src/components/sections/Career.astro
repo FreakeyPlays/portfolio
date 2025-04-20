@@ -1,16 +1,46 @@
 ---
+import Chip from '@components/Chip.astro';
+import HighlightLink from '@components/HighlightLink.astro';
+import Timeline from '@components/timeline/Timeline.astro';
+import TimelineItem from '@components/timeline/TimelineItem.astro';
+import { getCollection } from 'astro:content';
 import BaseSection from './BaseSection.astro';
+
+const careerCollection = await getCollection('career');
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseSection title="career">
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem aliquam
-    iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur deleniti
-    magni? Repellendus numquam explicabo tempora. Lorem ipsum dolor sit amet consectetur adipisicing
-    elit. Debitis saepe, quam voluptatem aliquam iure minima qui esse necessitatibus quasi
-    repellendus eaque distinctio illo tenetur deleniti magni? Repellendus numquam explicabo
-    tempora.Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem
-    aliquam iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur
-    deleniti magni? Repellendus numquam explicabo tempora.
-  </p>
+  {
+    careerCollection.map((career) => (
+      <Timeline>
+        <Fragment slot="left">
+          <h3 class="text-2xl font-bold">
+            <HighlightLink target="_blank" rel="noopener noreferrer" href={career.data.url}>
+              {career.data.company}
+            </HighlightLink>
+          </h3>
+          <p class="text-lg ">{career.data.location}</p>
+        </Fragment>
+        <Fragment slot="right">
+          {career.data.jobs.map((job) => (
+            <TimelineItem>
+              <h4 class="text-xl font-bold">{job.title}</h4>
+              <p class="text-sm text-gray-400 uppercase">
+                {dateFormatter.format(new Date(job.startDate))} -{' '}
+                {job.ongoing ? job.endDate : dateFormatter.format(new Date(job.endDate))}
+              </p>
+              <p class="mt-2">{job.description}</p>
+              <div class="flex flex-wrap gap-1 mt-2">
+                {job.technologies?.map((technology) => (
+                  <Chip label={technology} />
+                ))}
+              </div>
+            </TimelineItem>
+          ))}
+        </Fragment>
+      </Timeline>
+    ))
+  }
 </BaseSection>
