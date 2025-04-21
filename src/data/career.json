@@ -9,23 +9,23 @@
                 "title": "Software Engineer",
                 "startDate": "2024-06-01",
                 "endDate": "present",
-                "description": "At pep.digital, I support the development of both internal tools and client-facing applications. My role involves actively contributing to ongoing projects, improving existing solutions, and collaborating closely with designers and developers to create high-quality digital experiences.",
+                "description": "I support the development of both internal tools and client-facing applications. My role involves actively contributing to ongoing projects, improving existing solutions, and collaborating closely with customers and developers to create high-quality digital experiences.",
                 "ongoing": true,
-                "technologies": ["PayloadCMS", "React", "TailwindCSS", "PostgresDB"]
+                "technologies": ["PayloadCMS", "NextJS", "TailwindCSS", "PostgresDB"]
             },
             {
                 "title": "Bachelor Thesis",
                 "startDate": "2024-03-01",
                 "endDate": "2024-06-01",
-                "description": "In cooperation with pep.digital, I completed my Bachelor Thesis on exploring the capabilities of the Astro framework by building a video streaming application as an Progressive Web App. The project focused on evaluating how Astro handles dynamic functionality and real-time features, challenging its traditional role in static site development.",
+                "description": "I completed my Bachelor Thesis on exploring the capabilities of the Astro framework by building a video streaming application as an Progressive Web App. The project focused on evaluating how Astro handles dynamic functionality and real-time features, challenging its traditional role in static site development.",
                 "technologies": ["Astro", "PWA", "WebRTC"]
             },
             {
                 "title": "Internship Semester",
                 "startDate": "2023-09-01",
                 "endDate": "2024-03-01",
-                "description": "During my internship at pep.digital, I was involved in various real-world projects that exposed me to a wide range of development workflows and team dynamics. From internal tooling to client solutions, I gained hands-on experience in building and refining software products while deepening my understanding of modern frontend and backend practices.",
-                "technologies": ["Angular", "TypeScript", "Storybook"]
+                "description": "During my internship, I was involved in various real-world projects that exposed me to a wide range of development workflows and team dynamics. From internal tooling to client solutions, I gained hands-on experience in building and refining software products while deepening my understanding of modern frontend and backend practices.",
+                "technologies": ["Angular","Storybook", "TypeScript"]
             }
         ]
     }
