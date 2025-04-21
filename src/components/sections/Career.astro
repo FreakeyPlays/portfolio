@@ -32,11 +32,13 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
                 {job.ongoing ? job.endDate : dateFormatter.format(new Date(job.endDate))}
               </p>
               <p class="mt-2">{job.description}</p>
-              <div class="flex flex-wrap gap-1 mt-2">
+              <ul class="flex flex-wrap gap-1 mt-2">
                 {job.technologies?.map((technology) => (
-                  <Chip label={technology} />
+                  <li>
+                    <Chip label={technology} />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </TimelineItem>
           ))}
         </Fragment>
