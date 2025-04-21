@@ -9,10 +9,10 @@ const formattedTitle = title.trim().toLowerCase();
 ---
 
 <section id={formattedTitle} class:list={['scroll-m-32 mt-20!', className]}>
-  <h2 class="text-4xl font-extrabold font-serif">
-    /<span class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
-      {formattedTitle}
-    </span>
+  <h2
+    class="text-4xl font-extrabold font-serif bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
+  >
+    <span class="text-white">/</span>{formattedTitle}
   </h2>
   <slot />
 </section>
