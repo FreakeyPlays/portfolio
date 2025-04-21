@@ -1,16 +1,32 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseSection from './BaseSection.astro';
+
+const educationCollection = await getCollection('education');
+const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseSection title="education">
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem aliquam
-    iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur deleniti
-    magni? Repellendus numquam explicabo tempora. Lorem ipsum dolor sit amet consectetur adipisicing
-    elit. Debitis saepe, quam voluptatem aliquam iure minima qui esse necessitatibus quasi
-    repellendus eaque distinctio illo tenetur deleniti magni? Repellendus numquam explicabo
-    tempora.Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem
-    aliquam iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur
-    deleniti magni? Repellendus numquam explicabo tempora.
-  </p>
+  <ul class="space-y-4 mt-4">
+    {
+      educationCollection.map((education) => (
+        <li>
+          <h3 class="text-xl font-bold">{education.data.degree}</h3>
+          <p class="text-lg font-bold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
+            @{education.data.institution}
+          </p>
+          <p class="text-sm text-gray-400 uppercase">
+            <span class="capitalize">
+              {education.data.location}{' '}
+              {education.data.grade ? `| Grade: ${education.data.grade}` : ''}
+            </span>{' '}
+            | {dateFormatter.format(new Date(education.data.startDate))} -{' '}
+            {education.data.ongoing
+              ? education.data.endDate
+              : dateFormatter.format(new Date(education.data.endDate))}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
 </BaseSection>
