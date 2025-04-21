@@ -1,34 +1,34 @@
 ---
-import Grain from "./Grain.astro";
+import Grain from './Grain.astro';
 
 const links = [
   {
-    label: '/about',
+    label: 'about',
     url: '#about',
     samePage: true,
   },
   {
-    label: '/skills',
+    label: 'skills',
     url: '#skills',
     samePage: true,
   },
   {
-    label: '/career',
+    label: 'career',
     url: '#career',
     samePage: true,
   },
   {
-    label: '/education',
+    label: 'education',
     url: '#education',
     samePage: true,
   },
   {
-    label: '/projects',
+    label: 'projects',
     url: '#projects',
     samePage: true,
   },
   {
-    label: '/blog',
+    label: 'blog',
     url: '/blog',
     samePage: false,
   },
@@ -50,9 +50,12 @@ const links = [
             "relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100",
           ]}
         >
-          <a href={el.url} data-home-link={el.samePage} class="text-lg font-bold inline-block">
-            {el.label}
-          </a>
+          <a
+            href={el.url}
+            data-home-link={el.samePage}
+            class="text-lg font-bold inline-block"
+            set:html={`<span class="text-white">/</span>${el.label}`}
+          />
         </li>
       ))
     }
