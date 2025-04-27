@@ -98,8 +98,8 @@ const links = [
     });
 
     document.addEventListener('click', (event) => {
-      const isClickInsideNav = navList.contains(event.target);
-      const isClickOnToggle = toggle.contains(event.target);
+      const isClickInsideNav = event.target ? navList.contains(event.target as Node) : false;
+      const isClickOnToggle = event.target ? toggle.contains(event.target as Node) : false;
 
       if (!navList.classList.contains('hidden') && !isClickInsideNav && !isClickOnToggle) {
         navList.classList.add('hidden');
