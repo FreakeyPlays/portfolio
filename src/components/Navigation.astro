@@ -1,51 +1,58 @@
 ---
 import Grain from './Grain.astro';
+import NavigationIcon from '../assets/icons/ui/navigation.svg';
+import CloseIcon from '../assets/icons/ui/close.svg';
 
 const links = [
-  {
-    label: 'about',
-    url: '#about',
-    samePage: true,
-  },
-  {
-    label: 'skills',
-    url: '#skills',
-    samePage: true,
-  },
-  {
-    label: 'career',
-    url: '#career',
-    samePage: true,
-  },
-  {
-    label: 'education',
-    url: '#education',
-    samePage: true,
-  },
-  {
-    label: 'projects',
-    url: '#projects',
-    samePage: true,
-  },
-  {
-    label: 'blog',
-    url: '/blog',
-    samePage: false,
-  },
+  { label: 'about', url: '#about', samePage: true },
+  { label: 'skills', url: '#skills', samePage: true },
+  { label: 'career', url: '#career', samePage: true },
+  { label: 'education', url: '#education', samePage: true },
+  { label: 'projects', url: '#projects', samePage: true },
+  { label: 'blog', url: '/blog', samePage: false },
 ];
 ---
 
 <nav
   aria-label="Primary"
-  class="z-50 mx-2 h-16 p-2 pr-8 isolate rounded-full overflow-hidden bg-gray-200/20 sticky top-4 backdrop-blur-sm shadow-xl col-[image]! border border-white/20 flex items-center justify-between"
+  class:list={[
+    "z-50 mx-2 h-16 p-2 pr-8 isolate rounded-full bg-gray-200/20 sticky top-4 shadow-xl col-[image]! border border-white/20 flex items-center justify-between",
+    "before:content-[''] before:absolute before:inset-0 before:backdrop-blur-sm before:rounded-full before:-z-1",
+  ]}
 >
-  <Grain />
-  <a class="bg-gradient-to-tr z-10 from-lime-400 to-green-600 w-24 h-12 rounded-full" href="/"></a>
-  <ul class="flex gap-4 z-10">
+  <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 rounded-full">
+    <Grain />
+  </div>
+
+  <a
+    class="bg-gradient-to-tr z-10 from-lime-400 to-green-600 w-24 h-12 rounded-full"
+    href="/"
+    aria-label="Home"
+  >
+    <span class="sr-only">Home</span>
+  </a>
+
+  <button
+    id="menu-toggle"
+    class="cursor-pointer md:hidden"
+    aria-expanded="false"
+    aria-controls="nav-list"
+  >
+    <span class="sr-only">Toggle main menu</span>
+    <NavigationIcon id="menu-toggle-open" class="h-8 w-8" />
+    <CloseIcon id="menu-toggle-close" class="h-8 w-8 hidden" />
+  </button>
+
+  <ul id="nav-list" class:list={[
+    "hidden absolute mt-4 left-0 right-0 top-full rounded-4xl overflow-hidden bg-gray-200/20 backdrop-blur-md border border-white/20 space-y-2 py-4", 
+    "md:flex md:relative md:mt-0 md:top-0 md:bg-transparent md:border-none md:backdrop-blur-none md:gap-3 md:space-y-0"
+  ]}>
+    <Grain class="md:hidden" />
     {
       links.map((el) => (
         <li
           class:list={[
+            "w-fit mx-auto",
             'has-[.active-nav-link]:bg-gradient-to-br has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text',
             "relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100",
           ]}
@@ -63,6 +70,46 @@ const links = [
 </nav>
 
 <script>
+  const toggle = document.getElementById('menu-toggle');
+  const openIcon = document.getElementById('menu-toggle-open');
+  const closeIcon = document.getElementById('menu-toggle-close');
+  const navList = document.getElementById('nav-list');
+  const navItems = document.querySelectorAll('#nav-list li');
+
+  if (toggle && navList && openIcon && closeIcon) {
+    
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+
+      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      navList.classList.toggle('hidden');
+    });
+
+    navItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        navList.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const isClickInsideNav = navList.contains(event.target);
+      const isClickOnToggle = toggle.contains(event.target);
+
+      if (!navList.classList.contains('hidden') && !isClickInsideNav && !isClickOnToggle) {
+        navList.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   const navLinks: NodeListOf<HTMLAnchorElement> =
     document.querySelectorAll('[data-home-link="true"]');
   const sectionMap: Map<HTMLElement, HTMLAnchorElement> = new Map();
@@ -96,7 +143,7 @@ const links = [
       },
       {
         threshold: 0.6,
-        rootMargin: '0px 0px -20% 0px',
+        rootMargin: '0px 0px -15% 0px',
       }
     );
 
