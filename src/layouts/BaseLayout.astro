@@ -1,6 +1,7 @@
 ---
 import Filter from '@components/Filter.astro';
 import BaseHead, { type Props as HeadProps } from '@components/meta/BaseHead.astro';
+import Footer from "@components/Footer.astro"
 import '@styles/global.css';
 
 interface Props extends HeadProps {
@@ -20,17 +21,22 @@ const { bgClass, ...head } = Astro.props;
     <BaseHead {...head} />
   </head>
   <body
-    class="antialiased bg-stone-950 prose-stone prose-invert text-neutral-200 selection:bg-lime-700/80 relative grid grid-rows-[1fr_auto] min-h-screen max-w-screen"
+    class="antialiased bg-stone-950 prose-stone prose-invert text-neutral-200 selection:bg-lime-700/80 relative min-h-screen max-w-screen"
   >
     <Filter />
 
-    <main
-      id="main"
-      class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) *:col-[content] *:my-4"
-    >
-      <slot />
-    </main>
-
-    <div id="footer" class="inset-x-0 bottom-0 z-20 max-h-screen"></div>
+    <div class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) *:col-[content]">
+      {Astro.slots.has("header") && (
+        <header class="contents *:col-[content]">
+          <slot name="header" />
+        </header>
+      )}
+      
+      <main class="contents *:col-[content]">
+        <slot />
+      </main>
+      
+      <Footer />
+    </div>
   </body>
 </html>
