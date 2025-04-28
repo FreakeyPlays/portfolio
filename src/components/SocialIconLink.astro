@@ -1,0 +1,14 @@
+---
+interface Props {
+  icon: ((_props: astroHTML.JSX.SVGAttributes) => any) & ImageMetadata;
+  href: string,
+  text: string
+}
+
+const { icon: SocialIcon, href, text } = Astro.props;
+---
+
+<a href={href} target="_blank" rel="noopener noreferer">
+  <span class="sr-only">{text}</span>
+  <SocialIcon class="size-8 fill-neutral-200" aria-hidden="true" />
+</a>
