@@ -2,15 +2,7 @@
 import Grain from './Grain.astro';
 import NavigationIcon from '../assets/icons/ui/navigation.svg';
 import CloseIcon from '../assets/icons/ui/close.svg';
-
-const links = [
-  { label: 'about', url: '#about', samePage: true },
-  { label: 'skills', url: '#skills', samePage: true },
-  { label: 'career', url: '#career', samePage: true },
-  { label: 'education', url: '#education', samePage: true },
-  { label: 'projects', url: '#projects', samePage: true },
-  { label: 'blog', url: '/blog', samePage: false },
-];
+import { pages as links } from '@data/pages';
 ---
 
 <nav
@@ -45,7 +37,7 @@ const links = [
 
   <ul id="nav-list" class:list={[
     "hidden absolute mt-4 left-0 right-0 top-full rounded-4xl overflow-hidden bg-gray-200/20 backdrop-blur-md border border-white/20 space-y-2 py-4", 
-    "md:flex md:relative md:mt-0 md:top-0 md:bg-transparent md:border-none md:backdrop-blur-none md:gap-3 md:space-y-0"
+    "md:flex md:relative md:mt-0 md:top-0 md:bg-transparent md:border-none md:backdrop-blur-none md:gap-3 md:space-y-0 md:overflow-visible"
   ]}>
     <Grain class="md:hidden" />
     {
