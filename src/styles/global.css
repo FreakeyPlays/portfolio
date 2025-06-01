@@ -31,6 +31,19 @@
   }
 }
 
+.animate-flag-wave {
+  animation: flag-wave 1000ms alternate infinite ease-in-out both;
+}
+
+@keyframes flag-wave {
+  from {
+    transform: translateY(var(--billow, 2px));
+  }
+  to {
+    transform: translateY(calc(var(--billow, 2px) * -1));
+  }
+}
+
 @utility pause-animation {
   animation-play-state: paused;
 }

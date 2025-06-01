@@ -1,0 +1,134 @@
+---
+interface Props {
+  index: number;
+  billow: number;
+  staggeredDelay: number;
+  numberOfColumns: number;
+}
+
+type GradientStop = { from: number; to: number; color: string };
+
+const rainbow = [
+  'hsl(0deg 90% 55%)',
+  'hsl(30deg 95% 65%)',
+  'hsl(55deg 90% 65%)',
+  'hsl(100deg 65% 45%)',
+  'hsl(220deg 80% 55%)',
+  'hsl(265deg 80% 50%)',
+];
+
+const progress = [
+  'hsl(0deg 0% 0%)',
+  'hsl(25deg 100% 23%)',
+  'hsl(191deg 100% 50%)',
+  'hsl(347deg 100% 83%)',
+  'hsl(0deg 100% 100%)',
+  'hsl(347deg 100% 83%)',
+  'hsl(191deg 100% 50%)',
+  'hsl(25deg 100% 23%)',
+  'hsl(0deg 0% 0%)',
+];
+
+const { index, billow, staggeredDelay, numberOfColumns } = Astro.props;
+
+const firstColumnDelay = numberOfColumns * staggeredDelay * -1;
+
+function removeFromMiddle(arr: Array<any>, count: number) {
+  const mid = Math.floor(arr.length / 2);
+  const start = Math.max(0, mid - Math.floor(count / 2));
+
+  arr.splice(start, count);
+  return arr;
+}
+
+function adjustProgressArray() {
+  const triangleColWidth = Math.floor(numberOfColumns / 3);
+  const numberOfWhiteToAdd = Math.max(0, triangleColWidth - 5);
+
+  const middleIndex = Math.floor(progress.length / 2);
+  const middleElement = progress[middleIndex];
+  const duplicates = Array(numberOfWhiteToAdd).fill(middleElement);
+
+  return [...progress.slice(0, middleIndex + 1), ...duplicates, ...progress.slice(middleIndex + 1)];
+}
+
+function combineGradientStops(base: GradientStop[], override: GradientStop[]): GradientStop[] {
+  const result: GradientStop[] = [];
+
+  const allBreakpoints = new Set<number>();
+
+  for (const stop of base.concat(override)) {
+    allBreakpoints.add(stop.from);
+    allBreakpoints.add(stop.to);
+  }
+
+  const sortedPoints = Array.from(allBreakpoints).sort((a, b) => a - b);
+
+  for (let i = 0; i < sortedPoints.length - 1; i++) {
+    const from = sortedPoints[i];
+    const to = sortedPoints[i + 1];
+
+    const overrideSegment = override.find((s) => s.from <= from && s.to >= to);
+    if (overrideSegment) {
+      result.push({ from, to, color: overrideSegment.color });
+      continue;
+    }
+
+    const baseSegment = base.find((s) => s.from <= from && s.to >= to);
+    if (baseSegment) {
+      result.push({ from, to, color: baseSegment.color });
+    }
+  }
+
+  return result;
+}
+
+function generateColorStops(flagColumnIndex: number) {
+  const copy = adjustProgressArray();
+
+  const numOfRainbowRows = rainbow.length;
+  const rainbowSegmentHeight = 100 / numOfRainbowRows;
+  const numOfProgressRows = copy.length;
+  const progressSegmentHeight = 100 / numOfProgressRows;
+
+  const rainbowGradientStops = rainbow.map((color, index) => {
+    const from = +(index * rainbowSegmentHeight).toFixed(2);
+    const to = +((index + 1) * rainbowSegmentHeight).toFixed(2);
+
+    return { from, to, color };
+  });
+
+  removeFromMiddle(copy, flagColumnIndex);
+
+  const progressGradientStops = copy.map((color, index) => {
+    const padding = flagColumnIndex * (progressSegmentHeight / 2);
+    const from = +(index * progressSegmentHeight + padding).toFixed(2);
+    const to = +((index + 1) * progressSegmentHeight + padding).toFixed(2);
+
+    return { from, to, color };
+  });
+
+  const gradientStops = combineGradientStops(rainbowGradientStops, progressGradientStops).map(
+    ({ from, to, color }) => {
+      return `${color} ${from}% ${to}%`;
+    }
+  );
+
+  return `linear-gradient(to bottom,${gradientStops.join(',')})`;
+}
+---
+
+<div
+  class="grow animate-flag-wave"
+  style={{
+    background: generateColorStops(index),
+    animationDelay: `${firstColumnDelay + index * staggeredDelay}ms`,
+  }}
+>
+</div>
+
+<style
+  define:vars={{
+    billow: `${index * billow}px`,
+  }}
+></style>
