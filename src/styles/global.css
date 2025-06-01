@@ -37,10 +37,10 @@
 
 @keyframes flag-wave {
   from {
-    transform: translateY(var(--billow, 2px));
+    transform: translateY(calc(var(--billow, 2px) * var(--reducedMotion, 1)));
   }
   to {
-    transform: translateY(calc(var(--billow, 2px) * -1));
+    transform: translateY(calc((var(--billow, 2px) * -1) * var(--reducedMotion, 1)));
   }
 }
 

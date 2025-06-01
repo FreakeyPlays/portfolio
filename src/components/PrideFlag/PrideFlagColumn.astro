@@ -119,7 +119,7 @@ function generateColorStops(flagColumnIndex: number) {
 ---
 
 <div
-  class="grow animate-flag-wave"
+  class="grow animate-flag-wave motion-reduce:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
   style={{
     background: generateColorStops(index),
     animationDelay: `${firstColumnDelay + index * staggeredDelay}ms`,
