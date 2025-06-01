@@ -13,12 +13,12 @@ export default defineConfig({
       {
         provider: fontProviders.google(),
         name: 'Montserrat',
-        cssVariable: '--font-serif',
+        cssVariable: '--font-montserrat',
       },
       {
         provider: fontProviders.google(),
         name: 'Raleway',
-        cssVariable: '--font-sans',
+        cssVariable: '--font-raleway',
       }
     ],
   },

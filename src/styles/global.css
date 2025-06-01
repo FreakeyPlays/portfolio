@@ -47,3 +47,8 @@
 @utility pause-animation {
   animation-play-state: paused;
 }
+
+@theme inline {
+  --font-sans: var(--font-raleway);
+  --font-serif: var(--font-montserrat);
+}
