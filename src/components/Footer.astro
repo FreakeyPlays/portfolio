@@ -1,33 +1,46 @@
 ---
-import socialLinks from "@data/socialLinks"
-import { pages } from "@data/pages";
+import { pages } from '@data/pages';
+import socialLinks from '@data/socialLinks';
+import PrideFlag from './PrideFlag/PrideFlag.astro';
 import SocialIconLink from './SocialIconLink.astro';
-import siteInfo from '../data/siteInfo';
 ---
 
 <footer class="col-[extra]!">
   <nav aria-label="Secondary" class="py-4">
     <ul class="flex flex-row gap-3">
-      {pages.map(({label, url}) => (
-        <a class:list={[
-          "text-lg font-semibold",
-          "relative after:content-[\"\"] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100"
-          ]}
-           href={url}>/{label}</a>
-      ))}
+      {
+        pages.map(({ label, url }) => (
+          <a
+            class:list={[
+              'text-lg font-semibold',
+              'relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100',
+            ]}
+            href={url}
+          >
+            /{label}
+          </a>
+        ))
+      }
     </ul>
   </nav>
-  <hr class="border-neutral-600">
+  <hr class="border-neutral-600" />
   <nav aria-label="Legal & Socials" class="flex flex-row justify-between items-center py-8">
-    <a target="_blank" class='relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100' href="https://github.com/FreakeyPlays/portfolio/blob/main/LICENSE">
+    <a
+      target="_blank"
+      class='relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100'
+      href="https://github.com/FreakeyPlays/portfolio/blob/main/LICENSE"
+    >
       MIT License &copy; {new Date().getFullYear()}&nbsp;
     </a>
+    <PrideFlag width={50} numberOfColumns={20} billow={0.15} />
     <ul class="flex flex-row gap-4">
-      {socialLinks.map(({href, icon, text}) => (
-        <li>
-          <SocialIconLink icon={icon} href={href} text={text} />
-        </li>
-      ))}
+      {
+        socialLinks.map(({ href, icon, text }) => (
+          <li>
+            <SocialIconLink icon={icon} href={href} text={text} />
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </footer>
