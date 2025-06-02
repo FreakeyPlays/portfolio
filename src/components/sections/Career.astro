@@ -12,9 +12,14 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
 ---
 
 <BaseSection title="career">
+  <p class="mt-4">
+    My career has thrown plenty of challenges my way. I've built features, fixed bugs, and &mdash;
+    let’s be honest &mdash; probably created even more in the process. Still, with every project and
+    mistake, I’ve grown to become the best version of myself.
+  </p>
   {
     careerCollection.map((career) => (
-      <Timeline>
+      <Timeline class="mt-16">
         <Fragment slot="left">
           <h3 class="text-2xl font-bold">
             <HighlightLink target="_blank" rel="noopener noreferrer" href={career.data.url}>
