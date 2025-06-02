@@ -8,7 +8,7 @@ import { pages as links } from '@data/pages';
 <nav
   aria-label="Primary"
   class:list={[
-    "z-50 mx-2 h-16 p-2 pr-8 isolate rounded-full bg-gray-200/20 sticky top-4 shadow-xl col-[image]! border border-white/20 flex items-center justify-between",
+    'z-50 mx-2 h-16 p-2 pr-8 isolate rounded-full bg-gray-200/20 sticky top-4 shadow-xl col-[image]! border border-white/20 flex items-center justify-between',
     "before:content-[''] before:absolute before:inset-0 before:backdrop-blur-sm before:rounded-full before:-z-1",
   ]}
 >
@@ -35,16 +35,19 @@ import { pages as links } from '@data/pages';
     <CloseIcon id="menu-toggle-close" class="h-8 w-8 hidden" />
   </button>
 
-  <ul id="nav-list" class:list={[
-    "hidden absolute mt-4 left-0 right-0 top-full rounded-4xl overflow-hidden bg-gray-200/20 backdrop-blur-md border border-white/20 space-y-2 py-4", 
-    "md:flex md:relative md:mt-0 md:top-0 md:bg-transparent md:border-none md:backdrop-blur-none md:gap-3 md:space-y-0 md:overflow-visible"
-  ]}>
+  <ul
+    id="nav-list"
+    class:list={[
+      'hidden absolute mt-4 left-0 right-0 top-full rounded-4xl overflow-hidden bg-gray-200/20 backdrop-blur-md border border-white/20 space-y-2 py-4',
+      'md:flex md:relative md:mt-0 md:top-0 md:bg-transparent md:border-none md:backdrop-blur-none md:gap-3 md:space-y-0 md:overflow-visible',
+    ]}
+  >
     <Grain class="md:hidden" />
     {
       links.map((el) => (
         <li
           class:list={[
-            "w-fit mx-auto",
+            'w-fit mx-auto',
             'has-[.active-nav-link]:bg-gradient-to-br has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text',
             "relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100",
           ]}
@@ -69,7 +72,6 @@ import { pages as links } from '@data/pages';
   const navItems = document.querySelectorAll('#nav-list li');
 
   if (toggle && navList && openIcon && closeIcon) {
-    
     toggle.addEventListener('click', () => {
       const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
