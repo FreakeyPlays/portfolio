@@ -8,9 +8,10 @@ const { title, class: className } = Astro.props;
 const formattedTitle = title.trim().toLowerCase();
 ---
 
-<section id={formattedTitle} class:list={['scroll-m-32 mt-20', className]}>
+<section class:list={['mt-20', className]}>
   <h2
-    class="text-4xl font-extrabold font-serif bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
+    id={formattedTitle}
+    class="text-4xl font-extrabold font-serif bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent scroll-m-32"
   >
     <span class="text-white">/</span>{formattedTitle}
   </h2>
