@@ -1,21 +1,20 @@
 ---
 import Filter from '@components/Filter.astro';
+import Footer from '@components/Footer.astro';
 import BaseHead, { type Props as HeadProps } from '@components/meta/BaseHead.astro';
-import Footer from "@components/Footer.astro"
 import '@styles/global.css';
 
 interface Props extends HeadProps {
   class?: string;
-  bgClass?: string;
 }
 
-const { bgClass, ...head } = Astro.props;
+const { class: className, ...head } = Astro.props;
 ---
 
 <!doctype html>
 <html
   lang="en"
-  class:list={['overflow-x-hidden break-words scroll-smooth [word-break:break-word]', bgClass, Astro.props.class]}
+  class:list={['overflow-x-hidden break-words scroll-smooth [word-break:break-word]', className]}
 >
   <head>
     <BaseHead {...head} />
@@ -25,17 +24,21 @@ const { bgClass, ...head } = Astro.props;
   >
     <Filter />
 
-    <div class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) *:col-[content]">
-      {Astro.slots.has("header") && (
-        <header class="contents *:col-[content]">
-          <slot name="header" />
-        </header>
-      )}
-      
+    <div
+      class="z-10 grid grid-cols-(--grid-template-mobile) md:grid-cols-(--grid-template-tablet) xl:grid-cols-(--grid-template-desktop) *:col-[content]"
+    >
+      {
+        Astro.slots.has('header') && (
+          <header class="contents *:col-[content]">
+            <slot name="header" />
+          </header>
+        )
+      }
+
       <main class="contents *:col-[content]">
         <slot />
       </main>
-      
+
       <Footer />
     </div>
   </body>
