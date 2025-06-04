@@ -1,0 +1,55 @@
+---
+import GitHubIcon from '@assets/icons/social/github.svg';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const {
+  project: { data: projectData },
+} = Astro.props;
+---
+
+<li class="rounded-lg overflow-hidden flex flex-col intersect:motion-preset-fade-md">
+  <div class="aspect-video bg-gray-500 grid place-items-center">
+    {
+      projectData.image ? (
+        <Image
+          class="aspect-video"
+          src={projectData.image}
+          alt={`${projectData.title} Thumbnail image`}
+        />
+      ) : (
+        <p>Coming soon...</p>
+      )
+    }
+  </div>
+  <div class="bg-gradient-to-tr from-zinc-800 via-zinc-500 to-zinc-800 px-px pb-px h-full">
+    <div class="bg-zinc-800 p-2 rounded-b-lg h-full flex flex-col">
+      <h3 class="text-xl font-semibold font-serif">{projectData.title}</h3>
+      <p class="grow my-2">{projectData.description}</p>
+      <hr class="border-neutral-600 my-2" />
+      <div class="flex flex-row justify-between items-center">
+        <div>{projectData.state}</div>
+        <div class="flex flex-row gap-2">
+          {
+            projectData.deployedURL && (
+              <a
+                class="border rounded-full px-4 hover:text-neutral-400"
+                href={projectData.deployedURL}
+                target="_blank"
+              >
+                Demo
+              </a>
+            )
+          }
+          <a href={projectData.repositoryURL} rel="noopener noreferrer" target="_blank">
+            <GitHubIcon class="size-6 fill-neutral-200" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

@@ -1,16 +1,22 @@
 ---
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 import BaseSection from './BaseSection.astro';
+
+const posts = await getCollection('projects', ({ data }) => {
+  return import.meta.env.PROD ? data.isPublished !== true : true;
+});
+posts.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseSection title="projects">
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem aliquam
-    iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur deleniti
-    magni? Repellendus numquam explicabo tempora. Lorem ipsum dolor sit amet consectetur adipisicing
-    elit. Debitis saepe, quam voluptatem aliquam iure minima qui esse necessitatibus quasi
-    repellendus eaque distinctio illo tenetur deleniti magni? Repellendus numquam explicabo
-    tempora.Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis saepe, quam voluptatem
-    aliquam iure minima qui esse necessitatibus quasi repellendus eaque distinctio illo tenetur
-    deleniti magni? Repellendus numquam explicabo tempora.
+  <p class="mt-4">
+    Like any good developer, I have a long list of side projects &mdash; some finished, some...
+    still "in progress." Here’s a curated selection of the ones I believe are worth sharing.
   </p>
+  <ul
+    class="mt-16 grid gap-4 grid-cols-1 **:row-span-3 sm:**:nth-2:sm:col-start-2 sm:**:nth-2:sm:row-start-2 sm:grid-cols-2"
+  >
+    {posts.map((el) => <ProjectCard project={el} />)}
+  </ul>
 </BaseSection>

@@ -34,4 +34,20 @@ const career = defineCollection({
   }),
 });
 
-export const collections = { education, career };
+const projects = defineCollection({
+  loader: file("src/data/projects.json" ),
+  schema: ({image}) => (
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      repositoryURL: z.string().url(),
+      deployedURL: z.string().url().optional(),
+      state: z.enum(['Planned', 'WIP', 'Done', 'Maintenance']),
+      order: z.number().min(0).max(100).default(50),
+      image: image().optional(),
+      isPublished: z.boolean().default(false),
+    })
+  )
+})
+
+export const collections = { education, career, projects };
