@@ -1,49 +1,53 @@
 [
-    {
-        "id": "pwa-chat",
-        "title": "PWA Chat",
-        "description": "A fully functional Progressive Web App messenger built from scratch using only HTML, CSS, and TypeScript — no frameworks.",
-        "repositoryURL": "https://github.com/freakeyplays/pwa-chat",
-        "deployedURL": "https://chat.chrismerck.dev",
-        "state": "Done",
-        "order": 40,
-        "image": "./../assets/thumbnails/pwa-chat-preview.jpg",
-        "isPublished": false
-    },{
-        "id": "q-cv",
-        "title": "Q-CV",
-        "description": "A web-based CV management and generation tool developed in collaboration with Quanto Solutions at HS Esslingen.",
-        "repositoryURL": "https://github.com/freakeyplays/q-cv",
-        "image": "./../assets/thumbnails/q-cv-preview.jpg",
-        "state": "Done",
-        "order": 60,
-        "isPublished": true
-    }, {
-        "id": "todo-app",
-        "title": "ToDo App",
-        "description": "A simple web-based Todo app built with Angular and NestJS, tested using Cypress for frontend and k6 for backend performance.",
-        "repositoryURL": "https://github.com/freakeyplays/todo-app",
-        "deployedURL": "https://todo.chrismerck.dev",
-        "state": "Done",
-        "image": "./../assets/thumbnails/todo-app-preview.jpg",
-        "order": 80,
-        "isPublished": false
-    }, {
-        "id": "zenith",
-        "title": "Zenith",
-        "description": "A flexible and customizable PWA for tracking meals, workouts, and mental well-being — designed to adapt to your personal goals and habits.",
-        "repositoryURL": "https://github.com/freakeyplays/zenith",
-        "state": "Planned",
-        "image": "./../assets/thumbnails/zenith-preview.jpg",
-        "order": 20,
-        "isPublished": true
-    },{
-        "id": "pride-flags",
-        "title": "Pride Flags",
-        "description": "My very first NPM package released. It gives you the Power to embed animated Flags using CSS Gradients.",
-        "repositoryURL": "https://github.com/freakeyplays/zenith",
-        "state": "WIP",
-        "order": 30,
-        "isPublished": true
-    }
+  {
+    "id": "pwa-chat",
+    "title": "PWA Chat",
+    "description": "A fully functional Progressive Web App messenger built from scratch using only HTML, CSS, and TypeScript — no frameworks.",
+    "repositoryURL": "https://github.com/freakeyplays/pwa-chat",
+    "deployedURL": "https://chat.chrismerck.dev",
+    "state": "Done",
+    "order": 40,
+    "image": "./../assets/thumbnails/pwa-chat-preview.jpg",
+    "isPublished": false
+  },
+  {
+    "id": "q-cv",
+    "title": "Q-CV",
+    "description": "A web-based CV management and generation tool developed in collaboration with Quanto Solutions at HS Esslingen.",
+    "repositoryURL": "https://github.com/freakeyplays/q-cv",
+    "image": "./../assets/thumbnails/q-cv-preview.jpg",
+    "state": "Done",
+    "order": 60,
+    "isPublished": true
+  },
+  {
+    "id": "todo-app",
+    "title": "ToDo App",
+    "description": "A simple web-based Todo app built with Angular and NestJS, tested using Cypress for frontend and k6 for backend performance.",
+    "repositoryURL": "https://github.com/freakeyplays/todo-app",
+    "deployedURL": "https://todo.chrismerck.dev",
+    "state": "Done",
+    "image": "./../assets/thumbnails/todo-app-preview.jpg",
+    "order": 80,
+    "isPublished": false
+  },
+  {
+    "id": "zenith",
+    "title": "Zenith",
+    "description": "A flexible and customizable PWA for tracking meals, workouts, and mental well-being — designed to adapt to your personal goals and habits.",
+    "repositoryURL": "https://github.com/freakeyplays/zenith",
+    "state": "Planned",
+    "image": "./../assets/thumbnails/zenith-preview.jpg",
+    "order": 20,
+    "isPublished": true
+  },
+  {
+    "id": "pride-flags",
+    "title": "Pride Flags",
+    "description": "My very first NPM package released. It gives you the Power to embed animated Flags using CSS Gradients.",
+    "repositoryURL": "https://github.com/freakeyplays/zenith",
+    "state": "WIP",
+    "order": 30,
+    "isPublished": true
+  }
 ]

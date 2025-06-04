@@ -21,7 +21,7 @@ export default defineConfig({
         name: 'Inter',
         cssVariable: '--font-raleway',
         weights: [400, 600, 700],
-      }
+      },
     ],
   },
 

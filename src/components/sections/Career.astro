@@ -1,9 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
-import { getCollection } from 'astro:content';
 import BaseSection from './BaseSection.astro';
 
 const careerCollection = await getCollection('career');

@@ -1,7 +1,7 @@
 export type Page = {
-  label: string,
-  url: string,
-  samePage: boolean,
+  label: string;
+  url: string;
+  samePage: boolean;
 };
 
 export const pages: Page[] = [

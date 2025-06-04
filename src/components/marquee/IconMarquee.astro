@@ -2,7 +2,7 @@
 import MarqueeItem from './MarqueeItem.astro';
 
 interface Props {
-  skills: (((_props: astroHTML.JSX.SVGAttributes) => any) & ImageMetadata)[];
+  skills: (((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata)[];
   direction?: 'forwards' | 'reverse';
   speed?: number;
   gap?: number;

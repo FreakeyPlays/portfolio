@@ -23,20 +23,22 @@ const career = defineCollection({
     company: z.string(),
     url: z.string(),
     location: z.string(),
-    jobs: z.array(z.object({
-      title: z.string(),
-      startDate: z.string(),
-      endDate: z.string(),
-      description: z.string(),
-      ongoing: z.boolean().optional(),
-      technologies: z.array(z.string()).optional(),
-    })),
+    jobs: z.array(
+      z.object({
+        title: z.string(),
+        startDate: z.string(),
+        endDate: z.string(),
+        description: z.string(),
+        ongoing: z.boolean().optional(),
+        technologies: z.array(z.string()).optional(),
+      }),
+    ),
   }),
 });
 
 const projects = defineCollection({
-  loader: file("src/data/projects.json" ),
-  schema: ({image}) => (
+  loader: file('src/data/projects.json'),
+  schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string(),
@@ -46,8 +48,7 @@ const projects = defineCollection({
       order: z.number().min(0).max(100).default(50),
       image: image().optional(),
       isPublished: z.boolean().default(false),
-    })
-  )
-})
+    }),
+});
 
 export const collections = { education, career, projects };

@@ -7,7 +7,7 @@ export type SocialLink = {
   text: string;
   /** Short label with the name of the platform, e.g. `"Discord"`*/
   label: string;
-  icon: ((_props: astroHTML.JSX.SVGAttributes) => any) & ImageMetadata;
+  icon: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
   href: string;
   footerOnly?: boolean;
 };

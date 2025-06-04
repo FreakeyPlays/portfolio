@@ -3,13 +3,13 @@ interface Props {
   class?: string;
 }
 
-const { class: className = ''} = Astro.props;
+const { class: className = '' } = Astro.props;
 ---
 
 <div
   class:list={[
-    "absolute inset-0 opacity-20 filter-[url(#noise)] mix-blend-soft-light pointer-events-none", 
-    className
+    'absolute inset-0 opacity-20 filter-[url(#noise)] mix-blend-soft-light pointer-events-none',
+    className,
   ]}
 >
 </div>

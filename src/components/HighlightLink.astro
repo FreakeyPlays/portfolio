@@ -4,7 +4,7 @@ interface Props {
   target?: '_self' | '_blank' | '_parent' | '_top';
   rel?: string;
   class?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const { href, target = '_self', rel = '', class: className = '', ...rest } = Astro.props;

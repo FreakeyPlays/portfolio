@@ -33,7 +33,7 @@ const { index, billow, staggeredDelay, numberOfColumns } = Astro.props;
 
 const firstColumnDelay = numberOfColumns * staggeredDelay * -1;
 
-function removeFromMiddle(arr: Array<any>, count: number) {
+function removeFromMiddle(arr: Array<unknown>, count: number) {
   const mid = Math.floor(arr.length / 2);
   const start = Math.max(0, mid - Math.floor(count / 2));
 
