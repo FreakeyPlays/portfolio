@@ -8,7 +8,7 @@
     "state": "Done",
     "order": 40,
     "image": "./../assets/thumbnails/pwa-chat-preview.jpg",
-    "isPublished": false
+    "isPublished": true
   },
   {
     "id": "q-cv",
@@ -29,7 +29,7 @@
     "state": "Done",
     "image": "./../assets/thumbnails/todo-app-preview.jpg",
     "order": 80,
-    "isPublished": false
+    "isPublished": true
   },
   {
     "id": "zenith",

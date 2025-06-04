@@ -1,11 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
 import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 import BaseSection from './BaseSection.astro';
 
 const posts = await getCollection('projects', ({ data }) => {
-  return import.meta.env.PROD ? data.isPublished !== true : true;
+  return import.meta.env.PROD ? data.isPublished : true;
 });
+console.log(posts);
+
 posts.sort((a, b) => a.data.order - b.data.order);
 ---
 
