@@ -41,6 +41,19 @@ const resolvedImage: Image = {
 <Font cssVariable="--font-montserrat" preload />
 <Font cssVariable="--font-inter" preload />
 
+{/* Analytics */}
+{
+  import.meta.env.PROD && (
+    <script
+      async
+      is:inline
+      data-astro-rerun
+      src="https://umami.chrismerck.dev/script.js"
+      data-website-id="c7c4e802-1032-40aa-9dd8-dc62b220251e"
+    />
+  )
+}
+
 {/* Low Priority Global Metadata */}
 <Favicon />
 <link rel="mask-icon" href="/favicon.svg" color="#8BC225" />
