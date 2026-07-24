@@ -1,0 +1,49 @@
+---
+import { pages } from '@data/pages';
+import socialLinks from '@data/socialLinks';
+import PrideFlag from './PrideFlag/PrideFlag.astro';
+import SocialIconLink from './SocialIconLink.astro';
+---
+
+<footer class="col-[extra]!">
+  <nav aria-label="Secondary" class="py-4">
+    <ul class="flex flex-row gap-3">
+      {
+        pages.map(({ label, url }) => (
+          <li>
+            <a
+              class:list={[
+                'text-lg font-semibold',
+                'relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100',
+              ]}
+              href={url}
+            >
+              /{label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <hr class="border-neutral-600" />
+  <nav aria-label="Legal & Socials" class="flex flex-row justify-between items-center py-8">
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      class='relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100'
+      href="https://github.com/FreakeyPlays/portfolio/blob/master/LICENSE"
+    >
+      MIT License &copy; {new Date().getFullYear()}&nbsp;
+    </a>
+    <PrideFlag width={50} numberOfColumns={20} billow={0.15} />
+    <ul class="flex flex-row gap-4">
+      {
+        socialLinks.map(({ href, icon, text }) => (
+          <li>
+            <SocialIconLink icon={icon} href={href} text={text} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</footer>

@@ -1,0 +1,35 @@
+---
+import PrideFlagColumn from './PrideFlagColumn.astro';
+
+interface Props {
+  width?: number;
+  numberOfColumns?: number;
+  staggeredDelay?: number;
+  billow?: number;
+}
+
+const { width = 200, numberOfColumns = 10, staggeredDelay = 100, billow = 2 } = Astro.props;
+
+const friendlyFlagWidth = Math.round(width / numberOfColumns) * numberOfColumns;
+---
+
+<div class="flex aspect-[3/2] duration-700 w-(--friendlyFlagWidth,100px)">
+  {
+    [...Array(numberOfColumns).keys()].map((index) => {
+      return (
+        <PrideFlagColumn
+          index={index}
+          billow={billow}
+          staggeredDelay={staggeredDelay}
+          numberOfColumns={numberOfColumns}
+        />
+      );
+    })
+  }
+</div>
+
+<style
+  define:vars={{
+    friendlyFlagWidth: `${friendlyFlagWidth}px`,
+  }}
+></style>

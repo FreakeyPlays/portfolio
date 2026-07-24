@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+:root {
+  --grid-template-desktop: [full-start] 1fr [aside-left-start] 15rem [aside-left-end extra-start]
+    2rem [image-start] 2rem [content-start] 4rem [annotation-start] min(34rem, 100%)
+    [annotation-end] 4rem [content-end] 2rem [image-end] 2rem [extra-end aside-right-start] 15rem
+    [aside-right-end] 1fr [full-end];
+  --grid-template-tablet: [full-start] minmax(1rem, 1fr) [extra-start] 2rem [image-start] 2rem
+    [content-start] 4rem [annotation-start aside-left-start aside-right-start] min(30rem, 100%)
+    [aside-right-end aside-left-end annotation-end] 4rem [content-end] 2rem [image-end] 2rem
+    [extra-end] minmax(1rem, 1fr) [full-end];
+  --grid-template-mobile: [full-start] 1rem [extra-start image-start] 1rem [content-start] 1rem
+    [annotation-start aside-left-start aside-right-start] 1fr [aside-right-end aside-left-end
+    annotation-end] 1rem [content-end] 1rem [image-end extra-end] 1rem [full-end];
+}
+
+.cursor::part(typewriter)::after {
+  color: var(--color-neutral-200);
+  width: 0.15em;
+}
+
+.animate-marquee-move {
+  animation: marquee-move var(--speed, 5s) linear infinite var(--direction, forwards)
+    var(--delay, 3s);
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
+}
+
+.animate-flag-wave {
+  animation: flag-wave 1000ms alternate infinite ease-in-out both;
+}
+
+@keyframes flag-wave {
+  from {
+    transform: translateY(calc(var(--billow, 2px) * var(--reducedMotion, 1)));
+  }
+  to {
+    transform: translateY(calc((var(--billow, 2px) * -1) * var(--reducedMotion, 1)));
+  }
+}
+
+@utility pause-animation {
+  animation-play-state: paused;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-montserrat);
+}

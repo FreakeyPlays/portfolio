@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Chip from '@components/Chip.astro';
+import HighlightLink from '@components/HighlightLink.astro';
+import Timeline from '@components/timeline/Timeline.astro';
+import TimelineItem from '@components/timeline/TimelineItem.astro';
+import BaseSection from './BaseSection.astro';
+
+const careerCollection = await getCollection('career');
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+---
+
+<BaseSection title="career">
+  <p class="mt-4">
+    My career has thrown plenty of challenges my way. I've built features, fixed bugs, and &mdash;
+    let’s be honest &mdash; probably created even more in the process. Still, with every project and
+    mistake, I’ve grown to become a better developer.
+  </p>
+  {
+    careerCollection.map((career) => (
+      <Timeline class="mt-16">
+        <Fragment slot="left">
+          <h3 class="text-2xl font-bold">
+            <HighlightLink target="_blank" rel="noopener noreferrer" href={career.data.url}>
+              {career.data.company}
+            </HighlightLink>
+          </h3>
+          <p class="text-lg ">{career.data.location}</p>
+        </Fragment>
+        <Fragment slot="right">
+          {career.data.jobs.map((job) => (
+            <TimelineItem>
+              <h4 class="text-xl font-bold">{job.title}</h4>
+              <p class="text-sm text-gray-400 uppercase">
+                {dateFormatter.format(new Date(job.startDate))} -{' '}
+                {job.ongoing ? job.endDate : dateFormatter.format(new Date(job.endDate))}
+              </p>
+              <p class="mt-2">{job.description}</p>
+              <ul class="flex flex-wrap gap-1 mt-2">
+                {job.technologies?.map((technology) => (
+                  <li>
+                    <Chip label={technology} />
+                  </li>
+                ))}
+              </ul>
+            </TimelineItem>
+          ))}
+        </Fragment>
+      </Timeline>
+    ))
+  }
+</BaseSection>

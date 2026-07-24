@@ -1,0 +1,46 @@
+[
+  {
+    "id": "master",
+    "level": "Master",
+    "institution": "Hochschule der Medien",
+    "degree": "Computer Science and Media (M.Sc.)",
+    "startDate": "2024-09-01",
+    "endDate": "present",
+    "location": "Stuttgart, Germany",
+    "description": "At the University, I am learning specific subjects regarding Software Engineering and Media Computing. Here I learned new technologies like C/C++, Python and React.",
+    "ongoing": true
+  },
+  {
+    "id": "bachelor",
+    "level": "Bachelor",
+    "institution": "Hochschule Esslingen",
+    "degree": "Software Engineering and Media Computing (B.Eng.)",
+    "startDate": "2020-09-01",
+    "endDate": "2024-06-01",
+    "location": "Esslingen, Germany",
+    "description": "At the University, I am learning specific subjects regarding Software Engineering and Media Computing. Here I learned new technologies like C/C++, Python and React.",
+    "grade": "1.6"
+  },
+  {
+    "id": "pre-university",
+    "level": "Pre-University",
+    "institution": "Gottlieb-Daimler-Schule 2",
+    "degree": "Advanced Technical College Entrance Qualification",
+    "startDate": "2017-09-01",
+    "endDate": "2019-06-01",
+    "location": "Sindelfingen, Germany",
+    "description": "At College, I extended my knowledge from my High School. Additionally, I learned new subjects like Informatics and Web Development (HTML,CSS,JS). I also learned to use the Adobe Software like PhotoShop, Illustrator and InDesign.",
+    "grade": "3.1"
+  },
+  {
+    "id": "secondary-school",
+    "level": "Secondary School",
+    "institution": "Realschule Ditzingen",
+    "degree": "Secondary School Leaving Certificate",
+    "startDate": "2014-09-01",
+    "endDate": "2017-06-01",
+    "location": "Ditzingen, Germany",
+    "description": "In High school I learned the basic subjects like Math, English, German and also completed the ECDL-certificate. Here I learned how to use the Microsoft Office Software like Excel, Word and PowerPoint.",
+    "grade": "3.7"
+  }
+]
