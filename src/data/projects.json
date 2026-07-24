@@ -42,10 +42,10 @@
     "isPublished": true
   },
   {
-    "id": "pride-flags",
-    "title": "Pride Flags",
-    "description": "My very first NPM package released. It gives you the Power to embed animated Flags using CSS Gradients.",
-    "repositoryURL": "https://github.com/freakeyplays/zenith",
+    "id": "puzzles",
+    "title": "Puzzles",
+    "description": "Fast, free and fun puzzle games — running completely local with no servers, built with TypeScript, Rust and WebAssembly in a Turborepo.",
+    "repositoryURL": "https://github.com/FreakeyPlays/puzzles",
     "state": "WIP",
     "order": 30,
     "isPublished": true

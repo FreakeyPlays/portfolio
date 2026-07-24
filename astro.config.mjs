@@ -19,7 +19,7 @@ export default defineConfig({
       {
         provider: fontProviders.google(),
         name: 'Inter',
-        cssVariable: '--font-raleway',
+        cssVariable: '--font-inter',
         weights: [400, 600, 700],
       },
     ],

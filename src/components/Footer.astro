@@ -10,15 +10,17 @@ import SocialIconLink from './SocialIconLink.astro';
     <ul class="flex flex-row gap-3">
       {
         pages.map(({ label, url }) => (
-          <a
-            class:list={[
-              'text-lg font-semibold',
-              'relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100',
-            ]}
-            href={url}
-          >
-            /{label}
-          </a>
+          <li>
+            <a
+              class:list={[
+                'text-lg font-semibold',
+                'relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100',
+              ]}
+              href={url}
+            >
+              /{label}
+            </a>
+          </li>
         ))
       }
     </ul>
@@ -27,8 +29,9 @@ import SocialIconLink from './SocialIconLink.astro';
   <nav aria-label="Legal & Socials" class="flex flex-row justify-between items-center py-8">
     <a
       target="_blank"
+      rel="noopener noreferrer"
       class='relative after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100'
-      href="https://github.com/FreakeyPlays/portfolio/blob/main/LICENSE"
+      href="https://github.com/FreakeyPlays/portfolio/blob/master/LICENSE"
     >
       MIT License &copy; {new Date().getFullYear()}&nbsp;
     </a>

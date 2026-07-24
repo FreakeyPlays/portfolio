@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chismerck.dev/sitemap-index.xml
+Sitemap: https://chrismerck.dev/sitemap-index.xml
