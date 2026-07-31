@@ -1,19 +1,24 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 100,
-    "formatWithErrors": true,
-    "ignore": ["*.astro"]
+    "formatWithErrors": true
   },
-  "organizeImports": {
-    "enabled": true
+  "html": {
+    "experimentalFullSupportEnabled": true
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "a11y": {
         "noSvgWithoutTitle": "off"
       }
@@ -42,10 +47,23 @@
   },
   "overrides": [
     {
-      "include": ["package.json"],
+      "includes": ["**/package.json"],
       "json": {
         "formatter": {
           "lineWidth": 1
+        }
+      }
+    },
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noUselessFragments": "off"
+          },
+          "a11y": {
+            "useAnchorContent": "off"
+          }
         }
       }
     }

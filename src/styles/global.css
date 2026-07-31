@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --grid-template-desktop: [full-start] 1fr [aside-left-start] 15rem [aside-left-end extra-start]
@@ -11,8 +11,9 @@
     [aside-right-end aside-left-end annotation-end] 4rem [content-end] 2rem [image-end] 2rem
     [extra-end] minmax(1rem, 1fr) [full-end];
   --grid-template-mobile: [full-start] 1rem [extra-start image-start] 1rem [content-start] 1rem
-    [annotation-start aside-left-start aside-right-start] 1fr [aside-right-end aside-left-end
-    annotation-end] 1rem [content-end] 1rem [image-end extra-end] 1rem [full-end];
+    [annotation-start aside-left-start aside-right-start] 1fr
+    [aside-right-end aside-left-end annotation-end] 1rem [content-end] 1rem [image-end extra-end]
+    1rem [full-end];
 }
 
 .cursor::part(typewriter)::after {
