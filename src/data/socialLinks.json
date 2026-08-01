@@ -1,0 +1,20 @@
+[
+  {
+    "icon": "../assets/icons/social/github.svg",
+    "label": "GitHub",
+    "text": "See my GitHub Projects",
+    "href": "https://github.com/FreakeyPlays"
+  },
+  {
+    "icon": "../assets/icons/social/linkedin.svg",
+    "label": "LinkedIn",
+    "text": "Follow me on LinkedIn",
+    "href": "https://www.linkedin.com/in/christoph-merck"
+  },
+  {
+    "icon": "../assets/icons/social/bluesky.svg",
+    "label": "Bluesky",
+    "text": "Follow me on Bluesky",
+    "href": "https://bsky.app/profile/freakyplays.bsky.social"
+  }
+]

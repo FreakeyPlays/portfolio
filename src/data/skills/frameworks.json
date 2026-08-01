@@ -1,0 +1,29 @@
+{
+  "category": "Frameworks",
+  "skills": [
+    {
+      "name": "Angular",
+      "image": "../../assets/icons/skills/angular.svg"
+    },
+    {
+      "name": "Astro",
+      "image": "../../assets/icons/skills/astro.svg"
+    },
+    {
+      "name": "React",
+      "image": "../../assets/icons/skills/react.svg"
+    },
+    {
+      "name": "Vue",
+      "image": "../../assets/icons/skills/vuedotjs.svg"
+    },
+    {
+      "name": "Nuxt",
+      "image": "../../assets/icons/skills/nuxt.svg"
+    },
+    {
+      "name": "Next.js",
+      "image": "../../assets/icons/skills/nextdotjs.svg"
+    }
+  ]
+}
