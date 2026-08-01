@@ -1,0 +1,16 @@
+site_url: https://chrismerck.dev
+logout_redirect_url: https://chrismerck.dev
+
+app_title: Portfolio CMS
+
+backend:
+  name: github
+  repo: FreakeyPlays/portfolio
+  branch: dev
+
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+editor:
+  preview: false
+  
