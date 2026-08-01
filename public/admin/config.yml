@@ -1,0 +1,190 @@
+site_url: https://chrismerck.dev
+logout_redirect_url: https://chrismerck.dev
+
+app_title: Portfolio CMS
+
+backend:
+  name: github
+  repo: FreakeyPlays/portfolio
+  branch: dev
+
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+editor:
+  preview: false
+  
+collections:
+  - name: education
+    label: Education
+    label_singular: Education Entry
+    icon: school
+    folder: src/data/education
+    extension: json
+    format: json
+    create: true
+    identifier_field: level
+    summary: '{{level}} – {{institution}}'
+    fields:
+      - { name: level, label: Level, widget: string }
+      - { name: institution, label: Institution, widget: string }
+      - { name: degree, label: Degree, widget: string }
+      - { name: startDate, label: Start Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
+      - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty and check "Ongoing" if still running' }
+      - { name: location, label: Location, widget: string }
+      - { name: description, label: Description, widget: markdown }
+      - { name: grade, label: Grade, widget: number, value_type: float, min: 1.0, max: 6.0, step: 0.1, required: false }
+      - { name: ongoing, label: Ongoing, widget: boolean, required: false }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    icon: deployed_code
+    folder: src/data/projects
+    extension: json
+    format: json
+    create: true
+    thumbnail: image
+    summary: '{{title}}'
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text }
+      - { name: repositoryURL, label: Repository URL, widget: string, type: url }
+      - { name: deployedURL, label: Deployed URL, widget: string, type: url, required: false }
+      - { name: state, label: State, widget: select, options: [Planned, WIP, Done, Maintenance] }
+      - { name: order, label: Order, widget: number, value_type: int, min: 0, max: 100, default: 50, hint: 'Position in the project list (0–100)' }
+      - name: image
+        label: Preview Image
+        widget: image
+        required: false
+        media_folder: /src/assets/thumbnails
+        public_folder: ../../assets/thumbnails
+      - { name: isPublished, label: Published, widget: boolean, default: 0 }
+
+  - name: career
+    label: Career
+    label_singular: Company Streak
+    icon: work
+    folder: src/data/career
+    extension: json
+    format: json
+    create: true
+    identifier_field: company
+    summary: '{{company}} – {{location}}'
+    fields:
+      - { name: company, label: Company, widget: string }
+      - { name: url, label: Company Website, widget: string, type: url }
+      - { name: location, label: Location, widget: string }
+      - name: jobs
+        label: Positions
+        label_singular: Position
+        widget: list
+        summary: '{{fields.title}}'
+        hint: 'Drag to reorder — this is the order shown on the site (newest on top)'
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: startDate, label: Start Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
+          - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty and check "Ongoing" if still running' }
+          - { name: description, label: Description, widget: markdown }
+          - { name: ongoing, label: Ongoing, widget: boolean, required: false }
+          - { name: technologies, label: Technologies, widget: list, required: false }
+
+  - name: skills
+    label: Skills
+    label_singular: Skill Category
+    icon: handyman
+    folder: src/data/skills
+    extension: json
+    format: json
+    create: true
+    identifier_field: category
+    summary: '{{category}}'
+    fields:
+      - { name: category, label: Category, widget: string, hint: 'e.g. "Tools", "Frameworks", "Languages"' }
+      - name: skills
+        label: Skills
+        label_singular: Skill
+        widget: list
+        summary: '{{fields.name}}'
+        fields:
+          - { name: name, label: Name, widget: string }
+          - name: image
+            label: Icon
+            widget: image
+            media_folder: /src/assets/icons/skills
+            public_folder: ../../assets/icons/skills
+  - name: sections
+    label: Sections
+    icon: view_agenda
+    files:
+      - name: introduction
+        label: Introduction
+        file: src/content/sections/index-introduction.md
+        fields:
+          - { name: typewriterStart, label: Typewriter Beginning, widget: string}
+          - { name: typewriterMessages, label: Typewriter Messages, widget: list }
+          - { name: tagline, label: Tagline, widget: string }
+          - { name: body, label: Body, widget: markdown }
+      - name: skills
+        label: Skills
+        file: src/content/sections/index-skills.md
+        fields:
+          - { name: title, label: Heading, widget: string }
+          - { name: body, label: Body, widget: markdown }
+      - name: career
+        label: Career
+        file: src/content/sections/index-career.md
+        fields:
+          - { name: title, label: Heading, widget: string }
+          - { name: body, label: Body, widget: markdown }
+      - name: education
+        label: Education
+        file: src/content/sections/index-education.md
+        fields:
+          - { name: title, label: Heading, widget: string }
+          - { name: body, label: Body, widget: markdown }
+      - name: projects
+        label: Projects
+        file: src/content/sections/index-projects.md
+        fields:
+          - { name: title, label: Heading, widget: string }
+          - { name: body, label: Body, widget: markdown }
+
+singletons:
+  - name: siteInfo
+    label: Site Info
+    icon: info
+    file: src/data/siteInfo.json
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text }
+      - { name: keywords, label: Keywords, widget: list, required: false }
+      - { name: author, label: Author, widget: string }
+      - name: image
+        label: Social Share Image (Open Graph)
+        widget: object
+        fields:
+          - { name: src, label: Image, widget: image, media_folder: /public/og, public_folder: /og }
+          - { name: alt, label: Alt Text, widget: string }
+  - name: socialLinks
+    label: Social Links
+    icon: share
+    file: src/data/socialLinks.json
+    fields:
+      - name: links
+        label: Social Links
+        label_singular: Social Link
+        widget: list
+        root: true
+        summary: '{{fields.label}}'
+        fields:
+          - { name: label, label: Platform, widget: string, hint: 'Short platform name, e.g. "GitHub"' }
+          - { name: text, label: Text, widget: string, hint: 'Longer descriptive label, e.g. "See my GitHub Projects"' }
+          - { name: href, label: URL, widget: string, type: url }
+          - name: icon
+            label: Icon (SVG)
+            widget: image
+            media_folder: /src/assets/icons/social
+            public_folder: ../assets/icons/social
+          - { name: footerOnly, label: Footer only, widget: boolean, required: false }

@@ -25,6 +25,7 @@ import Grain from './Grain.astro';
   </a>
 
   <button
+    type="button"
     id="menu-toggle"
     class="cursor-pointer md:hidden"
     aria-expanded="false"
@@ -110,7 +111,7 @@ import Grain from './Grain.astro';
 
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');
-    if (!href || !href.startsWith('#')) return;
+    if (!href?.startsWith('#')) return;
 
     const id = href.slice(1);
     const section = document.getElementById(id);
@@ -141,6 +142,8 @@ import Grain from './Grain.astro';
       }
     );
 
-    sectionMap.forEach((_, section) => observer.observe(section));
+    sectionMap.forEach((_, section) => {
+      observer.observe(section);
+    });
   }
 </script>

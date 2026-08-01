@@ -1,0 +1,8 @@
+{
+  "title": "Puzzles",
+  "description": "Fast, free and fun puzzle games — running completely local with no servers, built with TypeScript, Rust and WebAssembly in a Turborepo.",
+  "repositoryURL": "https://github.com/FreakeyPlays/puzzles",
+  "state": "WIP",
+  "order": 30,
+  "isPublished": true
+}

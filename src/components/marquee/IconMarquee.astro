@@ -20,8 +20,9 @@ const {
 } = Astro.props;
 ---
 
-<div aria-label={ariaLabel} class:list={['@container overflow-hidden', className]}>
+<div class:list={['@container overflow-hidden', className]}>
   <ul
+    aria-label={ariaLabel}
     class="grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
   >
     {skills.map((skill, i) => <MarqueeItem skill={skill} index={i} />)}

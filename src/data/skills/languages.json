@@ -1,0 +1,41 @@
+{
+  "category": "Languages",
+  "skills": [
+    {
+      "name": "HTML",
+      "image": "../../assets/icons/skills/html5.svg"
+    },
+    {
+      "name": "CSS",
+      "image": "../../assets/icons/skills/css.svg"
+    },
+    {
+      "name": "JavaScript",
+      "image": "../../assets/icons/skills/javascript.svg"
+    },
+    {
+      "name": "TypeScript",
+      "image": "../../assets/icons/skills/typescript.svg"
+    },
+    {
+      "name": "C",
+      "image": "../../assets/icons/skills/c.svg"
+    },
+    {
+      "name": "C++",
+      "image": "../../assets/icons/skills/cplusplus.svg"
+    },
+    {
+      "name": "C#",
+      "image": "../../assets/icons/skills/csharp.svg"
+    },
+    {
+      "name": "Java",
+      "image": "../../assets/icons/skills/java.svg"
+    },
+    {
+      "name": "Python",
+      "image": "../../assets/icons/skills/python.svg"
+    }
+  ]
+}

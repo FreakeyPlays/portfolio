@@ -32,16 +32,13 @@ const resolvedImage: Image = {
 };
 ---
 
-{/* High Priority Global Metadata */}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{title}</title>
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#0c0a09" />
-<Font cssVariable="--font-montserrat" preload />
-<Font cssVariable="--font-inter" preload />
-
-{/* Analytics */}
+<Font cssVariable="--font-montserrat" preload={true} />
+<Font cssVariable="--font-inter" preload={true} />
 {
   import.meta.env.PROD && (
     <script
@@ -53,18 +50,9 @@ const resolvedImage: Image = {
     />
   )
 }
-
-{/* Low Priority Global Metadata */}
 <Favicon />
 <link rel="mask-icon" href="/favicon.svg" color="#8BC225" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-{
-  /*
-  TODO: Implement RSS feed
-  <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
-  */
-}
-
 <SEO
   name={siteInfo.name}
   title={title}

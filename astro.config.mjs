@@ -1,29 +1,27 @@
 // @ts-check
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, fontProviders } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://chrismerck.dev',
 
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: 'Montserrat',
-        cssVariable: '--font-montserrat',
-        weights: [400, 600, 700, 800],
-      },
-      {
-        provider: fontProviders.google(),
-        name: 'Inter',
-        cssVariable: '--font-inter',
-        weights: [400, 600, 700],
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Montserrat',
+      cssVariable: '--font-montserrat',
+      weights: [400, 600, 700, 800],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      weights: [400, 600, 700],
+    },
+  ],
 
   redirects: {
     '/projects': '/#projects',
@@ -37,5 +35,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({ filter: (page) => !page.includes('/admin') }),
+  ],
 });

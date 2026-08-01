@@ -1,0 +1,41 @@
+{
+  "category": "Tools",
+  "skills": [
+    {
+      "name": "Adobe",
+      "image": "../../assets/icons/skills/adobe.svg"
+    },
+    {
+      "name": "Figma",
+      "image": "../../assets/icons/skills/figma.svg"
+    },
+    {
+      "name": "Blender",
+      "image": "../../assets/icons/skills/blender.svg"
+    },
+    {
+      "name": "Docker",
+      "image": "../../assets/icons/skills/docker.svg"
+    },
+    {
+      "name": "Git",
+      "image": "../../assets/icons/skills/git.svg"
+    },
+    {
+      "name": "Node.js",
+      "image": "../../assets/icons/skills/nodedotjs.svg"
+    },
+    {
+      "name": "PostgreSQL",
+      "image": "../../assets/icons/skills/postgresql.svg"
+    },
+    {
+      "name": "MongoDB",
+      "image": "../../assets/icons/skills/mongodb.svg"
+    },
+    {
+      "name": "TailwindCSS",
+      "image": "../../assets/icons/skills/tailwindcss.svg"
+    }
+  ]
+}
