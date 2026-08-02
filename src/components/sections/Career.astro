@@ -9,8 +9,8 @@ import BaseSection from './BaseSection.astro';
 const latestJobStart = (jobs: { startDate: string }[]) =>
   jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), '');
 
-const careerCollection = (await getCollection('career')).sort((a, b) =>
-  latestJobStart(b.data.jobs).localeCompare(latestJobStart(a.data.jobs)),
+const careerCollection = (await getCollection('career', ({ data }) => data.isPublished)).sort(
+  (a, b) => latestJobStart(b.data.jobs).localeCompare(latestJobStart(a.data.jobs)),
 );
 const intro = await getEntry('sections', 'index-career');
 const Content = intro ? (await render(intro)).Content : null;

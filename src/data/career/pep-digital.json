@@ -23,5 +23,6 @@
       "description": "During my internship, I was involved in various real-world projects that exposed me to a wide range of development workflows and team dynamics. From internal tooling to client solutions, I gained hands-on experience in building and refining software products while deepening my understanding of modern frontend and backend practices.",
       "technologies": ["Angular", "Storybook", "TypeScript"]
     }
-  ]
+  ],
+  "isPublished": true
 }

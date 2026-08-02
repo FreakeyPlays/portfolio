@@ -2,8 +2,8 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseSection from './BaseSection.astro';
 
-const educationCollection = (await getCollection('education')).sort((a, b) =>
-  b.data.startDate.localeCompare(a.data.startDate),
+const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(
+  (a, b) => b.data.startDate.localeCompare(a.data.startDate),
 );
 const intro = await getEntry('sections', 'index-education');
 const Content = intro ? (await render(intro)).Content : null;

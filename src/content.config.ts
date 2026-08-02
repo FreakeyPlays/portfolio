@@ -14,6 +14,7 @@ const education = defineCollection({
     location: z.string(),
     description: z.string(),
     grade: z.number().optional(),
+    isPublished: z.boolean().default(false),
   }),
 });
 
@@ -32,6 +33,7 @@ const career = defineCollection({
         technologies: z.array(z.string()).optional(),
       }),
     ),
+    isPublished: z.boolean().default(false),
   }),
 });
 
