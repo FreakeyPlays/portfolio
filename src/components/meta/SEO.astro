@@ -24,7 +24,6 @@ export type Twitter = Partial<SEOMetadata> & {
 
 export type Props = SEOMetadata & {
   author: string;
-  keywords?: string[];
   og?: OpenGraph;
   twitter?: Twitter;
 };
@@ -34,9 +33,8 @@ const {
   title,
   description,
   author,
-  keywords,
   image,
-  locale = 'en',
+  locale = 'en_US',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 
@@ -67,20 +65,13 @@ const twitter = {
  */
 function formatCanonicalURL(url: string | URL) {
   const path = url.toString();
-  const hasQueryParams = path.includes('?');
-  // If there are query params, make sure the URL has no trailing slash
-  if (hasQueryParams) {
-    path.replace(/\/?$/, '');
-  }
-  // otherwise, canonical URL always has a trailing slash
-  return path.replace(/\/?$/, hasQueryParams ? '' : '/');
+  return path.includes('?') ? path.replace(/\/$/, '') : path.replace(/\/?$/, '/');
 }
 ---
 
 {canonicalURL && <link rel="canonical" href={formatCanonicalURL(canonicalURL)} />}
 <meta name="description" content={description} />
 <meta name="author" content={author} />
-{keywords && <meta name="keywords" content={keywords.join(' ')} />}
 <meta property="og:title" content={og.title} />
 <meta property="og:type" content={og.type} />
 {og.canonicalURL && <meta property="og:url" content={formatCanonicalURL(og.canonicalURL)} />}
@@ -95,4 +86,7 @@ function formatCanonicalURL(url: string | URL) {
 <meta name="twitter:description" content={twitter.description} />
 {twitter.image && <meta name="twitter:image" content={twitter.image.src} />}
 {twitter.image && <meta name="twitter:image:alt" content={twitter.image.alt} />}
-<meta name="robots" content="max-image-preview:large" />
+<meta
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
