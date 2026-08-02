@@ -160,10 +160,12 @@ singletons:
     file: src/data/siteInfo.json
     fields:
       - { name: name, label: Name, widget: string }
-      - { name: title, label: Title, widget: string }
-      - { name: description, label: Description, widget: text }
-      - { name: keywords, label: Keywords, widget: list, required: false }
-      - { name: author, label: Author, widget: string }
+      - name: tagline
+        label: Tagline
+        widget: string
+      - name: description
+        label: Description
+        widget: text
       - name: image
         label: Social Share Image (Open Graph)
         widget: object
