@@ -13,7 +13,10 @@ public_folder: /src/assets/uploads
 
 editor:
   preview: false
-  
+
+output:
+  omit_empty_optional_fields: true
+
 collections:
   - name: education
     label: Education
