@@ -13,13 +13,15 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Montserrat',
       cssVariable: '--font-montserrat',
-      weights: [400, 600, 700, 800],
+      weights: ['400 800'],
+      styles: ['normal'],
     },
     {
       provider: fontProviders.google(),
       name: 'Inter',
       cssVariable: '--font-inter',
-      weights: [400, 600, 700],
+      weights: ['400 700'],
+      styles: ['normal'],
     },
   ],
 
