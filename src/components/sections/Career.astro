@@ -4,18 +4,17 @@ import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
+import { formatMonthYear, toISODate } from '@lib/date';
 import BaseSection from './BaseSection.astro';
 
-const latestJobStart = (jobs: { startDate: string }[]) =>
-  jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), '');
+const latestJobStart = (jobs: { startDate: Date }[]) =>
+  jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), new Date(0));
 
 const careerCollection = (await getCollection('career', ({ data }) => data.isPublished)).sort(
-  (a, b) => latestJobStart(b.data.jobs).localeCompare(latestJobStart(a.data.jobs)),
+  (a, b) => latestJobStart(b.data.jobs).getTime() - latestJobStart(a.data.jobs).getTime(),
 );
 const intro = await getEntry('sections', 'index-career');
 const Content = intro ? (await render(intro)).Content : null;
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseSection title={intro?.data.title ?? 'career'}>
@@ -42,8 +41,12 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
             <TimelineItem>
               <h4 class="text-xl font-bold">{job.title}</h4>
               <p class="text-sm text-gray-400 uppercase">
-                {dateFormatter.format(new Date(job.startDate))} -{' '}
-                {job.endDate ? dateFormatter.format(new Date(job.endDate)) : 'present'}
+                <time datetime={toISODate(job.startDate)}>{formatMonthYear(job.startDate)}</time> -{' '}
+                {job.endDate ? (
+                  <time datetime={toISODate(job.endDate)}>{formatMonthYear(job.endDate)}</time>
+                ) : (
+                  'present'
+                )}
               </p>
               <p class="mt-2">{job.description}</p>
               <ul class="flex flex-wrap gap-1 mt-2">

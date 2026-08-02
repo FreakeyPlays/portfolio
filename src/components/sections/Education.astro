@@ -1,13 +1,13 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { formatMonthYear, toISODate } from '@lib/date';
 import BaseSection from './BaseSection.astro';
 
 const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(
-  (a, b) => b.data.startDate.localeCompare(a.data.startDate),
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
 );
 const intro = await getEntry('sections', 'index-education');
 const Content = intro ? (await render(intro)).Content : null;
-const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseSection title={intro?.data.title ?? 'education'}>
@@ -31,10 +31,18 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
               {education.data.location}{' '}
               {education.data.grade ? `| Grade: ${education.data.grade}` : ''}
             </span>{' '}
-            | {dateFormatter.format(new Date(education.data.startDate))} -{' '}
-            {education.data.endDate
-              ? dateFormatter.format(new Date(education.data.endDate))
-              : 'present'}
+            |{' '}
+            <time datetime={toISODate(education.data.startDate)}>
+              {formatMonthYear(education.data.startDate)}
+            </time>{' '}
+            -{' '}
+            {education.data.endDate ? (
+              <time datetime={toISODate(education.data.endDate)}>
+                {formatMonthYear(education.data.endDate)}
+              </time>
+            ) : (
+              'present'
+            )}
           </p>
         </li>
       ))

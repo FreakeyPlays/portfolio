@@ -9,8 +9,8 @@ const education = defineCollection({
     level: z.string(),
     institution: z.string(),
     degree: z.string(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
     location: z.string(),
     description: z.string(),
     grade: z.number().optional(),
@@ -27,8 +27,8 @@ const career = defineCollection({
     jobs: z.array(
       z.object({
         title: z.string(),
-        startDate: z.string(),
-        endDate: z.string().optional(),
+        startDate: z.coerce.date(),
+        endDate: z.coerce.date().optional(),
         description: z.string(),
         technologies: z.array(z.string()).optional(),
       }),
