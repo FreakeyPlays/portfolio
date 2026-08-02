@@ -1,5 +1,11 @@
 [
   {
+    "icon": "../assets/icons/social/mail.svg",
+    "label": "Email",
+    "text": "Send me an email",
+    "href": "mailto:contact@chrismerck.dev"
+  },
+  {
     "icon": "../assets/icons/social/github.svg",
     "label": "GitHub",
     "text": "See my GitHub Projects",
