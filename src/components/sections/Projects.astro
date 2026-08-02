@@ -3,9 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import ProjectCard from '@components/ProjectCard.astro';
 import BaseSection from './BaseSection.astro';
 
-const posts = await getCollection('projects', ({ data }) => {
-  return import.meta.env.PROD ? data.isPublished : true;
-});
+const posts = await getCollection('projects', ({ data }) => data.isPublished);
 
 posts.sort((a, b) => a.data.order - b.data.order);
 
