@@ -43,9 +43,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
               <h4 class="text-xl font-bold">{job.title}</h4>
               <p class="text-sm text-gray-400 uppercase">
                 {dateFormatter.format(new Date(job.startDate))} -{' '}
-                {job.ongoing || !job.endDate
-                  ? 'present'
-                  : dateFormatter.format(new Date(job.endDate))}
+                {job.endDate ? dateFormatter.format(new Date(job.endDate)) : 'present'}
               </p>
               <p class="mt-2">{job.description}</p>
               <ul class="flex flex-wrap gap-1 mt-2">

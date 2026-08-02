@@ -14,7 +14,6 @@ const education = defineCollection({
     location: z.string(),
     description: z.string(),
     grade: z.number().optional(),
-    ongoing: z.boolean().optional(),
   }),
 });
 
@@ -30,7 +29,6 @@ const career = defineCollection({
         startDate: z.string(),
         endDate: z.string().optional(),
         description: z.string(),
-        ongoing: z.boolean().optional(),
         technologies: z.array(z.string()).optional(),
       }),
     ),

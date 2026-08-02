@@ -32,9 +32,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
               {education.data.grade ? `| Grade: ${education.data.grade}` : ''}
             </span>{' '}
             | {dateFormatter.format(new Date(education.data.startDate))} -{' '}
-            {education.data.ongoing || !education.data.endDate
-              ? 'present'
-              : dateFormatter.format(new Date(education.data.endDate))}
+            {education.data.endDate
+              ? dateFormatter.format(new Date(education.data.endDate))
+              : 'present'}
           </p>
         </li>
       ))

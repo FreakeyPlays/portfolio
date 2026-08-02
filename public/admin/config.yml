@@ -30,11 +30,10 @@ collections:
       - { name: institution, label: Institution, widget: string }
       - { name: degree, label: Degree, widget: string }
       - { name: startDate, label: Start Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
-      - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty and check "Ongoing" if still running' }
+      - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty if still ongoing — shows as "present"' }
       - { name: location, label: Location, widget: string }
       - { name: description, label: Description, widget: markdown }
       - { name: grade, label: Grade, widget: number, value_type: float, min: 1.0, max: 6.0, step: 0.1, required: false }
-      - { name: ongoing, label: Ongoing, widget: boolean, required: false }
 
   - name: projects
     label: Projects
@@ -84,9 +83,8 @@ collections:
         fields:
           - { name: title, label: Title, widget: string }
           - { name: startDate, label: Start Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
-          - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty and check "Ongoing" if still running' }
+          - { name: endDate, label: End Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Leave empty if still ongoing — shows as "present"' }
           - { name: description, label: Description, widget: markdown }
-          - { name: ongoing, label: Ongoing, widget: boolean, required: false }
           - { name: technologies, label: Technologies, widget: list, required: false }
 
   - name: skills

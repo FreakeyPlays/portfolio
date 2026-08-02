@@ -7,7 +7,6 @@
       "title": "Software Engineer",
       "startDate": "2024-06-01",
       "description": "I support the development of both internal tools and client-facing applications. My role involves actively contributing to ongoing projects, improving existing solutions, and collaborating closely with customers and developers to create high-quality digital experiences.",
-      "ongoing": true,
       "technologies": ["PayloadCMS", "NextJS", "TailwindCSS", "PostgresDB"]
     },
     {
