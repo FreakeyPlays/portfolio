@@ -5,7 +5,7 @@
   "startDate": "2020-09-01",
   "endDate": "2024-06-01",
   "location": "Esslingen, Germany",
-  "description": "At the University, I am learning specific subjects regarding Software Engineering and Media Computing. Here I learned new technologies like C/C++, Python and React.",
+  "description": "Four years of applied software engineering, from C/C++ and Python through to web development and media technology. I finished with a thesis evaluating whether the Astro framework could handle real-time features, by building a video-streaming Progressive Web App.",
   "grade": 1.6,
   "isPublished": true
 }
