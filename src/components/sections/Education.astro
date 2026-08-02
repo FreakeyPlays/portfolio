@@ -1,16 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseSection from './BaseSection.astro';
 
-const educationCollection = await getCollection('education');
+const educationCollection = (await getCollection('education')).sort((a, b) =>
+  b.data.startDate.localeCompare(a.data.startDate),
+);
+const intro = await getEntry('sections', 'index-education');
+const Content = intro ? (await render(intro)).Content : null;
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
-<BaseSection title="education">
-  <p class="mt-4">
-    I didn’t just survive school &mdash; I learned a lot along the way. Here’s where I picked up the
-    fundamentals (and a few all-nighters).
-  </p>
+<BaseSection title={intro?.data.title ?? 'education'}>
+  {
+    Content && (
+      <div class="mt-4 space-y-2">
+        <Content />
+      </div>
+    )
+  }
   <ul class="space-y-4 mt-16">
     {
       educationCollection.map((education) => (
@@ -25,8 +32,8 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
               {education.data.grade ? `| Grade: ${education.data.grade}` : ''}
             </span>{' '}
             | {dateFormatter.format(new Date(education.data.startDate))} -{' '}
-            {education.data.ongoing
-              ? education.data.endDate
+            {education.data.ongoing || !education.data.endDate
+              ? 'present'
               : dateFormatter.format(new Date(education.data.endDate))}
           </p>
         </li>

@@ -1,8 +1,18 @@
 ---
 import { pages } from '@data/pages';
-import socialLinks from '@data/socialLinks';
+import socialLinks from '@data/socialLinks.json';
 import PrideFlag from './PrideFlag/PrideFlag.astro';
 import SocialIconLink from './SocialIconLink.astro';
+
+type SocialIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
+
+const iconModules = import.meta.glob('../assets/icons/social/*.svg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, SocialIcon>;
+
+const iconFor = (imagePath: string) =>
+  iconModules[`../assets/icons/social/${imagePath.split('/').pop()}`];
 ---
 
 <footer class="col-[extra]!">
@@ -40,7 +50,7 @@ import SocialIconLink from './SocialIconLink.astro';
       {
         socialLinks.map(({ href, icon, text }) => (
           <li>
-            <SocialIconLink icon={icon} href={href} text={text} />
+            <SocialIconLink icon={iconFor(icon)} href={href} text={text} />
           </li>
         ))
       }

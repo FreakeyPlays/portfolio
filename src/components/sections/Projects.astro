@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import ProjectCard from '@components/ProjectCard.astro';
 import BaseSection from './BaseSection.astro';
 
@@ -8,13 +8,19 @@ const posts = await getCollection('projects', ({ data }) => {
 });
 
 posts.sort((a, b) => a.data.order - b.data.order);
+
+const intro = await getEntry('sections', 'index-projects');
+const Content = intro ? (await render(intro)).Content : null;
 ---
 
-<BaseSection title="projects">
-  <p class="mt-4">
-    Like any good developer, I have a long list of side projects &mdash; some finished, some...
-    still "in progress." Here’s a curated selection of the ones I believe are worth sharing.
-  </p>
+<BaseSection title={intro?.data.title ?? 'projects'}>
+  {
+    Content && (
+      <div class="mt-4 space-y-2">
+        <Content />
+      </div>
+    )
+  }
   <ul
     class="mt-16 grid gap-4 grid-cols-1 **:row-span-3 sm:**:nth-2:sm:col-start-2 sm:**:nth-2:sm:row-start-2 sm:grid-cols-2"
   >

@@ -1,32 +1,33 @@
 ---
-import HighlightLink from '@components/HighlightLink.astro';
+import { getEntry, render } from 'astro:content';
 import Typewriter from 'astro-typewriter';
+
+const intro = await getEntry('sections', 'index-introduction');
+const Content = intro ? (await render(intro)).Content : null;
+const { typewriterStart = "Hey, I'm", typewriterMessages = [], tagline } = intro?.data ?? {};
 ---
 
 <section id="about" class="scroll-m-32 my-20!">
   <h1 class="text-4xl font-extrabold font-serif h-10 relative">
     <span class="absolute bottom-0"
-      >Hey, I'm <Typewriter
+      >{typewriterStart}&nbsp;<Typewriter
         class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent cursor"
-        messages={['Chris', 'a Developer', 'building web apps']}
+        messages={typewriterMessages}
       /></span
     >
   </h1>
-  <p class="text-xl text-gray-400 font-serif font-medium">Software Engineer and Media Computer</p>
-  <p class="mt-4">
-    I'm a software engineer and media computing specialist with a passion for crafting clean,
-    scalable web applications. Currently, I'm pursuing my Master’s degree <HighlightLink
-      href="https://www.hdm-stuttgart.de/"
-      target="_blank"
-      rel="noopener noreferrer">@Hochschule der Medien</HighlightLink
-    > while working <HighlightLink
-      href="https://pep.digital"
-      target="_blank"
-      rel="noopener noreferrer">@pep.digital</HighlightLink
-    > as a Software Engineer in Esslingen.
-  </p>
-  <p class="mt-2">
-    My focus is on crafting intuitive user interfaces and building seamless user experiences &mdash;
-    from pixel-perfect frontends to performant architectures in the backend.
-  </p>
+  <p class="text-xl text-gray-400 font-serif font-medium">{tagline}</p>
+  {
+    Content && (
+      <div
+        class:list={[
+          'mt-4 space-y-2',
+          '[&_a]:relative [&_a]:bg-gradient-to-br [&_a]:from-lime-400 [&_a]:to-green-600 [&_a]:bg-clip-text [&_a]:text-transparent',
+          "[&_a]:after:content-[''] [&_a]:after:absolute [&_a]:after:-bottom-0.5 [&_a]:after:left-0 [&_a]:after:w-full [&_a]:after:h-[0.1rem] [&_a]:after:bg-gradient-to-br [&_a]:after:from-lime-400 [&_a]:after:to-green-600 [&_a]:after:transition-all [&_a]:after:scale-0 [&_a]:after:origin-center [&_a]:hover:after:scale-100",
+        ]}
+      >
+        <Content />
+      </div>
+    )
+  }
 </section>

@@ -1,63 +1,41 @@
 ---
-import AdobeIcon from '@assets/icons/skills/adobe.svg';
-import AngularIcon from '@assets/icons/skills/angular.svg';
-import AstroIcon from '@assets/icons/skills/astro.svg';
-import BlenderIcon from '@assets/icons/skills/blender.svg';
-import CIcon from '@assets/icons/skills/c.svg';
-import CPlusPlusIcon from '@assets/icons/skills/cplusplus.svg';
-import CSharpIcon from '@assets/icons/skills/csharp.svg';
-import CssIcon from '@assets/icons/skills/css.svg';
-import DockerIcon from '@assets/icons/skills/docker.svg';
-import FigmaIcon from '@assets/icons/skills/figma.svg';
-import GitIcon from '@assets/icons/skills/git.svg';
-import HtmlIcon from '@assets/icons/skills/html5.svg';
-import JavaIcon from '@assets/icons/skills/java.svg';
-import JavaScriptIcon from '@assets/icons/skills/javascript.svg';
-import MongoDBIcon from '@assets/icons/skills/mongodb.svg';
-import NextIcon from '@assets/icons/skills/nextdotjs.svg';
-import NodeIcon from '@assets/icons/skills/nodedotjs.svg';
-import NuxtIcon from '@assets/icons/skills/nuxt.svg';
-import PostgresIcon from '@assets/icons/skills/postgresql.svg';
-import PythonIcon from '@assets/icons/skills/python.svg';
-import ReactIcon from '@assets/icons/skills/react.svg';
-import TailwindIcon from '@assets/icons/skills/tailwindcss.svg';
-import TypeScriptIcon from '@assets/icons/skills/typescript.svg';
-import VueIcon from '@assets/icons/skills/vuedotjs.svg';
+import { getCollection, getEntry, render } from 'astro:content';
 import IconMarquee from '@components/marquee/IconMarquee.astro';
 import BaseSection from './BaseSection.astro';
 
-const tools = [
-  AdobeIcon,
-  FigmaIcon,
-  BlenderIcon,
-  DockerIcon,
-  GitIcon,
-  NodeIcon,
-  PostgresIcon,
-  MongoDBIcon,
-  TailwindIcon,
-];
+type SkillIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
 
-const languages = [
-  HtmlIcon,
-  CssIcon,
-  JavaScriptIcon,
-  TypeScriptIcon,
-  CIcon,
-  CPlusPlusIcon,
-  CSharpIcon,
-  JavaIcon,
-  PythonIcon,
-];
+const iconModules = import.meta.glob('../../assets/icons/skills/*.svg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, SkillIcon>;
 
-const frameworks = [AngularIcon, AstroIcon, ReactIcon, VueIcon, NuxtIcon, NextIcon];
+const iconFor = (imagePath: string) =>
+  iconModules[`../../assets/icons/skills/${imagePath.split('/').pop()}`];
+
+const skillCategories = await getCollection('skills');
+const iconsFor = (id: string) =>
+  skillCategories
+    .find((category) => category.id === id)
+    ?.data.skills.map((skill) => iconFor(skill.image))
+    .filter(Boolean) ?? [];
+
+const languages = iconsFor('languages');
+const frameworks = iconsFor('frameworks');
+const tools = iconsFor('tools');
+
+const intro = await getEntry('sections', 'index-skills');
+const Content = intro ? (await render(intro)).Content : null;
 ---
 
-<BaseSection title="skills">
-  <p class="mt-4">
-    A developer is only as good as their tools &mdash; that’s why I’m always testing new ones. But
-    these are the ones I keep coming back to when building my projects.
-  </p>
+<BaseSection title={intro?.data.title ?? 'skills'}>
+  {
+    Content && (
+      <div class="mt-4 space-y-2">
+        <Content />
+      </div>
+    )
+  }
   <div class="mt-16 mask-x-from-90% mask-x-to-100%">
     <IconMarquee
       skills={languages}

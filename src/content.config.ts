@@ -1,24 +1,25 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from "astro/zod"
 
-import { file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
 const education = defineCollection({
-  loader: file('src/data/education.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/education' }),
   schema: z.object({
     level: z.string(),
     institution: z.string(),
     degree: z.string(),
     startDate: z.string(),
-    endDate: z.string(),
+    endDate: z.string().optional(),
     location: z.string(),
     description: z.string(),
-    grade: z.string().optional(),
+    grade: z.number().optional(),
     ongoing: z.boolean().optional(),
   }),
 });
 
 const career = defineCollection({
-  loader: file('src/data/career.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/career' }),
   schema: z.object({
     company: z.string(),
     url: z.string(),
@@ -27,7 +28,7 @@ const career = defineCollection({
       z.object({
         title: z.string(),
         startDate: z.string(),
-        endDate: z.string(),
+        endDate: z.string().optional(),
         description: z.string(),
         ongoing: z.boolean().optional(),
         technologies: z.array(z.string()).optional(),
@@ -37,7 +38,7 @@ const career = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: file('src/data/projects.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/projects' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -51,4 +52,27 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { education, career, projects };
+const skills = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/data/skills' }),
+  schema: z.object({
+    category: z.string(),
+    skills: z.array(
+      z.object({
+        name: z.string(),
+        image: z.string(),
+      }),
+    ),
+  }),
+});
+
+const sections = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/sections' }),
+  schema: z.object({
+    title: z.string().optional(),
+    typewriterStart: z.string().optional(),
+    typewriterMessages: z.array(z.string()).optional(),
+    tagline: z.string().optional(),
+  }),
+});
+
+export const collections = { education, career, projects, skills, sections };

@@ -1,22 +1,31 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
 import BaseSection from './BaseSection.astro';
 
-const careerCollection = await getCollection('career');
+const latestJobStart = (jobs: { startDate: string }[]) =>
+  jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), '');
+
+const careerCollection = (await getCollection('career')).sort((a, b) =>
+  latestJobStart(b.data.jobs).localeCompare(latestJobStart(a.data.jobs)),
+);
+const intro = await getEntry('sections', 'index-career');
+const Content = intro ? (await render(intro)).Content : null;
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
-<BaseSection title="career">
-  <p class="mt-4">
-    My career has thrown plenty of challenges my way. I've built features, fixed bugs, and &mdash;
-    let’s be honest &mdash; probably created even more in the process. Still, with every project and
-    mistake, I’ve grown to become a better developer.
-  </p>
+<BaseSection title={intro?.data.title ?? 'career'}>
+  {
+    Content && (
+      <div class="mt-4 space-y-2">
+        <Content />
+      </div>
+    )
+  }
   {
     careerCollection.map((career) => (
       <Timeline class="mt-16">
@@ -34,7 +43,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
               <h4 class="text-xl font-bold">{job.title}</h4>
               <p class="text-sm text-gray-400 uppercase">
                 {dateFormatter.format(new Date(job.startDate))} -{' '}
-                {job.ongoing ? job.endDate : dateFormatter.format(new Date(job.endDate))}
+                {job.ongoing || !job.endDate
+                  ? 'present'
+                  : dateFormatter.format(new Date(job.endDate))}
               </p>
               <p class="mt-2">{job.description}</p>
               <ul class="flex flex-wrap gap-1 mt-2">
