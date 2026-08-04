@@ -36,6 +36,14 @@
     {
       "name": "Python",
       "image": "../../assets/icons/skills/python.svg"
+    },
+    {
+      "name": "Rust",
+      "isPublished": false
+    },
+    {
+      "name": "WebAssembly",
+      "isPublished": false
     }
   ]
 }

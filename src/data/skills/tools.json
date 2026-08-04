@@ -36,6 +36,14 @@
     {
       "name": "Tailwind CSS",
       "image": "../../assets/icons/skills/tailwindcss.svg"
+    },
+    {
+      "name": "WebRTC",
+      "isPublished": false
+    },
+    {
+      "name": "Progressive Web App",
+      "isPublished": false
     }
   ]
 }

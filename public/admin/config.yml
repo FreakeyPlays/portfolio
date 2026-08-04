@@ -115,8 +115,11 @@ collections:
           - name: image
             label: Icon
             widget: image
+            required: false
             media_folder: /src/assets/icons/skills
             public_folder: ../../assets/icons/skills
+            hint: 'Required to show in the marquee. A skill without an icon stays on record but is never rendered.'
+          - { name: isPublished, label: Show on Site, widget: boolean, default: true }
 
   - name: pages
     label: Pages

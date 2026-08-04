@@ -17,7 +17,8 @@ const skillCategories = await getCollection('skills');
 const skillsFor = (id: string) =>
   skillCategories
     .find((category) => category.id === id)
-    ?.data.skills.map((skill) => ({ name: skill.name, icon: iconFor(skill.image) }))
+    ?.data.skills.filter((skill) => skill.isPublished && skill.image)
+    .map((skill) => ({ name: skill.name, icon: iconFor(skill.image as string) }))
     .filter((skill) => Boolean(skill.icon)) ?? [];
 
 const languages = skillsFor('languages');

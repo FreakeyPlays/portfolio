@@ -24,6 +24,10 @@
     {
       "name": "Next.js",
       "image": "../../assets/icons/skills/nextdotjs.svg"
+    },
+    {
+      "name": "PayloadCMS",
+      "isPublished": false
     }
   ]
 }

@@ -60,7 +60,8 @@ const skills = defineCollection({
     skills: z.array(
       z.object({
         name: z.string(),
-        image: z.string(),
+        image: z.string().optional(),
+        isPublished: z.boolean().default(true),
       }),
     ),
   }),
