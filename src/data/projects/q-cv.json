@@ -1,9 +1,9 @@
 {
+  "order": 4,
   "title": "Q-CV",
   "description": "A web-based CV management and generation tool developed in collaboration with Quanto Solutions at HS Esslingen.",
-  "repositoryURL": "https://github.com/freakeyplays/q-cv",
+  "repositoryURL": "https://github.com/FreakeyPlays/q-cv",
   "state": "Done",
-  "order": 60,
   "image": "../../assets/thumbnails/q-cv-preview.jpg",
   "isPublished": true
 }

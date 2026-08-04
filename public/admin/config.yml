@@ -48,6 +48,7 @@ collections:
     extension: json
     format: json
     create: true
+    reorder: true
     thumbnail: image
     summary: '{{title}}'
     fields:
@@ -56,7 +57,6 @@ collections:
       - { name: repositoryURL, label: Repository URL, widget: string, type: url }
       - { name: deployedURL, label: Deployed URL, widget: string, type: url, required: false }
       - { name: state, label: State, widget: select, options: [Planned, WIP, Done, Maintenance] }
-      - { name: order, label: Order, widget: number, value_type: int, min: 0, max: 100, default: 50, hint: 'Position in the project list (0–100)' }
       - name: image
         label: Preview Image
         widget: image

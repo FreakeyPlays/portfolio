@@ -1,9 +1,9 @@
 {
+  "order": 2,
   "title": "PWA Chat",
   "description": "A fully functional Progressive Web App messenger built from scratch using only HTML, CSS, and TypeScript — no frameworks.",
-  "repositoryURL": "https://github.com/freakeyplays/pwa-chat",
+  "repositoryURL": "https://github.com/FreakeyPlays/pwa-chat",
   "state": "Done",
-  "order": 40,
   "image": "../../assets/thumbnails/pwa-chat-preview.jpg",
   "isPublished": true
 }

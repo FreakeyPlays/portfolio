@@ -1,10 +1,10 @@
 {
+  "order": 5,
   "title": "ToDo App",
   "description": "A simple web-based Todo app built with Angular and NestJS, tested using Cypress for frontend and k6 for backend performance.",
-  "repositoryURL": "https://github.com/freakeyplays/todo-app",
+  "repositoryURL": "https://github.com/FreakeyPlays/todo-app",
   "deployedURL": "https://todo.chrismerck.dev",
   "state": "Done",
-  "order": 80,
   "image": "../../assets/thumbnails/todo-app-preview.jpg",
   "isPublished": true
 }
