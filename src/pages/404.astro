@@ -1,0 +1,34 @@
+---
+import HighlightLink from '@components/HighlightLink.astro';
+import Navigation from '@components/Navigation.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  rawTitle="404 Not Found | Christoph Merck"
+  description="This page does not exist on chrismerck.dev."
+  canonicalURL={null}
+  noindex={true}
+>
+  <Fragment slot="header">
+    <Navigation />
+  </Fragment>
+
+  <section class="my-20! flex flex-col gap-4">
+    <p class="font-serif text-7xl font-extrabold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
+      404
+    </p>
+    <h1 class="font-serif text-4xl font-extrabold">This page does not exist.</h1>
+    <p class="text-xl text-gray-400 font-serif font-medium">
+      You found a URL that never shipped. It happens.
+    </p>
+    <p class="mt-2">
+      Nothing here is broken on purpose, so either a link went stale or a character got lost on the
+      way. Everything I actually built is one level up.
+    </p>
+
+    <p class="mt-2 text-lg font-semibold">
+      <HighlightLink href="/">Back to the homepage</HighlightLink>
+    </p>
+  </section>
+</BaseLayout>
