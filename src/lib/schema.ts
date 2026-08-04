@@ -71,7 +71,9 @@ export async function buildProfileGraph(site: URL): Promise<object> {
   );
 
   const knowsAbout = [
-    ...skills.flatMap(({ data }) => data.skills.map((skill) => skill.name)),
+    ...skills.flatMap(({ data }) =>
+      data.skills.filter((skill) => skill.isPublished && skill.image).map((skill) => skill.name),
+    ),
     ...career.flatMap(({ data }) => data.jobs.flatMap((job) => job.technologies ?? [])),
     ...identity.additionalKnowsAbout,
   ]
