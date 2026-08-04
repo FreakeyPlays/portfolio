@@ -176,7 +176,9 @@ singletons:
     icon: info
     file: src/data/siteInfo.json
     fields:
-      - { name: name, label: Name, widget: string }
+      - { name: firstName, label: First Name, widget: string }
+      - { name: lastName, label: Last Name, widget: string }
+      - { name: fullName, label: Full Name, widget: compute, value: '{{fields.firstName}} {{fields.lastName}}'  }
       - name: tagline
         label: Tagline
         widget: string
@@ -198,8 +200,6 @@ singletons:
       fact marked up here is also visible in the page copy, so if you add
       something, put it in the introduction text too.
     fields:
-      - { name: givenName, label: First Name, widget: string }
-      - { name: familyName, label: Last Name, widget: string }
       - { name: alternateName, label: Handle, widget: string, required: false, hint: 'Other name you are known by, e.g. your GitHub handle. Tells search engines the handle and the name are the same person.' }
       - { name: jobTitle, label: Job Title, widget: string, hint: 'Keep identical to the title used on LinkedIn, GitHub and in the site tagline.' }
       - name: description

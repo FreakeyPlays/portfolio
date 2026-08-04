@@ -75,7 +75,6 @@ export async function buildProfileGraph(site: URL): Promise<object> {
       data.skills.filter((skill) => skill.isPublished && skill.image).map((skill) => skill.name),
     ),
     ...career.flatMap(({ data }) => data.jobs.flatMap((job) => job.technologies ?? [])),
-    ...identity.additionalKnowsAbout,
   ]
     .map(canonicalTechnology)
     .filter((value, index, all) => all.indexOf(value) === index)
@@ -90,9 +89,9 @@ export async function buildProfileGraph(site: URL): Promise<object> {
   const person = compact({
     '@type': 'Person',
     '@id': id('person'),
-    name: siteInfo.name,
-    givenName: identity.givenName,
-    familyName: identity.familyName,
+    name: siteInfo.fullName,
+    givenName: siteInfo.firstName,
+    familyName: siteInfo.lastName,
     alternateName: identity.alternateName,
     url: `${origin}/`,
     mainEntityOfPage: { '@id': id('profilepage') },
@@ -160,7 +159,7 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         '@type': 'WebSite',
         '@id': id('website'),
         url: `${origin}/`,
-        name: siteInfo.name,
+        name: siteInfo.fullName,
         alternateName: site.hostname,
         inLanguage: 'en',
         publisher: personRef,
@@ -169,7 +168,7 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         '@type': 'ProfilePage',
         '@id': id('profilepage'),
         url: `${origin}/`,
-        name: `${siteInfo.name} — ${siteInfo.tagline}`,
+        name: `${siteInfo.fullName} — ${siteInfo.tagline}`,
         isPartOf: { '@id': id('website') },
         datePublished: identity.sitePublished,
         dateModified: getContentModifiedISODate(),
