@@ -1,9 +1,9 @@
 {
   "name": "Christoph Merck",
-  "tagline": "Software Engineer | Web Apps & Interfaces",
-  "description": "Fullstack WebApp Engineer specializing in modern frontend frameworks. I build fast, scalable, and engaging user interfaces.",
+  "tagline": "Full-Stack Engineer in Stuttgart, Germany",
+  "description": "Christoph Merck is a full-stack engineer in Stuttgart, Germany, building fast and accessible web apps with TypeScript, React, Next.js, Angular and Astro.",
   "image": {
     "src": "/og/default_og.png",
-    "alt": "Christoph Merck - Developer Portfolio"
+    "alt": "Christoph Merck, Full-Stack Engineer in Stuttgart, Germany"
   }
 }

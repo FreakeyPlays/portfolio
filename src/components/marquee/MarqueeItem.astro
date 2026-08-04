@@ -2,11 +2,12 @@
 import Grain from '@components/Grain.astro';
 
 interface Props {
-  skill: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
+  name: string;
+  icon: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
   index: number;
 }
 
-const { skill: SkillIcon, index } = Astro.props;
+const { name, icon: SkillIcon, index } = Astro.props;
 ---
 
 <li
@@ -14,7 +15,8 @@ const { skill: SkillIcon, index } = Astro.props;
 >
   <Grain />
   <div class="p-[15%] bg-zinc-800 rounded-md">
-    <SkillIcon fill="var(--color-neutral-200)" />
+    <span class="sr-only">{name}</span>
+    <SkillIcon fill="var(--color-neutral-200)" aria-hidden="true" />
   </div>
 </li>
 

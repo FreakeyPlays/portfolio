@@ -31,6 +31,7 @@ collections:
     fields:
       - { name: level, label: Level, widget: string }
       - { name: institution, label: Institution, widget: string }
+      - { name: url, label: Institution Website, widget: string, type: url, required: false, hint: 'Used in the structured data for degrees only' }
       - { name: degree, label: Degree, widget: string }
       - { name: startDate, label: Start Date, widget: datetime, type: date, format: 'YYYY-MM-DD' }
       - { name: endDate, label: End Date, widget: datetime, type: date, format: 'YYYY-MM-DD', required: false, hint: 'Leave empty if still ongoing — shows as "present"' }
@@ -172,6 +173,52 @@ singletons:
         fields:
           - { name: src, label: Image, widget: image, media_folder: /public/og, public_folder: /og }
           - { name: alt, label: Alt Text, widget: string }
+  - name: identity
+    label: Identity (Structured Data)
+    icon: badge
+    file: src/data/identity.json
+    hint: >-
+      Feeds the JSON-LD Person graph on the homepage. Google requires that every
+      fact marked up here is also visible in the page copy, so if you add
+      something, put it in the introduction text too.
+    fields:
+      - { name: givenName, label: First Name, widget: string }
+      - { name: familyName, label: Last Name, widget: string }
+      - { name: alternateName, label: Handle, widget: string, required: false, hint: 'Other name you are known by, e.g. your GitHub handle. Tells search engines the handle and the name are the same person.' }
+      - { name: jobTitle, label: Job Title, widget: string, hint: 'Keep identical to the title used on LinkedIn, GitHub and in the site tagline.' }
+      - name: description
+        label: Description
+        widget: text
+        hint: 'Declarative third-person summary. Lead with "Christoph Merck is a…" so an AI answer engine can quote it directly. Include availability with an absolute date.'
+      - { name: disambiguatingDescription, label: Disambiguating Description, widget: text, required: false, hint: 'One line separating you from others with the same name.' }
+      - { name: email, label: Email, widget: string, required: false }
+      - { name: sitePublished, label: Site First Published, widget: datetime, type: date, format: 'YYYY-MM-DD', required: false, hint: 'Fixed date the site first went live. The "last modified" date is derived from git automatically and needs no field.' }
+      - name: address
+        label: Location
+        widget: object
+        hint: 'Where you are based now.'
+        fields:
+          - { name: locality, label: City, widget: string }
+          - { name: region, label: Region / State, widget: string, required: false }
+          - { name: country, label: Country Code, widget: string, hint: 'Two letters, e.g. DE' }
+      - { name: workLocation, label: Willing to Work In, widget: list, required: false, hint: 'Places you would take a role in, e.g. "Germany". Separate from where you live.' }
+      - name: knowsLanguage
+        label: Languages
+        label_singular: Language
+        widget: list
+        required: false
+        summary: '{{fields.name}}'
+        fields:
+          - { name: name, label: Language, widget: string }
+          - { name: code, label: Code, widget: string, hint: 'e.g. de, en' }
+      - { name: additionalKnowsAbout, label: Additional Topics, widget: list, required: false, hint: 'Topics not already covered by the Skills marquee or job technology chips. Each one must appear somewhere in the visible page text.' }
+      - { name: additionalSameAs, label: Additional Profile URLs, widget: list, required: false, hint: 'Profiles beyond the Social Links list. Link back to this site from each one.' }
+      - { name: orcid, label: ORCID iD, widget: string, required: false, hint: 'Full URL. Free and permanent, but only feeds academic systems, not Google.' }
+      - { name: image, label: Photograph, widget: image, required: false, media_folder: /public/og, public_folder: /og, hint: 'Only set this once the photo is actually shown on the page.' }
+      - { name: occupationalCategory, label: Occupation Code, widget: string, required: false, hint: 'ISCO-08 or O*NET-SOC code. Setting this emits an Occupation node. No known consumer, safe to leave blank.' }
+      - { name: awards, label: Awards, widget: list, required: false, hint: 'Named, verifiable awards only.' }
+      - { name: memberOf, label: Member Of, widget: list, required: false, hint: 'Professional bodies only.' }
+
   - name: socialLinks
     label: Social Links
     icon: share

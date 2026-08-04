@@ -1,0 +1,24 @@
+{
+  "givenName": "Christoph",
+  "familyName": "Merck",
+  "alternateName": "FreakeyPlays",
+  "jobTitle": "Full-Stack Engineer",
+  "description": "Christoph Merck is a full-stack engineer based in the Stuttgart area, Germany. He builds web applications and Progressive Web Apps with TypeScript, React, Next.js, Angular and Astro, currently at pep.digital while completing an M.Sc. in Computer Science and Media at Hochschule der Medien.",
+  "disambiguatingDescription": "Full-stack engineer based in the Stuttgart area, Germany, who publishes code on GitHub as FreakeyPlays.",
+  "email": "contact@chrismerck.dev",
+  "sitePublished": "2022-07-17",
+  "address": {
+    "locality": "Stuttgart",
+    "region": "Baden-Württemberg",
+    "country": "DE"
+  },
+  "workLocation": ["Germany"],
+  "knowsLanguage": [{ "name": "German", "code": "de" }, { "name": "English", "code": "en" }],
+  "additionalKnowsAbout": ["Rust", "WebAssembly", "WebRTC", "PayloadCMS", "Progressive Web App"],
+  "additionalSameAs": [],
+  "orcid": "",
+  "image": "",
+  "occupationalCategory": "",
+  "awards": [],
+  "memberOf": []
+}

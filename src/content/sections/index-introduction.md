@@ -4,7 +4,7 @@ typewriterMessages:
   - Chris
   - a Developer
   - building web apps
-tagline: Software Engineer and Media Computer
+tagline: Full-Stack Engineer · Stuttgart, Germany
 ---
 
 I'm a software engineer and media computing specialist with a passion for crafting clean, scalable web applications. Currently, I'm pursuing my Master’s degree [@Hochschule der Medien ](https://www.hdm-stuttgart.de/)while working [@pep.digital ](https://pep.digital/)as a Software Engineer in Esslingen.

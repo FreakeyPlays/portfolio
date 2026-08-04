@@ -14,15 +14,15 @@ const iconFor = (imagePath: string) =>
   iconModules[`../../assets/icons/skills/${imagePath.split('/').pop()}`];
 
 const skillCategories = await getCollection('skills');
-const iconsFor = (id: string) =>
+const skillsFor = (id: string) =>
   skillCategories
     .find((category) => category.id === id)
-    ?.data.skills.map((skill) => iconFor(skill.image))
-    .filter(Boolean) ?? [];
+    ?.data.skills.map((skill) => ({ name: skill.name, icon: iconFor(skill.image) }))
+    .filter((skill) => Boolean(skill.icon)) ?? [];
 
-const languages = iconsFor('languages');
-const frameworks = iconsFor('frameworks');
-const tools = iconsFor('tools');
+const languages = skillsFor('languages');
+const frameworks = skillsFor('frameworks');
+const tools = skillsFor('tools');
 
 const intro = await getEntry('sections', 'index-skills');
 const Content = intro ? (await render(intro)).Content : null;

@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 import Favicon from '@components/meta/Favicon.astro';
 import SEO, { type Image } from '@components/meta/SEO.astro';
 import siteInfo from '@data/siteInfo.json';
+import { buildProfileGraph } from '@lib/schema';
 
 export type Props = {
   title?: string;
@@ -12,6 +13,8 @@ export type Props = {
   canonicalURL?: URL | null;
   pageType?: 'website' | 'article';
   author?: string;
+  noindex?: boolean;
+  profileSchema?: boolean;
 };
 
 const {
@@ -21,7 +24,12 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   pageType = 'website',
   author = siteInfo.name,
+  noindex = false,
+  profileSchema = false,
 } = Astro.props;
+
+const profileGraph =
+  profileSchema && Astro.site ? await buildProfileGraph(Astro.site) : null;
 
 const title =
   rawTitle ??
@@ -63,4 +71,10 @@ const resolvedImage: Image = {
   og={{ type: pageType }}
   canonicalURL={canonicalURL}
   author={author}
+  noindex={noindex}
 />
+{
+  profileGraph && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(profileGraph)} />
+  )
+}

@@ -3,8 +3,8 @@
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
+import { getContentModifiedDate } from '@lib/contentDate.ts';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://chrismerck.dev',
 
@@ -38,6 +38,9 @@ export default defineConfig({
   },
 
   integrations: [
-    sitemap({ filter: (page) => !page.includes('/admin') }),
+    sitemap({
+      filter: (page) => !page.includes('/admin') && !page.includes('/404'),
+      serialize: (item) => ({ ...item, lastmod: getContentModifiedDate().toISOString() }),
+    }),
   ],
 });

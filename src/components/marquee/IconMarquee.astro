@@ -1,8 +1,13 @@
 ---
 import MarqueeItem from './MarqueeItem.astro';
 
+export type MarqueeSkill = {
+  name: string;
+  icon: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
+};
+
 interface Props {
-  skills: (((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata)[];
+  skills: MarqueeSkill[];
   direction?: 'forwards' | 'reverse';
   speed?: number;
   gap?: number;
@@ -25,7 +30,7 @@ const {
     aria-label={ariaLabel}
     class="grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
   >
-    {skills.map((skill, i) => <MarqueeItem skill={skill} index={i} />)}
+    {skills.map(({ name, icon }, i) => <MarqueeItem name={name} icon={icon} index={i} />)}
   </ul>
 </div>
 
