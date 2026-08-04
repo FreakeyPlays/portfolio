@@ -13,8 +13,17 @@
     "country": "DE"
   },
   "workLocation": ["Germany"],
-  "knowsLanguage": [{ "name": "German", "code": "de" }, { "name": "English", "code": "en" }],
-  "additionalKnowsAbout": ["Rust", "WebAssembly", "WebRTC", "PayloadCMS", "Progressive Web App"],
+  "knowsLanguage": [
+    {
+      "name": "German",
+      "code": "de"
+    },
+    {
+      "name": "English",
+      "code": "en"
+    }
+  ],
+  "additionalKnowsAbout": [],
   "additionalSameAs": [],
   "orcid": "",
   "image": "",
