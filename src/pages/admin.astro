@@ -24,6 +24,10 @@
 			#umami-toggle[data-tracking='off'] {
 				color: #4BB543;
 			}
+
+			#umami-toggle[hidden] {
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -39,8 +43,11 @@
 			const KEY = 'umami.disabled';
 			const button = document.querySelector<HTMLButtonElement>('#umami-toggle');
 
+			const isEntryPoint = () => ['', '#', '#/'].includes(location.hash);
+
 			const render = () => {
 				if (!button) return;
+				button.hidden = !isEntryPoint();
 				const isDisabled = localStorage.getItem(KEY) === '1';
 				button.dataset.tracking = isDisabled ? 'off' : 'on';
 				button.textContent = isDisabled ? 'Analytics off' : 'Analytics on';
@@ -51,6 +58,8 @@
 				localStorage.setItem(KEY, '1');
 				render();
 			});
+
+			window.addEventListener('hashchange', render);
 
 			render();
 		</script>
