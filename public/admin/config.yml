@@ -227,7 +227,6 @@ singletons:
         fields:
           - { name: name, label: Language, widget: string }
           - { name: code, label: Code, widget: string, hint: 'e.g. de, en' }
-      - { name: additionalKnowsAbout, label: Additional Topics, widget: list, required: false, hint: 'Topics not already covered by the Skills marquee or job technology chips. Each one must appear somewhere in the visible page text.' }
       - { name: additionalSameAs, label: Additional Profile URLs, widget: list, required: false, hint: 'Profiles beyond the Social Links list. Link back to this site from each one.' }
       - { name: orcid, label: ORCID iD, widget: string, required: false, hint: 'Full URL. Free and permanent, but only feeds academic systems, not Google.' }
       - { name: image, label: Photograph, widget: image, required: false, media_folder: /public/og, public_folder: /og, hint: 'Only set this once the photo is actually shown on the page.' }
