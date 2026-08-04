@@ -117,6 +117,19 @@ collections:
             widget: image
             media_folder: /src/assets/icons/skills
             public_folder: ../../assets/icons/skills
+
+  - name: pages
+    label: Pages
+    icon: description
+    files:
+      - name: not-found
+        label: 404 Page
+        file: src/content/pages/404.md
+        fields:
+          - { name: heading, label: Heading, widget: string }
+          - { name: tagline, label: Tagline, widget: string, required: false }
+          - { name: body, label: Body, widget: markdown }
+
   - name: sections
     label: Sections
     icon: view_agenda

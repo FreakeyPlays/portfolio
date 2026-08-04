@@ -76,4 +76,12 @@ const sections = defineCollection({
   }),
 });
 
-export const collections = { education, career, projects, skills, sections };
+const pages = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/pages' }),
+  schema: z.object({
+    heading: z.string(),
+    tagline: z.string().optional(),
+  }),
+});
+
+export const collections = { education, career, projects, skills, sections, pages };
