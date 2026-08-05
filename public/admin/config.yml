@@ -6,7 +6,13 @@ app_title: Portfolio CMS
 backend:
   name: github
   repo: FreakeyPlays/portfolio
-  branch: dev
+  commit_messages:
+    create: 'content({{collection}}): add "{{slug}}"'
+    update: 'content({{collection}}): update "{{slug}}"'
+    delete: 'content({{collection}}): remove "{{slug}}"'
+    uploadMedia: 'content(media): add "{{path}}"'
+    deleteMedia: 'content(media): remove "{{path}}"'
+    openAuthoring: '{{message}}'
 
 media_folder: src/assets/uploads
 public_folder: /src/assets/uploads
