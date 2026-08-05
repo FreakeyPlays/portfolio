@@ -24,6 +24,7 @@ const skillsFor = (id: string) =>
 const languages = skillsFor('languages');
 const frameworks = skillsFor('frameworks');
 const tools = skillsFor('tools');
+const ai = skillsFor('ai');
 
 const intro = await getEntry('sections', 'index-skills');
 const Content = intro ? (await render(intro)).Content : null;
@@ -38,6 +39,12 @@ const Content = intro ? (await render(intro)).Content : null;
     )
   }
   <div class="mt-16 space-y-2">
+		<IconMarquee
+			skills={ai}
+		  speed={20}
+		  gap={32}
+		  ariaLabel="Scrolling list of AI Tools used"
+		/>
     <IconMarquee
       skills={languages}
       speed={30}
