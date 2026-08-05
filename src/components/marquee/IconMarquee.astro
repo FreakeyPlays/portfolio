@@ -25,7 +25,7 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={['@container overflow-hidden', className]}>
+<div class:list={['@container overflow-hidden mask-x-from-90% mask-x-to-100% motion-reduce:mask-none', className]}>
   <ul
     aria-label={ariaLabel}
     class="grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"

@@ -37,7 +37,7 @@ const Content = intro ? (await render(intro)).Content : null;
       </div>
     )
   }
-  <div class="mt-16 mask-x-from-90% mask-x-to-100%">
+  <div class="mt-16 space-y-2">
     <IconMarquee
       skills={languages}
       speed={30}
@@ -46,7 +46,6 @@ const Content = intro ? (await render(intro)).Content : null;
       ariaLabel="Scrolling list of programming languages used"
     />
     <IconMarquee
-      class="my-2"
       skills={frameworks}
       speed={40}
       gap={32}
