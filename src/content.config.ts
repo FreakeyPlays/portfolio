@@ -67,16 +67,6 @@ const skills = defineCollection({
   }),
 });
 
-const sections = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/sections' }),
-  schema: z.object({
-    title: z.string().optional(),
-    typewriterStart: z.string().optional(),
-    typewriterMessages: z.array(z.string()).optional(),
-    tagline: z.string().optional(),
-  }),
-});
-
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
   schema: z.object({
@@ -85,4 +75,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { education, career, projects, skills, sections, pages };
+export const collections = { education, career, projects, skills, pages };
