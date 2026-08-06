@@ -39,6 +39,7 @@
 			import { navigationConfig } from "@blocks/navigation/config"
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
+			import { stampPublishedAt } from "@hooks/stampPublishedAt"
 
 			CMS.registerEditorComponent(typewriterConfig)
 			CMS.registerEditorComponent(navigationConfig)
@@ -46,6 +47,9 @@
 			CMS.registerEditorComponent(careerConfig)
 			CMS.registerEditorComponent(educationConfig)
 			CMS.registerEditorComponent(projectsConfig)
+			
+			CMS.registerEventListener(stampPublishedAt)
+			
 			CMS.init();
 		</script>
 
