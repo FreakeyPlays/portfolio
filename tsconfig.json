@@ -15,7 +15,8 @@
       "@data/*": ["src/data/*"],
       "@lib/*": ["src/lib/*"],
       "@blocks/*": ["src/blocks/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

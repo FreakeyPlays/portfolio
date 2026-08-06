@@ -3,9 +3,9 @@
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
-import { getContentModifiedDate } from '@lib/contentDate.ts';
 import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
+import { getModifiedDateForURL, isListedInSitemap } from '@utils/buildTimePageMeta.ts';
 
 export default defineConfig({
   site: 'https://chrismerck.dev',
@@ -38,8 +38,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/admin') && !page.includes('/404'),
-      serialize: (item) => ({ ...item, lastmod: getContentModifiedDate().toISOString() }),
+      filter: (page) => !page.includes('/admin') && isListedInSitemap(page),
+      serialize: (item) => ({ ...item, lastmod: getModifiedDateForURL(item.url).toISOString() }),
     }),
   ],
 });

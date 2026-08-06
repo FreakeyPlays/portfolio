@@ -2,9 +2,9 @@ import { getCollection } from 'astro:content';
 import identity from '@data/identity.json';
 import siteInfo from '@data/siteInfo.json';
 import socialLinks from '@data/socialLinks.json';
-import { getContentModifiedDate } from '@lib/contentDate';
-import { formatMonthYear } from '@lib/date';
+import { formatMonthYear } from '@utils/date.ts';
 import type { APIRoute } from 'astro';
+import { getLatestModifiedDate } from '@utils/buildTimePageMeta.ts';
 
 const GERMAN_GRADE_SCALE = 'German scale, 1.0 is the best mark and 4.0 the pass mark';
 
@@ -51,7 +51,7 @@ export const GET: APIRoute = async ({ site }) => {
   push('');
 
   if (identity.email) push(`Contact: ${identity.email}`);
-  push(`Last updated: ${getContentModifiedDate().toISOString().slice(0, 10)}`, '');
+  push(`Last updated: ${getLatestModifiedDate().toISOString().slice(0, 10)}`, '');
 
   const ordered = [...projects].sort((a, b) => a.data.order - b.data.order);
   const projectLine = ({ data }: (typeof ordered)[number]) =>
