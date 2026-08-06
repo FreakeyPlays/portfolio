@@ -1,0 +1,48 @@
+---
+interface Props {
+  href: string;
+  target?: '_self' | '_blank' | '_parent' | '_top';
+  rel?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, target, rel, class: className = '', ...rest } = Astro.props;
+
+
+function isExternalLink(link: string): boolean {
+  if (!Astro.site) return false;
+
+	const bareHost = (host: string) => host.replace(/^www\./, '');
+
+  try {
+    const url = new URL(link, Astro.site);
+
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return false;
+
+    return bareHost(url.hostname) !== bareHost(Astro.site.hostname);
+  } catch {
+    return false;
+  }
+}
+
+const isExternal = isExternalLink(href);
+
+const relTokens = [...(rel ?? '').split(' '), ...(isExternal ? ['noopener', 'noreferrer'] : [])]
+  .map((token) => token.trim())
+  .filter((token, index, all) => token && all.indexOf(token) === index);
+---
+
+<a
+	class:list={[
+		'bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent relative',
+		'after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-[0.1rem] after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all after:scale-0 after:origin-center hover:after:scale-100',
+		className,
+	]}
+	href={href}
+	target={target ?? (isExternal ? '_blank' : undefined)}
+	rel={relTokens.length > 0 ? relTokens.join(' ') : undefined}
+	{...rest}
+>
+	<slot />
+</a>

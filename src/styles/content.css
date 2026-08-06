@@ -1,0 +1,98 @@
+
+/* 1 spacing equals to 0.25rem */
+
+:root {
+  --flow-space-tight: --spacing(3);
+  --flow-space: --spacing(6);
+	--flow-space-loose: --spacing(10);
+  --flow-space-section: --spacing(20);
+  --flow-indent: --spacing(6);
+}
+
+@layer base {
+  main {
+    & > * + * {
+      margin-block-start: var(--flow-space);
+    }
+
+		& > div {
+			margin-block-start: var(--flow-space-loose);
+		}
+
+    & > p + p {
+      margin-block-start: var(--flow-space-tight);
+    }
+
+    & > :is(h1, h2) {
+      margin-block-start: var(--flow-space-section);
+    }
+
+    & > :is(h3, h4, h5, h6) {
+      margin-block-start: var(--flow-space-loose);
+    }
+
+    & > :is(h1, h2, h3, h4, h5, h6) + * {
+      margin-block-start: var(--flow-space-tight);
+    }
+
+    & > hr {
+      margin-block-start: var(--flow-space-loose);
+    }
+
+    & > :is(ul, ol) {
+      padding-inline-start: var(--flow-indent);
+
+      & li + li {
+        margin-block-start: var(--flow-space-tight);
+      }
+
+      & :is(ul, ol) {
+        margin-block-start: var(--flow-space-tight);
+        padding-inline-start: var(--flow-indent);
+      }
+    }
+
+    & > blockquote {
+      padding-inline-start: var(--flow-indent);
+
+      & > * + * {
+        margin-block-start: var(--flow-space-tight);
+      }
+    }
+
+    & > pre {
+      padding: --spacing(4);
+      overflow-x: auto;
+    }
+
+    & > p img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    & > table {
+      width: 100%;
+      border-collapse: collapse;
+
+      & :is(th, td) {
+        padding: --spacing(2) --spacing(3);
+      }
+    }
+
+    & > nav {
+      margin-block-start: var(--flow-space-section);
+    }
+
+    & > nav + * {
+      margin-block-start: var(--flow-space-section);
+    }
+
+    & > :first-child {
+      margin-block-start: var(--flow-space-section);
+    }
+
+    & > :last-child {
+      margin-block-end: var(--flow-space-section);
+    }
+  }
+}

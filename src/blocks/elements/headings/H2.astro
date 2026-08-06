@@ -1,0 +1,22 @@
+---
+import { pages } from '@data/pages';
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const sectionIds = pages.map((page) => page.url.split('#')[1]);
+const isSection = id !== undefined && sectionIds.includes(id);
+---
+
+<h2
+	id={id}
+	class:list={[
+		isSection &&
+			'font-extrabold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent scroll-m-32',
+	]}
+>
+	{isSection && <span class="text-white" aria-hidden="true">/</span>}<slot />
+</h2>
