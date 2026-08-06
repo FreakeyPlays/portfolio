@@ -139,7 +139,6 @@ collections:
     summary: '{{title}}'
     fields:
       - { name: title, label: Title, widget: string, pattern: ['^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+', 'The Homepage can be created via the name Home.'] }
-      - { name: customSlug, label: Custom Slug, widget: string, required: false, pattern: ['^$|^(?!(?:index|404)$)[a-z0-9]+(?:-[a-z0-9]+)*$', 'Lowercase letters, numbers and single hyphens only. "index" and "404" are reserved.'] }
       - { name: description, label: Description, widget: text, required: false, hint: 'Meta description. Leave empty to fall back to the site default.' }
       - { name: isPublished, label: Published, widget: boolean, default: false, required: true }
       - { name: noIndex, label: Remove from Indexing, widget: boolean, default: false, required: true }
