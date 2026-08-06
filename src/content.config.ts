@@ -68,11 +68,19 @@ const skills = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/pages' }),
+  loader: glob({ pattern: ['*.md', '!index.mdx'], base: './src/content/pages' }),
   schema: z.object({
     heading: z.string(),
     tagline: z.string().optional(),
   }),
 });
 
-export const collections = { education, career, projects, skills, pages };
+const home = defineCollection({
+  loader: glob({ pattern: 'index.mdx', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { education, career, projects, skills, pages, home };

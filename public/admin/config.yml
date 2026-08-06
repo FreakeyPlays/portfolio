@@ -131,6 +131,11 @@ collections:
     label: Pages
     icon: description
     files:
+      - name: home
+        label: Home
+        file: src/content/pages/index.mdx
+        fields:
+          - { name: body, label: Body, widget: markdown, editor_components: [typewriter] }
       - name: not-found
         label: 404 Page
         file: src/content/pages/404.md
@@ -160,6 +165,7 @@ singletons:
         fields:
           - { name: src, label: Image, widget: image, media_folder: /public/og, public_folder: /og }
           - { name: alt, label: Alt Text, widget: string }
+
   - name: identity
     label: Identity (Structured Data)
     icon: badge

@@ -33,7 +33,9 @@
 	<body>
 		<script>
 			import CMS from '@sveltia/cms';
+			import { typewriterConfig } from "@blocks/typewriter/config"
 
+			CMS.registerEditorComponent(typewriterConfig)
 			CMS.init();
 		</script>
 
