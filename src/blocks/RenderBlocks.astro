@@ -7,10 +7,10 @@ import Projects from '@blocks/projects/Component.astro';
 import Typewriter from '@blocks/typewriter/Component.astro';
 import h2 from "@blocks/elements/headings/H2.astro"
 import a from "@blocks/elements/A.astro"
-import { type DataEntryMap, render } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
 
 interface Props {
-	markdown: DataEntryMap['home']['markdown'];
+	markdown: CollectionEntry<'pages'>;
 }
 
 const { markdown } = Astro.props;

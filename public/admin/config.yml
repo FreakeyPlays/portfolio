@@ -129,20 +129,24 @@ collections:
 
   - name: pages
     label: Pages
+    label_singular: Page
     icon: description
-    files:
-      - name: home
-        label: Home
-        file: src/content/pages/index.mdx
-        fields:
-          - { name: body, label: Body, widget: markdown, editor_components: [typewriter, navigation, marquee, career, education, projects] }
-      - name: not-found
-        label: 404 Page
-        file: src/content/pages/404.md
-        fields:
-          - { name: heading, label: Heading, widget: string }
-          - { name: tagline, label: Tagline, widget: string, required: false }
-          - { name: body, label: Body, widget: markdown }
+    folder: src/content/pages
+    extension: mdx
+    format: frontmatter
+    create: true
+    identifier_field: title
+    summary: '{{title}}'
+    fields:
+      - { name: title, label: Title, widget: string, pattern: ['^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+', 'The Homepage can be created via the name Home.'] }
+      - { name: customSlug, label: Custom Slug, widget: string, required: false, pattern: ['^$|^(?!(?:index|404)$)[a-z0-9]+(?:-[a-z0-9]+)*$', 'Lowercase letters, numbers and single hyphens only. "index" and "404" are reserved.'] }
+      - { name: description, label: Description, widget: text, required: false, hint: 'Meta description. Leave empty to fall back to the site default.' }
+      - { name: isPublished, label: Published, widget: boolean, default: false, required: true }
+      - { name: noIndex, label: Remove from Indexing, widget: boolean, default: false, required: true }
+      - { name: createdAt, label: Created at, widget: hidden, default: '{{datetime}}' }
+      - { name: updatedAt, label: Updated at, widget: hidden, default: '{{datetime}}' }
+      - { name: publishedAt, label: Published at, widget: hidden }
+      - { name: body, label: Body, widget: markdown, editor_components: [typewriter, navigation, marquee, career, education, projects] }
 
 singletons:
   - name: siteInfo

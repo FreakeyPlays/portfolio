@@ -1,35 +1,17 @@
 ---
-import { getEntry, render } from 'astro:content';
-import Navigation from '@components/Navigation.astro';
+import RenderBlocks from '@blocks/RenderBlocks.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
 
 const page = await getEntry('pages', '404');
-if (!page) throw new Error('Missing content entry: src/content/pages/404.md');
-
-const { heading, tagline } = page.data;
-const { Content } = await render(page);
+if (!page) throw new Error('Missing content entry: src/content/pages/404.mdx');
 ---
 
 <BaseLayout
-	rawTitle="404 Not Found | Christoph Merck"
-	description="This page does not exist on chrismerck.dev."
+	title={page.data.title}
+	description={page.data.description}
 	canonicalURL={null}
 	noindex={true}
 >
-	<Fragment slot="header">
-		<Navigation />
-	</Fragment>
-
-	<section class="my-20! flex flex-col gap-4">
-		<p class="font-serif text-7xl font-extrabold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
-			404
-		</p>
-		<h1 class="font-serif text-4xl font-extrabold">{heading}</h1>
-		<p class="text-xl text-gray-400 font-serif font-medium">
-			{tagline}
-		</p>
-		<p class="mt-2 space-y-2">
-			<Content />
-		</p>
-	</section>
+	<RenderBlocks markdown={page} />
 </BaseLayout>

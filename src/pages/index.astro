@@ -3,10 +3,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getEntry } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
 
-const home = await getEntry('home', 'index');
-if (!home) throw new Error('Missing content entry: src/content/pages/index.mdx');
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('Missing content entry: src/content/pages/home.mdx');
 ---
 
-<BaseLayout profileSchema>
+<BaseLayout
+  profileSchema
+>
   <RenderBlocks markdown={home} />
 </BaseLayout>
