@@ -1,0 +1,29 @@
+---
+import RenderBlocks from '@blocks/RenderBlocks.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths = (async () => {
+  const reservedIds = ['index', 'home', '404'];
+
+  const pages = await getCollection('pages');
+
+  return pages
+    .filter((page) => !reservedIds.includes(page.id))
+    .filter((page) => page.data.isPublished || import.meta.env.DEV)
+    .map((page) => ({ params: { slug: page.id }, props: { page } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+---
+
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  noindex={page.data.noIndex}
+>
+  <RenderBlocks markdown={page} />
+</BaseLayout>
