@@ -7,8 +7,10 @@ const projects = (await getCollection('projects', ({ data }) => data.isPublished
 );
 ---
 
-<ul
-  class="col-[extra]! grid gap-4 grid-cols-1 **:row-span-3 sm:**:nth-2:sm:col-start-2 sm:**:nth-2:sm:row-start-2 sm:grid-cols-2"
->
-  {projects.map((project) => <ProjectCard project={project} />)}
-</ul>
+<div class="col-[extra]!">
+	<ul
+		class="grid gap-4 grid-cols-1 **:row-span-3 sm:**:nth-2:sm:col-start-2 sm:**:nth-2:sm:row-start-2 sm:grid-cols-2"
+	>
+		{projects.map((project) => <ProjectCard project={project} />)}
+	</ul>
+</div>

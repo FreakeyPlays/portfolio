@@ -7,33 +7,35 @@ const educationCollection = (await getCollection('education', ({ data }) => data
 );
 ---
 
-<ul class="space-y-4 col-[extra]!">
-  {
-    educationCollection.map((education) => (
-      <li>
-        <h3 class="text-xl font-bold">{education.data.degree}</h3>
-        <p class="text-lg font-bold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
-          @{education.data.institution}
-        </p>
-        <p class="text-sm text-gray-400 uppercase">
+<div class="col-[extra]!">
+	<ul class="space-y-4">
+		{
+			educationCollection.map((education) => (
+				<li>
+					<h3 class="text-xl font-bold">{education.data.degree}</h3>
+					<p class="text-lg font-bold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
+						@{education.data.institution}
+					</p>
+					<p class="text-sm text-gray-400 uppercase">
           <span class="capitalize">
             {education.data.location}{' '}
-            {education.data.grade ? `| Grade: ${education.data.grade}` : ''}
+						{education.data.grade ? `| Grade: ${education.data.grade}` : ''}
           </span>{' '}
-          |{' '}
-          <time datetime={toISODate(education.data.startDate)}>
-            {formatMonthYear(education.data.startDate)}
-          </time>{' '}
-          -{' '}
-          {education.data.endDate ? (
-            <time datetime={toISODate(education.data.endDate)}>
-              {formatMonthYear(education.data.endDate)}
-            </time>
-          ) : (
-            'present'
-          )}
-        </p>
-      </li>
-    ))
-  }
-</ul>
+						|{' '}
+						<time datetime={toISODate(education.data.startDate)}>
+							{formatMonthYear(education.data.startDate)}
+						</time>{' '}
+						-{' '}
+						{education.data.endDate ? (
+							<time datetime={toISODate(education.data.endDate)}>
+								{formatMonthYear(education.data.endDate)}
+							</time>
+						) : (
+							'present'
+						)}
+					</p>
+				</li>
+			))
+		}
+	</ul>
+</div>
