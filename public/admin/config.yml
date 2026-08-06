@@ -186,7 +186,7 @@ singletons:
         widget: text
         hint: 'Declarative third-person summary. Lead with "Christoph Merck is a…" so an AI answer engine can quote it directly. Include availability with an absolute date.'
       - { name: disambiguatingDescription, label: Disambiguating Description, widget: text, required: false, hint: 'One line separating you from others with the same name.' }
-      - { name: email, label: Email, widget: string, required: false }
+      - { name: email, label: Email, widget: string, type: email, required: false }
       - { name: sitePublished, label: Site First Published, widget: datetime, type: date, format: 'YYYY-MM-DD', required: false, hint: 'Fixed date the site first went live. The "last modified" date is derived from git automatically and needs no field.' }
       - name: address
         label: Location
