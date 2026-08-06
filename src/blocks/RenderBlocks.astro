@@ -1,5 +1,11 @@
 ---
+import Career from '@blocks/career/Component.astro';
+import Education from '@blocks/education/Component.astro';
+import Marquee from '@blocks/marquee/Component.astro';
+import Navigation from '@blocks/navigation/Component.astro';
+import Projects from '@blocks/projects/Component.astro';
 import Typewriter from '@blocks/typewriter/Component.astro';
+import H2 from "@blocks/heading/h2/Component.astro"
 import { type DataEntryMap, render } from 'astro:content';
 
 interface Props {
@@ -11,4 +17,4 @@ const { markdown } = Astro.props;
 const { Content } = await render(markdown);
 ---
 
-<Content components={{ Typewriter }} />
+<Content components={{ Typewriter, Navigation, Marquee, Career, Education, Projects, h2: H2 }} />

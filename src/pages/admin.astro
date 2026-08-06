@@ -33,9 +33,19 @@
 	<body>
 		<script>
 			import CMS from '@sveltia/cms';
+			import { careerConfig } from "@blocks/career/config"
+			import { educationConfig } from "@blocks/education/config"
+			import { marqueeConfig } from "@blocks/marquee/config"
+			import { navigationConfig } from "@blocks/navigation/config"
+			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
 
 			CMS.registerEditorComponent(typewriterConfig)
+			CMS.registerEditorComponent(navigationConfig)
+			CMS.registerEditorComponent(marqueeConfig)
+			CMS.registerEditorComponent(careerConfig)
+			CMS.registerEditorComponent(educationConfig)
+			CMS.registerEditorComponent(projectsConfig)
 			CMS.init();
 		</script>
 

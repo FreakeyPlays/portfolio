@@ -135,7 +135,7 @@ collections:
         label: Home
         file: src/content/pages/index.mdx
         fields:
-          - { name: body, label: Body, widget: markdown, editor_components: [typewriter] }
+          - { name: body, label: Body, widget: markdown, editor_components: [typewriter, navigation, marquee, career, education, projects] }
       - name: not-found
         label: 404 Page
         file: src/content/pages/404.md

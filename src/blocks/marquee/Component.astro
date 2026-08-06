@@ -1,0 +1,55 @@
+---
+import IconMarquee from '@components/marquee/IconMarquee.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  categories: string[];
+}
+
+type SkillIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
+
+/**
+ * Placeholder timings until speed and gap are either editable in the CMS or
+ * derived from the number of icons in a row.
+ */
+const SPEED = 30;
+const GAP = 16;
+
+const { categories } = Astro.props;
+
+const iconModules = import.meta.glob('../../assets/icons/skills/*.svg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, SkillIcon>;
+
+const iconFor = (imagePath: string) =>
+  iconModules[`../../assets/icons/skills/${imagePath.split('/').pop()}`];
+
+const skillCategories = await getCollection('skills');
+
+const rows = categories
+  .map((id) => skillCategories.find((category) => category.id === id))
+  .filter((category) => category !== undefined)
+  .map((category) => ({
+    category: category.data.category,
+    skills: category.data.skills
+      .filter((skill) => skill.isPublished && skill.image)
+      .map((skill) => ({ name: skill.name, icon: iconFor(skill.image as string) }))
+      .filter((skill) => Boolean(skill.icon)),
+  }))
+  .filter(({ skills }) => skills.length > 0);
+---
+
+<div class="space-y-2 col-[extra]!">
+  {
+    rows.map(({ category, skills }, i) => (
+      <IconMarquee
+        skills={skills}
+        speed={SPEED}
+        gap={GAP}
+        direction={i % 2 === 0 ? 'forwards' : 'reverse'}
+        ariaLabel={`Scrolling list of ${category} used`}
+      />
+    ))
+  }
+</div>
