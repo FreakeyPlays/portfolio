@@ -5,7 +5,7 @@ export type Page = {
 };
 
 export const pages: Page[] = [
-  { label: 'about', url: '/#about', samePage: true },
+  { label: 'about', url: '/', samePage: true },
   { label: 'skills', url: '/#skills', samePage: true },
   { label: 'career', url: '/#career', samePage: true },
   { label: 'education', url: '/#education', samePage: true },
