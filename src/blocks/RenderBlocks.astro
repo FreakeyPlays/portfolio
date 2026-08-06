@@ -1,0 +1,14 @@
+---
+import Typewriter from '@blocks/typewriter/Component.astro';
+import { type DataEntryMap, render } from 'astro:content';
+
+interface Props {
+	markdown: DataEntryMap['home']['markdown'];
+}
+
+const { markdown } = Astro.props;
+
+const { Content } = await render(markdown);
+---
+
+<Content components={{ Typewriter }} />
