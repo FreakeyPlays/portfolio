@@ -1,5 +1,5 @@
 ---
-import { formatMonthYear, toISODate } from '@lib/date';
+import { formatMonthYear, toISODate } from '@utils/date.ts';
 import { getCollection } from 'astro:content';
 
 const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(

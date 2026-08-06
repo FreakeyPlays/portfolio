@@ -3,7 +3,7 @@ import { Font } from 'astro:assets';
 import Favicon from '@components/meta/Favicon.astro';
 import SEO, { type Image } from '@components/meta/SEO.astro';
 import siteInfo from '@data/siteInfo.json';
-import { buildProfileGraph } from '@lib/schema';
+import { buildProfileGraph } from '@utils/schema.ts';
 
 export type Props = {
   title?: string;

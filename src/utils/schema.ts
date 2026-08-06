@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 import identity from '@data/identity.json';
 import siteInfo from '@data/siteInfo.json';
 import socialLinks from '@data/socialLinks.json';
-import { getContentModifiedISODate } from '@lib/contentDate';
+import { getPageModifiedISODate } from '@utils/buildTimePageMeta.ts';
 
 /**
  * Canonical spellings for technology names.
@@ -171,7 +171,7 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         name: `${siteInfo.fullName} — ${siteInfo.tagline}`,
         isPartOf: { '@id': id('website') },
         datePublished: identity.sitePublished,
-        dateModified: getContentModifiedISODate(),
+        dateModified: getPageModifiedISODate('home'),
         mainEntity: personRef,
       }),
       person,

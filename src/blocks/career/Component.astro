@@ -3,7 +3,7 @@ import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
-import { formatMonthYear, toISODate } from '@lib/date';
+import { formatMonthYear, toISODate } from '@utils/date.ts';
 import { getCollection } from 'astro:content';
 
 const latestJobStart = (jobs: { startDate: Date }[]) =>
