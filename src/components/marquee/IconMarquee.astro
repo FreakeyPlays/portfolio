@@ -9,7 +9,7 @@ export type MarqueeSkill = {
 interface Props {
   skills: MarqueeSkill[];
   direction?: 'forwards' | 'reverse';
-  speed?: number;
+  crossingTime?: number;
   gap?: number;
   ariaLabel?: string;
   class?: string;
@@ -18,11 +18,13 @@ interface Props {
 const {
   skills,
   direction = 'forwards',
-  speed = 5,
+  crossingTime = 5,
   gap = 8,
   ariaLabel,
   class: className,
 } = Astro.props;
+
+const duration = Math.round((crossingTime * skills.length * 100) / (skills.length - 1)) / 100;
 ---
 
 <div class:list={['@container overflow-hidden mask-x-from-90% mask-x-to-100% motion-reduce:mask-none', className]}>
@@ -36,10 +38,10 @@ const {
 
 <style
   define:vars={{
-    speed: `${speed}s`,
+    marqueeDuration: `${duration}s`,
     direction: direction,
     marqueeItems: `${skills.length}`,
     itemGap: `${gap}px`,
-    itemWidth: `calc(100cqw / calc(var(--marqueeItems) - var(--reducedMotion)) - var(--itemGap))`,
+    itemWidth: `calc(calc(100cqw - calc(var(--marqueeItems) * var(--itemGap))) / calc(var(--marqueeItems) - var(--reducedMotion)))`,
   }}
 ></style>

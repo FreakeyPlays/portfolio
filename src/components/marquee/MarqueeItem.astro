@@ -26,6 +26,6 @@ const { name, icon: SkillIcon, index } = Astro.props;
 <style
   define:vars={{
     marqueeIndex: `${index + 1}`,
-    delay: `calc(var(--speed) / calc(var(--marqueeItems) + var(--addItem, 0)) * var(--marqueeIndex) * -1)`,
+    delay: `calc(var(--marqueeDuration) / calc(var(--marqueeItems) + var(--addItem, 0)) * var(--marqueeIndex) * -1)`,
   }}
 ></style>

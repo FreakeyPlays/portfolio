@@ -23,7 +23,7 @@
 }
 
 .animate-marquee-move {
-  animation: marquee-move var(--speed, 5s) linear infinite var(--direction, forwards)
+  animation: marquee-move var(--marqueeDuration, 5s) linear infinite var(--direction, forwards)
     var(--delay, 3s);
 }
 

@@ -8,11 +8,7 @@ interface Props {
 
 type SkillIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
 
-/**
- * Placeholder timings until speed and gap are either editable in the CMS or
- * derived from the number of icons in a row.
- */
-const SPEED = 30;
+const CROSSING_TIME = 30;
 const GAP = 16;
 
 const { categories } = Astro.props;
@@ -37,7 +33,7 @@ const rows = categories
       .map((skill) => ({ name: skill.name, icon: iconFor(skill.image as string) }))
       .filter((skill) => Boolean(skill.icon)),
   }))
-  .filter(({ skills }) => skills.length > 0);
+  .filter(({ skills }) => skills.length > 1);
 ---
 
 <div class="space-y-2 col-[extra]!">
@@ -45,7 +41,7 @@ const rows = categories
     rows.map(({ category, skills }, i) => (
       <IconMarquee
         skills={skills}
-        speed={SPEED}
+        crossingTime={CROSSING_TIME}
         gap={GAP}
         direction={i % 2 === 0 ? 'forwards' : 'reverse'}
         ariaLabel={`Scrolling list of ${category} used`}
