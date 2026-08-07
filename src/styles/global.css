@@ -33,6 +33,28 @@
   }
 }
 
+@property --monochrome {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.monochrome-icon {
+  transition: --monochrome 200ms ease-in-out;
+
+  & > * {
+    filter: invert(1) brightness(var(--monochrome)) invert(1);
+  }
+
+  & .svg-mono-dim {
+    filter: invert(calc(0.5 * (1 - var(--monochrome))));
+  }
+
+  & .svg-mono-invert {
+    filter: invert(calc(0.15 * (1 - var(--monochrome))));
+  }
+}
+
 .animate-flag-wave {
   animation: flag-wave 1000ms alternate infinite ease-in-out both;
 }
