@@ -1,7 +1,7 @@
 ---
+import { getEntry } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
 
 const page = await getEntry('pages', '404');
 if (!page) throw new Error('Missing content entry: src/content/pages/404.mdx');

@@ -1,6 +1,6 @@
 ---
-import { formatMonthYear, toISODate } from '@utils/date.ts';
 import { getCollection } from 'astro:content';
+import { formatMonthYear, toISODate } from '@utils/date.ts';
 
 const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(
   (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),

@@ -1,10 +1,9 @@
-
 /* 1 spacing equals to 0.25rem */
 
 :root {
   --flow-space-tight: --spacing(3);
   --flow-space: --spacing(6);
-	--flow-space-loose: --spacing(10);
+  --flow-space-loose: --spacing(10);
   --flow-space-section: --spacing(20);
   --flow-indent: --spacing(6);
 }
@@ -15,9 +14,9 @@
       margin-block-start: var(--flow-space);
     }
 
-		& > div {
-			margin-block-start: var(--flow-space-loose);
-		}
+    & > div {
+      margin-block-start: var(--flow-space-loose);
+    }
 
     & > p + p {
       margin-block-start: var(--flow-space-tight);

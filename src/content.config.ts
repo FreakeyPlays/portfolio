@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
-import { z } from "astro/zod"
-
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const education = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/data/education' }),
@@ -72,11 +71,11 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string().optional(),
     description: z.string().optional(),
-		createdAt: z.coerce.date(),
-		updatedAt: z.coerce.date(),
-		publishedAt: z.coerce.date().optional(),
-		isPublished: z.boolean().default(false),
-		noIndex: z.boolean().default(false),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+    publishedAt: z.coerce.date().optional(),
+    isPublished: z.boolean().default(false),
+    noIndex: z.boolean().default(false),
   }),
 });
 

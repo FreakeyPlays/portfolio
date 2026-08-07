@@ -1,6 +1,6 @@
 ---
-import ProjectCard from '@components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import ProjectCard from '@components/ProjectCard.astro';
 
 const projects = (await getCollection('projects', ({ data }) => data.isPublished)).sort(
   (a, b) => a.data.order - b.data.order,

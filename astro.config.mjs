@@ -1,11 +1,11 @@
 // @ts-check
 
-import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, fontProviders } from 'astro/config';
 import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 import { getModifiedDateForURL, isListedInSitemap } from '@utils/buildTimePageMeta.ts';
+import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
   site: 'https://chrismerck.dev',

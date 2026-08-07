@@ -32,7 +32,6 @@
 	</head>
 	<body>
 		<script>
-			import CMS from '@sveltia/cms';
 			import { careerConfig } from "@blocks/career/config"
 			import { educationConfig } from "@blocks/education/config"
 			import { marqueeConfig } from "@blocks/marquee/config"
@@ -40,6 +39,7 @@
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
 			import { stampPublishedAt } from "@hooks/stampPublishedAt"
+			import CMS from '@sveltia/cms';
 
 			CMS.registerEditorComponent(typewriterConfig)
 			CMS.registerEditorComponent(navigationConfig)

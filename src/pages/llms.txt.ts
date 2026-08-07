@@ -2,9 +2,9 @@ import { getCollection } from 'astro:content';
 import identity from '@data/identity.json';
 import siteInfo from '@data/siteInfo.json';
 import socialLinks from '@data/socialLinks.json';
+import { getLatestModifiedDate } from '@utils/buildTimePageMeta.ts';
 import { formatMonthYear } from '@utils/date.ts';
 import type { APIRoute } from 'astro';
-import { getLatestModifiedDate } from '@utils/buildTimePageMeta.ts';
 
 const GERMAN_GRADE_SCALE = 'German scale, 1.0 is the best mark and 4.0 the pass mark';
 
@@ -103,9 +103,9 @@ export const GET: APIRoute = async ({ site }) => {
   for (const { label, href } of socialLinks) {
     if (href.startsWith('http')) push(`- [${label}](${href})`);
   }
-	if(identity.orcid) {
-		push(`- [ORCID](${identity.orcid})`)
-	}
+  if (identity.orcid) {
+    push(`- [ORCID](${identity.orcid})`);
+  }
 
   return new Response(
     `${out

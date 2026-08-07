@@ -50,8 +50,8 @@ export const typewriterConfig: EditorComponentDefinition = {
   id: 'typewriter',
   label: 'Typewriter',
   icon: 'keyboard',
-	mode: "dialog",
-	summary: "{{start}} {{messages.0}}\n{{tagline}}",
+  mode: 'dialog',
+  summary: '{{start}} {{messages.0}}\n{{tagline}}',
   fields: [
     {
       name: 'start',

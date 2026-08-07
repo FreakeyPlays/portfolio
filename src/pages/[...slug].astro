@@ -1,8 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
-import { getCollection } from 'astro:content';
 
 export const getStaticPaths = (async () => {
   const reservedIds = ['index', 'home', '404'];
