@@ -8,8 +8,18 @@ interface Props {
 
 type SkillIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
 
-const CROSSING_TIME = 30;
-const GAP = 16;
+const DECAY_BASE = 2.6;
+const MIN_ITEMS = 5;
+const MAX_ITEMS = 12;
+const SLOWEST_CROSSING = 40;
+const CROSSING_FLOOR = 20;
+
+const crossingTimeFor = (itemCount: number) => {
+  const steps = Math.min(Math.max(itemCount, MIN_ITEMS), MAX_ITEMS) - MIN_ITEMS;
+  const crossingTime = CROSSING_FLOOR + (SLOWEST_CROSSING - CROSSING_FLOOR) / DECAY_BASE ** steps;
+
+  return Math.round(crossingTime * 10) / 10;
+};
 
 const { categories } = Astro.props;
 
@@ -41,8 +51,8 @@ const rows = categories
     rows.map(({ category, skills }, i) => (
       <IconMarquee
         skills={skills}
-        crossingTime={CROSSING_TIME}
-        gap={GAP}
+        crossingTime={crossingTimeFor(skills.length)}
+        gap={skills.length > (MIN_ITEMS + MAX_ITEMS) / 2 ? 8 : 16}
         direction={i % 2 === 0 ? 'forwards' : 'reverse'}
         ariaLabel={`Scrolling list of ${category} used`}
       />
