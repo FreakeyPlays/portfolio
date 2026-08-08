@@ -2,25 +2,33 @@
 import Grain from '@components/Grain.astro';
 
 interface Props {
-  skill: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
+  name: string;
+  icon: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
   index: number;
+  glowSlot: number;
 }
 
-const { skill: SkillIcon, index } = Astro.props;
+const { name, icon: SkillIcon, index, glowSlot } = Astro.props;
 ---
 
 <li
-  class="p-px overflow-hidden aspect-square w-(--itemWidth) rounded-md bg-gradient-to-tr from-zinc-800 via-zinc-500 to-zinc-800 col-[resting] row-start-1 animate-marquee-move motion-reduce:[--addItem:1]"
+  class="group p-px overflow-hidden aspect-square w-(--itemWidth) rounded-md bg-gradient-to-tr from-zinc-800 via-zinc-500 to-zinc-800 col-[resting] row-start-1 animate-marquee-move motion-reduce:[--addItem:1]"
 >
   <Grain />
-  <div class="p-[15%] bg-zinc-800 rounded-md">
-    <SkillIcon fill="var(--color-neutral-200)" />
+  <div class="h-full p-[15%] bg-zinc-800 rounded-md">
+    <span class="sr-only">{name}</span>
+    <SkillIcon
+      class="size-full monochrome-icon animate-icon-glow group-hover/row:[--glowGate:0] group-hover:[--monochrome:1]!"
+      aria-hidden="true"
+    />
   </div>
 </li>
 
 <style
   define:vars={{
     marqueeIndex: `${index + 1}`,
-    delay: `calc(var(--speed) / calc(var(--marqueeItems) + var(--addItem, 0)) * var(--marqueeIndex) * -1)`,
+    delay: `calc(var(--marqueeDuration) / calc(var(--marqueeItems) + var(--addItem, 0)) * var(--marqueeIndex) * -1)`,
+    glowSlot: `${glowSlot}`,
+    glowDelay: `calc((var(--glowCycle) / var(--marqueeItems) * var(--glowSlot) + var(--glowOffset, 0s)) * -1)`,
   }}
 ></style>

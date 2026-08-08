@@ -11,11 +11,11 @@
     },
     {
       "name": "JavaScript",
-      "image": "../../assets/icons/skills/javascript.svg"
+      "image": "../../assets/icons/skills/js.svg"
     },
     {
       "name": "TypeScript",
-      "image": "../../assets/icons/skills/typescript.svg"
+      "image": "../../assets/icons/skills/ts.svg"
     },
     {
       "name": "C",
@@ -23,7 +23,7 @@
     },
     {
       "name": "C++",
-      "image": "../../assets/icons/skills/cplusplus.svg"
+      "image": "../../assets/icons/skills/cpp.svg"
     },
     {
       "name": "C#",
@@ -36,6 +36,16 @@
     {
       "name": "Python",
       "image": "../../assets/icons/skills/python.svg"
+    },
+    {
+      "name": "Rust",
+      "image": "../../assets/icons/skills/rust.svg",
+      "isPublished": true
+    },
+    {
+      "name": "WebAssembly",
+      "image": "../../assets/icons/skills/wasm.svg",
+      "isPublished": true
     }
   ]
 }

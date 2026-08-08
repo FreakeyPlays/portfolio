@@ -6,9 +6,11 @@ interface Props {
 }
 
 const { icon: SocialIcon, href, text } = Astro.props;
+
+const opensInNewTab = /^https?:/i.test(href);
 ---
 
-<a href={href} target="_blank" rel="noopener noreferer">
+<a href={href} {...opensInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>
   <span class="sr-only">{text}</span>
   <SocialIcon class="size-6 fill-neutral-200" aria-hidden="true" />
 </a>

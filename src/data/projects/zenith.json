@@ -1,9 +1,9 @@
 {
+  "order": 3,
   "title": "Zenith",
   "description": "A flexible and customizable PWA for tracking meals, workouts, and mental well-being — designed to adapt to your personal goals and habits.",
-  "repositoryURL": "https://github.com/freakeyplays/zenith",
+  "repositoryURL": "https://github.com/FreakeyPlays/zenith",
   "state": "Planned",
-  "order": 20,
   "image": "../../assets/thumbnails/zenith-preview.jpg",
   "isPublished": true
 }

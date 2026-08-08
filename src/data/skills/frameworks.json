@@ -2,20 +2,20 @@
   "category": "Frameworks",
   "skills": [
     {
-      "name": "Angular",
-      "image": "../../assets/icons/skills/angular.svg"
+      "name": "Astro",
+      "image": "../../assets/icons/skills/astro-icon-light-gradient.svg"
     },
     {
-      "name": "Astro",
-      "image": "../../assets/icons/skills/astro.svg"
+      "name": "Angular",
+      "image": "../../assets/icons/skills/angular.svg"
     },
     {
       "name": "React",
       "image": "../../assets/icons/skills/react.svg"
     },
     {
-      "name": "Vue",
-      "image": "../../assets/icons/skills/vuedotjs.svg"
+      "name": "Vue.js",
+      "image": "../../assets/icons/skills/vue.svg"
     },
     {
       "name": "Nuxt",
@@ -23,7 +23,11 @@
     },
     {
       "name": "Next.js",
-      "image": "../../assets/icons/skills/nextdotjs.svg"
+      "image": "../../assets/icons/skills/nextjs.svg"
+    },
+    {
+      "name": "PayloadCMS",
+      "isPublished": false
     }
   ]
 }

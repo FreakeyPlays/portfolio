@@ -6,5 +6,6 @@
   "endDate": "2017-06-01",
   "location": "Ditzingen, Germany",
   "description": "In High school I learned the basic subjects like Math, English, German and also completed the ECDL-certificate. Here I learned how to use the Microsoft Office Software like Excel, Word and PowerPoint.",
-  "grade": 3.7
+  "grade": 3.7,
+  "isPublished": false
 }

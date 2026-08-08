@@ -1,0 +1,29 @@
+---
+import Typewriter from 'astro-typewriter';
+
+interface Props {
+  start: string;
+  messages: string[];
+  tagline: string;
+}
+
+const { start, messages , tagline } = Astro.props;
+
+const longest = messages.reduce(
+  (longestSoFar, message) => (message.length > longestSoFar.length ? message : longestSoFar),
+  '',
+);
+---
+
+<div>
+	<h1 class="relative font-serif text-4xl/10 font-extrabold">
+		<span aria-hidden="true" class="mb-2 block invisible">{start}&nbsp;{longest}</span>
+		<span class="absolute inset-x-0 top-0 block"
+		>{start}&nbsp;<Typewriter
+			class="cursor bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"
+			messages={messages}
+		/></span
+		>
+	</h1>
+	<p class="font-serif text-xl font-medium text-gray-400">{tagline}</p>
+</div>

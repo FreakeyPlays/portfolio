@@ -1,0 +1,30 @@
+{
+  "category": "AI",
+  "skills": [
+    {
+      "name": "GitHub Copilot",
+      "image": "../../assets/icons/skills/copilot.svg",
+      "isPublished": true
+    },
+    {
+      "name": "Claude Code",
+      "image": "../../assets/icons/skills/claudecode.svg",
+      "isPublished": true
+    },
+    {
+      "name": "Codex",
+      "image": "../../assets/icons/skills/codex.svg",
+      "isPublished": true
+    },
+    {
+      "name": "Cursor",
+      "image": "../../assets/icons/skills/cursor.svg",
+      "isPublished": true
+    },
+    {
+      "name": "Antigravity",
+      "image": "../../assets/icons/skills/antigravity.svg",
+      "isPublished": true
+    }
+  ]
+}

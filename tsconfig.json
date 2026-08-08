@@ -12,7 +12,11 @@
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
       "@content/*": ["src/content/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@lib/*": ["src/lib/*"],
+      "@blocks/*": ["src/blocks/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

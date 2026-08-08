@@ -1,24 +1,25 @@
-import { defineCollection, z } from 'astro:content';
-
-import { file } from 'astro/loaders';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const education = defineCollection({
-  loader: file('src/data/education.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/education' }),
   schema: z.object({
     level: z.string(),
     institution: z.string(),
+    url: z.string().optional(),
     degree: z.string(),
-    startDate: z.string(),
-    endDate: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
     location: z.string(),
     description: z.string(),
-    grade: z.string().optional(),
-    ongoing: z.boolean().optional(),
+    grade: z.number().optional(),
+    isPublished: z.boolean().default(false),
   }),
 });
 
 const career = defineCollection({
-  loader: file('src/data/career.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/career' }),
   schema: z.object({
     company: z.string(),
     url: z.string(),
@@ -26,18 +27,18 @@ const career = defineCollection({
     jobs: z.array(
       z.object({
         title: z.string(),
-        startDate: z.string(),
-        endDate: z.string(),
+        startDate: z.coerce.date(),
+        endDate: z.coerce.date().optional(),
         description: z.string(),
-        ongoing: z.boolean().optional(),
         technologies: z.array(z.string()).optional(),
       }),
     ),
+    isPublished: z.boolean().default(false),
   }),
 });
 
 const projects = defineCollection({
-  loader: file('src/data/projects.json'),
+  loader: glob({ pattern: '*.json', base: './src/data/projects' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -51,4 +52,31 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { education, career, projects };
+const skills = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/data/skills' }),
+  schema: z.object({
+    category: z.string(),
+    skills: z.array(
+      z.object({
+        name: z.string(),
+        image: z.string().optional(),
+        isPublished: z.boolean().default(true),
+      }),
+    ),
+  }),
+});
+
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+    publishedAt: z.coerce.date().optional(),
+    isPublished: z.boolean().default(false),
+    noIndex: z.boolean().default(false),
+  }),
+});
+
+export const collections = { education, career, projects, skills, pages };

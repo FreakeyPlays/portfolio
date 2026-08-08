@@ -23,7 +23,7 @@
     },
     {
       "name": "Node.js",
-      "image": "../../assets/icons/skills/nodedotjs.svg"
+      "image": "../../assets/icons/skills/nodejs.svg"
     },
     {
       "name": "PostgreSQL",
@@ -34,8 +34,18 @@
       "image": "../../assets/icons/skills/mongodb.svg"
     },
     {
-      "name": "TailwindCSS",
+      "name": "Tailwind CSS",
       "image": "../../assets/icons/skills/tailwindcss.svg"
+    },
+    {
+      "name": "WebRTC",
+      "image": "../../assets/icons/skills/webrtc.svg",
+      "isPublished": false
+    },
+    {
+      "name": "Progressive Web App",
+      "image": "../../assets/icons/skills/pwa.svg",
+      "isPublished": false
     }
   ]
 }

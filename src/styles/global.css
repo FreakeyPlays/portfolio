@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./content.css";
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -22,13 +23,83 @@
 }
 
 .animate-marquee-move {
-  animation: marquee-move var(--speed, 5s) linear infinite var(--direction, forwards)
+  animation: marquee-move var(--marqueeDuration, 5s) linear infinite var(--direction, forwards)
     var(--delay, 3s);
 }
 
 @keyframes marquee-move {
   to {
     transform: translateX(calc(-100cqw - 100%));
+  }
+}
+
+@property --monochrome {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* What the keyframes below drive. Kept apart from --monochrome so a hovered row
+   can mute the glow with the gate while the pulse keeps running underneath:
+   killing the animation instead would restart every row from the same spot the
+   moment the pointer leaves. */
+@property --glowPulse {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --glowGate {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.monochrome-icon {
+  --monochrome: calc(var(--glowPulse) * var(--glowGate));
+
+  transition: --glowGate 200ms ease-in-out;
+
+  & > * {
+    filter: invert(1) brightness(var(--monochrome)) invert(1);
+  }
+
+  & .svg-mono-dim {
+    --monoLevel: 0.5;
+  }
+
+  & .svg-mono-invert {
+    --monoLevel: 0.15;
+  }
+
+  & .svg-mono-dim,
+  & .svg-mono-invert {
+    filter: invert(1) brightness(var(--monochrome))
+      invert(calc(var(--monoLevel) + (1 - var(--monoLevel)) * var(--monochrome)));
+  }
+}
+
+.animate-icon-glow {
+  animation: icon-glow var(--glowCycle, 12s) linear infinite var(--glowDelay, 0s);
+}
+
+@keyframes icon-glow {
+  0% {
+    --glowPulse: 0;
+  }
+  1.5%,
+  5.5% {
+    --glowPulse: 1;
+  }
+  7%,
+  100% {
+    --glowPulse: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-icon-glow {
+    animation: none;
   }
 }
 
@@ -52,4 +123,79 @@
 @theme inline {
   --font-sans: var(--font-inter);
   --font-serif: var(--font-montserrat);
+}
+
+@theme {
+  /* Generated with https://utopia.fyi/ */
+
+  --text-body-small: clamp(0.8889rem, 0.8454rem + 0.1932vw, 1rem);
+  --text-body-small--line-height: 1.5;
+
+  --text-body: clamp(1rem, 0.9511rem + 0.2174vw, 1.125rem);
+  --text-body--line-height: 1.55;
+
+  --text-body-large: clamp(1.125rem, 1.07rem + 0.2446vw, 1.2656rem);
+  --text-body-large--line-height: 1.6;
+
+  --text-heading-00: clamp(3.5832rem, 3.4079rem + 0.779vw, 4.0311rem);
+  --text-heading-00--line-height: 1.25;
+  --text-heading-00--letter-spacing: -0.04rem;
+  --text-heading-00--font-weight: 800;
+
+  --text-heading-01: clamp(2.986rem, 2.8399rem + 0.6491vw, 3.3592rem);
+  --text-heading-01--line-height: 1.25;
+  --text-heading-01--letter-spacing: -0.035rem;
+  --text-heading-01--font-weight: 600;
+
+  --text-heading-02: clamp(2.4883rem, 2.3666rem + 0.5409vw, 2.7994rem);
+  --text-heading-02--line-height: 1.25;
+  --text-heading-02--letter-spacing: -0.03rem;
+  --text-heading-02--font-weight: 600;
+
+  --text-heading-03: clamp(2.0736rem, 1.9722rem + 0.4508vw, 2.3328rem);
+  --text-heading-03--line-height: 1.25;
+  --text-heading-03--letter-spacing: -0.025rem;
+  --text-heading-03--font-weight: 600;
+
+  --text-heading-04: clamp(1.728rem, 1.6435rem + 0.3757vw, 1.944rem);
+  --text-heading-04--line-height: 1.25;
+  --text-heading-04--letter-spacing: -0.02rem;
+  --text-heading-04--font-weight: 600;
+
+  --text-heading-05: clamp(1.44rem, 1.3696rem + 0.313vw, 1.62rem);
+  --text-heading-05--line-height: 1.25;
+  --text-heading-05--letter-spacing: -0.015rem;
+  --text-heading-05--font-weight: 600;
+
+  --text-heading-06: clamp(1.2rem, 1.1413rem + 0.2609vw, 1.35rem);
+  --text-heading-06--line-height: 1.25;
+  --text-heading-06--letter-spacing: -0.01rem;
+  --text-heading-06--font-weight: 600;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-body;
+  }
+  :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-serif;
+  }
+  h1 {
+    @apply text-heading-01;
+  }
+  h2 {
+    @apply text-heading-02;
+  }
+  h3 {
+    @apply text-heading-03;
+  }
+  h4 {
+    @apply text-heading-04;
+  }
+  h5 {
+    @apply text-heading-05;
+  }
+  h6 {
+    @apply text-heading-06;
+  }
 }

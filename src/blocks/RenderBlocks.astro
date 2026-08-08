@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import Career from '@blocks/career/Component.astro';
+import Education from '@blocks/education/Component.astro';
+import a from "@blocks/elements/A.astro"
+import h2 from "@blocks/elements/headings/H2.astro"
+import Marquee from '@blocks/marquee/Component.astro';
+import Navigation from '@blocks/navigation/Component.astro';
+import Projects from '@blocks/projects/Component.astro';
+import Typewriter from '@blocks/typewriter/Component.astro';
+
+interface Props {
+	markdown: CollectionEntry<'pages'>;
+}
+
+const { markdown } = Astro.props;
+
+const { Content } = await render(markdown);
+---
+
+<Content components={{ Typewriter, Navigation, Marquee, Career, Education, Projects, h2, a }} />

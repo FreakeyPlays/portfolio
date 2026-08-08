@@ -110,10 +110,9 @@ import Grain from './Grain.astro';
   const sectionMap: Map<HTMLElement, HTMLAnchorElement> = new Map();
 
   navLinks.forEach((link) => {
-    const href = link.getAttribute('href');
-    if (!href?.startsWith('#')) return;
+    const id = link.getAttribute('href')?.split('#')[1];
+    if (!id) return;
 
-    const id = href.slice(1);
     const section = document.getElementById(id);
     if (section) {
       sectionMap.set(section, link);

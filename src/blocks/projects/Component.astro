@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '@components/ProjectCard.astro';
+
+const projects = (await getCollection('projects', ({ data }) => data.isPublished)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<div class="col-[extra]!">
+	<ul
+		class="grid gap-4 grid-cols-1 **:row-span-3 sm:**:nth-2:sm:col-start-2 sm:**:nth-2:sm:row-start-2 sm:grid-cols-2"
+	>
+		{projects.map((project) => <ProjectCard project={project} />)}
+	</ul>
+</div>

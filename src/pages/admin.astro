@@ -3,17 +3,81 @@
 
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="robots" content="noindex" />
-	<title>Content Manager</title>
-</head>
-<body>
-<script>
-	import CMS from '@sveltia/cms';
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<title>Content Manager</title>
+		<style>
+			#umami-toggle {
+				position: fixed;
+				right: 0.75rem;
+				bottom: 0.75rem;
+				z-index: 1000;
+				padding: 0.35rem 0.7rem;
+				border: 1px solid;
+				border-radius: 999px;
+				background: #1c1917;
+				color: #a1a1aa;
+			}
 
-	CMS.init()
-</script>
-</body>
+			#umami-toggle[data-tracking='off'] {
+				color: #4BB543;
+			}
+
+			#umami-toggle[hidden] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			import { careerConfig } from "@blocks/career/config"
+			import { educationConfig } from "@blocks/education/config"
+			import { marqueeConfig } from "@blocks/marquee/config"
+			import { navigationConfig } from "@blocks/navigation/config"
+			import { projectsConfig } from "@blocks/projects/config"
+			import { typewriterConfig } from "@blocks/typewriter/config"
+			import { stampPublishedAt } from "@hooks/stampPublishedAt"
+			import CMS from '@sveltia/cms';
+
+			CMS.registerEditorComponent(typewriterConfig)
+			CMS.registerEditorComponent(navigationConfig)
+			CMS.registerEditorComponent(marqueeConfig)
+			CMS.registerEditorComponent(careerConfig)
+			CMS.registerEditorComponent(educationConfig)
+			CMS.registerEditorComponent(projectsConfig)
+			
+			CMS.registerEventListener(stampPublishedAt)
+			
+			CMS.init();
+		</script>
+
+		<button id="umami-toggle" type="button"></button>
+
+		<script>
+			const KEY = 'umami.disabled';
+			const button = document.querySelector<HTMLButtonElement>('#umami-toggle');
+
+			const isEntryPoint = () => ['', '#', '#/'].includes(location.hash);
+
+			const render = () => {
+				if (!button) return;
+				button.hidden = !isEntryPoint();
+				const isDisabled = localStorage.getItem(KEY) === '1';
+				button.dataset.tracking = isDisabled ? 'off' : 'on';
+				button.textContent = isDisabled ? 'Analytics off' : 'Analytics on';
+				button.disabled = isDisabled;
+			};
+
+			button?.addEventListener('click', () => {
+				localStorage.setItem(KEY, '1');
+				render();
+			});
+
+			window.addEventListener('hashchange', render);
+
+			render();
+		</script>
+	</body>
 </html>
