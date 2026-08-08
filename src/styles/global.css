@@ -39,19 +39,67 @@
   initial-value: 0;
 }
 
+/* What the keyframes below drive. Kept apart from --monochrome so a hovered row
+   can mute the glow with the gate while the pulse keeps running underneath:
+   killing the animation instead would restart every row from the same spot the
+   moment the pointer leaves. */
+@property --glowPulse {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --glowGate {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 .monochrome-icon {
-  transition: --monochrome 200ms ease-in-out;
+  --monochrome: calc(var(--glowPulse) * var(--glowGate));
+
+  transition: --glowGate 200ms ease-in-out;
 
   & > * {
     filter: invert(1) brightness(var(--monochrome)) invert(1);
   }
 
   & .svg-mono-dim {
-    filter: invert(calc(0.5 * (1 - var(--monochrome))));
+    --monoLevel: 0.5;
   }
 
   & .svg-mono-invert {
-    filter: invert(calc(0.15 * (1 - var(--monochrome))));
+    --monoLevel: 0.15;
+  }
+
+  & .svg-mono-dim,
+  & .svg-mono-invert {
+    filter: invert(1) brightness(var(--monochrome))
+      invert(calc(var(--monoLevel) + (1 - var(--monoLevel)) * var(--monochrome)));
+  }
+}
+
+.animate-icon-glow {
+  animation: icon-glow var(--glowCycle, 12s) linear infinite var(--glowDelay, 0s);
+}
+
+@keyframes icon-glow {
+  0% {
+    --glowPulse: 0;
+  }
+  1.5%,
+  5.5% {
+    --glowPulse: 1;
+  }
+  7%,
+  100% {
+    --glowPulse: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-icon-glow {
+    animation: none;
   }
 }
 

@@ -10,6 +10,7 @@ interface Props {
   skills: MarqueeSkill[];
   direction?: 'forwards' | 'reverse';
   crossingTime?: number;
+  glowCycle?: number;
   gap?: number;
   ariaLabel?: string;
   class?: string;
@@ -19,20 +20,43 @@ const {
   skills,
   direction = 'forwards',
   crossingTime = 5,
+  glowCycle = 30,
   gap = 8,
   ariaLabel,
   class: className,
 } = Astro.props;
 
 const duration = Math.round((crossingTime * skills.length * 100) / (skills.length - 1)) / 100;
+
+const hash = (value: string) => {
+  let result = 0;
+  for (const char of value) result = (result * 101 + char.charCodeAt(0)) | 0;
+
+  return result;
+};
+
+const glowOrder = skills
+  .map(({ name }, index) => ({ index, key: hash(name) }))
+  .sort((a, b) => a.key - b.key);
+
+const glowSlots = skills.map((_, index) => glowOrder.findIndex((item) => item.index === index));
+
+// Without this every row starts its cycle at load and all of them fire their
+// first glow together. Keying the offset off the row's own skills scatters the
+// rows instead of stepping through them in order, and keeps it put per build.
+const rowOffset = (Math.abs(hash(skills.map(({ name }) => name).join())) % 100) / 100;
 ---
 
 <div class:list={['@container overflow-hidden mask-x-from-90% mask-x-to-100% motion-reduce:mask-none', className]}>
   <ul
     aria-label={ariaLabel}
-    class="grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
+    class="group/row grid grid-cols-[100cqw_[track]_0px[resting]] w-max hover:*:pause-animation! motion-reduce:*:pause-animation! motion-reduce:[--reducedMotion:0] [--reducedMotion:1]"
   >
-    {skills.map(({ name, icon }, i) => <MarqueeItem name={name} icon={icon} index={i} />)}
+    {
+      skills.map(({ name, icon }, i) => (
+        <MarqueeItem name={name} icon={icon} index={i} glowSlot={glowSlots[i]} />
+      ))
+    }
   </ul>
 </div>
 
@@ -40,6 +64,8 @@ const duration = Math.round((crossingTime * skills.length * 100) / (skills.lengt
   define:vars={{
     marqueeDuration: `${duration}s`,
     direction: direction,
+    glowCycle: `${glowCycle}s`,
+    glowOffset: `${Math.round(rowOffset * glowCycle * 100) / 100}s`,
     marqueeItems: `${skills.length}`,
     itemGap: `${gap}px`,
     itemWidth: `calc(calc(100cqw - calc(var(--marqueeItems) * var(--itemGap))) / calc(var(--marqueeItems) - var(--reducedMotion)))`,

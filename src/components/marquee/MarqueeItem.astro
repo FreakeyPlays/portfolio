@@ -5,9 +5,10 @@ interface Props {
   name: string;
   icon: ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
   index: number;
+  glowSlot: number;
 }
 
-const { name, icon: SkillIcon, index } = Astro.props;
+const { name, icon: SkillIcon, index, glowSlot } = Astro.props;
 ---
 
 <li
@@ -16,7 +17,10 @@ const { name, icon: SkillIcon, index } = Astro.props;
   <Grain />
   <div class="h-full p-[15%] bg-zinc-800 rounded-md">
     <span class="sr-only">{name}</span>
-    <SkillIcon class="size-full monochrome-icon group-hover:[--monochrome:1]" aria-hidden="true" />
+    <SkillIcon
+      class="size-full monochrome-icon animate-icon-glow group-hover/row:[--glowGate:0] group-hover:[--monochrome:1]!"
+      aria-hidden="true"
+    />
   </div>
 </li>
 
@@ -24,5 +28,7 @@ const { name, icon: SkillIcon, index } = Astro.props;
   define:vars={{
     marqueeIndex: `${index + 1}`,
     delay: `calc(var(--marqueeDuration) / calc(var(--marqueeItems) + var(--addItem, 0)) * var(--marqueeIndex) * -1)`,
+    glowSlot: `${glowSlot}`,
+    glowDelay: `calc((var(--glowCycle) / var(--marqueeItems) * var(--glowSlot) + var(--glowOffset, 0s)) * -1)`,
   }}
 ></style>
