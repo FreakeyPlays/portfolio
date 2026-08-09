@@ -46,9 +46,13 @@ const {
               </a>
             )
           }
-          <a href={projectData.repositoryURL} rel="noopener noreferrer" target="_blank">
-            <GitHubIcon class="size-6 fill-neutral-200" />
-          </a>
+          {
+            projectData.repositoryURL && (
+            <a href={projectData.repositoryURL} rel="noopener noreferrer" target="_blank">
+              <GitHubIcon class="size-6 fill-neutral-200" />
+            </a>
+            )
+          }
         </div>
       </div>
     </div>

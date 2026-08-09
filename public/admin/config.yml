@@ -166,6 +166,7 @@ collections:
           label: Repository URL,
           widget: string,
           type: url,
+          required: false,
         }
       - {
           name: deployedURL,

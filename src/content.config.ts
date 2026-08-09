@@ -43,7 +43,7 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      repositoryURL: z.string().url(),
+      repositoryURL: z.string().url().optional(),
       deployedURL: z.string().url().optional(),
       state: z.enum(['Planned', 'WIP', 'Done', 'Maintenance']),
       order: z.number().min(0).max(100).default(50),
