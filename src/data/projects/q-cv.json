@@ -1,7 +1,7 @@
 {
-  "order": 4,
+  "order": 5,
   "title": "Q-CV",
-  "description": "A web based CV generator with user management, built for QUANTO Solutions as a university project. The requirements came from an actual client, which made it the first time I built to someone else's specification instead of my own.",
+  "description": "Built for QUANTO Solutions as a university project, a web based CV generator with user management. The requirements came from an actual client, which made it the first time I built to someone else's specification instead of my own.",
   "repositoryURL": "https://github.com/FreakeyPlays/q-cv",
   "state": "Done",
   "image": "../../assets/thumbnails/q-cv-preview.jpg",

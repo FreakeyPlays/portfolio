@@ -1,7 +1,7 @@
 {
-  "order": 5,
+  "order": 6,
   "title": "ToDo App",
-  "description": "A todo app as an excuse to learn testing properly. Angular and NestJS underneath, with Cypress covering the frontend end to end and k6 load testing the API.",
+  "description": "Learning to test properly was the point, the todo app was just the excuse. Angular and NestJS underneath, with Cypress covering the frontend end to end and k6 load testing the API.",
   "repositoryURL": "https://github.com/FreakeyPlays/todo-app",
   "deployedURL": "https://todo.chrismerck.dev",
   "state": "Done",
