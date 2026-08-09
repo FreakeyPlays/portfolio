@@ -3,9 +3,5 @@
   "lastName": "Merck",
   "fullName": "Christoph Merck",
   "tagline": "Full-Stack Engineer in Stuttgart, Germany",
-  "description": "Christoph Merck is a full-stack engineer in Stuttgart, Germany, building fast and accessible web apps with TypeScript, React, Next.js, Angular and Astro.",
-  "image": {
-    "src": "/og/default_og.webp",
-    "alt": "Christoph Merck, Full-Stack Engineer in Stuttgart, Germany"
-  }
+  "description": "Christoph Merck is a full-stack engineer in Stuttgart, Germany, building fast and accessible web apps with TypeScript, React, Next.js, Angular and Astro."
 }

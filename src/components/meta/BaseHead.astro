@@ -1,15 +1,15 @@
 ---
 import { Font } from 'astro:assets';
 import Favicon from '@components/meta/Favicon.astro';
-import SEO, { type Image } from '@components/meta/SEO.astro';
+import SEO from '@components/meta/SEO.astro';
 import siteInfo from '@data/siteInfo.json';
 import { buildProfileGraph } from '@utils/schema.ts';
+import { getSocialPreview } from '@utils/socialPreview.ts';
 
 export type Props = {
   title?: string;
   rawTitle?: string;
   description?: string;
-  image?: Image;
   canonicalURL?: URL | null;
   pageType?: 'website' | 'article';
   author?: string;
@@ -20,7 +20,6 @@ export type Props = {
 const {
   rawTitle,
   description = siteInfo.description,
-  image = siteInfo.image,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   pageType = 'website',
   author = siteInfo.fullName,
@@ -36,10 +35,8 @@ const title =
   (Astro.props.title
     ? `${Astro.props.title} | ${siteInfo.fullName}`
     : `${siteInfo.fullName} — ${siteInfo.tagline}`);
-const resolvedImage: Image = {
-  src: new URL(image.src, Astro.site).toString(),
-  alt: image.alt,
-};
+
+const social = await getSocialPreview(Astro.site, { pageType });
 ---
 
 <meta charset="utf-8" />
@@ -67,8 +64,9 @@ const resolvedImage: Image = {
   name={siteInfo.fullName}
   title={title}
   description={description}
-  image={resolvedImage}
-  og={{ type: pageType }}
+  image={social.image}
+  og={social.og}
+  twitter={social.twitter}
   canonicalURL={canonicalURL}
   author={author}
   noindex={noindex}
