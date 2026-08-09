@@ -42,6 +42,8 @@ const relTokens = [...(rel ?? '').split(' '), ...(isExternal ? ['noopener', 'nor
 	href={href}
 	target={target ?? (isExternal ? '_blank' : undefined)}
 	rel={relTokens.length > 0 ? relTokens.join(' ') : undefined}
+	data-umami-event={isExternal ? 'outbound-link-click' : undefined}
+	data-umami-event-url={isExternal ? href : undefined}
 	{...rest}
 >
 	<slot />
