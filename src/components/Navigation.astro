@@ -105,44 +105,87 @@ import Grain from './Grain.astro';
     });
   }
 
-  const navLinks: NodeListOf<HTMLAnchorElement> =
-    document.querySelectorAll('[data-home-link="true"]');
-  const sectionMap: Map<HTMLElement, HTMLAnchorElement> = new Map();
+  type SectionLink = { link: HTMLAnchorElement; heading: HTMLElement | null };
 
-  navLinks.forEach((link) => {
+  const sectionLinks: SectionLink[] = [];
+
+  navList?.querySelectorAll<HTMLAnchorElement>('[data-home-link="true"]').forEach((link) => {
     const id = link.getAttribute('href')?.split('#')[1];
-    if (!id) return;
 
-    const section = document.getElementById(id);
-    if (section) {
-      sectionMap.set(section, link);
+    if (!id) {
+      sectionLinks.push({ link, heading: null });
+      return;
     }
+
+    const heading = document.getElementById(id);
+    if (heading) sectionLinks.push({ link, heading });
   });
 
-  if (sectionMap.size > 0) {
+  sectionLinks.sort((a, b) => {
+    if (!a.heading) return -1;
+    if (!b.heading) return 1;
+
+    return a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  });
+
+  const firstHeading = sectionLinks.find((entry) => entry.heading)?.heading;
+
+  if (firstHeading) {
+    const spyLine = () => {
+      const scrollMargin = Number.parseFloat(getComputedStyle(firstHeading).scrollMarginTop);
+
+      return (Number.isFinite(scrollMargin) ? scrollMargin : 96) + 4;
+    };
+
     let currentActive: HTMLAnchorElement | null = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const newActive = sectionMap.get(entry.target as HTMLElement);
-            if (newActive && newActive !== currentActive) {
-              if (currentActive) currentActive.classList.remove('active-nav-link');
-              newActive.classList.add('active-nav-link');
-              currentActive = newActive;
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.6,
-        rootMargin: '0px 0px -15% 0px',
-      }
-    );
+    const setActive = (link: HTMLAnchorElement) => {
+      if (link === currentActive) return;
 
-    sectionMap.forEach((_, section) => {
-      observer.observe(section);
-    });
+      if (currentActive) {
+        currentActive.classList.remove('active-nav-link');
+        currentActive.removeAttribute('aria-current');
+      }
+
+      link.classList.add('active-nav-link');
+      link.setAttribute('aria-current', 'true');
+      currentActive = link;
+    };
+
+    const update = () => {
+      const line = spyLine();
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
+      if (atBottom) {
+        setActive(sectionLinks[sectionLinks.length - 1].link);
+        return;
+      }
+
+      let active = sectionLinks[0].link;
+      for (const entry of sectionLinks) {
+        if (entry.heading && entry.heading.getBoundingClientRect().top > line) break;
+        active = entry.link;
+      }
+
+      setActive(active);
+    };
+
+    let frame = 0;
+    const scheduleUpdate = () => {
+      if (frame) return;
+
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        update();
+      });
+    };
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('hashchange', scheduleUpdate);
+    window.addEventListener('load', scheduleUpdate);
+
+    update();
   }
 </script>
