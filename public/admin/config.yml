@@ -24,6 +24,77 @@ output:
   omit_empty_optional_fields: true
 
 collections:
+  - name: pages
+    label: Pages
+    label_singular: Page
+    icon: description
+    folder: src/content/pages
+    extension: mdx
+    format: frontmatter
+    create: true
+    identifier_field: title
+    summary: "{{title}}"
+    fields:
+      - {
+          name: title,
+          label: Title,
+          widget: string,
+          pattern:
+            [
+              '^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+',
+              "The Homepage can be created via the name Home.",
+            ],
+        }
+      - {
+          name: description,
+          label: Description,
+          widget: text,
+          required: false,
+          hint: "Meta description. Leave empty to fall back to the site default.",
+        }
+      - {
+          name: isPublished,
+          label: Published,
+          widget: boolean,
+          default: false,
+          required: true,
+        }
+      - {
+          name: noIndex,
+          label: Remove from Indexing,
+          widget: boolean,
+          default: false,
+          required: true,
+        }
+      - {
+          name: createdAt,
+          label: Created at,
+          widget: hidden,
+          default: "{{datetime}}",
+        }
+      - {
+          name: updatedAt,
+          label: Updated at,
+          widget: hidden,
+          default: "{{datetime}}",
+        }
+      - { name: publishedAt, label: Published at, widget: hidden }
+      - {
+          name: body,
+          label: Body,
+          widget: markdown,
+          editor_components:
+            [
+              typewriter,
+              contact,
+              navigation,
+              marquee,
+              career,
+              education,
+              projects,
+            ],
+        }
+
   - name: education
     label: Education
     label_singular: Education Entry
@@ -201,77 +272,6 @@ collections:
               widget: boolean,
               default: true,
             }
-
-  - name: pages
-    label: Pages
-    label_singular: Page
-    icon: description
-    folder: src/content/pages
-    extension: mdx
-    format: frontmatter
-    create: true
-    identifier_field: title
-    summary: "{{title}}"
-    fields:
-      - {
-          name: title,
-          label: Title,
-          widget: string,
-          pattern:
-            [
-              '^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+',
-              "The Homepage can be created via the name Home.",
-            ],
-        }
-      - {
-          name: description,
-          label: Description,
-          widget: text,
-          required: false,
-          hint: "Meta description. Leave empty to fall back to the site default.",
-        }
-      - {
-          name: isPublished,
-          label: Published,
-          widget: boolean,
-          default: false,
-          required: true,
-        }
-      - {
-          name: noIndex,
-          label: Remove from Indexing,
-          widget: boolean,
-          default: false,
-          required: true,
-        }
-      - {
-          name: createdAt,
-          label: Created at,
-          widget: hidden,
-          default: "{{datetime}}",
-        }
-      - {
-          name: updatedAt,
-          label: Updated at,
-          widget: hidden,
-          default: "{{datetime}}",
-        }
-      - { name: publishedAt, label: Published at, widget: hidden }
-      - {
-          name: body,
-          label: Body,
-          widget: markdown,
-          editor_components:
-            [
-              typewriter,
-              contact,
-              navigation,
-              marquee,
-              career,
-              education,
-              projects,
-            ],
-        }
 
 singletons:
   - name: siteInfo
