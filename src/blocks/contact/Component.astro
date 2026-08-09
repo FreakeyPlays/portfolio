@@ -1,0 +1,31 @@
+---
+import MailIcon from '@assets/icons/social/mail.svg';
+import identity from '@data/identity.json';
+
+interface Props {
+  label?: string;
+  additionalParameters?: string;
+}
+
+const { label, additionalParameters = '' } = Astro.props;
+
+const query = new URLSearchParams(additionalParameters.trim().replace(/^\?/, ''))
+  .toString()
+  .replaceAll('+', '%20');
+
+const href = query ? `mailto:${identity.email}?${query}` : `mailto:${identity.email}`;
+---
+
+<a
+  href={href}
+  class:list={[
+    'group w-fit inline-flex items-center gap-3 relative font-semibold whitespace-nowrap text-body-large',
+    'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-400',
+    "after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:h-[0.1rem] after:w-full after:origin-center after:scale-0 after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-all hover:after:scale-100",
+  ]}
+>
+  <MailIcon class="size-5 fill-lime-400" aria-hidden="true" />
+  <span class="bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
+    {label}
+  </span>
+</a>

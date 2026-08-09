@@ -145,7 +145,7 @@ collections:
       - { name: createdAt, label: Created at, widget: hidden, default: '{{datetime}}' }
       - { name: updatedAt, label: Updated at, widget: hidden, default: '{{datetime}}' }
       - { name: publishedAt, label: Published at, widget: hidden }
-      - { name: body, label: Body, widget: markdown, editor_components: [typewriter, navigation, marquee, career, education, projects] }
+      - { name: body, label: Body, widget: markdown, editor_components: [typewriter, contact, navigation, marquee, career, education, projects] }
 
 singletons:
   - name: siteInfo

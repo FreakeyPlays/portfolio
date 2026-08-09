@@ -33,6 +33,7 @@
 	<body>
 		<script>
 			import { careerConfig } from "@blocks/career/config"
+			import { contactConfig } from "@blocks/contact/config"
 			import { educationConfig } from "@blocks/education/config"
 			import { marqueeConfig } from "@blocks/marquee/config"
 			import { navigationConfig } from "@blocks/navigation/config"
@@ -42,6 +43,7 @@
 			import CMS from '@sveltia/cms';
 
 			CMS.registerEditorComponent(typewriterConfig)
+			CMS.registerEditorComponent(contactConfig)
 			CMS.registerEditorComponent(navigationConfig)
 			CMS.registerEditorComponent(marqueeConfig)
 			CMS.registerEditorComponent(careerConfig)

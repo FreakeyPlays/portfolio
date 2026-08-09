@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, render } from 'astro:content';
 import Career from '@blocks/career/Component.astro';
+import Contact from '@blocks/contact/Component.astro';
 import Education from '@blocks/education/Component.astro';
 import a from "@blocks/elements/A.astro"
 import h2 from "@blocks/elements/headings/H2.astro"
@@ -18,4 +19,6 @@ const { markdown } = Astro.props;
 const { Content } = await render(markdown);
 ---
 
-<Content components={{ Typewriter, Navigation, Marquee, Career, Education, Projects, h2, a }} />
+<Content
+	components={{ Typewriter, Contact, Navigation, Marquee, Career, Education, Projects, h2, a }}
+/>
