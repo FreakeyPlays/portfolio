@@ -1,8 +1,9 @@
 {
   "order": 1,
   "title": "Puzzles",
-  "description": "Fast, free and fun puzzle games — running completely local with no servers, built with TypeScript, Rust and WebAssembly in a Turborepo.",
+  "description": "Puzzle games that run entirely in the browser with no backend at all. TypeScript on the surface, Rust compiled to WebAssembly for the parts that need the speed, organised as a Turborepo.",
   "repositoryURL": "https://github.com/FreakeyPlays/puzzles",
+  "deployedURL": "https://sudoku.chrismerck.dev/",
   "state": "WIP",
   "isPublished": true
 }

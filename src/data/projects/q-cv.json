@@ -1,7 +1,7 @@
 {
   "order": 4,
   "title": "Q-CV",
-  "description": "A web-based CV management and generation tool developed in collaboration with Quanto Solutions at HS Esslingen.",
+  "description": "A web based CV generator with user management, built for QUANTO Solutions as a university project. The requirements came from an actual client, which made it the first time I built to someone else's specification instead of my own.",
   "repositoryURL": "https://github.com/FreakeyPlays/q-cv",
   "state": "Done",
   "image": "../../assets/thumbnails/q-cv-preview.jpg",

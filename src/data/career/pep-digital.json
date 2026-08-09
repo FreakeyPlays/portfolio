@@ -13,14 +13,14 @@
       "title": "Bachelor Thesis",
       "startDate": "2024-03-01",
       "endDate": "2024-06-01",
-      "description": "I completed my Bachelor Thesis on exploring the capabilities of the Astro framework by building a video streaming application as a Progressive Web App. The project focused on evaluating how Astro handles dynamic functionality and real-time features, challenging its traditional role in static site development.",
+      "description": "For my Bachelor Thesis I explored the capabilities of Astro by building a video streaming application as a Progressive Web App. The focus was on how a framework built for static sites handles dynamic functionality and real-time features, and where that stops working.",
       "technologies": ["Astro", "PWA", "WebRTC"]
     },
     {
       "title": "Internship Semester",
       "startDate": "2023-09-01",
       "endDate": "2024-03-01",
-      "description": "During my internship, I was involved in various real-world projects that exposed me to a wide range of development workflows and team dynamics. From internal tooling to client solutions, I gained hands-on experience in building and refining software products while deepening my understanding of modern frontend and backend practices.",
+      "description": "My first task was exploring and integrating Storyblok into a live client project. After that I built an internal theme generator for the Angular Material library, and spent the remaining time helping implement a brand new customer portal for an enterprise client.",
       "technologies": ["Angular", "Storybook", "TypeScript"]
     }
   ],
