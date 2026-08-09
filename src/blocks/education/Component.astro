@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import HighlightLink from '@components/HighlightLink.astro';
 import { formatMonthYear, toISODate } from '@utils/date.ts';
 
 const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(
@@ -14,7 +15,13 @@ const educationCollection = (await getCollection('education', ({ data }) => data
 				<li>
 					<h3 class="text-xl font-bold">{education.data.degree}</h3>
 					<p class="text-lg font-bold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
-						@{education.data.institution}
+						{education.data.url ? (
+							<HighlightLink target="_blank" rel="noopener noreferrer" href={education.data.url}>
+								@{education.data.institution}
+							</HighlightLink>
+						) : (
+							education.data.institution
+						)}
 					</p>
 					<p class="text-sm text-gray-400 uppercase">
           <span class="capitalize">
