@@ -17,18 +17,18 @@
     "@astrojs/markdown-satteri": "^0.3.5",
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/sitemap": "^3.7.3",
-    "@sveltia/cms": "^0.176.1",
-    "astro": "^7.1.6",
-    "astro-typewriter": "^1.1.0"
+    "@sveltia/cms": "^0.185.0",
+    "astro": "^7.2.0",
+    "astro-typewriter": "^1.2.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "2.5.6",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.8",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.3.3"
   },
   "lint-staged": {
     "*": [
