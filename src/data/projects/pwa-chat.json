@@ -3,6 +3,7 @@
   "title": "PWA Chat",
   "description": "A messenger built as a Progressive Web App with no framework underneath it, so routing, state and offline support are all hand written. Built for the Mobile Apps and User Experience course at HS Esslingen.",
   "repositoryURL": "https://github.com/FreakeyPlays/pwa-chat",
+  "deployedURL": "https://chat.chrismerck.dev",
   "state": "Done",
   "image": "../../assets/thumbnails/pwa-chat-preview.jpg",
   "isPublished": true
