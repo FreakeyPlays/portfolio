@@ -16,8 +16,8 @@ const entries = (await getCollection('education', ({ data }) => data.isPublished
         "overflow-hidden relative group/edu flex flex-col md:flex-row not-open:shrink-0 rounded-[2.5rem] bg-linear-to-tr z-0 from-zinc-800 via-zinc-500 to-zinc-800 py-6 md:py-10 open:cursor-auto cursor-pointer",
         "before:content-[''] before:absolute before:inset-px before:rounded-[2.5rem] before:bg-zinc-800 before:-z-2",
         "after:content-[''] after:absolute after:inset-px after:rounded-[2.5rem] after:opacity-60 after:filter-[url(#noise)] after:mix-blend-soft-light after:-z-1",
-        "details-content:transition-[content-visibility,height,width] details-content:duration-500 details-content:ease-in-out details-content:transition-discrete",
-        "details-content:min-w-0 details-content:min-h-0 details-content:overflow-hidden max-md:details-content:h-0 max-md:open:details-content:h-auto md:details-content:w-0 md:open:details-content:w-auto",
+        "details-content:transition-[content-visibility,grid-template-rows,width] details-content:duration-500 details-content:ease-in-out details-content:transition-discrete",
+        "details-content:min-w-0 details-content:min-h-0 details-content:overflow-hidden max-md:details-content:grid max-md:details-content:grid-rows-[0fr] max-md:open:details-content:grid-rows-[1fr] md:details-content:w-0 md:open:details-content:w-[calc(100cqw-17rem)]",
         "motion-reduce:details-content:transition-none"
       ]}
       open={index === 0}
@@ -41,8 +41,8 @@ const entries = (await getCollection('education', ({ data }) => data.isPublished
           </p>
         </div>
       </summary>
-      <div class="px-6 md:px-0 md:pb-0 mt-10 md:mt-0 md:mr-10 md:w-[calc(100cqw-19.5rem)]">
-        <div class="flex flex-row gap-8">
+      <div class="px-6 md:px-0 md:pb-0 md:mr-10 max-md:overflow-hidden md:w-[calc(100cqw-19.5rem)]">
+        <div class="flex flex-row gap-8 max-md:mt-10">
           <div class="grow">
             <h3 class="[text-box:trim-start_cap_alphabetic] text-heading-04">{entry.data.degree}</h3>
             <HighlightLink class="mt-2 inline-block text-body-large font-bold after:bottom-1" target="_blank" rel="noopener noreferrer" href={entry.data.url}>@{entry.data.institution}</HighlightLink>
