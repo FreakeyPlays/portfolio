@@ -1,48 +1,73 @@
 ---
 import { getCollection } from 'astro:content';
 import HighlightLink from '@components/HighlightLink.astro';
-import { formatMonthYear, toISODate } from '@utils/date.ts';
+import { formatMonthYear, toISODate } from '@utils/date';
+import { renderMarkdown } from '@utils/markdown';
 
-const educationCollection = (await getCollection('education', ({ data }) => data.isPublished)).sort(
+const entries = (await getCollection('education', ({ data }) => data.isPublished)).sort(
   (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
 );
 ---
 
-<div class="col-[extra]!">
-	<ul class="space-y-4">
-		{
-			educationCollection.map((education) => (
-				<li>
-					<h3 class="text-xl font-bold">{education.data.degree}</h3>
-					<p class="text-lg font-bold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">
-						{education.data.url ? (
-							<HighlightLink target="_blank" rel="noopener noreferrer" href={education.data.url}>
-								@{education.data.institution}
-							</HighlightLink>
-						) : (
-							education.data.institution
-						)}
-					</p>
-					<p class="text-sm text-gray-400 uppercase">
-          <span class="capitalize">
-            {education.data.location}{' '}
-						{education.data.grade ? `| Grade: ${education.data.grade}` : ''}
-          </span>{' '}
-						|{' '}
-						<time datetime={toISODate(education.data.startDate)}>
-							{formatMonthYear(education.data.startDate)}
-						</time>{' '}
-						-{' '}
-						{education.data.endDate ? (
-							<time datetime={toISODate(education.data.endDate)}>
-								{formatMonthYear(education.data.endDate)}
-							</time>
-						) : (
-							'present'
-						)}
-					</p>
-				</li>
-			))
-		}
-	</ul>
+<div id="container-for-education" class="col-[extra]! flex flex-row gap-4 w-full">
+  {entries.map((entry, index) => (
+    <details name="education" 
+      class:list={[
+        "overflow-hidden relative group/edu flex flex-row not-open:shrink-0 rounded-[2.5rem] bg-linear-to-tr z-0 from-zinc-800 via-zinc-500 to-zinc-800 py-10 open:cursor-auto cursor-pointer",
+        "before:content-[''] before:absolute before:inset-px before:rounded-[2.5rem] before:bg-zinc-800 before:-z-2",
+        "after:content-[''] after:absolute after:inset-px after:rounded-[2.5rem] after:opacity-60 after:filter-[url(#noise)] after:mix-blend-soft-light after:-z-1"
+      ]} 
+      open={index === 0}
+    >
+      <summary class="marker:content-[''] uppercase w-20! shrink-0 select-none">
+        <div>
+          <p class="[text-box:trim-start_cap_alphabetic] [writing-mode:vertical-lr] font-serif text-heading-03 text-gray-300 font-bold group-open/edu:text-transparent bg-linear-to-br from-lime-400 to-green-600 bg-clip-text">
+            {entry.data.level}
+          </p>
+          <p class="mt-4 text-gray-400 [text-box:trim-start_cap_alphabetic] [writing-mode:vertical-lr]">
+            <time datetime={toISODate(entry.data.startDate)}>
+              {formatMonthYear(entry.data.startDate)}
+            </time>
+            {' '} -{' '} 
+            {entry.data.endDate ? (
+              <time datetime={toISODate(entry.data.endDate)}>
+                {formatMonthYear(entry.data.endDate)}
+              </time>
+            ) : ('present')
+            }
+          </p>
+        </div>
+      </summary>
+      <div class="mr-10">
+        <div class="flex flex-row gap-8">
+          <div class="grow">
+            <h3 class="[text-box:trim-start_cap_alphabetic] text-heading-04">{entry.data.degree}</h3>
+            <HighlightLink class="mt-2 inline-block text-body-large font-bold after:bottom-1" target="_blank" rel="noopener noreferrer" href={entry.data.url}>@{entry.data.institution}</HighlightLink>
+            <p class="-mt-2 text-gray-400">{entry.data.location}</p>
+          </div>
+          <div>
+            <p class="[text-box:trim-start_cap_alphabetic] text-heading-03 font-bold text-nowrap bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">{entry.data.grade}</p>
+            <p class="uppercase text-xs break-normal">{entry.data.endDate ? "Final Grade" : "Current Grade"}</p>
+          </div>
+        </div>
+        <div class="mt-4" set:html={renderMarkdown(entry.data.description)}></div>
+      </div>
+    </details>
+  ))}
+  
+  <script is:inline>
+    const container = document.getElementById("container-for-education");
+  
+    container.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+  
+      const summary = event.target.closest("summary");
+      if (!summary) return;
+  
+      const details = summary.parentElement;
+      if (details instanceof HTMLDetailsElement && details.open) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </div>
