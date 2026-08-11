@@ -44,12 +44,12 @@ const entries = (await getCollection('education', ({ data }) => data.isPublished
       <div class="px-6 md:px-0 md:pb-0 md:mr-10 max-md:overflow-hidden md:w-[calc(100cqw-19.5rem)]">
         <div class="flex flex-row gap-8 max-md:mt-10">
           <div class="grow">
-            <h3 class="[text-box:trim-start_cap_alphabetic] text-heading-04">{entry.data.degree}</h3>
+            <h3 class="text-heading-04">{entry.data.degree}</h3>
             <HighlightLink class="mt-2 inline-block text-body-large font-bold after:bottom-1" target="_blank" rel="noopener noreferrer" href={entry.data.url}>@{entry.data.institution}</HighlightLink>
             <p class="-mt-2 text-gray-400">{entry.data.location}</p>
           </div>
           <div>
-            <p class="[text-box:trim-start_cap_alphabetic] text-heading-03 font-bold text-nowrap bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">{entry.data.grade}</p>
+            <p class="text-heading-03 font-bold text-nowrap bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent">{entry.data.grade}</p>
             <p class="uppercase text-xs break-normal">{entry.data.endDate ? "Final Grade" : "Current Grade"}</p>
           </div>
         </div>
