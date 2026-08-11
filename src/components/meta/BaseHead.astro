@@ -34,7 +34,7 @@ const title =
   rawTitle ??
   (Astro.props.title
     ? `${Astro.props.title} | ${siteInfo.fullName}`
-    : `${siteInfo.fullName} — ${siteInfo.tagline}`);
+    : `${siteInfo.fullName} – ${siteInfo.tagline}`);
 
 const social = await getSocialPreview(Astro.site, { pageType });
 ---
