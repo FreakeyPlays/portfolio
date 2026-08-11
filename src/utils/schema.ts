@@ -160,7 +160,6 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         '@id': id('website'),
         url: `${origin}/`,
         name: siteInfo.fullName,
-        alternateName: site.hostname,
         inLanguage: 'en',
         publisher: personRef,
       },
