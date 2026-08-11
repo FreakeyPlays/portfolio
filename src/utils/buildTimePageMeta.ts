@@ -59,8 +59,10 @@ export function getPageModifiedDate(slug: string): Date {
   return readPageMeta().get(slug)?.updatedAt ?? getBuildDate();
 }
 
-export function getPageModifiedISODate(slug: string): string {
-  return getPageModifiedDate(slug).toISOString().slice(0, 10);
+export function getPageModifiedDateTime(slug: string): string {
+  return getPageModifiedDate(slug)
+    .toISOString()
+    .replace(/\.\d{3}Z$/, 'Z');
 }
 
 export function getLatestModifiedDate(): Date {
