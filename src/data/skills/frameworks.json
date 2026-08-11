@@ -3,27 +3,33 @@
   "skills": [
     {
       "name": "Astro",
-      "image": "../../assets/icons/skills/astro-icon-light-gradient.svg"
+      "image": "../../assets/icons/skills/astro-icon-light-gradient.svg",
+      "isPublished": true
     },
     {
       "name": "Angular",
-      "image": "../../assets/icons/skills/angular.svg"
+      "image": "../../assets/icons/skills/angular.svg",
+      "isPublished": true
     },
     {
       "name": "React",
-      "image": "../../assets/icons/skills/react.svg"
+      "image": "../../assets/icons/skills/react.svg",
+      "isPublished": true
     },
     {
       "name": "Vue.js",
-      "image": "../../assets/icons/skills/vue.svg"
+      "image": "../../assets/icons/skills/vue.svg",
+      "isPublished": true
     },
     {
       "name": "Nuxt",
-      "image": "../../assets/icons/skills/nuxt.svg"
+      "image": "../../assets/icons/skills/nuxt.svg",
+      "isPublished": true
     },
     {
       "name": "Next.js",
-      "image": "../../assets/icons/skills/nextjs.svg"
+      "image": "../../assets/icons/skills/nextjs.svg",
+      "isPublished": true
     },
     {
       "name": "PayloadCMS",

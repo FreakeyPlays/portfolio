@@ -3,39 +3,48 @@
   "skills": [
     {
       "name": "HTML",
-      "image": "../../assets/icons/skills/html5.svg"
+      "image": "../../assets/icons/skills/html5.svg",
+      "isPublished": true
     },
     {
       "name": "CSS",
-      "image": "../../assets/icons/skills/css.svg"
+      "image": "../../assets/icons/skills/css.svg",
+      "isPublished": true
     },
     {
       "name": "JavaScript",
-      "image": "../../assets/icons/skills/js.svg"
+      "image": "../../assets/icons/skills/js.svg",
+      "isPublished": true
     },
     {
       "name": "TypeScript",
-      "image": "../../assets/icons/skills/ts.svg"
+      "image": "../../assets/icons/skills/ts.svg",
+      "isPublished": true
     },
     {
       "name": "C",
-      "image": "../../assets/icons/skills/c.svg"
+      "image": "../../assets/icons/skills/c.svg",
+      "isPublished": true
     },
     {
       "name": "C++",
-      "image": "../../assets/icons/skills/cpp.svg"
+      "image": "../../assets/icons/skills/cpp.svg",
+      "isPublished": true
     },
     {
       "name": "C#",
-      "image": "../../assets/icons/skills/csharp.svg"
+      "image": "../../assets/icons/skills/csharp.svg",
+      "isPublished": true
     },
     {
       "name": "Java",
-      "image": "../../assets/icons/skills/java.svg"
+      "image": "../../assets/icons/skills/java.svg",
+      "isPublished": true
     },
     {
       "name": "Python",
-      "image": "../../assets/icons/skills/python.svg"
+      "image": "../../assets/icons/skills/python.svg",
+      "isPublished": true
     },
     {
       "name": "Rust",
