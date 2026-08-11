@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const education = defineCollection({
-  loader: glob({ pattern: '*.json', base: './src/data/education' }),
+  loader: glob({ pattern: '*.mdx', base: './src/data/education' }),
   schema: z.object({
     level: z.string(),
     institution: z.string(),
@@ -12,7 +12,6 @@ const education = defineCollection({
     startDate: z.coerce.date(),
     endDate: z.coerce.date().optional(),
     location: z.string(),
-    description: z.string(),
     grade: z.number().optional(),
     isPublished: z.boolean().default(false),
   }),

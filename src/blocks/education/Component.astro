@@ -1,11 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import a from '@blocks/elements/A.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import { formatMonthYear, toISODate } from '@utils/date';
-import { renderMarkdown } from '@utils/markdown';
 
-const entries = (await getCollection('education', ({ data }) => data.isPublished)).sort(
-  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+const sorted = (await getCollection('education', ({ data }) => data.isPublished)).sort(
+  (older, newer) => newer.data.startDate.getTime() - older.data.startDate.getTime(),
+);
+
+const entries = await Promise.all(
+  sorted.map(async (entry) => ({ ...entry, Content: (await render(entry)).Content })),
 );
 ---
 
@@ -53,7 +57,9 @@ const entries = (await getCollection('education', ({ data }) => data.isPublished
             <p class="uppercase text-xs break-normal">{entry.data.endDate ? "Final Grade" : "Current Grade"}</p>
           </div>
         </div>
-        <div class="mt-4" set:html={renderMarkdown(entry.data.description)}></div>
+        <div class="mt-4 [&>p+p]:mt-3">
+          <entry.Content components={{ a }} />
+        </div>
       </div>
     </details>
   ))}

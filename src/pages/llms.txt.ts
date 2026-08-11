@@ -85,7 +85,7 @@ export const GET: APIRoute = async ({ site }) => {
   push('');
 
   push('## Education', '');
-  for (const { data } of [...education].sort(
+  for (const { data, body } of [...education].sort(
     (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
   )) {
     push(
@@ -93,7 +93,7 @@ export const GET: APIRoute = async ({ site }) => {
         `- [${data.degree}, ${data.institution}](${data.url ?? `${origin}/#education`}):`,
         `${data.level}, ${period(data.startDate, data.endDate)}, ${data.location}.`,
         data.grade !== undefined && `Grade ${data.grade} (${GERMAN_GRADE_SCALE}).`,
-        oneLine(data.description),
+        body && oneLine(body),
       ),
     );
   }

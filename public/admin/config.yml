@@ -100,8 +100,8 @@ collections:
     label_singular: Education Entry
     icon: school
     folder: src/data/education
-    extension: json
-    format: json
+    extension: mdx
+    format: frontmatter
     create: true
     identifier_field: level
     summary: "{{level}} – {{institution}}"
@@ -134,7 +134,6 @@ collections:
           hint: 'Leave empty if still ongoing — shows as "present"',
         }
       - { name: location, label: Location, widget: string }
-      - { name: description, label: Description, widget: markdown }
       - {
           name: grade,
           label: Grade,
@@ -146,6 +145,13 @@ collections:
           required: false,
         }
       - { name: isPublished, label: Published, widget: boolean, default: 0 }
+      - {
+          name: body,
+          label: Description,
+          widget: markdown,
+          editor_components: [],
+          hint: "Prose only. Links are rendered in the site style.",
+        }
 
   - name: projects
     label: Projects
