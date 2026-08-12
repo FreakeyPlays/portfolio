@@ -23,13 +23,13 @@ const crossingTimeFor = (itemCount: number) => {
 
 const { categories } = Astro.props;
 
-const iconModules = import.meta.glob('../../assets/icons/skills/*.svg', {
+const iconModules = import.meta.glob('../../assets/icons/*.svg', {
   eager: true,
   import: 'default',
 }) as Record<string, SkillIcon>;
 
 const iconFor = (imagePath: string) =>
-  iconModules[`../../assets/icons/skills/${imagePath.split('/').pop()}`];
+  iconModules[`../../assets/icons/${imagePath.split('/').pop()}`];
 
 const skillCategories = await getCollection('skills');
 

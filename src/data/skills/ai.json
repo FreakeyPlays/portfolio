@@ -3,27 +3,27 @@
   "skills": [
     {
       "name": "GitHub Copilot",
-      "image": "../../assets/icons/skills/copilot.svg",
+      "image": "/src/assets/icons/copilot.svg",
       "isPublished": true
     },
     {
       "name": "Claude Code",
-      "image": "../../assets/icons/skills/claudecode.svg",
+      "image": "/src/assets/icons/claudecode.svg",
       "isPublished": true
     },
     {
       "name": "Codex",
-      "image": "../../assets/icons/skills/codex.svg",
+      "image": "/src/assets/icons/codex.svg",
       "isPublished": true
     },
     {
       "name": "Cursor",
-      "image": "../../assets/icons/skills/cursor.svg",
+      "image": "/src/assets/icons/cursor.svg",
       "isPublished": true
     },
     {
       "name": "Antigravity",
-      "image": "../../assets/icons/skills/antigravity.svg",
+      "image": "/src/assets/icons/antigravity.svg",
       "isPublished": true
     }
   ]

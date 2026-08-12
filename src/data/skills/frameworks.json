@@ -3,32 +3,32 @@
   "skills": [
     {
       "name": "Astro",
-      "image": "../../assets/icons/skills/astro-icon-light-gradient.svg",
+      "image": "/src/assets/icons/astro-icon-light-gradient.svg",
       "isPublished": true
     },
     {
       "name": "Angular",
-      "image": "../../assets/icons/skills/angular.svg",
+      "image": "/src/assets/icons/angular.svg",
       "isPublished": true
     },
     {
       "name": "React",
-      "image": "../../assets/icons/skills/react.svg",
+      "image": "/src/assets/icons/react.svg",
       "isPublished": true
     },
     {
       "name": "Vue.js",
-      "image": "../../assets/icons/skills/vue.svg",
+      "image": "/src/assets/icons/vue.svg",
       "isPublished": true
     },
     {
       "name": "Nuxt",
-      "image": "../../assets/icons/skills/nuxt.svg",
+      "image": "/src/assets/icons/nuxt.svg",
       "isPublished": true
     },
     {
       "name": "Next.js",
-      "image": "../../assets/icons/skills/nextjs.svg",
+      "image": "/src/assets/icons/nextjs.svg",
       "isPublished": true
     },
     {

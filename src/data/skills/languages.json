@@ -3,57 +3,57 @@
   "skills": [
     {
       "name": "HTML",
-      "image": "../../assets/icons/skills/html5.svg",
+      "image": "/src/assets/icons/html5.svg",
       "isPublished": true
     },
     {
       "name": "CSS",
-      "image": "../../assets/icons/skills/css.svg",
+      "image": "/src/assets/icons/css.svg",
       "isPublished": true
     },
     {
       "name": "JavaScript",
-      "image": "../../assets/icons/skills/js.svg",
+      "image": "/src/assets/icons/js.svg",
       "isPublished": true
     },
     {
       "name": "TypeScript",
-      "image": "../../assets/icons/skills/ts.svg",
+      "image": "/src/assets/icons/ts.svg",
       "isPublished": true
     },
     {
       "name": "C",
-      "image": "../../assets/icons/skills/c.svg",
+      "image": "/src/assets/icons/c.svg",
       "isPublished": true
     },
     {
       "name": "C++",
-      "image": "../../assets/icons/skills/cpp.svg",
+      "image": "/src/assets/icons/cpp.svg",
       "isPublished": true
     },
     {
       "name": "C#",
-      "image": "../../assets/icons/skills/csharp.svg",
+      "image": "/src/assets/icons/csharp.svg",
       "isPublished": true
     },
     {
       "name": "Java",
-      "image": "../../assets/icons/skills/java.svg",
+      "image": "/src/assets/icons/java.svg",
       "isPublished": true
     },
     {
       "name": "Python",
-      "image": "../../assets/icons/skills/python.svg",
+      "image": "/src/assets/icons/python.svg",
       "isPublished": true
     },
     {
       "name": "Rust",
-      "image": "../../assets/icons/skills/rust.svg",
+      "image": "/src/assets/icons/rust.svg",
       "isPublished": true
     },
     {
       "name": "WebAssembly",
-      "image": "../../assets/icons/skills/wasm.svg",
+      "image": "/src/assets/icons/wasm.svg",
       "isPublished": true
     }
   ]

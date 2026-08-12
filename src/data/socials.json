@@ -3,18 +3,18 @@
     "label": "GitHub",
     "text": "See my GitHub Projects",
     "href": "https://github.com/FreakeyPlays",
-    "icon": "../assets/icons/social/github.svg"
+    "icon": "/src/assets/icons/github.svg"
   },
   {
     "label": "LinkedIn",
     "text": "Follow me on LinkedIn",
     "href": "https://www.linkedin.com/in/christoph-merck",
-    "icon": "../assets/icons/social/linkedin.svg"
+    "icon": "/src/assets/icons/linkedin.svg"
   },
   {
     "label": "Bluesky",
     "text": "Follow me on Bluesky",
     "href": "https://bsky.app/profile/freakyplays.bsky.social",
-    "icon": "../assets/icons/social/bluesky.svg"
+    "icon": "/src/assets/icons/bluesky.svg"
   }
 ]

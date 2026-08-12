@@ -5,13 +5,13 @@ import SocialIconLink from './SocialIconLink.astro';
 
 type SocialIcon = ((_props: astroHTML.JSX.SVGAttributes) => unknown) & ImageMetadata;
 
-const iconModules = import.meta.glob('../assets/icons/social/*.svg', {
+const iconModules = import.meta.glob('../assets/icons/*.svg', {
   eager: true,
   import: 'default',
 }) as Record<string, SocialIcon>;
 
 const iconFor = (imagePath: string) =>
-  iconModules[`../assets/icons/social/${imagePath.split('/').pop()}`];
+  iconModules[`../assets/icons/${imagePath.split('/').pop()}`];
 
 const socials = await getSocials();
 ---
