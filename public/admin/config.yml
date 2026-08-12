@@ -1,5 +1,5 @@
-site_url: "https://chrismerck.dev"
-logout_redirect_url: "https://chrismerck.dev"
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
 app_title: Portfolio CMS
 
 backend:
@@ -22,12 +22,28 @@ editor:
 output:
   omit_empty_optional_fields: true
 
+slug:
+  clean_accents: true
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 2000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+        svg:
+          optimize: true
+
 collections:
   - name: pages
     label: Pages
     label_singular: Page
     icon: description
     folder: src/content/pages
+    preview_path: "/{{slug}}"
     extension: mdx
     format: frontmatter
     create: true
@@ -56,15 +72,12 @@ collections:
         default: false
         required: true
       - name: createdAt
-        label: Created at
         widget: hidden
         default: "{{datetime}}"
       - name: updatedAt
-        label: Updated at
         widget: hidden
         default: "{{datetime}}"
       - name: publishedAt
-        label: Published at
         widget: hidden
       - name: body
         label: Body
@@ -136,10 +149,12 @@ collections:
       - name: isPublished
         label: Published
         widget: boolean
-        default: 0
+        default: false
       - name: body
         label: Description
         widget: markdown
+        buttons: [bold, italic, link]
+        editor_components: []
 
   - name: projects
     label: Projects
@@ -186,7 +201,7 @@ collections:
       - name: isPublished
         label: Published
         widget: boolean
-        default: 0
+        default: false
 
   - name: career
     label: Career
@@ -241,7 +256,7 @@ collections:
       - name: isPublished
         label: Published
         widget: boolean
-        default: 0
+        default: false
 
   - name: skills
     label: Skills
