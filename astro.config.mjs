@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { getModifiedDateForURL, isListedInSitemap } from '@utils/buildTimePageMeta.ts';
 import { defineConfig, fontProviders } from 'astro/config';
+import copyCmsAssets from 'scripts/copy-cms-assets';
 
 export default defineConfig({
   site: 'https://chrismerck.dev',
@@ -36,6 +37,7 @@ export default defineConfig({
   },
 
   integrations: [
+    copyCmsAssets(),
     mdx(),
     sitemap({
       filter: (page) => !page.includes('/admin') && isListedInSitemap(page),

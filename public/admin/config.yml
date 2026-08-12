@@ -15,7 +15,8 @@ backend:
     deleteMedia: 'content(media): remove "{{path}}"'
     openAuthoring: "{{message}}"
 
-media_folder: /src/assets/images
+media_folder: /src/assets
+public_folder: /assets
 
 editor:
   preview: false
@@ -38,30 +39,18 @@ media_libraries:
         svg:
           optimize: true
 
-# Media libraries. Both show up as locations in every image picker, so any field
-# can browse either one.
-#
-# The two public_folder styles are a constraint, not a preference. Astro only
-# optimizes a markdown body image when its path is relative and passes /src/...
-# through untouched, which 404s. So images stay relative, and every entry that
-# references one sits two levels below src (src/content/pages/*.mdx,
-# src/data/projects/*.json), which makes ../../ land on src in both.
-#
-# Icons never go through markdown. The site inlines them via import.meta.glob
-# and matches on the file name alone, so they use a root path that is correct
-# from any depth and needs no layout rule.
 asset_collections:
   - name: images
     label: Images
     icon: image
     media_folder: /src/assets/images
-    public_folder: ../../assets/images
+    public_folder: /assets/images
 
   - name: icons
     label: Icons
     icon: interests
     media_folder: /src/assets/icons
-    public_folder: /src/assets/icons
+    public_folder: /assets/icons
 
 collections:
   - name: pages
@@ -70,8 +59,6 @@ collections:
     icon: description
     folder: src/content/pages
     preview_path: "/{{slug}}"
-    media_folder: /src/assets/images
-    public_folder: ../../assets/images
     extension: mdx
     format: frontmatter
     create: true
@@ -224,8 +211,6 @@ collections:
         label: Preview Image
         widget: image
         required: false
-        media_folder: /src/assets/images
-        public_folder: ../../assets/images
       - name: isPublished
         label: Published
         widget: boolean
@@ -315,8 +300,6 @@ collections:
             widget: image
             required: false
             accept: image/svg+xml
-            media_folder: /src/assets/icons
-            public_folder: /src/assets/icons
             hint: SVG only. The site renders it inline, so it can be recolored.
           - name: isPublished
             label: Show on Site
@@ -527,8 +510,6 @@ singletons:
             label: Icon
             widget: image
             accept: image/svg+xml
-            media_folder: /src/assets/icons
-            public_folder: /src/assets/icons
             hint: SVG only. The site renders it inline, so it can be recolored.
           - name: footerOnly
             label: Footer only
