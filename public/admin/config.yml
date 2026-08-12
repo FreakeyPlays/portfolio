@@ -94,6 +94,13 @@ collections:
               projects,
             ],
         }
+    view_groups:
+      - name: published
+        label: Is Published
+        field: isPublished
+      - name: indexed
+        label: Not Indexed
+        field: noIndex
 
   - name: education
     label: Education
@@ -103,19 +110,13 @@ collections:
     extension: mdx
     format: frontmatter
     create: true
+    reorder: true
     identifier_field: level
     summary: "{{level}} – {{institution}}"
     fields:
       - { name: level, label: Level, widget: string }
       - { name: institution, label: Institution, widget: string }
-      - {
-          name: url,
-          label: Institution Website,
-          widget: string,
-          type: url,
-          required: false,
-          hint: "Used in the structured data for degrees only",
-        }
+      - { name: url, label: Institution Website, widget: string, type: url }
       - { name: degree, label: Degree, widget: string }
       - {
           name: startDate,
@@ -145,13 +146,7 @@ collections:
           required: false,
         }
       - { name: isPublished, label: Published, widget: boolean, default: 0 }
-      - {
-          name: body,
-          label: Description,
-          widget: markdown,
-          editor_components: [],
-          hint: "Prose only. Links are rendered in the site style.",
-        }
+      - { name: body, label: Description, widget: markdown }
 
   - name: projects
     label: Projects
@@ -203,6 +198,7 @@ collections:
     extension: json
     format: json
     create: true
+    reorder: true
     identifier_field: company
     summary: "{{company}} – {{location}}"
     fields:
@@ -214,7 +210,6 @@ collections:
         label_singular: Position
         widget: list
         summary: "{{fields.title}}"
-        hint: "Drag to reorder — this is the order shown on the site (newest on top)"
         fields:
           - { name: title, label: Title, widget: string }
           - {
@@ -272,7 +267,6 @@ collections:
             required: false
             media_folder: /src/assets/icons/skills
             public_folder: ../../assets/icons/skills
-            hint: "Required to show in the marquee. A skill without an icon stays on record but is never rendered."
           - {
               name: isPublished,
               label: Show on Site,
