@@ -1,8 +1,9 @@
 import { getCollection } from 'astro:content';
-import identity from '@data/identity.json';
-import siteInfo from '@data/siteInfo.json';
-import socialLinks from '@data/socialLinks.json';
 import { getPageModifiedDateTime } from '@utils/buildTimePageMeta.ts';
+import { byOrder } from '@utils/order.ts';
+import { getPerson } from '@utils/person.ts';
+import { getSite } from '@utils/site.ts';
+import { getProfiles } from '@utils/socials.ts';
 
 /**
  * Canonical spellings for technology names.
@@ -58,7 +59,10 @@ export async function buildProfileGraph(site: URL): Promise<object> {
   const id = (fragment: string) => `${origin}/#${fragment}`;
   const personRef = { '@id': id('person') };
 
-  const [career, education, skills] = await Promise.all([
+  const [person, profiles, siteData, career, education, skills] = await Promise.all([
+    getPerson(),
+    getProfiles(),
+    getSite(),
     getCollection('career', ({ data }) => data.isPublished),
     getCollection('education', ({ data }) => data.isPublished),
     getCollection('skills'),
@@ -66,9 +70,9 @@ export async function buildProfileGraph(site: URL): Promise<object> {
 
   const currentEmployer = career.find(({ data }) => data.jobs.some((job) => !job.endDate));
 
-  const universities = education.filter(({ data }) =>
-    HIGHER_EDUCATION_LEVELS.has(data.level.toLowerCase()),
-  );
+  const universities = education
+    .filter(({ data }) => HIGHER_EDUCATION_LEVELS.has(data.level.toLowerCase()))
+    .sort(byOrder);
 
   const knowsAbout = [
     ...skills.flatMap(({ data }) =>
@@ -80,57 +84,43 @@ export async function buildProfileGraph(site: URL): Promise<object> {
     .filter((value, index, all) => all.indexOf(value) === index)
     .sort((a, b) => a.localeCompare(b));
 
-  const sameAs = [
-    ...socialLinks.map(({ href }) => href).filter((href) => !href.startsWith('mailto:')),
-    ...identity.additionalSameAs,
-    identity.orcid,
-  ].filter((href): href is string => Boolean(href?.trim()));
+  // Every other place the same person can be verified from.
+  const sameAs = [...profiles.map(({ href }) => href), person.orcid].filter(
+    (href): href is string => href !== undefined,
+  );
 
-  const person = compact({
+  const personNode = compact({
     '@type': 'Person',
     '@id': id('person'),
-    name: siteInfo.fullName,
-    givenName: siteInfo.firstName,
-    familyName: siteInfo.lastName,
-    alternateName: identity.alternateName,
+    name: person.name.full,
+    givenName: person.name.first,
+    familyName: person.name.last,
+    alternateName: person.alternateName,
     url: `${origin}/`,
     mainEntityOfPage: { '@id': id('profilepage') },
-    jobTitle: identity.jobTitle,
-    description: identity.description,
-    disambiguatingDescription: identity.disambiguatingDescription,
-    image: identity.image ? new URL(identity.image, site).toString() : undefined,
-    email: identity.email ? `mailto:${identity.email}` : undefined,
-    identifier: identity.orcid || undefined,
+    jobTitle: person.jobTitle,
+    description: person.bio.long,
+    disambiguatingDescription: person.bio.short,
+    image: person.image ? new URL(person.image, site).toString() : undefined,
+    email: `mailto:${person.email}`,
+    identifier: person.orcid,
     address: compact({
       '@type': 'PostalAddress',
-      addressLocality: identity.address.locality,
-      addressRegion: identity.address.region,
-      addressCountry: identity.address.country,
+      addressLocality: person.location.locality,
+      addressRegion: person.location.region,
+      addressCountry: person.location.country,
     }),
-    workLocation: identity.workLocation.map((name) => ({ '@type': 'Place', name })),
-    knowsLanguage: identity.knowsLanguage.map(({ name, code }) =>
+    workLocation: person.workLocation.map((name) => ({ '@type': 'Place', name })),
+    knowsLanguage: person.languages.map(({ name, code }) =>
       compact({ '@type': 'Language', name, alternateName: code }),
     ),
     knowsAbout,
     sameAs,
     worksFor: currentEmployer ? { '@id': id(`org-${currentEmployer.id}`) } : undefined,
     alumniOf: universities.map(({ id: entryId }) => ({ '@id': id(`edu-${entryId}`) })),
-    // Emitted only once an occupational category (ISCO-08 / O*NET-SOC) is set.
-    hasOccupation: identity.occupationalCategory
-      ? compact({
-          '@type': 'Occupation',
-          name: identity.jobTitle,
-          occupationalCategory: identity.occupationalCategory,
-          skills: knowsAbout,
-          occupationLocation: identity.workLocation.map((name) => ({
-            '@type': 'AdministrativeArea',
-            name,
-          })),
-        })
-      : undefined,
-    award: identity.awards,
-    memberOf: identity.memberOf.map((name) => ({ '@type': 'Organization', name })),
   });
+
+  const launchedAt = siteData.launchedAt.toISOString().slice(0, 10);
 
   const organizations = currentEmployer
     ? [
@@ -159,7 +149,7 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         '@type': 'WebSite',
         '@id': id('website'),
         url: `${origin}/`,
-        name: siteInfo.fullName,
+        name: person.name.full,
         inLanguage: 'en',
         publisher: personRef,
       },
@@ -167,14 +157,14 @@ export async function buildProfileGraph(site: URL): Promise<object> {
         '@type': 'ProfilePage',
         '@id': id('profilepage'),
         url: `${origin}/`,
-        name: `${siteInfo.fullName} — ${siteInfo.tagline}`,
+        name: `${person.name.full} — ${person.tagline}`,
         isPartOf: { '@id': id('website') },
-        dateCreated: identity.sitePublished,
-        datePublished: identity.sitePublished,
+        dateCreated: launchedAt,
+        datePublished: launchedAt,
         dateModified: getPageModifiedDateTime('home'),
         mainEntity: personRef,
       }),
-      person,
+      personNode,
       ...organizations,
       ...schools,
     ],

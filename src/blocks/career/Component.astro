@@ -5,12 +5,10 @@ import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
 import { formatMonthYear, toISODate } from '@utils/date.ts';
-
-const latestJobStart = (jobs: { startDate: Date }[]) =>
-  jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), new Date(0));
+import { byOrder } from '@utils/order.ts';
 
 const careerCollection = (await getCollection('career', ({ data }) => data.isPublished)).sort(
-  (a, b) => latestJobStart(b.data.jobs).getTime() - latestJobStart(a.data.jobs).getTime(),
+  byOrder,
 );
 ---
 

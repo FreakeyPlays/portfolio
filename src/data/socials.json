@@ -1,29 +1,20 @@
 [
   {
-    "type": "url",
     "label": "GitHub",
     "text": "See my GitHub Projects",
     "href": "https://github.com/FreakeyPlays",
-    "icon": "../assets/icons/social/github.svg",
-    "inFooter": true,
-    "inSameAs": true
+    "icon": "../assets/icons/social/github.svg"
   },
   {
-    "type": "url",
     "label": "LinkedIn",
     "text": "Follow me on LinkedIn",
     "href": "https://www.linkedin.com/in/christoph-merck",
-    "icon": "../assets/icons/social/linkedin.svg",
-    "inFooter": true,
-    "inSameAs": true
+    "icon": "../assets/icons/social/linkedin.svg"
   },
   {
-    "type": "url",
     "label": "Bluesky",
     "text": "Follow me on Bluesky",
     "href": "https://bsky.app/profile/freakyplays.bsky.social",
-    "icon": "../assets/icons/social/bluesky.svg",
-    "inFooter": true,
-    "inSameAs": true
+    "icon": "../assets/icons/social/bluesky.svg"
   }
 ]

@@ -1,6 +1,6 @@
 ---
 import MailIcon from '@assets/icons/social/mail.svg';
-import identity from '@data/identity.json';
+import { getPerson } from '@utils/person.ts';
 
 interface Props {
   label?: string;
@@ -9,11 +9,13 @@ interface Props {
 
 const { label, additionalParameters = '' } = Astro.props;
 
+const { email } = await getPerson();
+
 const query = new URLSearchParams(additionalParameters.trim().replace(/^\?/, ''))
   .toString()
   .replaceAll('+', '%20');
 
-const href = query ? `mailto:${identity.email}?${query}` : `mailto:${identity.email}`;
+const href = query ? `mailto:${email}?${query}` : `mailto:${email}`;
 ---
 
 <a

@@ -1,9 +1,9 @@
 import { getCollection } from 'astro:content';
-import identity from '@data/identity.json';
-import siteInfo from '@data/siteInfo.json';
-import socialLinks from '@data/socialLinks.json';
 import { getLatestModifiedDate } from '@utils/buildTimePageMeta.ts';
 import { formatMonthYear } from '@utils/date.ts';
+import { byOrder } from '@utils/order.ts';
+import { getPerson } from '@utils/person.ts';
+import { getProfiles } from '@utils/socials.ts';
 import type { APIRoute } from 'astro';
 
 const GERMAN_GRADE_SCALE = 'German scale, 1.0 is the best mark and 4.0 the pass mark';
@@ -18,7 +18,9 @@ const period = (startDate: Date, endDate?: Date) =>
 export const GET: APIRoute = async ({ site }) => {
   const origin = site?.origin ?? 'https://chrismerck.dev';
 
-  const [career, education, projects, skills] = await Promise.all([
+  const [person, profiles, career, education, projects, skills] = await Promise.all([
+    getPerson(),
+    getProfiles(),
     getCollection('career', ({ data }) => data.isPublished),
     getCollection('education', ({ data }) => data.isPublished),
     getCollection('projects', ({ data }) => data.isPublished),
@@ -28,20 +30,18 @@ export const GET: APIRoute = async ({ site }) => {
   const out: string[] = [];
   const push = (...lines: string[]) => out.push(...lines);
 
-  push(`# ${siteInfo.fullName}`, '');
-  push(`> ${identity.description}`, '');
+  push(`# ${person.name.full}`, '');
+  push(`> ${person.bio.long}`, '');
 
-  push(`${identity.jobTitle}.`);
+  push(`${person.jobTitle}.`);
   push(
-    `Based in ${[identity.address.locality, identity.address.region, identity.address.country]
+    `Based in ${[person.location.locality, person.location.region, person.location.country]
       .filter(Boolean)
       .join(', ')}.`,
   );
-  if (identity.workLocation.length) push(`Open to roles in ${identity.workLocation.join(', ')}.`);
-  if (identity.knowsLanguage.length)
-    push(`Speaks ${identity.knowsLanguage.map(({ name }) => name).join(' and ')}.`);
-  if (identity.awards.length) push(`Awards: ${identity.awards.join(', ')}.`);
-  if (identity.memberOf.length) push(`Member of ${identity.memberOf.join(', ')}.`);
+  if (person.workLocation.length) push(`Open to roles in ${person.workLocation.join(', ')}.`);
+  if (person.languages.length)
+    push(`Speaks ${person.languages.map(({ name }) => name).join(' and ')}.`);
   push('');
 
   const named = skills.flatMap(({ data }) =>
@@ -50,13 +50,13 @@ export const GET: APIRoute = async ({ site }) => {
   if (named.length) push(`Skills: ${named.join(', ')}.`);
   push('');
 
-  if (identity.email) push(`Contact: ${identity.email}`);
+  push(`Contact: ${person.email}`);
   push(`Last updated: ${getLatestModifiedDate().toISOString().slice(0, 10)}`, '');
 
-  const ordered = [...projects].sort((a, b) => a.data.order - b.data.order);
+  const ordered = [...projects].sort(byOrder);
   const projectLine = ({ data }: (typeof ordered)[number]) =>
     sentences(
-      `- [${data.title}](${data.repositoryURL}):`,
+      `- [${data.title}](${data.repositoryURL ?? data.deployedURL ?? `${origin}/#projects`}):`,
       `Status: ${data.state}.`,
       oneLine(data.description),
     );
@@ -64,13 +64,8 @@ export const GET: APIRoute = async ({ site }) => {
   push('## Projects', '');
   push(...ordered.filter(({ data }) => data.state !== 'Planned').map(projectLine), '');
 
-  const latestStart = (jobs: { startDate: Date }[]) =>
-    jobs.reduce((latest, job) => (job.startDate > latest ? job.startDate : latest), new Date(0));
-
   push('## Career', '');
-  for (const { data } of [...career].sort(
-    (a, b) => latestStart(b.data.jobs).getTime() - latestStart(a.data.jobs).getTime(),
-  )) {
+  for (const { data } of [...career].sort(byOrder)) {
     for (const job of data.jobs) {
       push(
         sentences(
@@ -85,9 +80,7 @@ export const GET: APIRoute = async ({ site }) => {
   push('');
 
   push('## Education', '');
-  for (const { data, body } of [...education].sort(
-    (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
-  )) {
+  for (const { data, body } of [...education].sort(byOrder)) {
     push(
       sentences(
         `- [${data.degree}, ${data.institution}](${data.url ?? `${origin}/#education`}):`,
@@ -100,11 +93,11 @@ export const GET: APIRoute = async ({ site }) => {
   push('');
 
   push('## Profiles', '');
-  for (const { label, href } of socialLinks) {
-    if (href.startsWith('http')) push(`- [${label}](${href})`);
+  for (const { label, href } of profiles) {
+    push(`- [${label}](${href})`);
   }
-  if (identity.orcid) {
-    push(`- [ORCID](${identity.orcid})`);
+  if (person.orcid) {
+    push(`- [ORCID](${person.orcid})`);
   }
 
   return new Response(

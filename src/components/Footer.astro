@@ -1,5 +1,5 @@
 ---
-import socialLinks from '@data/socialLinks.json';
+import { getSocials } from '@utils/socials.ts';
 import PrideFlag from './PrideFlag/PrideFlag.astro';
 import SocialIconLink from './SocialIconLink.astro';
 
@@ -12,6 +12,8 @@ const iconModules = import.meta.glob('../assets/icons/social/*.svg', {
 
 const iconFor = (imagePath: string) =>
   iconModules[`../assets/icons/social/${imagePath.split('/').pop()}`];
+
+const socials = await getSocials();
 ---
 
 <footer class="col-[image]!">
@@ -28,7 +30,7 @@ const iconFor = (imagePath: string) =>
     <PrideFlag width={50} numberOfColumns={20} billow={0.15} />
     <ul class="flex flex-row gap-4">
       {
-        socialLinks.map(({ href, icon, text }) => (
+        socials.map(({ href, icon, text }) => (
           <li>
             <SocialIconLink icon={iconFor(icon)} href={href} text={text} />
           </li>

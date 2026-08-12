@@ -1,16 +1,6 @@
 import { join } from 'node:path';
-import socialPreview from '@data/socialPreview.json';
+import { getSite } from '@utils/site.ts';
 import sharp from 'sharp';
-
-type SocialPreviewConfig = {
-  image: { src: string; alt: string };
-  title?: string;
-  description?: string;
-  card?: string;
-  twitterHandle?: string;
-};
-
-const config = socialPreview as SocialPreviewConfig;
 
 const PUBLIC_DIR = 'public';
 
@@ -53,12 +43,6 @@ function readImageFacts(src: string): Promise<ImageFacts> {
   return facts;
 }
 
-function filled(value: string | undefined): string | undefined {
-  const trimmed = value?.trim();
-
-  return trimmed ? trimmed : undefined;
-}
-
 export type SocialImage = {
   src: string;
   alt: string;
@@ -72,15 +56,17 @@ type PageContext = {
 };
 
 export async function getSocialPreview(site: URL | undefined, { pageType }: PageContext) {
+  const { socialPreview: config } = await getSite();
+
   const image: SocialImage = {
     src: new URL(config.image.src, site).toString(),
     alt: config.image.alt,
     ...(await readImageFacts(config.image.src)),
   };
 
-  const title = filled(config.title);
-  const description = filled(config.description);
-  const handle = filled(config.twitterHandle);
+  // `omit_empty_optional_fields` in the CMS config means these are either
+  // absent or actually filled in, so there is nothing to trim away here.
+  const { title, description, twitterHandle: handle } = config;
 
   return {
     image,

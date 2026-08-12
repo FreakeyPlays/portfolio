@@ -2,8 +2,9 @@
 import { Font } from 'astro:assets';
 import Favicon from '@components/meta/Favicon.astro';
 import SEO from '@components/meta/SEO.astro';
-import siteInfo from '@data/siteInfo.json';
+import { getPerson } from '@utils/person.ts';
 import { buildProfileGraph } from '@utils/schema.ts';
+import { getSite } from '@utils/site.ts';
 import { getSocialPreview } from '@utils/socialPreview.ts';
 
 export type Props = {
@@ -17,12 +18,14 @@ export type Props = {
   profileSchema?: boolean;
 };
 
+const [person, site] = await Promise.all([getPerson(), getSite()]);
+
 const {
   rawTitle,
-  description = siteInfo.description,
+  description = site.description,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   pageType = 'website',
-  author = siteInfo.fullName,
+  author = person.name.full,
   noindex = false,
   profileSchema = false,
 } = Astro.props;
@@ -33,8 +36,8 @@ const profileGraph =
 const title =
   rawTitle ??
   (Astro.props.title
-    ? `${Astro.props.title} | ${siteInfo.fullName}`
-    : `${siteInfo.fullName} – ${siteInfo.tagline}`);
+    ? `${Astro.props.title} | ${person.name.full}`
+    : `${person.name.full} – ${person.tagline}`);
 
 const social = await getSocialPreview(Astro.site, { pageType });
 ---
@@ -60,7 +63,7 @@ const social = await getSocialPreview(Astro.site, { pageType });
 <Favicon />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <SEO
-  name={siteInfo.fullName}
+  name={person.name.full}
   title={title}
   description={description}
   image={social.image}

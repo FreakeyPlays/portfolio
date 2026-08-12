@@ -3,10 +3,9 @@ import { getCollection, render } from 'astro:content';
 import a from '@blocks/elements/A.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import { formatMonthYear, toISODate } from '@utils/date';
+import { byOrder } from '@utils/order.ts';
 
-const sorted = (await getCollection('education', ({ data }) => data.isPublished)).sort(
-  (older, newer) => newer.data.startDate.getTime() - older.data.startDate.getTime(),
-);
+const sorted = (await getCollection('education', ({ data }) => data.isPublished)).sort(byOrder);
 
 const entries = await Promise.all(
   sorted.map(async (entry) => ({ ...entry, Content: (await render(entry)).Content })),
