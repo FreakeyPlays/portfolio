@@ -1,6 +1,5 @@
-site_url: https://chrismerck.dev
-logout_redirect_url: https://chrismerck.dev
-
+site_url: "https://chrismerck.dev"
+logout_redirect_url: "https://chrismerck.dev"
 app_title: Portfolio CMS
 
 backend:
@@ -35,65 +34,49 @@ collections:
     identifier_field: title
     summary: "{{title}}"
     fields:
-      - {
-          name: title,
-          label: Title,
-          widget: string,
-          pattern:
-            [
-              '^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+',
-              "The Homepage can be created via the name Home.",
-            ],
-        }
-      - {
-          name: description,
-          label: Description,
-          widget: text,
-          required: false,
-          hint: "Meta description. Leave empty to fall back to the site default.",
-        }
-      - {
-          name: isPublished,
-          label: Published,
-          widget: boolean,
-          default: false,
-          required: true,
-        }
-      - {
-          name: noIndex,
-          label: Remove from Indexing,
-          widget: boolean,
-          default: false,
-          required: true,
-        }
-      - {
-          name: createdAt,
-          label: Created at,
-          widget: hidden,
-          default: "{{datetime}}",
-        }
-      - {
-          name: updatedAt,
-          label: Updated at,
-          widget: hidden,
-          default: "{{datetime}}",
-        }
-      - { name: publishedAt, label: Published at, widget: hidden }
-      - {
-          name: body,
-          label: Body,
-          widget: markdown,
-          editor_components:
-            [
-              typewriter,
-              contact,
-              navigation,
-              marquee,
-              career,
-              education,
-              projects,
-            ],
-        }
+      - name: title
+        label: Title
+        widget: string
+        pattern:
+          - '^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+'
+          - The Homepage can be created via the name Home.
+      - name: description
+        label: Description
+        widget: text
+        required: false
+        hint: Meta description. Leave empty to fall back to the site default.
+      - name: isPublished
+        label: Published
+        widget: boolean
+        default: false
+        required: true
+      - name: noIndex
+        label: Remove from Indexing
+        widget: boolean
+        default: false
+        required: true
+      - name: createdAt
+        label: Created at
+        widget: hidden
+        default: "{{datetime}}"
+      - name: updatedAt
+        label: Updated at
+        widget: hidden
+        default: "{{datetime}}"
+      - name: publishedAt
+        label: Published at
+        widget: hidden
+      - name: body
+        label: Body
+        widget: markdown
+        editor_components:
+          - typewriter
+          - contact
+          - navigation
+          - marquee
+          - career
+          - education
+          - projects
     view_groups:
       - name: published
         label: Is Published
@@ -114,39 +97,49 @@ collections:
     identifier_field: level
     summary: "{{level}} – {{institution}}"
     fields:
-      - { name: level, label: Level, widget: string }
-      - { name: institution, label: Institution, widget: string }
-      - { name: url, label: Institution Website, widget: string, type: url }
-      - { name: degree, label: Degree, widget: string }
-      - {
-          name: startDate,
-          label: Start Date,
-          widget: datetime,
-          type: date,
-          format: "YYYY-MM-DD",
-        }
-      - {
-          name: endDate,
-          label: End Date,
-          widget: datetime,
-          type: date,
-          format: "YYYY-MM-DD",
-          required: false,
-          hint: 'Leave empty if still ongoing — shows as "present"',
-        }
-      - { name: location, label: Location, widget: string }
-      - {
-          name: grade,
-          label: Grade,
-          widget: number,
-          value_type: float,
-          min: 1.0,
-          max: 6.0,
-          step: 0.1,
-          required: false,
-        }
-      - { name: isPublished, label: Published, widget: boolean, default: 0 }
-      - { name: body, label: Description, widget: markdown }
+      - name: level
+        label: Level
+        widget: string
+      - name: institution
+        label: Institution
+        widget: string
+      - name: url
+        label: Institution Website
+        widget: string
+        type: url
+      - name: degree
+        label: Degree
+        widget: string
+      - name: startDate
+        label: Start Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+      - name: endDate
+        label: End Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+        hint: Leave empty if still ongoing — shows as "present"
+      - name: location
+        label: Location
+        widget: string
+      - name: grade
+        label: Grade
+        widget: number
+        value_type: float
+        min: 1
+        max: 6
+        step: 0.1
+        required: false
+      - name: isPublished
+        label: Published
+        widget: boolean
+        default: 0
+      - name: body
+        label: Description
+        widget: markdown
 
   - name: projects
     label: Projects
@@ -160,35 +153,40 @@ collections:
     thumbnail: image
     summary: "{{title}}"
     fields:
-      - { name: title, label: Title, widget: string }
-      - { name: description, label: Description, widget: text }
-      - {
-          name: repositoryURL,
-          label: Repository URL,
-          widget: string,
-          type: url,
-          required: false,
-        }
-      - {
-          name: deployedURL,
-          label: Deployed URL,
-          widget: string,
-          type: url,
-          required: false,
-        }
-      - {
-          name: state,
-          label: State,
-          widget: select,
-          options: [Planned, WIP, Done, Maintenance],
-        }
+      - name: title
+        label: Title
+        widget: string
+      - name: description
+        label: Description
+        widget: text
+      - name: repositoryURL
+        label: Repository URL
+        widget: string
+        type: url
+        required: false
+      - name: deployedURL
+        label: Deployed URL
+        widget: string
+        type: url
+        required: false
+      - name: state
+        label: State
+        widget: select
+        options:
+          - Planned
+          - WIP
+          - Done
+          - Maintenance
       - name: image
         label: Preview Image
         widget: image
         required: false
         media_folder: /src/assets/thumbnails
         public_folder: ../../assets/thumbnails
-      - { name: isPublished, label: Published, widget: boolean, default: 0 }
+      - name: isPublished
+        label: Published
+        widget: boolean
+        default: 0
 
   - name: career
     label: Career
@@ -202,40 +200,48 @@ collections:
     identifier_field: company
     summary: "{{company}} – {{location}}"
     fields:
-      - { name: company, label: Company, widget: string }
-      - { name: url, label: Company Website, widget: string, type: url }
-      - { name: location, label: Location, widget: string }
+      - name: company
+        label: Company
+        widget: string
+      - name: url
+        label: Company Website
+        widget: string
+        type: url
+      - name: location
+        label: Location
+        widget: string
       - name: jobs
         label: Positions
         label_singular: Position
         widget: list
         summary: "{{fields.title}}"
         fields:
-          - { name: title, label: Title, widget: string }
-          - {
-              name: startDate,
-              label: Start Date,
-              widget: datetime,
-              type: date,
-              format: "YYYY-MM-DD",
-            }
-          - {
-              name: endDate,
-              label: End Date,
-              widget: datetime,
-              type: date,
-              format: "YYYY-MM-DD",
-              required: false,
-              hint: 'Leave empty if still ongoing — shows as "present"',
-            }
-          - { name: description, label: Description, widget: markdown }
-          - {
-              name: technologies,
-              label: Technologies,
-              widget: list,
-              required: false,
-            }
-      - { name: isPublished, label: Published, widget: boolean, default: 0 }
+          - name: title
+            label: Title
+            widget: string
+          - name: startDate
+            label: Start Date
+            widget: datetime
+            type: date
+            format: YYYY-MM-DD
+          - name: endDate
+            label: End Date
+            widget: datetime
+            type: date
+            format: YYYY-MM-DD
+            required: false
+            hint: Leave empty if still ongoing — shows as "present"
+          - name: description
+            label: Description
+            widget: markdown
+          - name: technologies
+            label: Technologies
+            widget: list
+            required: false
+      - name: isPublished
+        label: Published
+        widget: boolean
+        default: 0
 
   - name: skills
     label: Skills
@@ -248,31 +254,29 @@ collections:
     identifier_field: category
     summary: "{{category}}"
     fields:
-      - {
-          name: category,
-          label: Category,
-          widget: string,
-          hint: 'e.g. "Tools", "Frameworks", "Languages"',
-        }
+      - name: category
+        label: Category
+        widget: string
+        hint: 'e.g. "Tools", "Frameworks", "Languages"'
       - name: skills
         label: Skills
         label_singular: Skill
         widget: list
         summary: "{{fields.name}}"
         fields:
-          - { name: name, label: Name, widget: string }
+          - name: name
+            label: Name
+            widget: string
           - name: image
             label: Icon
             widget: image
             required: false
             media_folder: /src/assets/icons/skills
             public_folder: ../../assets/icons/skills
-          - {
-              name: isPublished,
-              label: Show on Site,
-              widget: boolean,
-              default: true,
-            }
+          - name: isPublished
+            label: Show on Site
+            widget: boolean
+            default: true
 
 singletons:
   - name: person
@@ -286,27 +290,29 @@ singletons:
         summary: "{{first}} {{last}}"
         collapsed: true
         fields:
-          - { name: first, label: First Name, widget: string }
-          - { name: last, label: Last Name, widget: string }
-      - {
-          name: alternateName,
-          label: Handle,
-          widget: string,
-          required: false,
-          hint: "Other name you are known by, e.g. your GitHub handle. Tells search engines the handle and the name are the same person.",
-        }
-      - {
-          name: jobTitle,
-          label: Job Title,
-          widget: string,
-          hint: "Keep identical to the title used on LinkedIn, GitHub and in the tagline.",
-        }
-      - {
-          name: tagline,
-          label: Tagline,
-          widget: string,
-          hint: "One line after your name in the browser tab title.",
-        }
+          - name: first
+            label: First Name
+            widget: string
+          - name: last
+            label: Last Name
+            widget: string
+      - name: alternateName
+        label: Handle
+        widget: string
+        required: false
+        hint: >-
+          Other name you are known by, e.g. your GitHub handle. Tells search
+          engines the handle and the name are the same person.
+      - name: jobTitle
+        label: Job Title
+        widget: string
+        hint: >-
+          Keep identical to the title used on LinkedIn, GitHub and in the
+          tagline.
+      - name: tagline
+        label: Tagline
+        widget: string
+        hint: One line after your name in the browser tab title.
       - name: bio
         label: Biography
         widget: object
@@ -314,58 +320,56 @@ singletons:
           - name: long
             label: Full Biography
             widget: text
-            hint: 'Declarative third-person summary. Lead with "Christoph Merck is a…" so an AI answer engine can quote it directly. Include availability with an absolute date.'
-          - {
-              name: short,
-              label: Short Biography,
-              widget: text,
-              required: false,
-              hint: "One line separating you from others with the same name.",
-            }
-      - { name: email, label: Email, widget: string, type: email }
-      - {
-          name: orcid,
-          label: ORCID iD,
-          widget: string,
-          type: url,
-          required: false,
-        }
-      - {
-          name: image,
-          label: Photograph,
-          widget: image,
-          required: false,
-          media_folder: /public/og,
-          public_folder: /og,
-          hint: "Only set this once the photo is actually shown on the page.",
-        }
+            hint: >-
+              Declarative third-person summary. Lead with "Christoph Merck is
+              a…" so an AI answer engine can quote it directly. Include
+              availability with an absolute date.
+          - name: short
+            label: Short Biography
+            widget: text
+            required: false
+            hint: One line separating you from others with the same name.
+      - name: email
+        label: Email
+        widget: string
+        type: email
+      - name: orcid
+        label: ORCID iD
+        widget: string
+        type: url
+        required: false
+      - name: image
+        label: Photograph
+        widget: image
+        required: false
+        media_folder: /public/og
+        public_folder: /og
+        hint: Only set this once the photo is actually shown on the page.
       - name: location
         label: Location
         widget: object
-        hint: "Where you are based now."
+        hint: Where you are based now.
         summary: "{{locality}}, {{region}}, {{country}}"
         collapsed: true
         fields:
-          - { name: locality, label: City, widget: string }
-          - {
-              name: region,
-              label: Region / State,
-              widget: string,
-              required: false,
-            }
-          - {
-              name: country,
-              label: Country Code,
-              widget: string,
-              hint: "Two letters, e.g. DE",
-            }
-      - {
-          name: workLocation,
-          label: Willing to Work In,
-          widget: list,
-          required: false,
-          hint: 'Places you would take a role in, e.g. "Germany". Separate from where you live.',
-        }
+          - name: locality
+            label: City
+            widget: string
+          - name: region
+            label: Region / State
+            widget: string
+            required: false
+          - name: country
+            label: Country Code
+            widget: string
+            hint: "Two letters, e.g. DE"
+      - name: workLocation
+        label: Willing to Work In
+        widget: list
+        required: false
+        hint: >-
+          Places you would take a role in, e.g. "Germany". Separate from where
+          you live.
       - name: languages
         label: Languages
         label_singular: Language
@@ -374,25 +378,30 @@ singletons:
         summary: "{{fields.name}}"
         collapsed: true
         fields:
-          - { name: name, label: Language, widget: string }
-          - { name: code, label: Code, widget: string, hint: "e.g. de, en" }
+          - name: name
+            label: Language
+            widget: string
+          - name: code
+            label: Code
+            widget: string
+            hint: "e.g. de, en"
 
   - name: site
     label: Site
     icon: language
     file: src/data/site.json
     fields:
-      - {
-          name: launchedAt,
-          label: First Published,
-          widget: datetime,
-          type: date,
-          format: "YYYY-MM-DD",
-        }
+      - name: launchedAt
+        label: First Published
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
       - name: description
         label: Default Description
         widget: text
-        hint: "Meta description for any page that does not set its own. Describes the site, so first person is fine here."
+        hint: >-
+          Meta description for any page that does not set its own. Describes the
+          site, so first person is fine here.
       - name: socialPreview
         label: Social Preview (Open Graph)
         widget: object
@@ -402,44 +411,47 @@ singletons:
             label: Share Image
             widget: object
             fields:
-              - {
-                  name: src,
-                  label: Image,
-                  widget: image,
-                  media_folder: /public/og,
-                  public_folder: /og,
-                }
-              - { name: alt, label: Alt Text, widget: string }
-          - {
-              name: title,
-              label: Share Title,
-              widget: string,
-              required: false,
-              hint: "Overrides the page title inside the card only. Leave empty to use the page title. Cut off after roughly 60 characters.",
-            }
-          - {
-              name: description,
-              label: Share Description,
-              widget: text,
-              required: false,
-              hint: "Overrides the meta description inside the card only. Leave empty to use the page description. Cut off after roughly 110 characters.",
-            }
+              - name: src
+                label: Image
+                widget: image
+                media_folder: /public/og
+                public_folder: /og
+              - name: alt
+                label: Alt Text
+                widget: string
+          - name: title
+            label: Share Title
+            widget: string
+            required: false
+            hint: >-
+              Overrides the page title inside the card only. Leave empty to use
+              the page title. Cut off after roughly 60 characters.
+          - name: description
+            label: Share Description
+            widget: text
+            required: false
+            hint: >-
+              Overrides the meta description inside the card only. Leave empty
+              to use the page description. Cut off after roughly 110 characters.
           - name: card
             label: Card Layout
             widget: select
             default: none
-            hint: "Only X reads this. Everywhere else the large image is used regardless."
+            hint: >-
+              Only X reads this. Everywhere else the large image is used
+              regardless.
             options:
-              - { label: "None", value: none }
-              - { label: "Large image", value: summary_large_image }
-              - { label: "Small square thumbnail", value: summary }
-          - {
-              name: twitterHandle,
-              label: X Handle,
-              widget: string,
-              required: false,
-              hint: "Including the @. Only used for the attribution line on X.",
-            }
+              - label: None
+                value: none
+              - label: Large image
+                value: summary_large_image
+              - label: Small square thumbnail
+                value: summary
+          - name: twitterHandle
+            label: X Handle
+            widget: string
+            required: false
+            hint: Including the @. Only used for the attribution line on X.
 
   - name: socials
     label: Socials
@@ -454,27 +466,24 @@ singletons:
         root: true
         summary: "{{fields.label}}"
         fields:
-          - {
-              name: label,
-              label: Platform,
-              widget: string,
-              hint: 'Short platform name, e.g. "GitHub"',
-            }
-          - {
-              name: text,
-              label: Text,
-              widget: string,
-              hint: 'Longer descriptive label, e.g. "See my GitHub Projects"',
-            }
-          - { name: href, label: URL, widget: string, type: url }
+          - name: label
+            label: Platform
+            widget: string
+            hint: 'Short platform name, e.g. "GitHub"'
+          - name: text
+            label: Text
+            widget: string
+            hint: 'Longer descriptive label, e.g. "See my GitHub Projects"'
+          - name: href
+            label: URL
+            widget: string
+            type: url
           - name: icon
             label: Icon (SVG)
             widget: image
             media_folder: /src/assets/icons/social
             public_folder: ../assets/icons/social
-          - {
-              name: footerOnly,
-              label: Footer only,
-              widget: boolean,
-              required: false,
-            }
+          - name: footerOnly
+            label: Footer only
+            widget: boolean
+            required: false
