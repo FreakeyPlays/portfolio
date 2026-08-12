@@ -2,6 +2,8 @@
 
 app_title: Portfolio CMS
 
+publish_mode: editorial_workflow
+
 backend:
   name: github
   repo: FreakeyPlays/portfolio
@@ -13,8 +15,8 @@ backend:
     deleteMedia: 'content(media): remove "{{path}}"'
     openAuthoring: "{{message}}"
 
-media_folder: src/assets/uploads
-public_folder: /src/assets/uploads
+media_folder: /src/assets/uploads
+public_folder: /_astro
 
 editor:
   preview: false
@@ -197,7 +199,7 @@ collections:
         widget: image
         required: false
         media_folder: /src/assets/thumbnails
-        public_folder: ../../assets/thumbnails
+        public_folder: /_astro
       - name: isPublished
         label: Published
         widget: boolean
@@ -287,7 +289,7 @@ collections:
             widget: image
             required: false
             media_folder: /src/assets/icons/skills
-            public_folder: ../../assets/icons/skills
+            public_folder: /_astro
           - name: isPublished
             label: Show on Site
             widget: boolean
@@ -497,7 +499,7 @@ singletons:
             label: Icon (SVG)
             widget: image
             media_folder: /src/assets/icons/social
-            public_folder: ../assets/icons/social
+            public_folder: /_astro
           - name: footerOnly
             label: Footer only
             widget: boolean
