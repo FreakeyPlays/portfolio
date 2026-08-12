@@ -281,83 +281,19 @@ collections:
             }
 
 singletons:
-  - name: siteInfo
-    label: Site Info
-    icon: info
-    file: src/data/siteInfo.json
+  - name: person
+    label: Person
+    icon: person
+    file: src/data/person.json
     fields:
-      - { name: firstName, label: First Name, widget: string }
-      - { name: lastName, label: Last Name, widget: string }
-      - {
-          name: fullName,
-          label: Full Name,
-          widget: compute,
-          value: "{{fields.firstName}} {{fields.lastName}}",
-        }
-      - name: tagline
-        label: Tagline
-        widget: string
-      - name: description
-        label: Description
-        widget: text
-
-  - name: socialPreview
-    label: Social Preview (Open Graph)
-    icon: ios_share
-    file: src/data/socialPreview.json
-    fields:
-      - name: image
-        label: Share Image
+      - name: name
+        label: Name
         widget: object
+        summary: "{{first}} {{last}}"
+        collapsed: true
         fields:
-          - {
-              name: src,
-              label: Image,
-              widget: image,
-              media_folder: /public/og,
-              public_folder: /og,
-            }
-          - { name: alt, label: Alt Text, widget: string }
-      - {
-          name: title,
-          label: Share Title,
-          widget: string,
-          required: false,
-          hint: "Overrides the page title inside the card only. Leave empty to use the page title. Cut off after roughly 60 characters.",
-        }
-      - {
-          name: description,
-          label: Share Description,
-          widget: text,
-          required: false,
-          hint: "Overrides the meta description inside the card only. Leave empty to use the page description. Cut off after roughly 110 characters.",
-        }
-      - name: card
-        label: Card Layout
-        widget: select
-        default: none
-        hint: "Only X reads this. Everywhere else the large image is used regardless."
-        options:
-          - { label: "None", value: none }
-          - { label: "Large image", value: summary_large_image }
-          - { label: "Small square thumbnail", value: summary }
-      - {
-          name: twitterHandle,
-          label: X Handle,
-          widget: string,
-          required: false,
-          hint: "Including the @. Only used for the attribution line on X.",
-        }
-
-  - name: identity
-    label: Identity (Structured Data)
-    icon: badge
-    file: src/data/identity.json
-    hint: >-
-      Feeds the JSON-LD Person graph on the homepage. Google requires that every
-      fact marked up here is also visible in the page copy, so if you add
-      something, put it in the introduction text too.
-    fields:
+          - { name: first, label: First Name, widget: string }
+          - { name: last, label: Last Name, widget: string }
       - {
           name: alternateName,
           label: Handle,
@@ -369,39 +305,52 @@ singletons:
           name: jobTitle,
           label: Job Title,
           widget: string,
-          hint: "Keep identical to the title used on LinkedIn, GitHub and in the site tagline.",
-        }
-      - name: description
-        label: Description
-        widget: text
-        hint: 'Declarative third-person summary. Lead with "Christoph Merck is a…" so an AI answer engine can quote it directly. Include availability with an absolute date.'
-      - {
-          name: disambiguatingDescription,
-          label: Disambiguating Description,
-          widget: text,
-          required: false,
-          hint: "One line separating you from others with the same name.",
+          hint: "Keep identical to the title used on LinkedIn, GitHub and in the tagline.",
         }
       - {
-          name: email,
-          label: Email,
+          name: tagline,
+          label: Tagline,
           widget: string,
-          type: email,
+          hint: "One line after your name in the browser tab title.",
+        }
+      - name: bio
+        label: Biography
+        widget: object
+        fields:
+          - name: long
+            label: Full Biography
+            widget: text
+            hint: 'Declarative third-person summary. Lead with "Christoph Merck is a…" so an AI answer engine can quote it directly. Include availability with an absolute date.'
+          - {
+              name: short,
+              label: Short Biography,
+              widget: text,
+              required: false,
+              hint: "One line separating you from others with the same name.",
+            }
+      - { name: email, label: Email, widget: string, type: email }
+      - {
+          name: orcid,
+          label: ORCID iD,
+          widget: string,
+          type: url,
           required: false,
         }
       - {
-          name: sitePublished,
-          label: Site First Published,
-          widget: datetime,
-          type: date,
-          format: "YYYY-MM-DD",
+          name: image,
+          label: Photograph,
+          widget: image,
           required: false,
-          hint: 'Fixed date the site first went live. The "last modified" date is derived from git automatically and needs no field.',
+          media_folder: /public/og,
+          public_folder: /og,
+          hint: "Only set this once the photo is actually shown on the page.",
         }
-      - name: address
+      - name: location
         label: Location
         widget: object
         hint: "Where you are based now."
+        summary: "{{locality}}, {{region}}, {{country}}"
+        collapsed: true
         fields:
           - { name: locality, label: City, widget: string }
           - {
@@ -423,69 +372,91 @@ singletons:
           required: false,
           hint: 'Places you would take a role in, e.g. "Germany". Separate from where you live.',
         }
-      - name: knowsLanguage
+      - name: languages
         label: Languages
         label_singular: Language
         widget: list
         required: false
         summary: "{{fields.name}}"
+        collapsed: true
         fields:
           - { name: name, label: Language, widget: string }
           - { name: code, label: Code, widget: string, hint: "e.g. de, en" }
-      - {
-          name: additionalSameAs,
-          label: Additional Profile URLs,
-          widget: list,
-          required: false,
-          hint: "Profiles beyond the Social Links list. Link back to this site from each one.",
-        }
-      - {
-          name: orcid,
-          label: ORCID iD,
-          widget: string,
-          required: false,
-          hint: "Full URL. Free and permanent, but only feeds academic systems, not Google.",
-        }
-      - {
-          name: image,
-          label: Photograph,
-          widget: image,
-          required: false,
-          media_folder: /public/og,
-          public_folder: /og,
-          hint: "Only set this once the photo is actually shown on the page.",
-        }
-      - {
-          name: occupationalCategory,
-          label: Occupation Code,
-          widget: string,
-          required: false,
-          hint: "ISCO-08 or O*NET-SOC code. Setting this emits an Occupation node. No known consumer, safe to leave blank.",
-        }
-      - {
-          name: awards,
-          label: Awards,
-          widget: list,
-          required: false,
-          hint: "Named, verifiable awards only.",
-        }
-      - {
-          name: memberOf,
-          label: Member Of,
-          widget: list,
-          required: false,
-          hint: "Professional bodies only.",
-        }
 
-  - name: socialLinks
-    label: Social Links
-    icon: share
-    file: src/data/socialLinks.json
+  - name: site
+    label: Site
+    icon: language
+    file: src/data/site.json
     fields:
-      - name: links
-        label: Social Links
-        label_singular: Social Link
+      - {
+          name: launchedAt,
+          label: First Published,
+          widget: datetime,
+          type: date,
+          format: "YYYY-MM-DD",
+        }
+      - name: description
+        label: Default Description
+        widget: text
+        hint: "Meta description for any page that does not set its own. Describes the site, so first person is fine here."
+      - name: socialPreview
+        label: Social Preview (Open Graph)
+        widget: object
+        collapsed: true
+        fields:
+          - name: image
+            label: Share Image
+            widget: object
+            fields:
+              - {
+                  name: src,
+                  label: Image,
+                  widget: image,
+                  media_folder: /public/og,
+                  public_folder: /og,
+                }
+              - { name: alt, label: Alt Text, widget: string }
+          - {
+              name: title,
+              label: Share Title,
+              widget: string,
+              required: false,
+              hint: "Overrides the page title inside the card only. Leave empty to use the page title. Cut off after roughly 60 characters.",
+            }
+          - {
+              name: description,
+              label: Share Description,
+              widget: text,
+              required: false,
+              hint: "Overrides the meta description inside the card only. Leave empty to use the page description. Cut off after roughly 110 characters.",
+            }
+          - name: card
+            label: Card Layout
+            widget: select
+            default: none
+            hint: "Only X reads this. Everywhere else the large image is used regardless."
+            options:
+              - { label: "None", value: none }
+              - { label: "Large image", value: summary_large_image }
+              - { label: "Small square thumbnail", value: summary }
+          - {
+              name: twitterHandle,
+              label: X Handle,
+              widget: string,
+              required: false,
+              hint: "Including the @. Only used for the attribution line on X.",
+            }
+
+  - name: socials
+    label: Socials
+    icon: share
+    file: src/data/socials.json
+    fields:
+      - name: socials
+        label: Socials
+        label_singular: Social
         widget: list
+        collapsed: true
         root: true
         summary: "{{fields.label}}"
         fields:
