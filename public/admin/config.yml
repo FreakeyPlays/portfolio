@@ -16,7 +16,7 @@ backend:
     openAuthoring: "{{message}}"
 
 media_folder: /src/assets
-public_folder: /assets
+public_folder: /src/assets
 
 editor:
   preview: false
@@ -44,13 +44,13 @@ asset_collections:
     label: Images
     icon: image
     media_folder: /src/assets/images
-    public_folder: /assets/images
+    public_folder: /src/assets/images
 
   - name: icons
     label: Icons
     icon: interests
     media_folder: /src/assets/icons
-    public_folder: /assets/icons
+    public_folder: /src/assets/icons
 
 collections:
   - name: pages

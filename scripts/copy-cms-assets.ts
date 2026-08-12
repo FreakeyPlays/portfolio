@@ -8,7 +8,7 @@ export default function copyCmsAssets(): AstroIntegration {
     name: 'copy-cms-assets',
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
-        await cp(sourceDir, new URL('assets/', dir), {
+        await cp(sourceDir, new URL('src/assets/', dir), {
           recursive: true,
           force: true,
         });
