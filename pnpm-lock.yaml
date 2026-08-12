@@ -18,8 +18,8 @@ importers:
         specifier: ^3.7.3
         version: 3.7.3
       '@sveltia/cms':
-        specifier: ^0.185.0
-        version: 0.185.0
+        specifier: ^0.188.0
+        version: 0.188.0
       astro:
         specifier: ^7.2.0
         version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@24.13.3)(idb-keyval@6.3.0)(jiti@2.7.0)(yaml@2.9.0)
@@ -821,8 +821,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@sveltia/cms@0.185.0':
-    resolution: {integrity: sha512-oXDsnZURpOiINe1tAQsWLLyAXw/3MNwWGH1LPwdj8uux7fGUogfSm2wWGtM/p1euz0jSghIozVZjB8tjuqkgPA==}
+  '@sveltia/cms@0.188.0':
+    resolution: {integrity: sha512-QXqibERaGIkwnwhqzUGegxXJo9GZmnGRKpwIIfzjFY6LqWvZU/LAsQqCa/IuigetSL3Xq7d8QLYlbyYY0VkJIA==}
 
   '@tailwindcss/node@4.3.3':
     resolution: {integrity: sha512-/T8IKEsf9VTU6tLjgC7+sv2mOPtQxzE2jMw7u4Tt40Tx+QSZxpzh95/H6cMKoja9XuW7iMdLJYBB0o9G1CaAgg==}
@@ -3113,7 +3113,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@sveltia/cms@0.185.0': {}
+  '@sveltia/cms@0.188.0': {}
 
   '@tailwindcss/node@4.3.3':
     dependencies:
