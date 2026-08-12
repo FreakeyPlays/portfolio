@@ -4,6 +4,6 @@
   "description": "Built for QUANTO Solutions as a university project, a web based CV generator with user management. The requirements came from an actual client, which made it the first time I built to someone else's specification instead of my own.",
   "repositoryURL": "https://github.com/FreakeyPlays/q-cv",
   "state": "Done",
-  "image": "../../assets/images/q-cv-preview.jpg",
+  "image": "/src/assets/images/q-cv-preview.jpg",
   "isPublished": true
 }

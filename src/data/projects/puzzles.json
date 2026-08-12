@@ -5,6 +5,6 @@
   "repositoryURL": "https://github.com/FreakeyPlays/puzzles",
   "deployedURL": "https://sudoku.chrismerck.dev/",
   "state": "WIP",
-  "image": "../../assets/images/puzzles.png",
+  "image": "/src/assets/images/puzzles.png",
   "isPublished": true
 }
