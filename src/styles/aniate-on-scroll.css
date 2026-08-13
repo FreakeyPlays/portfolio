@@ -1,0 +1,16 @@
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+main > * {
+  @apply [animation-timeline:view()] motion-reduce:animate-none animate-[scroll-reveal] duration-200 ease-in-out [animation-range:entry_0_25%] [animation-iteration-count:1];
+}
+
+main > nav {
+  @apply [animation-range:entry_0];
+}
