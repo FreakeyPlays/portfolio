@@ -1,0 +1,50 @@
+---
+import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import FAQ from '@components/blog/FAQ.astro';
+import Navigation from '@components/Navigation.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export interface Props {
+	title: string
+	description: string
+	faq?: {question: string; answer: string}[]
+}
+
+const { title, description, faq } = Astro.props;
+
+const test = await createSatteriMarkdownProcessor()
+const { code: renderedDescription } = await test.render(description);
+---
+
+<BaseLayout>
+  <Navigation />
+
+  <article class="contents *:col-[content]">
+    <header class="contents *:col-[content]">
+      <h1>{title}</h1>
+      <p set:html={renderedDescription}></p>
+      <p><span>Published: </span><time>18.08.2026</time> - <span>Reading time: 3min</span></p>
+      <div class="bg-red-400 aspect-video xl:col-start-[aside-left]! xl:col-end-[aside-right]! xl:rounded-4xl col-[full]!"></div>
+    </header>
+    
+    <aside class="col-[aside-left]!">
+      <div>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+      </div>
+      <nav id="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#1">H1</a></li>
+        </ol>
+      </nav>
+    </aside>
+    
+    <slot />
+
+    <FAQ items={faq} />
+  </article>
+  
+</BaseLayout>

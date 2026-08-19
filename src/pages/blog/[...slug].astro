@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import RenderBlocks from '@blocks/RenderBlocks.astro';
+import PostLayout from '@layouts/PostLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const reservedIds = ['blog', 'index'];
+  const posts = await getCollection('posts');
+  return posts
+    .filter((post) => !reservedIds.includes(post.id))
+    .filter((post) => post.data.isPublished || import.meta.env.DEV)
+    .map((post) => ({
+      params: { slug: post.data.customSlug ?? post.id },
+      props: { post },
+    }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const processor = await createSatteriMarkdownProcessor();
+
+const { code: intro } = await processor.render(post.data.intro);
+const faq = await Promise.all(
+  post.data.faq.map(async ({ question, answer }) => ({
+    question,
+    answer: (await processor.render(answer)).code,
+  })),
+);
+---
+
+<PostLayout
+  title={post.data.title}
+  description={intro}
+  faq={faq}
+>
+  <RenderBlocks markdown={post} />
+</PostLayout>
