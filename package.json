@@ -17,7 +17,7 @@
     "@astrojs/markdown-satteri": "^0.3.6",
     "@astrojs/mdx": "^7.0.6",
     "@astrojs/sitemap": "^3.7.3",
-    "@sveltia/cms": "^0.188.1",
+    "@sveltia/cms": "^0.193.1",
     "astro": "^7.2.3",
     "astro-typewriter": "^1.2.0"
   },
