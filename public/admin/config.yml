@@ -115,6 +115,93 @@ collections:
         label: Not Indexed
         field: noIndex
 
+  - name: posts
+    label: Posts
+    label_singular: Post
+    icon: history_edu
+    folder: src/content/posts
+    extension: mdx
+    format: frontmatter
+    create: true
+    reorder: true
+    fields:
+      - name: image
+        label: Image
+        widget: image
+      - name: title
+        label: Title
+        widget: string
+      - name: intro
+        label: Intro
+        widget: markdown
+        buttons:
+          - bold
+          - italic
+        editor_components: []
+      - name: body
+        label: Body
+        widget: markdown
+        editor_components: [image, code-block]
+        buttons:
+          [
+            heading-two,
+            heading-three,
+            heading-four,
+            heading-five,
+            heading-six,
+            bulleted-list,
+            numbered-list,
+            bold,
+            italic,
+            strikethrough,
+            code,
+            link,
+          ]
+      - name: faq
+        label: FAQ
+        widget: list
+        required: false
+        collapsed: true
+        fields:
+          - name: question
+            label: Question
+            widget: string
+          - name: answer
+            label: Answer
+            widget: markdown
+            buttons:
+              - bold
+              - italic
+              - link
+            editor_components: []
+      - name: tags
+        label: Tags
+        widget: relation
+        collection: blog-meta
+        file: tag
+        multiple: true
+        min: 1
+        value_field: "{{tags.*.title}}"
+      - name: categories
+        label: Categories
+        widget: relation
+        collection: blog-meta
+        file: category
+        multiple: true
+        value_field: "{{category.*.title}}"
+      - name: customSlug
+        label: Custom Slug (optional)
+        widget: string
+        required: false
+        before_input: .com/blog/
+        pattern:
+          - ^[a-z0-9]*(?:-[a-z0-9]+)*$
+          - String must be lowercase letters and may contain hyphens. No other special characters are allowed.
+      - name: isPublished
+        label: Is Published
+        widget: boolean
+        default: false
+
   - name: education
     label: Education
     label_singular: Education Entry
@@ -308,6 +395,31 @@ collections:
             widget: boolean
             default: true
 
+  - name: blog-meta
+    label: Blog Meta
+    files:
+      - name: tag
+        label: Tags
+        file: src/data/blog-meta/tags.json
+        fields:
+          - name: tags
+            label: Tags
+            widget: list
+            fields:
+              - name: title
+                label: Title
+                widget: string
+      - name: category
+        label: Categories
+        file: src/data/blog-meta/categories.json
+        fields:
+          - name: category
+            label: Category
+            widget: list
+            fields:
+              - name: title
+                label: Title
+                widget: string
 singletons:
   - name: person
     label: Person

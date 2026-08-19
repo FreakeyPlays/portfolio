@@ -19,6 +19,21 @@ const pages = defineCollection({
   }),
 });
 
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/posts' }),
+  schema: ({ image }) =>
+    z.object({
+      image: image(),
+      title: z.string(),
+      intro: z.string(),
+      faq: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
+      tags: z.array(z.string()).default([]),
+      categorys: z.array(z.string()).optional(),
+      customSlug: z.string().optional(),
+      isPublished: z.boolean().default(false),
+    }),
+});
+
 const education = defineCollection({
   loader: glob({ pattern: '*.mdx', base: './src/data/education' }),
   schema: z.object({
@@ -158,6 +173,7 @@ const socials = defineCollection({
 
 export const collections = {
   pages,
+  posts,
   education,
   projects,
   career,
