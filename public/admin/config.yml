@@ -7,6 +7,8 @@ publish_mode: editorial_workflow
 backend:
   name: github
   repo: FreakeyPlays/portfolio
+  cms_label_prefix: content/
+  squash_merges: true
   commit_messages:
     create: 'content({{collection}}): add "{{slug}}"'
     update: 'content({{collection}}): update "{{slug}}"'
