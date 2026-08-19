@@ -11,12 +11,12 @@ import Projects from '@blocks/projects/Component.astro';
 import Typewriter from '@blocks/typewriter/Component.astro';
 
 interface Props {
-	markdown: CollectionEntry<'pages'>;
+	markdown: CollectionEntry<'pages' | 'posts'>;
 }
 
 const { markdown } = Astro.props;
 
-const { Content } = await render(markdown);
+const { Content} = await render(markdown);
 ---
 
 <Content
