@@ -33,10 +33,5 @@
     "*": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off"
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "satteri": "^0.10.5"
-    }
   }
 }
