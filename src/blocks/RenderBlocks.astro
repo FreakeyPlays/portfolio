@@ -9,14 +9,16 @@ import Marquee from '@blocks/marquee/Component.astro';
 import Navigation from '@blocks/navigation/Component.astro';
 import Projects from '@blocks/projects/Component.astro';
 import Typewriter from '@blocks/typewriter/Component.astro';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import { isAstroComponentFactory } from 'astro/runtime/server/render/astro/factory.js';
 
 interface Props {
-	markdown: CollectionEntry<'pages' | 'posts'>;
+	markdown: CollectionEntry<'pages' | 'posts'> | AstroComponentFactory;
 }
 
 const { markdown } = Astro.props;
 
-const { Content} = await render(markdown);
+const Content = !isAstroComponentFactory(markdown) ? (await render(markdown)).Content : markdown;
 ---
 
 <Content
