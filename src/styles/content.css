@@ -9,7 +9,8 @@
 }
 
 @layer base {
-  main {
+  main,
+  .flow {
     & > * + * {
       margin-block-start: var(--flow-space);
     }

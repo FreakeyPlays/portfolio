@@ -1,16 +1,17 @@
 ---
 interface Props {
   items?: { question: string; answer: string }[];
+  class?: string;
 }
 
-const { items } = Astro.props;
+const { items, class: className } = Astro.props;
 ---
 
 {
   items && items.length > 0 && (
-    <section aria-labelledby="faq">
+    <section aria-labelledby="faq" class={className}>
       <h2 id="faq">
-        Frequently asked questions
+        FAQ
       </h2>
       <ul class="mt-6 space-y-2">
         {items.map(({ question, answer }) => (

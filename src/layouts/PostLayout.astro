@@ -1,50 +1,41 @@
 ---
-import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import FAQ from '@components/blog/FAQ.astro';
+import BlogHero from '@components/blog/Hero.astro';
+import TableOfContents from '@components/blog/TableOfContents.astro';
 import Navigation from '@components/Navigation.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import type { TocEntry } from '@utils/buildTableOfContents';
+
 
 export interface Props {
 	title: string
+	intro: string
+	image: ImageMetadata
 	description: string
 	faq?: {question: string; answer: string}[]
+	toc?: TocEntry[]
 }
 
-const { title, description, faq } = Astro.props;
-
-const test = await createSatteriMarkdownProcessor()
-const { code: renderedDescription } = await test.render(description);
+const { title, intro, image, description, faq, toc = [] } = Astro.props;
 ---
 
-<BaseLayout>
-  <Navigation />
+<BaseLayout title={title} description={description} pageType="article">
+  <Navigation slot="header" />
 
   <article class="contents *:col-[content]">
-    <header class="contents *:col-[content]">
-      <h1>{title}</h1>
-      <p set:html={renderedDescription}></p>
-      <p><span>Published: </span><time>18.08.2026</time> - <span>Reading time: 3min</span></p>
-      <div class="bg-red-400 aspect-video xl:col-start-[aside-left]! xl:col-end-[aside-right]! xl:rounded-4xl col-[full]!"></div>
-    </header>
-    
-    <aside class="col-[aside-left]!">
-      <div>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul>
-      </div>
-      <nav id="toc" aria-label="On this page">
-        <ol>
-          <li><a href="#1">H1</a></li>
-        </ol>
-      </nav>
-    </aside>
-    
-    <slot />
+    <BlogHero title={title} intro={intro} image={image} />
 
-    <FAQ items={faq} />
+    {toc.length > 0 && (
+      <aside class="col-[aside-left]!">
+        <TableOfContents entries={toc} />
+      </aside>
+    )}
+    
+    <div class="flow">
+      <slot />
+    </div>
+
+    <FAQ class="my-8" items={faq} />
   </article>
   
 </BaseLayout>

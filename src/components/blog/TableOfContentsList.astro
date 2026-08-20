@@ -1,0 +1,24 @@
+---
+import type { TocEntry } from '@utils/buildTableOfContents';
+
+interface Props {
+  entries: TocEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="space-y-2">
+  {entries.map(({ slug, text, children }) => (
+    <li>
+      <a href={`#${slug}`} class="hover:text-lime-400">
+        {text}
+      </a>
+      {children.length > 0 && (
+        <div class="mt-2 border-l border-gray-700 pl-4">
+          <Astro.self entries={children} />
+        </div>
+      )}
+    </li>
+  ))}
+</ol>
