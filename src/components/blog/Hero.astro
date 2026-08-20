@@ -5,9 +5,10 @@ interface Props {
   title: string;
   intro: string;
   image: ImageMetadata;
+  readingTime: number;
 }
 
-const { title, intro, image } = Astro.props;
+const { title, intro, image, readingTime } = Astro.props;
 ---
 
 <header class="contents *:col-[content]">
@@ -15,7 +16,7 @@ const { title, intro, image } = Astro.props;
   <div class="my-4 text-body-large" set:html={intro} />
   <p class="my-2 text-body-small!">
     <span>Published: </span><time>18.08.2026</time>
-    <Fragment>{' - '}<span>Reading time: </span>X min</Fragment>
+    <Fragment>{' - '}<span>Reading time: </span>{readingTime} min</Fragment>
   </p>
   <hr class="my-2">
   <Image src={image} alt="test" class="bg-red-400 aspect-video rounded-4xl xl:col-[extra]! col-[image]!"></Image>

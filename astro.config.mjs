@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { getModifiedDateForURL, isListedInSitemap } from '@utils/buildTimePageMeta.ts';
+import { mdastReadingTimePlugin } from '@utils/mdastReadTimePlugin';
 import { defineConfig, fontProviders } from 'astro/config';
 import copyCmsAssets from 'scripts/copy-cms-assets';
 
@@ -33,7 +34,7 @@ export default defineConfig({
   },
 
   markdown: {
-    processor: satteri(),
+    processor: satteri({ mdastPlugins: [mdastReadingTimePlugin] }),
   },
 
   integrations: [
