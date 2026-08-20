@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./content.css";
 @import "./aniate-on-scroll.css";
-@plugin "@tailwindcss/typography";
 
 :root {
   --grid-template-desktop: [full-start] 1fr [aside-left-start] 15rem [aside-left-end extra-start]
