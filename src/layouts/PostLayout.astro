@@ -27,7 +27,7 @@ const { title, intro, image, description, faq, toc = [], readingTime } = Astro.p
     <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} />
 
     {toc.length > 0 && (
-      <aside class="col-[aside-left]!">
+      <aside class="col-[aside-left]! xl:self-start xl:row-start-2 xl:row-end-4 xl:sticky xl:mt-8 xl:top-8">
         <TableOfContents entries={toc} />
       </aside>
     )}
