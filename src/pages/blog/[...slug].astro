@@ -20,8 +20,9 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
-const { headings, Content } = await render(post);
+const { headings, Content, remarkPluginFrontmatter } = await render(post);
 const toc = buildTableOfContents(headings);
+const readingTime = remarkPluginFrontmatter.readingTime as number;
 const processor = await createSatteriMarkdownProcessor();
 
 const { code: intro } = await processor.render(post.data.intro);
@@ -41,6 +42,7 @@ const faq = await Promise.all(
   description={description}
   faq={faq}
   toc={toc}
+  readingTime={readingTime}
 >
   <RenderBlocks markdown={Content} />
 </PostLayout>
