@@ -1,0 +1,18 @@
+---
+import type { TocEntry } from '@utils/buildTableOfContents';
+import TableOfContentsList from './TableOfContentsList.astro';
+
+interface Props {
+  entries: TocEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+{
+  <nav id="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading" class="text-heading-05">On this page</h2>
+
+    <TableOfContentsList entries={entries} />
+  </nav>
+}
