@@ -25,7 +25,7 @@ const { title, intro, image, description, faq, toc = [], readingTime, publishedA
   <Navigation slot="header" />
   
   <article class="contents *:col-[content]">
-    <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} publishedAt={publishedAt} />
+    <BlogHero title={title} intro={intro} readingTime={readingTime} publishedAt={publishedAt} />
 
     {
       toc.length > 0 && (
