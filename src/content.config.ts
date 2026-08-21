@@ -31,6 +31,9 @@ const posts = defineCollection({
       categorys: z.array(z.string()).optional(),
       customSlug: z.string().optional(),
       isPublished: z.boolean().default(false),
+      createdAt: z.coerce.date(),
+      updatedAt: z.coerce.date(),
+      publishedAt: z.coerce.date().optional(),
     }),
 });
 
