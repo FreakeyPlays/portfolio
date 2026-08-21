@@ -39,7 +39,7 @@
 			import { navigationConfig } from "@blocks/navigation/config"
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
-			import { stampPublishedAt } from "@hooks/stampPublishedAt"
+			import { updateTimestamps } from "@hooks/updateTimestamps"
 			import CMS from '@sveltia/cms';
 
 			CMS.registerEditorComponent(typewriterConfig)
@@ -50,7 +50,7 @@
 			CMS.registerEditorComponent(educationConfig)
 			CMS.registerEditorComponent(projectsConfig)
 			
-			CMS.registerEventListener(stampPublishedAt)
+			CMS.registerEventListener(updateTimestamps)
 			
 			CMS.init();
 		</script>
