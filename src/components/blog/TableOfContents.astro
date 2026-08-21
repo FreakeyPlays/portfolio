@@ -1,6 +1,4 @@
 ---
-import PixelSpider from '@assets/test/spidy.svg';
-import WebTopSvg from '@assets/test/web-top.svg';
 import type { TocEntry } from '@utils/buildTableOfContents';
 import TableOfContentsList from './TableOfContentsList.astro';
 
@@ -20,135 +18,12 @@ const { entries } = Astro.props;
   </h2>
 
   <div class="toc-track">
-    <span class="toc-web-anchor" aria-hidden="true">
-      <WebTopSvg />
-    </span>
-    <span class="toc-web" aria-hidden="true"></span>
-    <span class="toc-spider" aria-hidden="true">
-      <PixelSpider />
-    </span>
-
     <TableOfContentsList entries={entries} />
   </div>
 </nav>
 
 <style>
   .toc-track {
-    --toc-rail-inset: -1.25rem;
-    --toc-spider-width: 20px;
-    --toc-spider-lift: 2px;
-
-    position: relative;
     margin-block-start: 1rem;
-  }
-
-  @media (width >= 80rem) {
-    .toc-track {
-      --toc-rail-inset: -1.75rem;
-      --toc-spider-width: 28px;
-      --toc-spider-lift: 3px;
-    }
-  }
-
-  .toc-web-anchor {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: var(--toc-rail-inset);
-    margin-inline-start: -5px;
-    margin-block-start: -16px;
-    z-index: 1;
-  }
-
-  .toc-web-anchor :global(svg) {
-    display: block;
-    width: 10px;
-    height: auto;
-  }
-
-  .toc-web {
-    position: absolute;
-    inset-inline-start: var(--toc-rail-inset);
-    inset-block: 0;
-  }
-
-  .toc-web {
-    width: 2px;
-    margin-inline-start: -0.5px;
-    background-image: url('/web.svg');
-    background-repeat: repeat-y;
-    background-size: 2px 6px;
-    image-rendering: pixelated;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-
-  .toc-spider {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: var(--toc-rail-inset);
-    margin-inline-start: calc(var(--toc-spider-width) / -2);
-    margin-block-start: calc(var(--toc-spider-lift) * -1);
-  }
-
-  .toc-spider :global(svg) {
-    display: block;
-    width: var(--toc-spider-width);
-    height: auto;
-    transform-origin: 50% 0;
-  }
-
-  .toc-web,
-  .toc-spider {
-    display: none;
-  }
-
-  @supports (animation-timeline: scroll()) and (timeline-scope: --toc-progress) {
-    .toc-web,
-    .toc-spider {
-      display: block;
-      animation-timeline: --toc-progress;
-      animation-range: contain 0% contain 100%;
-      animation-fill-mode: both;
-      animation-timing-function: linear;
-    }
-
-    .toc-web {
-      animation-name: toc-web-spin;
-    }
-
-    .toc-spider {
-      animation-name: toc-spider-descend;
-    }
-
-    .toc-spider :global(svg) {
-      animation: toc-spider-sway 2.8s ease-in-out infinite alternate;
-    }
-  }
-
-  @keyframes toc-web-spin {
-    to {
-      transform: scaleY(1);
-    }
-  }
-
-  @keyframes toc-spider-descend {
-    to {
-      inset-block-start: 100%;
-    }
-  }
-
-  @keyframes toc-spider-sway {
-    from {
-      transform: rotate(-3deg);
-    }
-    to {
-      transform: rotate(3deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .toc-spider :global(svg) {
-      animation: none;
-    }
   }
 </style>
