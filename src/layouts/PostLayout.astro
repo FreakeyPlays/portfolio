@@ -5,15 +5,14 @@ import TableOfContents from '@components/blog/TableOfContents.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import type { TocEntry } from '@utils/buildTableOfContents';
 
-
 export interface Props {
-	title: string
-	intro: string
-	image: ImageMetadata
-	description: string
-	readingTime: number
-	faq?: {question: string; answer: string}[]
-	toc?: TocEntry[]
+  title: string;
+  intro: string;
+  image: ImageMetadata;
+  description: string;
+  readingTime: number;
+  faq?: { question: string; answer: string }[];
+  toc?: TocEntry[];
 }
 
 const { title, intro, image, description, faq, toc = [], readingTime } = Astro.props;
@@ -23,17 +22,29 @@ const { title, intro, image, description, faq, toc = [], readingTime } = Astro.p
   <article class="contents *:col-[content]">
     <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} />
 
-    {toc.length > 0 && (
-      <aside class="col-[aside-left]! xl:self-start xl:row-start-2 xl:row-end-4 xl:sticky xl:mt-8 xl:top-8">
-        <TableOfContents entries={toc} />
-      </aside>
-    )}
-    
+    {
+      toc.length > 0 && (
+        <aside class="col-[aside-left]! xl:top-8 xl:row-start-2 xl:row-end-4 xl:mt-8 xl:self-start xl:sticky">
+          <TableOfContents entries={toc} />
+        </aside>
+      )
+    }
+
     <div class="flow">
       <slot />
     </div>
 
     <FAQ class="my-8" items={faq} />
   </article>
-  
 </BaseLayout>
+
+<style>
+  article {
+    timeline-scope: --toc-progress;
+  }
+
+  .flow {
+    view-timeline-name: --toc-progress;
+    view-timeline-axis: block;
+  }
+</style>
