@@ -16,8 +16,8 @@ const { entries, nested = false } = Astro.props;
         <a
           href={`#${slug}`}
           class:list={[
-            'transition-colors hover:text-lime-400',
-            nested ? 'text-body-small text-neutral-400' : 'text-body',
+            'block px-3 py-1.5 rounded-lg transition-colors hover:text-lime-400 hover:bg-stone-700',
+            nested ? 'text-body-small text-neutral-400' : 'text-body text-neutral-300',
           ]}
         >
           {text}

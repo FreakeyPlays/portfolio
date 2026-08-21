@@ -94,5 +94,11 @@
     & > :last-child {
       margin-block-end: var(--flow-space-section);
     }
+
+    &.disable > :first-child,
+    &.disable > :last-child {
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+    }
   }
 }

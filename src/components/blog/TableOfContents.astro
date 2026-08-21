@@ -10,8 +10,10 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<details class:list={[
-  "group cursor-pointer p-4 max-xl:border max-xl:border-gray-200/30 rounded-2xl max-xl:bg-gray-200/20",
+<details
+  id="toc"
+  class:list={[
+  "group cursor-pointer p-4 shadow-xl shadow-black/30 border border-stone-700 rounded-2xl bg-stone-800",
   "max-xl:details-content:grid max-xl:details-content:grid-rows-[0fr] max-xl:details-content:transition-[grid-template-rows,content-visibility] max-xl:details-content:transition-discrete max-xl:details-content:duration-300 max-xl:open:details-content:grid-rows-[1fr]",
   "xl:details-content:[content-visibility:visible] xl:cursor-auto"
 ]}>
@@ -19,18 +21,29 @@ const { entries } = Astro.props;
     <TocIcon class="size-6 shrink-0" aria-hidden="true" />
     <h2
       id="toc-heading"
-      class="flex flex-1 font-sans text-heading-05 font-semibold select-none"
+      class="flex flex-1 font-sans text-heading-06 font-semibold select-none"
     >
       On this page 
       <span
-        class="xl:hidden ml-auto transition-transform group-open:rotate-180"
+        class="xl:hidden ml-auto transition-transform text-neutral-400 group-open:rotate-180"
         aria-hidden="true"
       >
         &#9662;
       </span>
     </h2>
   </summary>
-  <nav id="toc" aria-labelledby="toc-heading" class="text-body-small overflow-hidden min-h-0">  
+  <nav id="toc" aria-labelledby="toc-heading" class="text-body-small overflow-hidden min-h-0">
+    <hr class="mt-4 text-stone-700" />
     <TableOfContentsList entries={entries} />
   </nav>
 </details>
+
+<script>
+  const toc = document.getElementById('toc');
+
+  toc?.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.closest('a')) {
+      toc.removeAttribute('open');
+    }
+  });
+</script>
