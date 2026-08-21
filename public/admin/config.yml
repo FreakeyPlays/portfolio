@@ -202,6 +202,14 @@ collections:
         label: Is Published
         widget: boolean
         default: false
+      - name: createdAt
+        widget: hidden
+        default: "{{datetime}}"
+      - name: updatedAt
+        widget: hidden
+        default: "{{datetime}}"
+      - name: publishedAt
+        widget: hidden
 
   - name: education
     label: Education
