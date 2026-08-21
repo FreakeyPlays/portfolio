@@ -1,12 +1,20 @@
 ---
-import { pages as links } from '@data/pages';
+import { pages as links, type Page } from '@data/pages';
 import CloseIcon from '../assets/ui/close.svg';
 import NavigationIcon from '../assets/ui/navigation.svg';
 import Grain from './Grain.astro';
+
+const currentPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
+const isHome = currentPath === '/';
+
+const resolveHref = (page: Page) => (isHome || !page.url.startsWith('#') ? page.url : `/${page.url}`);
+
+const isCurrent = (page: Page) => !isHome && !page.homeSection && page.url.replace(/(.)\/$/, '$1') === currentPath;
 ---
 
 <nav
   aria-label="Primary"
+  data-home={isHome}
   class:list={[
     'z-50 mx-2 h-16 p-2 pr-8 isolate rounded-full bg-gray-200/20 sticky top-4 shadow-xl col-[image]! border border-white/20 flex items-center justify-between',
     "before:content-[''] before:absolute before:inset-0 before:backdrop-blur-sm before:rounded-full before:-z-1",
@@ -54,9 +62,10 @@ import Grain from './Grain.astro';
           ]}
         >
           <a
-            href={el.url}
-            data-home-link={el.samePage}
-            class="text-lg font-bold inline-block"
+            href={resolveHref(el)}
+            data-home-link={el.homeSection}
+            aria-current={isCurrent(el) ? 'page' : undefined}
+            class:list={['text-lg font-bold inline-block', isCurrent(el) && 'active-nav-link']}
             set:html={`<span class="text-white">/</span>${el.label}`}
           />
         </li>
@@ -108,18 +117,21 @@ import Grain from './Grain.astro';
   type SectionLink = { link: HTMLAnchorElement; heading: HTMLElement | null };
 
   const sectionLinks: SectionLink[] = [];
+  const isHomePage = navList?.closest('nav')?.dataset.home === 'true';
 
-  navList?.querySelectorAll<HTMLAnchorElement>('[data-home-link="true"]').forEach((link) => {
-    const id = link.getAttribute('href')?.split('#')[1];
+  if (isHomePage) {
+    navList?.querySelectorAll<HTMLAnchorElement>('[data-home-link="true"]').forEach((link) => {
+      const id = link.getAttribute('href')?.split('#')[1];
 
-    if (!id) {
-      sectionLinks.push({ link, heading: null });
-      return;
-    }
+      if (!id) {
+        sectionLinks.push({ link, heading: null });
+        return;
+      }
 
-    const heading = document.getElementById(id);
-    if (heading) sectionLinks.push({ link, heading });
-  });
+      const heading = document.getElementById(id);
+      if (heading) sectionLinks.push({ link, heading });
+    });
+  }
 
   sectionLinks.sort((a, b) => {
     if (!a.heading) return -1;

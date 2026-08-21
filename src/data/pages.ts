@@ -1,13 +1,13 @@
 export type Page = {
   label: string;
   url: string;
-  samePage: boolean;
+  homeSection: boolean;
 };
 
 export const pages: Page[] = [
-  { label: 'about', url: '/', samePage: true },
-  { label: 'skills', url: '#skills', samePage: true },
-  { label: 'career', url: '#career', samePage: true },
-  { label: 'education', url: '#education', samePage: true },
-  { label: 'projects', url: '#projects', samePage: true },
+  { label: 'about', url: '/', homeSection: true },
+  { label: 'skills', url: '#skills', homeSection: true },
+  { label: 'career', url: '#career', homeSection: true },
+  { label: 'education', url: '#education', homeSection: true },
+  { label: 'projects', url: '#projects', homeSection: true },
 ];
