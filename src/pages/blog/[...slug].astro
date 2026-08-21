@@ -43,6 +43,7 @@ const faq = await Promise.all(
   faq={faq}
   toc={toc}
   readingTime={readingTime}
+  publishedAt={post.data.publishedAt}
 >
   <RenderBlocks markdown={Content} />
 </PostLayout>
