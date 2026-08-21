@@ -1,22 +1,34 @@
 ---
 import { Image } from 'astro:assets';
+import { formatDayMonthYear } from '@utils/date';
 
 interface Props {
   title: string;
   intro: string;
   image: ImageMetadata;
   readingTime: number;
+  publishedAt?: Date;
 }
 
-const { title, intro, image, readingTime } = Astro.props;
+const { title, intro, image, readingTime, publishedAt } = Astro.props;
 ---
 
 <header class="col-[extra]! text-body-large text-pretty space-y-8">
   <h1 class="xl:text-heading-00 md:text-heading-01 text-heading-02 mt-16">{title}</h1>
-  
-  <Fragment
-    set:html={intro}
-  />
 
-  <hr class=" text-stone-700" />
+
+  {
+    intro && (
+      <Fragment set:html={intro} />
+    )
+  }
+
+  {publishedAt && (
+    <div class="text-body-small text-stone-400">
+      Published on <time datetime={publishedAt.toISOString()}>{formatDayMonthYear(publishedAt)}</time>
+      {readingTime > 0 && <span aria-hidden="true"> &middot; {readingTime}min read</span>}
+    </div>
+  )}
+
+  <hr class="text-stone-700" />
 </header>

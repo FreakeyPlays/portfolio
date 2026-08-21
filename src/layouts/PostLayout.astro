@@ -15,16 +15,17 @@ export interface Props {
   readingTime: number;
   faq?: { question: string; answer: string }[];
   toc?: TocEntry[];
+  publishedAt?: Date;
 }
 
-const { title, intro, image, description, faq, toc = [], readingTime } = Astro.props;
+const { title, intro, image, description, faq, toc = [], readingTime, publishedAt } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} pageType="article">
   <Navigation slot="header" />
   
   <article class="contents *:col-[content]">
-    <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} />
+    <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} publishedAt={publishedAt} />
 
     {
       toc.length > 0 && (
