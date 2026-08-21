@@ -17,7 +17,7 @@ const { entries } = Astro.props;
   "max-xl:details-content:grid max-xl:details-content:grid-rows-[0fr] max-xl:details-content:transition-[grid-template-rows,content-visibility] max-xl:details-content:transition-discrete max-xl:details-content:duration-300 max-xl:open:details-content:grid-rows-[1fr]",
   "xl:details-content:[content-visibility:visible] xl:cursor-auto"
 ]}>
-  <summary class="flex items-center gap-2 marker:content-['']">
+  <summary class="flex items-center gap-2 marker:content-[''] xl:pointer-events-none">
     <TocIcon class="size-6 shrink-0" aria-hidden="true" />
     <h2
       id="toc-heading"
