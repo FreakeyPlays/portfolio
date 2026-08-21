@@ -37,14 +37,3 @@ const { title, intro, image, description, faq, toc = [], readingTime } = Astro.p
     <FAQ class="my-8" items={faq} />
   </article>
 </BaseLayout>
-
-<style>
-  article {
-    timeline-scope: --toc-progress;
-  }
-
-  .flow {
-    view-timeline-name: --toc-progress;
-    view-timeline-axis: block;
-  }
-</style>
