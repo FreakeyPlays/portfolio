@@ -17,13 +17,5 @@ const { entries } = Astro.props;
     On this page
   </h2>
 
-  <div class="toc-track">
-    <TableOfContentsList entries={entries} />
-  </div>
+  <TableOfContentsList entries={entries} />
 </nav>
-
-<style>
-  .toc-track {
-    margin-block-start: 1rem;
-  }
-</style>
