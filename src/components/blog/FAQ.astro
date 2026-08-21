@@ -14,10 +14,11 @@ const { items, class: className } = Astro.props;
         FAQ
       </h2>
       <ul class="mt-6 space-y-2">
-        {items.map(({ question, answer }) => (
-          <li class="rounded-2xl border border-gray-700 bg-zinc-900">
-            <details class="group px-4 py-4">
-              <summary class="flex cursor-pointer gap-3 font-semibold group-open:mb-6">
+        {items.map(({ question, answer }, index) => (
+          <li class="shadow-xl shadow-black/30 border border-stone-700 rounded-2xl bg-stone-800">
+            <details class="group p-4 details-content:grid details-content:grid-rows-[0fr] details-content:transition-[grid-template-rows,content-visibility] details-content:transition-discrete details-content:duration-300 open:details-content:grid-rows-[1fr]">
+              <summary class="select-none flex cursor-pointer gap-3 font-semibold">
+                <span class="font-bold text-lime-400" aria-hidden="true">{index + 1}.</span>
                 {question}
                 <span
                   class="ml-auto text-neutral-400 transition-transform group-open:rotate-180"
@@ -26,7 +27,9 @@ const { items, class: className } = Astro.props;
                   &#9662;
                 </span>
               </summary>
-              <Fragment set:html={answer} />
+              <div class="overflow-hidden min-h-0">
+                <div class="pt-4" set:html={answer} />
+              </div>
             </details>
           </li>
         ))}

@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import FAQ from '@components/blog/FAQ.astro';
 import BlogHero from '@components/blog/Hero.astro';
 import TableOfContents from '@components/blog/TableOfContents.astro';
+import Navigation from '@components/Navigation.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import type { TocEntry } from '@utils/buildTableOfContents';
 
@@ -19,18 +21,22 @@ const { title, intro, image, description, faq, toc = [], readingTime } = Astro.p
 ---
 
 <BaseLayout title={title} description={description} pageType="article">
+  <Navigation slot="header" />
+  
   <article class="contents *:col-[content]">
     <BlogHero title={title} intro={intro} image={image} readingTime={readingTime} />
 
     {
       toc.length > 0 && (
-        <aside class="col-[aside-left]! xl:top-8 xl:row-start-2 xl:row-end-4 xl:mt-8 xl:self-start xl:sticky">
+        <aside class="col-[aside-left]! xl:top-8 xl:row-start-3 xl:row-end-5 row-start-4 row-end-5 xl:self-start xl:sticky xl:mt-8 mt-8">
           <TableOfContents entries={toc} />
         </aside>
       )
     }
 
-    <div class="flow">
+    <Image src={image} alt="" class="rounded-xl shadow-xl shadow-black/30 mt-8" />
+
+    <div class="flow disable mt-8">
       <slot />
     </div>
 
