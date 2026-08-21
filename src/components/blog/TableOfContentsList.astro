@@ -9,7 +9,7 @@ interface Props {
 const { entries, nested = false } = Astro.props;
 ---
 
-<ol class:list={[nested && 'mb-1 ps-4']}>
+<ol class={nested ? 'mb-1 pl-3' : "mt-4"}>
   {
     entries.map(({ slug, text, children }) => (
       <li>
@@ -17,7 +17,7 @@ const { entries, nested = false } = Astro.props;
           href={`#${slug}`}
           class:list={[
             'transition-colors hover:text-lime-400',
-            nested ? 'text-neutral-500' : 'text-neutral-300',
+            nested ? 'text-body-small text-neutral-400' : 'text-body',
           ]}
         >
           {text}
