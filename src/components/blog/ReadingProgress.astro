@@ -1,0 +1,128 @@
+---
+import Spidy from '@assets/test/spidy.svg';
+import Web from '@assets/test/web.svg';
+import WebAnchor from '@assets/test/web-top.svg';
+---
+
+<div class="reading-progress" aria-hidden="true">
+  <WebAnchor class="reading-progress-anchor" />
+  <div class="reading-progress-thread"></div>
+  <Spidy class="reading-progress-spider" />
+</div>
+
+<style define:vars={{ thread: `url("${Web.src}")` }}>
+  /* One scroll-driven animation ticks --readingProgress from 0 to 1. The thread's
+     clip and the spider's offset are both calc()ed from that single value over the
+     same --track length, so the spider sits exactly on the thread's tip on every
+     frame instead of chasing it with an animation of its own. */
+  @property --readingProgress {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @property --swing {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @keyframes reading-progress {
+    to {
+      --readingProgress: 1;
+    }
+  }
+
+  @keyframes spidy-swing {
+    from {
+      --swing: -3deg;
+    }
+    to {
+      --swing: 3deg;
+    }
+  }
+
+  .reading-progress {
+    /* Integer scale factor keeps the pixel art on whole device pixels. */
+    --px: 1px;
+    --anchorHeight: calc(17 * var(--px));
+    --spiderHeight: calc(31 * var(--px));
+    --track: calc(100dvh - var(--anchorHeight) - var(--spiderHeight) - 2rem);
+
+    position: fixed;
+    top: 0;
+    right: 0.75rem;
+    /* Zero-width box: its inline edge is the axis the whole rig hangs from. */
+    width: 0;
+    height: 100dvh;
+    z-index: 20;
+    pointer-events: none;
+
+    animation-name: reading-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+  }
+
+  /* From lg up the grid's side gutters open past the art's width, so it can step
+     up a scale factor and move fully clear of the text. */
+  @media (width >= 64rem) {
+    .reading-progress {
+      --px: 2px;
+      right: clamp(1.5rem, 4vw, 5rem);
+    }
+  }
+
+  .reading-progress-anchor,
+  .reading-progress-thread,
+  .reading-progress-spider {
+    position: absolute;
+    display: block;
+  }
+
+  /* The anchor draws its own thread at x=3..4 of its 10px-wide art, so it hangs
+     off that column rather than off its centre. */
+  .reading-progress-anchor {
+    top: 0;
+    left: calc(-4 * var(--px));
+    width: calc(10 * var(--px));
+    height: var(--anchorHeight);
+  }
+
+  .reading-progress-thread {
+    top: var(--anchorHeight);
+    left: calc(-1 * var(--px));
+    width: calc(2 * var(--px));
+    height: var(--track);
+    background-image: var(--thread);
+    background-repeat: repeat-y;
+    background-size: calc(2 * var(--px)) calc(6 * var(--px));
+    clip-path: inset(0 0 calc((1 - var(--readingProgress)) * var(--track)) 0);
+  }
+
+  /* Spidy hangs upside down with the thread meeting his top centre (x=10 of 20),
+     which is also what he pivots on: the swing reads as a pendulum off the tip
+     rather than a spin about his middle. */
+  .reading-progress-spider {
+    top: var(--anchorHeight);
+    left: calc(-10 * var(--px));
+    width: calc(20 * var(--px));
+    height: var(--spiderHeight);
+    transform-origin: 50% 0;
+    transform: translateY(calc(var(--readingProgress) * var(--track))) rotate(var(--swing));
+    animation: spidy-swing 2.6s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reading-progress-spider {
+      animation: none;
+    }
+  }
+
+  @supports not (animation-timeline: scroll(root block)) {
+    .reading-progress {
+      display: none;
+    }
+  }
+</style>
