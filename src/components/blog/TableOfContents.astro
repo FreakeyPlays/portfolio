@@ -11,7 +11,7 @@ const { entries } = Astro.props;
 ---
 
 <details
-  id="toc"
+  id="toc-wrapper"
   class:list={[
   "group cursor-pointer p-4 shadow-xl shadow-black/30 border border-stone-700 rounded-2xl bg-stone-800",
   "max-xl:details-content:grid max-xl:details-content:grid-rows-[0fr] max-xl:details-content:transition-[grid-template-rows,content-visibility] max-xl:details-content:transition-discrete max-xl:details-content:duration-300 max-xl:open:details-content:grid-rows-[1fr]",
@@ -39,7 +39,7 @@ const { entries } = Astro.props;
 </details>
 
 <script>
-  const toc = document.getElementById('toc');
+  const toc = document.getElementById('toc-wrapper');
 
   toc?.addEventListener('click', (event) => {
     if (event.target instanceof Element && event.target.closest('a')) {
