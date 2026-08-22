@@ -187,7 +187,6 @@ collections:
         widget: relation
         collection: blog-meta
         file: category
-        multiple: true
         value_field: "{{category.*.title}}"
       - name: customSlug
         label: Custom Slug (optional)
