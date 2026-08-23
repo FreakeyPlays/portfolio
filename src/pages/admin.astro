@@ -37,6 +37,7 @@
 			import { educationConfig } from "@blocks/education/config"
 			import { marqueeConfig } from "@blocks/marquee/config"
 			import { navigationConfig } from "@blocks/navigation/config"
+			import { postListConfig } from "@blocks/postList/config"
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
 			import { updateTimestamps } from "@hooks/updateTimestamps"
@@ -49,6 +50,7 @@
 			CMS.registerEditorComponent(careerConfig)
 			CMS.registerEditorComponent(educationConfig)
 			CMS.registerEditorComponent(projectsConfig)
+			CMS.registerEditorComponent(postListConfig)
 			
 			CMS.registerEventListener(updateTimestamps)
 			
