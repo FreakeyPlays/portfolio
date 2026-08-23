@@ -137,7 +137,7 @@ collections:
       - name: slug
         label: Slug
         widget: compute
-        value: "{{title | slugify}}"
+        value: "{{fields.title | slugify}}"
       - name: intro
         label: Intro
         widget: markdown
