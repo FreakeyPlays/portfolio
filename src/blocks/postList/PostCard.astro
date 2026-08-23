@@ -27,8 +27,8 @@ const date = publishedAt ?? createdAt;
 <a
   href={href}
   class:list={[
-    'group/postcard grid h-full grid-cols-1 gap-3 rounded-2xl border border-stone-700 bg-stone-800 p-3 shadow-xl shadow-black/30 transition-colors hover:border-stone-500',
-    wide && 'sm:col-span-2 sm:gap-10.5 sm:grid-cols-subgrid',
+    'group/postcard grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-3 rounded-2xl border border-stone-700 bg-stone-800 p-3 shadow-xl shadow-black/30 transition-colors hover:border-stone-500',
+    wide && 'sm:col-span-2 sm:gap-10.5 sm:grid-cols-subgrid sm:grid-rows-1',
   ]}
 >
   <div
@@ -46,7 +46,7 @@ const date = publishedAt ?? createdAt;
     />
   </div>
 
-  <div class="flex h-full w-full flex-col gap-2 start">
+  <div class="flex h-full w-full flex-col gap-2">
     {
       tags.length > 0 && (
         <ul class="flex flex-wrap gap-1">
