@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
     .filter((post) => !reservedIds.includes(post.id))
     .filter((post) => post.data.isPublished || import.meta.env.DEV)
     .map((post) => ({
-      params: { slug: post.data.customSlug ?? post.id },
+      params: { slug: post.data.customSlug ?? post.data.slug },
       props: { post },
     }));
 }) satisfies GetStaticPaths;
