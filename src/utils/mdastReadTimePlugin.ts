@@ -10,7 +10,7 @@ export const mdastReadingTimePlugin = defineMdastPlugin({
     const readingTime = getReadingTime(textOnPage);
 
     if (context.data.astro !== undefined) {
-      context.data.astro.frontmatter.readingTime = Math.round(readingTime.minutes);
+      context.data.astro.frontmatter.readingTime = Math.max(1, Math.round(readingTime.minutes));
       context.data.astro.frontmatter.wordCount = readingTime.words;
     }
   },
