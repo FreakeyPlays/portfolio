@@ -125,6 +125,7 @@ collections:
     format: frontmatter
     create: true
     reorder: true
+    slug: "post-{{order}}-{{slug}}"
     fields:
       - name: image
         label: Image
@@ -132,6 +133,10 @@ collections:
       - name: title
         label: Title
         widget: string
+      - name: slug
+        label: Slug
+        widget: compute
+        value: "{{title | slugify}}"
       - name: intro
         label: Intro
         widget: markdown
