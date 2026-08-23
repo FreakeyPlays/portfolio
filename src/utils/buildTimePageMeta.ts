@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
+import { toISODateTime } from '@utils/date.ts';
 
 const PAGES_DIR = 'src/content/pages';
 const HOME_SLUG = 'home';
@@ -60,9 +61,7 @@ export function getPageModifiedDate(slug: string): Date {
 }
 
 export function getPageModifiedDateTime(slug: string): string {
-  return getPageModifiedDate(slug)
-    .toISOString()
-    .replace(/\.\d{3}Z$/, 'Z');
+  return toISODateTime(getPageModifiedDate(slug));
 }
 
 export function getLatestModifiedDate(): Date {

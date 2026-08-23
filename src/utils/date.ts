@@ -22,3 +22,7 @@ export function formatMonthYear(date: Date): string {
 export function toISODate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
+
+export function toISODateTime(date: Date): string {
+  return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
