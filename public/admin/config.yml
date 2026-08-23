@@ -107,6 +107,7 @@ collections:
           - career
           - education
           - projects
+          - postList
     view_groups:
       - name: published
         label: Is Published
