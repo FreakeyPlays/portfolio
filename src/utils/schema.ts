@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { getPageModifiedDateTime } from '@utils/buildTimePageMeta.ts';
+import { toISODateTime } from '@utils/date.ts';
 import { byOrder } from '@utils/order.ts';
 import { getPerson } from '@utils/person.ts';
 import { getSite } from '@utils/site.ts';
@@ -167,6 +168,68 @@ export async function buildProfileGraph(site: URL): Promise<object> {
       personNode,
       ...organizations,
       ...schools,
+    ],
+  };
+}
+
+export type ArticleFacts = {
+  url: URL;
+  title: string;
+  description: string;
+  image: string;
+  publishedAt?: Date;
+  updatedAt: Date;
+  section?: string;
+  tags: string[];
+  wordCount?: number;
+};
+
+export async function buildArticleGraph(site: URL, article: ArticleFacts): Promise<object> {
+  const origin = site.origin;
+  const id = (fragment: string) => `${origin}/#${fragment}`;
+  const personRef = { '@id': id('person') };
+
+  const [person, profiles] = await Promise.all([getPerson(), getProfiles()]);
+  const url = article.url.toString();
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      compact({
+        '@type': 'BlogPosting',
+        '@id': `${url}#article`,
+        url,
+        headline: article.title,
+        description: article.description,
+        image: article.image,
+        inLanguage: 'en',
+        datePublished: article.publishedAt ? toISODateTime(article.publishedAt) : undefined,
+        dateModified: toISODateTime(article.updatedAt),
+        articleSection: article.section,
+        keywords: article.tags,
+        wordCount: article.wordCount,
+        author: personRef,
+        publisher: personRef,
+        mainEntityOfPage: { '@id': url },
+        isPartOf: { '@id': id('website') },
+      }),
+      {
+        '@type': 'WebSite',
+        '@id': id('website'),
+        url: `${origin}/`,
+        name: person.name.full,
+        inLanguage: 'en',
+        publisher: personRef,
+      },
+      compact({
+        '@type': 'Person',
+        '@id': id('person'),
+        name: person.name.full,
+        url: `${origin}/`,
+        jobTitle: person.jobTitle,
+        image: person.image ? new URL(person.image, site).toString() : undefined,
+        sameAs: profiles.map(({ href }) => href),
+      }),
     ],
   };
 }

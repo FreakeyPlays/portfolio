@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import FAQ from '@components/blog/FAQ.astro';
 import BlogHero from '@components/blog/Hero.astro';
 import TableOfContents from '@components/blog/TableOfContents.astro';
@@ -16,12 +16,42 @@ export interface Props {
   faq?: { question: string; answer: string }[];
   toc?: TocEntry[];
   publishedAt?: Date;
+  updatedAt: Date;
+  tags?: string[];
+  category?: string;
 }
 
-const { title, intro, image, description, faq, toc = [], readingTime, publishedAt } = Astro.props;
+const {
+  title,
+  intro,
+  image,
+  description,
+  faq,
+  toc = [],
+  readingTime,
+  publishedAt,
+  updatedAt,
+  tags,
+  category,
+} = Astro.props;
+
+const optimized = await getImage({ src: image });
+const imageURL = Astro.site ? new URL(optimized.src, Astro.site).toString() : undefined;
 ---
 
-<BaseLayout title={title} description={description} pageType="article">
+<BaseLayout
+  title={title}
+  description={description}
+  pageType="article"
+  article={{
+    publishedAt,
+    updatedAt,
+    section: category,
+    tags,
+    image: imageURL,
+    readingTime,
+  }}
+>
   <Navigation slot="header" />
   
   <article class="contents *:col-[content]">
