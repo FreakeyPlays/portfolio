@@ -10,4 +10,5 @@ export const pages: Page[] = [
   { label: 'career', url: '#career', homeSection: true },
   { label: 'education', url: '#education', homeSection: true },
   { label: 'projects', url: '#projects', homeSection: true },
+  { label: 'blog', url: '/blog', homeSection: false },
 ];
