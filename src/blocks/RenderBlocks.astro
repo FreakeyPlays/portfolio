@@ -7,8 +7,11 @@ import a from "@blocks/elements/A.astro"
 import h2 from "@blocks/elements/headings/H2.astro"
 import Marquee from '@blocks/marquee/Component.astro';
 import Navigation from '@blocks/navigation/Component.astro';
+import PostList from '@blocks/postList/Component.astro';
 import Projects from '@blocks/projects/Component.astro';
 import Typewriter from '@blocks/typewriter/Component.astro';
+
+
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import { isAstroComponentFactory } from 'astro/runtime/server/render/astro/factory.js';
 
@@ -22,5 +25,5 @@ const Content = !isAstroComponentFactory(markdown) ? (await render(markdown)).Co
 ---
 
 <Content
-	components={{ Typewriter, Contact, Navigation, Marquee, Career, Education, Projects, h2, a }}
+	components={{ Typewriter, Contact, Navigation, Marquee, Career, Education, Projects, PostList, h2, a }}
 />

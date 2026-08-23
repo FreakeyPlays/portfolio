@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import Chip from '@components/Chip.astro';
+import { formatDayMonthYear } from '@utils/date';
+import { removeHtmlTags } from '@utils/removeHtmlTags';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  wide?: boolean;
+}
+
+const { post, wide = false } = Astro.props;
+const { image, title, tags, customSlug, publishedAt, createdAt } = post.data;
+
+const processor = await createSatteriMarkdownProcessor();
+const { remarkPluginFrontmatter: { readingTime  } } = await render(post);
+const { code: intro } = await processor.render(post.data.intro);
+const description = removeHtmlTags(intro);
+
+const href = `/blog/${customSlug ?? post.id}`;
+const date = publishedAt ?? createdAt;
+---
+
+<a
+  href={href}
+  class:list={[
+    'group/postcard grid h-full grid-cols-1 gap-3 rounded-2xl border border-stone-700 bg-stone-800 p-3 shadow-xl shadow-black/30 transition-colors hover:border-stone-500',
+    wide && 'sm:col-span-2 sm:gap-10.5 sm:grid-cols-subgrid',
+  ]}
+>
+  <div
+    class='overflow-hidden rounded-xl'
+  >
+    <Image
+      src={image}
+      alt=""
+      widths={[320, 640, 960]}
+      sizes="(min-width: 640px) 24rem, 90vw"
+      class:list={[
+        'aspect-video w-full object-cover transition-transform duration-300 ease-out group-hover/postcard:scale-105 motion-reduce:group-hover/postcard:scale-100',
+        wide && 'sm:h-full',
+      ]}
+    />
+  </div>
+
+  <div class="flex h-full w-full flex-col gap-2">
+    {
+      tags.length > 0 && (
+        <ul class="flex flex-wrap gap-1">
+          {tags.map((tag) => (
+            <li>
+              <Chip label={tag} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <h3 class="text-heading-06 group-hover/postcard:text-lime-400">{title}</h3>
+
+    <p class="line-clamp-3 text-body-small text-stone-300">{description}</p>
+
+    <div class="mt-auto pt-2 text-body-small text-stone-400">
+      <time datetime={date.toISOString()}>{formatDayMonthYear(date)}</time>
+      {readingTime > 0 && <span> &middot; {readingTime}min read</span>}
+    </div>
+  </div>
+</a>
