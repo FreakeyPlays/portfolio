@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
-import { byOrder } from '@utils/order';
+import { byOrderInverse } from '@utils/order';
 import PostCard from './PostCard.astro';
 
 const posts = (await getCollection(
   'posts',
   (post) => (post.data.isPublished || import.meta.env.DEV),
-)).sort(byOrder);
+)).sort(byOrderInverse);
 ---
 
 <div class="col-[extra]!">
