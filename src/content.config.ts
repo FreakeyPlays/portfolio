@@ -28,7 +28,7 @@ const posts = defineCollection({
       intro: z.string(),
       faq: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
       tags: z.array(z.string()).default([]),
-      categorys: z.string(),
+      category: z.string(),
       customSlug: z.string().optional(),
       isPublished: z.boolean().default(false),
       createdAt: z.coerce.date(),
