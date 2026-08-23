@@ -182,8 +182,8 @@ collections:
         multiple: true
         min: 1
         value_field: "{{tags.*.title}}"
-      - name: categories
-        label: Categories
+      - name: category
+        label: Category
         widget: relation
         collection: blog-meta
         file: category
@@ -417,8 +417,8 @@ collections:
                 label: Title
                 widget: string
       - name: category
-        label: Categories
-        file: src/data/blog-meta/categories.json
+        label: Category
+        file: src/data/blog-meta/category.json
         fields:
           - name: category
             label: Category
