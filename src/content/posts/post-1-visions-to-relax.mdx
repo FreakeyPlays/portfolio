@@ -1,0 +1,84 @@
+---
+order: 1
+image: /src/assets/images/visions-to-relax.png
+title: 'Maybach – Visions to Relax: Mixed reality app for autonomous cars'
+slug: maybach-visions-to-relax-mixed-reality-app-for-autonomous-cars
+intro: During my first semester of my Master's degree at **Hochschule der Medien**, I worked on a project with **Mercedes-Benz AG**. Two of us developed an app for the **Apple Vision Pro** to help passengers relax while the car drives autonomously. The app responds to steering, acceleration and more. The app can also communicate with the car to activate functions such as seat heating or the massage programme.
+faq:
+  - question: What was the app built with?
+    answer: Unity and C#. The Maybach had no API we could talk to, so we wrote our own server and spoke to it over a plain TCP socket. The app never knew the difference between that and a real car.
+  - question: Who ran the project?
+    answer: It was a Projektarbeit at Hochschule der Medien in winter semester 2024/2025, supervised by Prof. Dr. Ansgar Gerlicher. Lukas Kleinau and I built it. On the Mercedes-Benz side our contacts were Dr. Gudrun Schönherr and Dr. Michael Lahres.
+  - question: Does a headset not make you carsick?
+    answer: It can, and that was the risk we designed around from the start. The rule we settled on was that the virtual world is never allowed to contradict what your body feels. If the car turns, the scene turns with it.
+tags:
+  - Uni
+  - VR
+  - Unity
+category: Projects
+customSlug: visions-to-relax
+isPublished: false
+createdAt: 2026-08-24T07:27:00.000Z
+updatedAt: 2026-08-24T16:35:00.000Z
+---
+
+## The brief
+
+The project sat inside [CARpulse](https://arena2036.de/en/carpulse/), a research campus initiative at ARENA2036 in Stuttgart. It runs from January 2024 to December 2028, is funded as a flagship project by the German federal research ministry, and has nine partners behind it, among them Mercedes-Benz, the University of Stuttgart, Trumpf, the DLR and Hochschule der Medien. The question the whole thing circles is what a car should be once nobody has to drive it. HdM's contribution is the human side of that: user centred design and XR for the interaction between passenger and vehicle.
+
+Our slice was small and very concrete. Build something for the Apple Vision Pro that helps someone relax in the back of a Maybach.
+
+The kickoff was not a slide deck. We were put in the car first, a Maybach V12, and driven around before anyone said the word requirements. That turned out to be the most useful hour of the project. You cannot design a relaxation experience for a car you have only seen in photos. The seats, the sound of the doors, how little you feel of the road: all of that sets the bar for what your app has to live up to, and it is a high bar. Anything cheap looking would have felt worse than no app at all.
+
+## Why another app?
+
+We spent the first stretch of the project looking at what was already out there rather than building. Meditation apps, ambient scenes, breathing guides, the headset experiences that ship with every new device.
+
+They are all built on the same three assumptions. You are in a quiet room. You are not moving. Nothing is going to interrupt you.
+
+A car gives you none of that. You are moving, and your inner ear knows it. The light changes every few seconds. The car brakes, corners, hits a bad patch of road. Every one of those events is something the existing apps treat as noise, an interruption to be ignored and waited out.
+
+That was the gap, and it was the whole project in one sentence. Movement is not noise. Movement is the input.
+
+## Movement as input
+
+Once you flip that around, the design falls out of it almost on its own.
+
+The car turns, so the virtual world turns with it. You accelerate, and the scene reacts to being pushed forward instead of pretending nothing happened. What is outside the window feeds what is inside the headset, so the two are describing the same journey rather than arguing about it.
+
+That was the rule we kept coming back to whenever we disagreed about something: the virtual world is never allowed to contradict what the body feels. It is also the honest answer to the obvious objection, which is that a headset in a moving car sounds like a fast route to motion sickness. It is, if the world you show people is standing still while they are not. Tie the two together and the same movement that would have made you queasy becomes part of the experience.
+
+The other half was that the app should not just watch the car. It should be able to use it. A Maybach already knows how to make you comfortable, it has the seat heating and the massage programs built in, they were just sitting behind a button nobody presses at the right moment. So we let the experience trigger them. The scene decides it is time to warm up, and the seat warms up. No menu, no settings screen.
+
+## Talking to a car with no API
+
+The obvious problem: there was no interface for us to use. Not a private one, not a locked down one, none. The car functions we wanted to drive were not something a student project was going to get wired into in a semester.
+
+So we built the car instead. A small server stood in for the vehicle, and the app spoke to it over a plain TCP socket: driving signals coming in, comfort commands going out. Nothing clever, and that was the point. The app was written against an interface that could just as well have been real, which meant we could develop the whole thing on a desk, replay a drive as often as we needed, and set up the exact situation we wanted to test instead of waiting for the road to produce it.
+
+If you have ever integrated against a system that does not exist yet, this is the same trick, and it works as well in a car as it does in a web stack. Decide what the boundary looks like, put something fake behind it, and let the fake be the thing you develop against.
+
+## Then we put it in the actual car
+
+Which is where you find out what your desk was lying to you about.
+
+A demo that behaves on a laptop and a demo that behaves in a moving vehicle are two different demos. On a desk you control every variable. In the car you control none of them: the light, the road surface, the route, how the person in the seat is feeling that day. Things that looked fine in a controlled replay were suddenly either too much or too subtle, and the only way to find that out was to sit in the back with the headset on and drive.
+
+That gap between the two is the part I would not have understood from reading about it.
+
+## What I took from it
+
+Three things stuck.
+
+The first is that the good idea in this project was not technical. It was noticing that everyone else treats motion as a problem and deciding to treat it as material. The Unity work was ordinary. The reframing was the value.
+
+The second is that a fake dependency you control beats a real one you are waiting for. We shipped a working app in a semester because we stopped waiting for an API and wrote one.
+
+The third is that you have to get in the car. Not the mockup, not the video, the car. Everything I actually learned on this project came from being in the seat.
+
+## Links
+
+- [Maybach - Visions to Relax on HdM Stage](https://hdm-stuttgart.de/stage/projekt_detail/projekt_details?projekt_ID=4608), the official project entry
+- [Ansgar Gerlicher's post about the kickoff](https://www.linkedin.com/posts/ansgar-gerlicher-0949a84b_carpulse-arena2036-apple-activity-7255316267018940417--edW), including the ride in the V12
+- [CARpulse at ARENA2036](https://arena2036.de/en/carpulse/), the research initiative the project belonged to
+- The source lives in [HdM's GitLab](https://gitlab.mi.hdm-stuttgart.de/cm168/maybach-visions-to-relax) and needs a university login
