@@ -14,11 +14,11 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.3.7",
-    "@astrojs/mdx": "^7.0.7",
+    "@astrojs/markdown-satteri": "^0.3.8",
+    "@astrojs/mdx": "^7.0.8",
     "@astrojs/sitemap": "^3.7.3",
-    "@sveltia/cms": "^0.193.2",
-    "astro": "^7.2.4",
+    "@sveltia/cms": "^0.197.1",
+    "astro": "^7.2.5",
     "astro-typewriter": "^1.2.0",
     "reading-time": "^1.5.0",
     "satteri": "^0.10.5"
