@@ -4,7 +4,7 @@ import CloseIcon from '../assets/ui/close.svg';
 import NavigationIcon from '../assets/ui/navigation.svg';
 import Grain from './Grain.astro';
 
-const currentPath = Astro.url.pathname.replace(/(.)\/$/, '$1');
+const currentPath = `/${Astro.url.pathname.split("/")[1]}`;
 const isHome = currentPath === '/';
 
 const resolveHref = (page: Page) => (isHome || !page.url.startsWith('#') ? page.url : `/${page.url}`);
