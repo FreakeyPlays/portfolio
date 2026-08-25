@@ -6,6 +6,8 @@ import TableOfContents from '@components/blog/TableOfContents.astro';
 import Navigation from '@components/Navigation.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import type { TocEntry } from '@utils/buildTableOfContents';
+import { removeHtmlTags } from '@utils/removeHtmlTags';
+import type { Breadcrumb } from '@utils/schema.ts';
 import { socialImageType } from '@utils/socialPreview.ts';
 
 export interface Props {
@@ -20,6 +22,7 @@ export interface Props {
   updatedAt: Date;
   tags?: string[];
   category?: string;
+  breadcrumbs?: Breadcrumb[];
 }
 
 const {
@@ -34,6 +37,7 @@ const {
   updatedAt,
   tags,
   category,
+  breadcrumbs,
 } = Astro.props;
 
 const card = await getImage({
@@ -43,6 +47,11 @@ const card = await getImage({
   fit: 'cover',
   format: 'jpeg',
 });
+
+const faqFacts = faq?.map(({ question, answer }) => ({
+  question,
+  answer: removeHtmlTags(answer),
+}));
 
 const social = Astro.site
   ? {
@@ -68,8 +77,10 @@ const social = Astro.site
     section: category,
     tags,
     readingTime,
+    faq: faqFacts,
   }}
   social={social}
+  breadcrumbs={breadcrumbs}
 >
   <Navigation slot="header" />
   

@@ -172,6 +172,34 @@ export async function buildProfileGraph(site: URL): Promise<object> {
   };
 }
 
+export type Breadcrumb = {
+  name: string;
+  url: URL | string;
+};
+
+export function buildBreadcrumbGraph(site: URL, page: URL, trail: Breadcrumb[]): object {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${page.toString()}#breadcrumb`,
+        itemListElement: trail.map(({ name, url }, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name,
+          item: new URL(url, site).toString(),
+        })),
+      },
+    ],
+  };
+}
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type ArticleFacts = {
   url: URL;
   title: string;
@@ -182,6 +210,7 @@ export type ArticleFacts = {
   section?: string;
   tags: string[];
   wordCount?: number;
+  faq?: FaqItem[];
 };
 
 export async function buildArticleGraph(site: URL, article: ArticleFacts): Promise<object> {
@@ -191,6 +220,27 @@ export async function buildArticleGraph(site: URL, article: ArticleFacts): Promi
 
   const [person, profiles] = await Promise.all([getPerson(), getProfiles()]);
   const url = article.url.toString();
+
+  const faqNodes =
+    article.faq && article.faq.length > 0
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': `${url}#faq`,
+            url,
+            about: { '@id': `${url}#article` },
+            isPartOf: { '@id': id('website') },
+            mainEntity: article.faq.map(({ question, answer }) => ({
+              '@type': 'Question',
+              name: question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: answer,
+              },
+            })),
+          },
+        ]
+      : [];
 
   return {
     '@context': 'https://schema.org',
@@ -213,6 +263,7 @@ export async function buildArticleGraph(site: URL, article: ArticleFacts): Promi
         mainEntityOfPage: { '@id': url },
         isPartOf: { '@id': id('website') },
       }),
+      ...faqNodes,
       {
         '@type': 'WebSite',
         '@id': id('website'),
