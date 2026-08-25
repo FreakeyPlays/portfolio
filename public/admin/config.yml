@@ -7,6 +7,7 @@ publish_mode: editorial_workflow
 backend:
   name: github
   repo: FreakeyPlays/portfolio
+  base_url: https://sveltia-cms-auth.chrissimerck.workers.dev
   cms_label_prefix: content/
   squash_merges: true
   commit_messages:
