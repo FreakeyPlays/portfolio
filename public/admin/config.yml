@@ -302,6 +302,12 @@ collections:
         widget: string
         type: url
         required: false
+      - name: relatedBlogPost
+        label: Related Blog Post
+        widget: relation
+        collection: posts
+        value_field: "{{fields.customSlug}}|{{fields.slug}}"
+        required: false
       - name: state
         label: State
         widget: select

@@ -64,6 +64,7 @@ const projects = defineCollection({
       description: z.string(),
       repositoryURL: z.url().optional(),
       deployedURL: z.url().optional(),
+      relatedBlogPost: z.string().optional(),
       state: z.enum(['Planned', 'WIP', 'Done', 'Maintenance']),
       image: image().optional(),
       isPublished: z.boolean().default(false),
