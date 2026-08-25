@@ -43,6 +43,10 @@ function readImageFacts(src: string): Promise<ImageFacts> {
   return facts;
 }
 
+export function socialImageType(format?: string) {
+  return format ? MIME_TYPE_BY_FORMAT[format] : undefined;
+}
+
 export type SocialImage = {
   src: string;
   alt: string;
@@ -51,22 +55,34 @@ export type SocialImage = {
   type?: string;
 };
 
-type PageContext = {
-  pageType: 'website' | 'article';
+export type SocialOverride = {
+  title?: string;
+  description?: string;
+  image?: SocialImage;
 };
 
-export async function getSocialPreview(site: URL | undefined, { pageType }: PageContext) {
+type PageContext = {
+  pageType: 'website' | 'article';
+  override?: SocialOverride;
+};
+
+export async function getSocialPreview(
+  site: URL | undefined,
+  { pageType, override = {} }: PageContext,
+) {
   const { socialPreview: config } = await getSite();
 
-  const image: SocialImage = {
-    src: new URL(config.image.src, site).toString(),
-    alt: config.image.alt,
-    ...(await readImageFacts(config.image.src)),
-  };
+  const image =
+    override.image ??
+    ({
+      src: new URL(config.image.src, site).toString(),
+      alt: config.image.alt,
+      ...(await readImageFacts(config.image.src)),
+    } satisfies SocialImage);
 
-  // `omit_empty_optional_fields` in the CMS config means these are either
-  // absent or actually filled in, so there is nothing to trim away here.
-  const { title, description, twitterHandle: handle } = config;
+  const title = override.title ?? config.title;
+  const description = override.description ?? config.description;
+  const handle = config.twitterHandle;
 
   return {
     image,

@@ -6,6 +6,7 @@ import TableOfContents from '@components/blog/TableOfContents.astro';
 import Navigation from '@components/Navigation.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import type { TocEntry } from '@utils/buildTableOfContents';
+import { socialImageType } from '@utils/socialPreview.ts';
 
 export interface Props {
   title: string;
@@ -35,8 +36,26 @@ const {
   category,
 } = Astro.props;
 
-const optimized = await getImage({ src: image });
-const imageURL = Astro.site ? new URL(optimized.src, Astro.site).toString() : undefined;
+const card = await getImage({
+  src: image,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  format: 'jpeg',
+});
+
+const social = Astro.site
+  ? {
+      description,
+      image: {
+        src: new URL(card.src, Astro.site).toString(),
+        alt: title,
+        width: card.options.width,
+        height: card.options.height,
+        type: socialImageType(card.options.format),
+      },
+    }
+  : { description };
 ---
 
 <BaseLayout
@@ -48,9 +67,9 @@ const imageURL = Astro.site ? new URL(optimized.src, Astro.site).toString() : un
     updatedAt,
     section: category,
     tags,
-    image: imageURL,
     readingTime,
   }}
+  social={social}
 >
   <Navigation slot="header" />
   
