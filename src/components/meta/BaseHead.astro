@@ -4,7 +4,13 @@ import Favicon from '@components/meta/Favicon.astro';
 import SEO from '@components/meta/SEO.astro';
 import { formatDayMonthYear, toISODateTime } from '@utils/date.ts';
 import { getPerson } from '@utils/person.ts';
-import { buildArticleGraph, buildProfileGraph } from '@utils/schema.ts';
+import {
+  type Breadcrumb,
+  buildArticleGraph,
+  buildBreadcrumbGraph,
+  buildProfileGraph,
+  type FaqItem,
+} from '@utils/schema.ts';
 import { getSite } from '@utils/site.ts';
 import { getSocialPreview, type SocialOverride } from '@utils/socialPreview.ts';
 
@@ -14,6 +20,7 @@ export type ArticleMeta = {
   section?: string;
   tags?: string[];
   readingTime?: number;
+  faq?: FaqItem[];
 };
 
 export type Props = {
@@ -27,6 +34,7 @@ export type Props = {
   profileSchema?: boolean;
   article?: ArticleMeta;
   social?: SocialOverride;
+  breadcrumbs?: Breadcrumb[];
 };
 
 const [person, site] = await Promise.all([getPerson(), getSite()]);
@@ -41,6 +49,7 @@ const {
   profileSchema = false,
   article,
   social: socialOverride,
+  breadcrumbs = [],
 } = Astro.props;
 
 const profileGraph =
@@ -54,7 +63,7 @@ const title =
 
 const social = await getSocialPreview(Astro.site, { pageType, override: socialOverride });
 
-const articleURL = canonicalURL ?? new URL(Astro.url.pathname, Astro.site);
+const pageURL = canonicalURL ?? new URL(Astro.url.pathname, Astro.site);
 
 const og = article
   ? {
@@ -89,7 +98,7 @@ const twitter = labels.length > 0 ? { ...social.twitter, labels } : social.twitt
 const articleGraph =
   article && Astro.site
     ? await buildArticleGraph(Astro.site, {
-        url: articleURL,
+        url: pageURL,
         title: Astro.props.title ?? title,
         description,
         image: social.image.src,
@@ -97,7 +106,13 @@ const articleGraph =
         updatedAt: article.updatedAt,
         section: article.section,
         tags: article.tags ?? [],
+        faq: article.faq,
       })
+    : null;
+
+const breadcrumbGraph =
+  breadcrumbs.length > 0 && Astro.site
+    ? buildBreadcrumbGraph(Astro.site, pageURL, breadcrumbs)
     : null;
 ---
 
@@ -140,5 +155,10 @@ const articleGraph =
 {
   articleGraph && (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(articleGraph)} />
+  )
+}
+{
+  breadcrumbGraph && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbGraph)} />
   )
 }

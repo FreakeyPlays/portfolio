@@ -18,12 +18,18 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props as Props;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: page.data.title, url: Astro.url.pathname },
+];
 ---
 
 <BaseLayout
   title={page.data.title}
   description={page.data.description}
   noindex={page.data.noIndex}
+  breadcrumbs={breadcrumbs}
 >
   <RenderBlocks markdown={page} />
 </BaseLayout>
