@@ -129,6 +129,8 @@
 
 @theme {
   /* Generated with https://utopia.fyi/ */
+  --text-body-extra-small: clamp(0.7901rem, 0.7497rem + 0.1796vw, 0.8889rem);
+  --text-body-extrasmall--line-height: 1.45;
 
   --text-body-small: clamp(0.8889rem, 0.8454rem + 0.1932vw, 1rem);
   --text-body-small--line-height: 1.5;
