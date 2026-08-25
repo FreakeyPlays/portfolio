@@ -6,14 +6,13 @@ import { formatDayMonthYear, toISODateTime } from '@utils/date.ts';
 import { getPerson } from '@utils/person.ts';
 import { buildArticleGraph, buildProfileGraph } from '@utils/schema.ts';
 import { getSite } from '@utils/site.ts';
-import { getSocialPreview } from '@utils/socialPreview.ts';
+import { getSocialPreview, type SocialOverride } from '@utils/socialPreview.ts';
 
 export type ArticleMeta = {
   publishedAt?: Date;
   updatedAt: Date;
   section?: string;
   tags?: string[];
-  image?: string;
   readingTime?: number;
 };
 
@@ -27,6 +26,7 @@ export type Props = {
   noindex?: boolean;
   profileSchema?: boolean;
   article?: ArticleMeta;
+  social?: SocialOverride;
 };
 
 const [person, site] = await Promise.all([getPerson(), getSite()]);
@@ -40,6 +40,7 @@ const {
   noindex = false,
   profileSchema = false,
   article,
+  social: socialOverride,
 } = Astro.props;
 
 const profileGraph =
@@ -51,7 +52,7 @@ const title =
     ? `${Astro.props.title} | ${person.name.full}`
     : `${person.name.full} – ${person.tagline}`);
 
-const social = await getSocialPreview(Astro.site, { pageType });
+const social = await getSocialPreview(Astro.site, { pageType, override: socialOverride });
 
 const articleURL = canonicalURL ?? new URL(Astro.url.pathname, Astro.site);
 
@@ -91,7 +92,7 @@ const articleGraph =
         url: articleURL,
         title: Astro.props.title ?? title,
         description,
-        image: article.image ?? social.image.src,
+        image: social.image.src,
         publishedAt: article.publishedAt,
         updatedAt: article.updatedAt,
         section: article.section,
