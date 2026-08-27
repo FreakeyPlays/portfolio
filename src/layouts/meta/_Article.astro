@@ -1,0 +1,35 @@
+---
+export interface ArticleMeta {
+  publishedAt: string;
+  modifiedAt: string;
+  section: string;
+  tags: string[];
+  author: {
+    firstName: string;
+    lastName: string;
+    alternateName?: string;
+  }
+}
+
+interface Props {
+  meta?: ArticleMeta;
+}
+
+const { meta } = Astro.props;
+---
+
+{
+  meta && (
+    <>
+        <meta property="article:published_time" content={meta.publishedAt} />
+        <meta property="article:modified_time" content={meta.modifiedAt} />
+        <meta property="article:section" content={meta.section} />
+        {meta.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+        <meta property="article:author:first_name" content={meta.author.firstName} />
+        <meta property="article:author:last_name" content={meta.author.lastName} />
+        {meta.author.alternateName && (
+          <meta property="article:author:username" content={meta.author.alternateName} />
+        )}
+    </>
+  )
+}
