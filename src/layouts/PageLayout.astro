@@ -3,13 +3,13 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  post: CollectionEntry<"posts">;
+  page: CollectionEntry<"pages">;
   class?: string;
 }
 
-const { post, class: className } = Astro.props;
+const { page, class: className } = Astro.props;
 ---
 
-<BaseLayout entity={post} class={className}>
+<BaseLayout entity={page} class={className}>
   
 </BaseLayout>
