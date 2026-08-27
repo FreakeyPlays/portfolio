@@ -1,4 +1,5 @@
 {
+  "id": "7175a71b-fd51-4c25-b16a-6c94aced154d",
   "order": 1,
   "title": "Puzzles",
   "description": "Puzzle games that run entirely in the browser with no backend at all. TypeScript on the surface, Rust compiled to WebAssembly for the parts that need the speed, organised as a Turborepo.",
@@ -6,5 +7,5 @@
   "deployedURL": "https://sudoku.chrismerck.dev/",
   "state": "WIP",
   "image": "/src/assets/images/puzzles.png",
-  "isPublished": true
+  "hidden": false
 }

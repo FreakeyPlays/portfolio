@@ -3,10 +3,9 @@
   "description": "I build high quality software with AI agents and my professional judgement. Agents write the code, I own the architecture and decide what ships.",
   "socialPreview": {
     "image": {
-      "src": "/og/default_og.webp",
+      "src": "/src/assets/images/default_og.webp",
       "alt": "Christoph Merck, Full-Stack Engineer in Stuttgart, Germany"
     },
-    "description": "Welcome to my corner of the internet! Take a look at what I've been up to, and feel free to get in touch.",
-    "card": "none"
+    "description": "Welcome to my corner of the internet! Take a look at what I've been up to, and feel free to get in touch."
   }
 }

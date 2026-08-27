@@ -1,4 +1,5 @@
 {
+  "id": "60131072-523f-4824-bb56-3f9babc4095c",
   "order": 1,
   "company": "pep.digital",
   "url": "https://pep.digital",
@@ -25,5 +26,5 @@
       "technologies": ["Angular", "Storybook", "TypeScript"]
     }
   ],
-  "isPublished": true
+  "hidden": false
 }

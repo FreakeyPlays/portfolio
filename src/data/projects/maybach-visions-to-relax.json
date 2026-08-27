@@ -1,9 +1,10 @@
 {
+  "id": "ac080542-9c7b-4de4-98f3-9adfa0b723a8",
   "order": 2,
   "title": "Maybach - Visions to Relax",
   "description": "In association with Mercedes-Benz AG and the HdM, I developed a concept game for the Apple Vision Pro. The game can be played while the car is driving autonomously, and it interacts with the vehicle. It reacts to movement like steering, and can activate functions like the heating.",
-  "relatedBlogPost": "visions-to-relax|maybach-visions-to-relax-a-mixed-reality-game-for-autonomous-cars",
+  "relatedBlogPost": "a223eee0-b27b-4208-806e-72ff43f528e4",
   "state": "Done",
   "image": "/src/assets/images/visions-to-relax.png",
-  "isPublished": true
+  "hidden": false
 }

@@ -1,39 +1,42 @@
 {
+  "id": "822c52dd-3d4c-4d89-a032-eff6995dd05c",
+  "order": 3,
   "category": "Frameworks",
+  "hidden": false,
   "skills": [
     {
       "name": "Astro",
-      "image": "/src/assets/icons/astro-icon-light-gradient.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/astro-icon-light-gradient.svg",
+      "hidden": false
     },
     {
       "name": "Angular",
-      "image": "/src/assets/icons/angular.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/angular.svg",
+      "hidden": false
     },
     {
       "name": "React",
-      "image": "/src/assets/icons/react.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/react.svg",
+      "hidden": false
     },
     {
       "name": "Vue.js",
-      "image": "/src/assets/icons/vue.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/vue.svg",
+      "hidden": false
     },
     {
       "name": "Nuxt",
-      "image": "/src/assets/icons/nuxt.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/nuxt.svg",
+      "hidden": false
     },
     {
       "name": "Next.js",
-      "image": "/src/assets/icons/nextjs.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/nextjs.svg",
+      "hidden": false
     },
     {
       "name": "PayloadCMS",
-      "isPublished": false
+      "hidden": true
     }
   ]
 }

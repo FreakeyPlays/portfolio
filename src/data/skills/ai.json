@@ -1,30 +1,33 @@
 {
+  "id": "fe436e88-ab4b-4cbc-9228-271e022ead08",
+  "order": 1,
   "category": "AI",
+  "hidden": false,
   "skills": [
     {
       "name": "GitHub Copilot",
-      "image": "/src/assets/icons/copilot.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/copilot.svg",
+      "hidden": false
     },
     {
       "name": "Claude Code",
-      "image": "/src/assets/icons/claudecode.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/claudecode.svg",
+      "hidden": false
     },
     {
       "name": "Codex",
-      "image": "/src/assets/icons/codex.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/codex.svg",
+      "hidden": false
     },
     {
       "name": "Cursor",
-      "image": "/src/assets/icons/cursor.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/cursor.svg",
+      "hidden": false
     },
     {
       "name": "Antigravity",
-      "image": "/src/assets/icons/antigravity.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/antigravity.svg",
+      "hidden": false
     }
   ]
 }

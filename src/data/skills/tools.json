@@ -1,59 +1,63 @@
 {
+  "id": "118fec1d-3265-420d-98b7-c06e4b45920c",
+  "order": 4,
   "category": "Tools",
+  "hidden": false,
   "skills": [
     {
       "name": "Adobe",
-      "image": "/src/assets/icons/adobe.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/adobe.svg",
+      "hidden": false
     },
     {
       "name": "Figma",
-      "image": "/src/assets/icons/figma.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/figma.svg",
+      "hidden": false
     },
     {
       "name": "Blender",
-      "image": "/src/assets/icons/blender.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/blender.svg",
+      "hidden": false
     },
     {
       "name": "Docker",
-      "image": "/src/assets/icons/docker.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/docker.svg",
+      "hidden": false
     },
     {
       "name": "Git",
-      "image": "/src/assets/icons/git.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/git.svg",
+      "hidden": false
     },
     {
       "name": "Node.js",
-      "image": "/src/assets/icons/nodejs.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/nodejs.svg",
+      "hidden": false
     },
     {
       "name": "PostgreSQL",
-      "image": "/src/assets/icons/postgresql.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/postgresql.svg",
+      "hidden": false
     },
     {
       "name": "MongoDB",
-      "image": "/src/assets/icons/mongodb.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/mongodb.svg",
+      "hidden": false
     },
     {
       "name": "Tailwind CSS",
-      "image": "/src/assets/icons/tailwindcss.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/tailwindcss.svg",
+      "hidden": false
     },
     {
       "name": "WebRTC",
-      "image": "/src/assets/icons/webrtc.svg"
+      "icon": "/src/assets/icons/webrtc.svg",
+      "hidden": false
     },
     {
       "name": "Progressive Web App",
-      "image": "/src/assets/icons/pwa.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/pwa.svg",
+      "hidden": false
     }
   ]
 }

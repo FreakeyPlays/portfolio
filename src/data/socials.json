@@ -1,17 +1,20 @@
 [
   {
+    "order": 1,
     "label": "GitHub",
     "text": "See my GitHub Projects",
     "href": "https://github.com/FreakeyPlays",
     "icon": "/src/assets/icons/github.svg"
   },
   {
+    "order": 2,
     "label": "LinkedIn",
     "text": "Follow me on LinkedIn",
     "href": "https://www.linkedin.com/in/christoph-merck",
     "icon": "/src/assets/icons/linkedin.svg"
   },
   {
+    "order": 3,
     "label": "Bluesky",
     "text": "Follow me on Bluesky",
     "href": "https://bsky.app/profile/freakyplays.bsky.social",
