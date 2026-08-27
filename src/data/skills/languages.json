@@ -1,60 +1,63 @@
 {
+  "id": "3894be5d-6aa4-4e6a-ae8d-4e519d737a8c",
+  "order": 2,
   "category": "Languages",
+  "hidden": false,
   "skills": [
     {
       "name": "HTML",
-      "image": "/src/assets/icons/html5.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/html5.svg",
+      "hidden": false
     },
     {
       "name": "CSS",
-      "image": "/src/assets/icons/css.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/css.svg",
+      "hidden": false
     },
     {
       "name": "JavaScript",
-      "image": "/src/assets/icons/js.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/js.svg",
+      "hidden": false
     },
     {
       "name": "TypeScript",
-      "image": "/src/assets/icons/ts.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/ts.svg",
+      "hidden": false
     },
     {
       "name": "C",
-      "image": "/src/assets/icons/c.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/c.svg",
+      "hidden": false
     },
     {
       "name": "C++",
-      "image": "/src/assets/icons/cpp.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/cpp.svg",
+      "hidden": false
     },
     {
       "name": "C#",
-      "image": "/src/assets/icons/csharp.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/csharp.svg",
+      "hidden": false
     },
     {
       "name": "Java",
-      "image": "/src/assets/icons/java.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/java.svg",
+      "hidden": false
     },
     {
       "name": "Python",
-      "image": "/src/assets/icons/python.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/python.svg",
+      "hidden": false
     },
     {
       "name": "Rust",
-      "image": "/src/assets/icons/rust.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/rust.svg",
+      "hidden": false
     },
     {
       "name": "WebAssembly",
-      "image": "/src/assets/icons/wasm.svg",
-      "isPublished": true
+      "icon": "/src/assets/icons/wasm.svg",
+      "hidden": false
     }
   ]
 }

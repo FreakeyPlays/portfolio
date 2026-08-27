@@ -1,4 +1,5 @@
 {
+  "id": "95b9649e-b68e-4638-ba38-81bdaa6cfde9",
   "order": 3,
   "title": "PWA Chat",
   "description": "A messenger built as a Progressive Web App with no framework underneath it, so routing, state and offline support are all hand written. Built for the Mobile Apps and User Experience course at HS Esslingen.",
@@ -6,5 +7,5 @@
   "deployedURL": "https://chat.chrismerck.dev",
   "state": "Done",
   "image": "/src/assets/images/pwa-chat-preview.jpg",
-  "isPublished": true
+  "hidden": false
 }

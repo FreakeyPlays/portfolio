@@ -1,8 +1,6 @@
 {
-  "name": {
-    "first": "Christoph",
-    "last": "Merck"
-  },
+  "firstName": "Christoph",
+  "lastName": "Merck",
   "jobTitle": "Full-Stack Engineer",
   "tagline": "Full-Stack Engineer in Stuttgart, Germany",
   "bio": {

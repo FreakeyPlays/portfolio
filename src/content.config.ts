@@ -1,190 +1,227 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const order = z.number().optional();
-const cmsDate = z.coerce.date();
-const singleton = (name: string) => (text: string) => ({ [name]: JSON.parse(text) });
+const singleton =
+  (id: string) =>
+  (text: string): Record<string, Record<string, unknown>> => ({
+    [id]: JSON.parse(text),
+  });
+
+const publicationMetadata = {
+  isPublished: z.boolean(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  publishedAt: z.coerce.date().optional(),
+};
 
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/pages' }),
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/pages',
+    generateId: (options) => options.data.id as string,
+  }),
   schema: z.object({
+    id: z.uuid(),
     title: z.string(),
+    slug: z.string(),
     description: z.string().optional(),
-    isPublished: z.boolean().default(false),
-    noIndex: z.boolean().default(false),
-    createdAt: z.coerce.date(),
-    updatedAt: z.coerce.date(),
-    publishedAt: z.coerce.date().optional(),
+    ...publicationMetadata,
+    noIndex: z.boolean(),
   }),
 });
 
 const posts = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/posts' }),
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/posts',
+    generateId: (options) => options.data.id as string,
+  }),
   schema: ({ image }) =>
     z.object({
-      order: z.number().optional(),
-      image: image(),
+      order: z.number(),
+      id: z.uuid(),
       title: z.string(),
+      image: image(),
       slug: z.string(),
-      intro: z.string(),
-      faq: z.array(z.object({ question: z.string(), answer: z.string() })).default([]),
-      tags: z.array(z.string()).default([]),
-      category: z.string(),
-      customSlug: z.string().optional(),
-      isPublished: z.boolean().default(false),
-      createdAt: z.coerce.date(),
-      updatedAt: z.coerce.date(),
-      publishedAt: z.coerce.date().optional(),
+      description: z.string(),
+      relatedPosts: z.array(reference('posts')).optional(),
+      tags: z.array(reference('tags')),
+      category: reference('categories'),
+      faq: z
+        .array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        )
+        .optional(),
+      ...publicationMetadata,
     }),
-});
-
-const education = defineCollection({
-  loader: glob({ pattern: '*.mdx', base: './src/data/education' }),
-  schema: z.object({
-    order,
-    level: z.string(),
-    institution: z.string(),
-    url: z.url(),
-    degree: z.string(),
-    startDate: cmsDate,
-    endDate: cmsDate.optional(),
-    location: z.string(),
-    grade: z.number().min(1).max(6).optional(),
-    isPublished: z.boolean().default(false),
-  }),
 });
 
 const projects = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/data/projects' }),
   schema: ({ image }) =>
     z.object({
-      order,
+      id: z.uuid(),
+      order: z.number(),
       title: z.string(),
       description: z.string(),
       repositoryURL: z.url().optional(),
       deployedURL: z.url().optional(),
-      relatedBlogPost: z.string().optional(),
+      relatedBlogPost: reference('posts').optional(),
       state: z.enum(['Planned', 'WIP', 'Done', 'Maintenance']),
       image: image().optional(),
-      isPublished: z.boolean().default(false),
+      hidden: z.boolean(),
     }),
 });
 
 const career = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/data/career' }),
   schema: z.object({
-    order,
+    id: z.uuid(),
+    order: z.number(),
     company: z.string(),
     url: z.url(),
     location: z.string(),
     jobs: z.array(
       z.object({
         title: z.string(),
-        startDate: cmsDate,
-        endDate: cmsDate.optional(),
+        startDate: z.coerce.date(),
+        endDate: z.coerce.date().optional(),
         description: z.string(),
         technologies: z.array(z.string()).optional(),
       }),
     ),
-    isPublished: z.boolean().default(false),
+    hidden: z.boolean(),
   }),
 });
 
 const skills = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/data/skills' }),
   schema: z.object({
+    id: z.uuid(),
+    order: z.number(),
     category: z.string(),
+    hidden: z.boolean(),
     skills: z.array(
       z.object({
         name: z.string(),
-        image: z.string().optional(),
-        isPublished: z.boolean().default(true),
+        icon: z.string().optional(),
+        hidden: z.boolean(),
       }),
     ),
   }),
 });
 
-const person = defineCollection({
-  loader: file('src/data/person.json', { parser: singleton('person') }),
+const education = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/data/education' }),
   schema: z.object({
-    name: z.object({
-      first: z.string(),
-      last: z.string(),
-    }),
-    alternateName: z.string().optional(),
-    jobTitle: z.string(),
-    tagline: z.string(),
-    bio: z.object({
-      long: z.string(),
-      short: z.string().optional(),
-    }),
-    email: z.email(),
-    orcid: z.url().optional(),
-    image: z.string().optional(),
-    location: z.object({
-      locality: z.string(),
-      region: z.string().optional(),
-      country: z.string(),
-    }),
-    workLocation: z.array(z.string()).default([]),
-    languages: z
-      .array(
+    id: z.uuid(),
+    order: z.number(),
+    level: z.string(),
+    institution: z.string(),
+    url: z.url(),
+    degree: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    location: z.string(),
+    grade: z.number().min(1).max(6).optional(),
+    hidden: z.boolean(),
+    description: z.string(),
+  }),
+});
+
+const tags = defineCollection({
+  loader: file('src/data/meta/tags.json'),
+  schema: z.object({
+    id: z.uuid(),
+    label: z.string(),
+    slug: z.string(),
+  }),
+});
+
+const categories = defineCollection({
+  loader: file('src/data/meta/categories.json'),
+  schema: z.object({
+    id: z.uuid(),
+    label: z.string(),
+    slug: z.string(),
+  }),
+});
+
+const personal = defineCollection({
+  loader: file('src/data/personal.json', { parser: singleton('personal') }),
+  schema: ({ image }) =>
+    z.object({
+      firstName: z.string(),
+      lastName: z.string(),
+      alternateName: z.string().optional(),
+      jobTitle: z.string(),
+      tagline: z.string(),
+      bio: z.object({
+        long: z.string(),
+        short: z.string().optional(),
+      }),
+      email: z.email(),
+      orcid: z.url().optional(),
+      image: image().optional(),
+      location: z.object({
+        locality: z.string(),
+        region: z.string().optional(),
+        country: z.string(),
+      }),
+      workLocation: z.array(z.string()),
+      languages: z.array(
         z.object({
           name: z.string(),
           code: z.string(),
         }),
-      )
-      .default([]),
-  }),
+      ),
+    }),
 });
 
 const site = defineCollection({
   loader: file('src/data/site.json', { parser: singleton('site') }),
-  schema: z.object({
-    launchedAt: cmsDate,
-    description: z.string(),
-    socialPreview: z.object({
-      image: z.object({
-        src: z.string(),
-        alt: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      launchedAt: z.coerce.date(),
+      description: z.string(),
+      socialPreview: z.object({
+        image: z.object({
+          src: image(),
+          alt: z.string(),
+        }),
+        title: z.string().optional(),
+        description: z.string().optional(),
       }),
-      title: z.string().optional(),
-      description: z.string().optional(),
-      card: z.enum(['none', 'summary_large_image', 'summary']).default('none'),
-      twitterHandle: z.string().optional(),
     }),
-  }),
 });
 
 const socials = defineCollection({
-  loader: file('src/data/socials.json', {
-    parser: (text) =>
-      Object.fromEntries(
-        (JSON.parse(text) as { label: string }[]).map((social, index) => [
-          social.label,
-          { ...social, order: index },
-        ]),
-      ),
-  }),
-  schema: z.object({
-    order: z.number(),
-    label: z.string(),
-    text: z.string(),
-    href: z.url(),
-    icon: z.string(),
-    footerOnly: z.boolean().default(false),
-  }),
+  loader: file('src/data/socials.json', { parser: singleton('socials') }),
+  schema: z.array(
+    z.object({
+      order: z.number(),
+      label: z.string(),
+      text: z.string(),
+      href: z.url(),
+      icon: z.string(),
+    }),
+  ),
 });
 
 export const collections = {
   pages,
   posts,
-  education,
   projects,
   career,
   skills,
-  person,
+  education,
+  tags,
+  categories,
+  personal,
   site,
   socials,
 };

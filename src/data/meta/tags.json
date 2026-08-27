@@ -1,0 +1,22 @@
+[
+  {
+    "id": "13c3f2e7-28c2-4086-a7aa-53505f9864b8",
+    "label": "Claude",
+    "slug": "claude"
+  },
+  {
+    "id": "326930ab-5bb3-4d89-a68f-bf7dec3ef199",
+    "label": "Uni",
+    "slug": "uni"
+  },
+  {
+    "id": "420432b5-78d9-4bf2-91f9-d2ecab347a1d",
+    "label": "Unity",
+    "slug": "unity"
+  },
+  {
+    "id": "07967bd3-95a6-4823-b839-eb3fecb41c3a",
+    "label": "VR",
+    "slug": "vr"
+  }
+]

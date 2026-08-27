@@ -1,8 +1,16 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
 app_title: Portfolio CMS
-
 publish_mode: editorial_workflow
+
+editor:
+  preview: false
+
+output:
+  omit_empty_optional_fields: true
+
+slug:
+  clean_accents: true
 
 backend:
   name: github
@@ -20,16 +28,6 @@ backend:
 
 media_folder: /src/assets
 public_folder: /src/assets
-
-editor:
-  preview: false
-
-output:
-  omit_empty_optional_fields: true
-
-slug:
-  clean_accents: true
-
 media_libraries:
   default:
     config:
@@ -61,19 +59,50 @@ collections:
     label_singular: Page
     icon: description
     folder: src/content/pages
-    preview_path: "/{{slug}}"
     extension: mdx
-    format: frontmatter
-    create: true
+    reorder: true
+    preview_path: "/{{slug}}"
     identifier_field: title
-    summary: "{{title}}"
+    summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
+    slug: "{{slug}}"
+    view_groups:
+      - name: published
+        label: Is Published
+        field: isPublished
+      - name: indexed
+        label: Not Indexed
+        field: noIndex
+    view_filters:
+      - name: draft
+        label: Draft
+        field: isPublished
+        pattern: false
+      - name: published
+        label: Published
+        field: isPublished
+        pattern: true
+      - name: indexed
+        label: Indexed
+        field: noIndex
+        pattern: false
+      - name: notIndexed
+        label: Not Indexed
+        field: noIndex
+        pattern: true
     fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
       - name: title
         label: Title
         widget: string
         pattern:
           - '^(?!\s*(?:[Ii][Nn][Dd][Ee][Xx])\s*$).+'
           - The Homepage can be created via the name Home.
+      - name: slug
+        label: Slug
+        widget: compute
+        value: "{{fields.title | default('untitled') | slugify}}"
       - name: description
         label: Description
         widget: text
@@ -83,12 +112,6 @@ collections:
         label: Published
         widget: boolean
         default: false
-        required: true
-      - name: noIndex
-        label: Remove from Indexing
-        widget: boolean
-        default: false
-        required: true
       - name: createdAt
         widget: hidden
         default: "{{datetime}}"
@@ -97,6 +120,11 @@ collections:
         default: "{{datetime}}"
       - name: publishedAt
         widget: hidden
+      - name: noIndex
+        label: Remove from Indexing
+        widget: boolean
+        default: false
+        required: true
       - name: body
         label: Body
         widget: markdown
@@ -109,13 +137,6 @@ collections:
           - education
           - projects
           - postList
-    view_groups:
-      - name: published
-        label: Is Published
-        field: isPublished
-      - name: indexed
-        label: Not Indexed
-        field: noIndex
 
   - name: posts
     label: Posts
@@ -123,11 +144,15 @@ collections:
     icon: history_edu
     folder: src/content/posts
     extension: mdx
-    format: frontmatter
-    create: true
     reorder: true
+    preview_path: "/blog/{{slug}}"
+    identifier_field: title
+    summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
     slug: "post-{{order}}-{{slug}}"
     fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
       - name: image
         label: Image
         widget: image
@@ -136,10 +161,13 @@ collections:
         widget: string
       - name: slug
         label: Slug
-        widget: compute
-        value: "{{fields.title | default('untitled') | slugify}}"
-      - name: intro
-        label: Intro
+        widget: string
+        before_input: .com/blog/
+        pattern:
+          - ^[a-z0-9]*(?:-[a-z0-9]+)*$
+          - String must be lowercase letters and may contain hyphens. No other special characters are allowed.
+      - name: description
+        label: Description
         widget: markdown
         buttons:
           - bold
@@ -164,6 +192,21 @@ collections:
             code,
             link,
           ]
+      - name: relatedPosts
+        label: Related Posts
+        widget: relation
+        collection: posts
+        required: false
+        multiple: true
+        max: 2
+        dropdown_threshold: 0
+        value_field: id
+        display_fields: ["title"]
+        search_fields: ["title"]
+        filters:
+          - field: id
+            values: ["{{id}}"]
+            exclude: true
       - name: faq
         label: FAQ
         widget: list
@@ -184,25 +227,23 @@ collections:
       - name: tags
         label: Tags
         widget: relation
-        collection: blog-meta
-        file: tag
+        collection: meta
+        file: tags
         multiple: true
         min: 1
-        value_field: "{{tags.*.title}}"
+        value_field: "{{tags.*.id}}"
+        display_fields: ["{{tags.*.label}}"]
+        search_fields: ["{{tags.*.label}}"]
+        dropdown_threshold: 0
       - name: category
         label: Category
         widget: relation
-        collection: blog-meta
+        collection: meta
         file: categories
-        value_field: "{{category.*.title}}"
-      - name: customSlug
-        label: Custom Slug (optional)
-        widget: string
-        required: false
-        before_input: .com/blog/
-        pattern:
-          - ^[a-z0-9]*(?:-[a-z0-9]+)*$
-          - String must be lowercase letters and may contain hyphens. No other special characters are allowed.
+        value_field: "{{categories.*.id}}"
+        display_fields: ["{{categories.*.label}}"]
+        search_fields: ["{{categories.*.label}}"]
+        dropdown_threshold: 0
       - name: isPublished
         label: Is Published
         widget: boolean
@@ -216,127 +257,62 @@ collections:
       - name: publishedAt
         widget: hidden
 
-  - name: education
-    label: Education
-    label_singular: Education Entry
-    icon: school
-    folder: src/data/education
-    extension: mdx
-    format: frontmatter
-    create: true
-    reorder: true
-    identifier_field: level
-    summary: "{{level}} – {{institution}}"
-    fields:
-      - name: level
-        label: Level
-        widget: string
-      - name: institution
-        label: Institution
-        widget: string
-      - name: url
-        label: Institution Website
-        widget: string
-        type: url
-      - name: degree
-        label: Degree
-        widget: string
-      - name: startDate
-        label: Start Date
-        widget: datetime
-        type: date
-        format: YYYY-MM-DD
-      - name: endDate
-        label: End Date
-        widget: datetime
-        type: date
-        format: YYYY-MM-DD
-        required: false
-        hint: Leave empty if still ongoing — shows as "present"
-      - name: location
-        label: Location
-        widget: string
-      - name: grade
-        label: Grade
-        widget: number
-        value_type: float
-        min: 1
-        max: 6
-        step: 0.1
-        required: false
-      - name: isPublished
-        label: Published
-        widget: boolean
-        default: false
-      - name: body
-        label: Description
-        widget: markdown
-        buttons: [bold, italic, link]
-        editor_components: []
-
-  - name: projects
-    label: Projects
-    label_singular: Project
-    icon: deployed_code
-    folder: src/data/projects
-    extension: json
+  - name: skills
+    label: Skills
+    label_singular: Skill Collection
+    icon: handyman
+    folder: src/data/skills
     format: json
-    create: true
     reorder: true
-    thumbnail: image
-    summary: "{{title}}"
+    identifier_field: category
+    summary: "{{category}}"
+    slug: "{{category | slugify}}"
     fields:
-      - name: title
-        label: Title
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
+      - name: category
+        label: Category
         widget: string
-      - name: description
-        label: Description
-        widget: text
-      - name: repositoryURL
-        label: Repository URL
-        widget: string
-        type: url
-        required: false
-      - name: deployedURL
-        label: Deployed URL
-        widget: string
-        type: url
-        required: false
-      - name: relatedBlogPost
-        label: Related Blog Post
-        widget: relation
-        collection: posts
-        value_field: "{{fields.customSlug}}|{{fields.slug}}"
-        required: false
-      - name: state
-        label: State
-        widget: select
-        options:
-          - Planned
-          - WIP
-          - Done
-          - Maintenance
-      - name: image
-        label: Preview Image
-        widget: image
-        required: false
-      - name: isPublished
-        label: Published
+        hint: 'e.g. "Tools", "Frameworks", "Languages"'
+      - name: hidden
+        label: Hidden
         widget: boolean
         default: false
+      - name: skills
+        label: Skills
+        label_singular: Skill
+        widget: list
+        summary: "{{fields.name}}"
+        fields:
+          - name: name
+            label: Name
+            widget: string
+          - name: icon
+            label: Icon
+            widget: image
+            required: false
+            accept: image/svg+xml
+            hint: SVG only. The site renders it inline, so it can be recolored.
+          - name: hidden
+            label: Hidden
+            widget: boolean
+            default: false
 
   - name: career
     label: Career
-    label_singular: Company Streak
+    label_singular: Career Entry
     icon: work
     folder: src/data/career
-    extension: json
     format: json
-    create: true
     reorder: true
     identifier_field: company
-    summary: "{{company}} – {{location}}"
+    summary: "{{company}}"
+    slug: "{{year}}-{{company | slugify}}"
     fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
       - name: company
         label: Company
         widget: string
@@ -375,89 +351,201 @@ collections:
             label: Technologies
             widget: list
             required: false
-      - name: isPublished
-        label: Published
+      - name: hidden
+        label: Hidden
         widget: boolean
-        default: false
+        default: true
 
-  - name: skills
-    label: Skills
-    label_singular: Skill Category
-    icon: handyman
-    folder: src/data/skills
-    extension: json
+  - name: education
+    label: Education
+    label_singular: Education Entry
+    icon: school
+    folder: src/data/education
     format: json
-    create: true
-    identifier_field: category
-    summary: "{{category}}"
+    reorder: true
+    identifier_field: institution
+    summary: "{{level}} – {{institution}}"
+    slug: "{{level | slugify}}-{{institution | slugify}}"
     fields:
-      - name: category
-        label: Category
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
+      - name: level
+        label: Level
         widget: string
-        hint: 'e.g. "Tools", "Frameworks", "Languages"'
-      - name: skills
-        label: Skills
-        label_singular: Skill
-        widget: list
-        summary: "{{fields.name}}"
-        fields:
-          - name: name
-            label: Name
-            widget: string
-          - name: image
-            label: Icon
-            widget: image
-            required: false
-            accept: image/svg+xml
-            hint: SVG only. The site renders it inline, so it can be recolored.
-          - name: isPublished
-            label: Show on Site
-            widget: boolean
-            default: true
+      - name: institution
+        label: Institution
+        widget: string
+      - name: url
+        label: Institution Website
+        widget: string
+        type: url
+      - name: degree
+        label: Degree
+        widget: string
+      - name: startDate
+        label: Start Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+      - name: endDate
+        label: End Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+        hint: Leave empty if still ongoing — shows as "present"
+      - name: location
+        label: Location
+        widget: string
+      - name: grade
+        label: Grade
+        widget: number
+        value_type: float
+        min: 1
+        max: 6
+        step: 0.1
+      - name: hidden
+        label: Hidden
+        widget: boolean
+        default: true
+      - name: description
+        label: Description
+        widget: markdown
+        buttons: [bold, italic, link]
+        editor_components: []
 
-  - name: blog-meta
-    label: Blog Meta
+  - name: projects
+    label: Projects
+    label_singular: Project
+    icon: handyman
+    folder: src/data/projects
+    format: json
+    reorder: true
+    identifier_field: title
+    summary: "{{title}}"
+    slug: "{{title | slugify}}"
+    fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
+      - name: title
+        label: Title
+        widget: string
+      - name: description
+        label: Description
+        widget: markdown
+        buttons: [bold, italic, link]
+        editor_components: []
+      - name: repositoryURL
+        label: Repository URL
+        widget: string
+        type: url
+        required: false
+      - name: deployedURL
+        label: Deployed URL
+        widget: string
+        type: url
+        required: false
+      - name: relatedBlogPost
+        label: Related Blog Post
+        widget: relation
+        collection: posts
+        dropdown_threshold: 0
+        value_field: "id"
+        display_fields: ["title"]
+        search_fields: ["title"]
+        required: false
+      - name: state
+        label: State
+        widget: select
+        options:
+          - Planned
+          - WIP
+          - Done
+          - Maintenance
+      - name: image
+        label: Preview Image
+        widget: image
+        required: false
+      - name: hidden
+        label: Hidden
+        widget: boolean
+        default: true
+
+  - name: meta
+    label: Meta
     files:
-      - name: tag
+      - name: tags
         label: Tags
-        file: src/data/blog-meta/tags.json
+        file: src/data/meta/tags.json
         fields:
           - name: tags
             label: Tags
             widget: list
+            root: true
             fields:
-              - name: title
-                label: Title
+              - name: id
+                widget: hidden
+                default: "{{uuid}}"
+              - name: label
+                label: Label
                 widget: string
+              - name: slug
+                widget: compute
+                value: "{{label | default('undefined') | slugify}}"
+
       - name: categories
         label: Categories
-        file: src/data/blog-meta/categories.json
+        file: src/data/meta/categories.json
         fields:
-          - name: category
-            label: Category
+          - name: categories
+            label: Categories
             widget: list
+            root: true
             fields:
-              - name: title
-                label: Title
+              - name: id
+                widget: hidden
+                default: "{{uuid}}"
+              - name: label
+                label: Label
                 widget: string
-singletons:
-  - name: person
-    label: Person
-    icon: person
-    file: src/data/person.json
-    fields:
-      - name: name
-        label: Name
-        widget: object
-        summary: "{{first}} {{last}}"
-        collapsed: true
+              - name: slug
+                widget: compute
+                value: "{{label | default('undefined') | slugify}}"
+
+      - name: headers
+        label: Headers
+        file: public/_headers
         fields:
-          - name: first
-            label: First Name
-            widget: string
-          - name: last
-            label: Last Name
-            widget: string
+          - name: body
+            label: Headers
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+
+      - name: redirects
+        label: Redirects
+        file: public/_redirects
+        fields:
+          - name: body
+            label: Redirects
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+
+singletons:
+  - name: personal
+    label: Personal
+    icon: person
+    file: src/data/personal.json
+    fields:
+      - name: firstName
+        label: First Name
+        widget: string
+      - name: lastName
+        label: Last Name
+        widget: string
       - name: alternateName
         label: Handle
         widget: string
@@ -504,14 +592,12 @@ singletons:
         label: Photograph
         widget: image
         required: false
-        media_folder: /public/og
-        public_folder: /og
         hint: Only set this once the photo is actually shown on the page.
       - name: location
         label: Location
         widget: object
         hint: Where you are based now.
-        summary: "{{locality}}, {{region}}, {{country}}"
+        summary: "{{locality}}, {{country}}"
         collapsed: true
         fields:
           - name: locality
@@ -537,7 +623,7 @@ singletons:
         label_singular: Language
         widget: list
         required: false
-        summary: "{{fields.name}}"
+        summary: "{{name}}"
         collapsed: true
         fields:
           - name: name
@@ -576,8 +662,6 @@ singletons:
               - name: src
                 label: Image
                 widget: image
-                media_folder: /public/og
-                public_folder: /og
               - name: alt
                 label: Alt Text
                 widget: string
@@ -595,25 +679,6 @@ singletons:
             hint: >-
               Overrides the meta description inside the card only. Leave empty
               to use the page description. Cut off after roughly 110 characters.
-          - name: card
-            label: Card Layout
-            widget: select
-            default: none
-            hint: >-
-              Only X reads this. Everywhere else the large image is used
-              regardless.
-            options:
-              - label: None
-                value: none
-              - label: Large image
-                value: summary_large_image
-              - label: Small square thumbnail
-                value: summary
-          - name: twitterHandle
-            label: X Handle
-            widget: string
-            required: false
-            hint: Including the @. Only used for the attribution line on X.
 
   - name: socials
     label: Socials
@@ -626,7 +691,7 @@ singletons:
         widget: list
         collapsed: true
         root: true
-        summary: "{{fields.label}}"
+        summary: "{{label}}"
         fields:
           - name: label
             label: Platform
@@ -645,7 +710,3 @@ singletons:
             widget: image
             accept: image/svg+xml
             hint: SVG only. The site renders it inline, so it can be recolored.
-          - name: footerOnly
-            label: Footer only
-            widget: boolean
-            required: false

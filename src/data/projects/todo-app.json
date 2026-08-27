@@ -1,4 +1,5 @@
 {
+  "id": "2d45aa97-bcc6-4175-a3ef-dc1ad36431c7",
   "order": 6,
   "title": "ToDo App",
   "description": "Learning to test properly was the point, the todo app was just the excuse. Angular and NestJS underneath, with Cypress covering the frontend end to end and k6 load testing the API.",
@@ -6,5 +7,5 @@
   "deployedURL": "https://todo.chrismerck.dev",
   "state": "Done",
   "image": "/src/assets/images/todo-app-preview.jpg",
-  "isPublished": true
+  "hidden": false
 }
