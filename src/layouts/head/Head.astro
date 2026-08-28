@@ -1,4 +1,5 @@
 ---
+import { isProduction } from '@constants';
 import type { HeadData } from "@utils/pageMetaData";
 import Article from "./_Article.astro";
 import JsonLD from "./_JsonLD.astro";
@@ -45,7 +46,7 @@ const { meta } = Astro.props;
 <JsonLD nodes={meta.jsonLdNodes} />
 
 {
-  import.meta.env.PROD && (
+  isProduction && (
     <script
       async
       is:inline

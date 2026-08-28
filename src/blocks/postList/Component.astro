@@ -1,11 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
+import { isProduction } from '@constants';
 import { byOrderInverse } from '@utils/sorting';
 import PostCard from './PostCard.astro';
 
 const posts = (await getCollection(
   'posts',
-  (post) => (post.data.isPublished || import.meta.env.DEV),
+  (post) => (post.data.isPublished || !isProduction),
 )).sort(byOrderInverse);
 ---
 
