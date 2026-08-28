@@ -1,9 +1,8 @@
 import { getCollection } from 'astro:content';
 import { getLatestModifiedDate } from '@utils/buildTimePageMeta.ts';
-import { formatMonthYear } from '@utils/date.ts';
-import { byOrder } from '@utils/order.ts';
-import { getPerson } from '@utils/person.ts';
-import { getProfiles } from '@utils/socials.ts';
+import { formatMonthYear } from '@utils/dateFormat';
+import { getSingelton } from '@utils/getSingelton';
+import { byOrder } from '@utils/sorting';
 import type { APIRoute } from 'astro';
 
 const GERMAN_GRADE_SCALE = 'German scale, 1.0 is the best mark and 4.0 the pass mark';
@@ -19,38 +18,43 @@ export const GET: APIRoute = async ({ site }) => {
   const origin = site?.origin ?? 'https://chrismerck.dev';
 
   const [person, profiles, career, education, projects, skills] = await Promise.all([
-    getPerson(),
-    getProfiles(),
-    getCollection('career', ({ data }) => data.isPublished),
-    getCollection('education', ({ data }) => data.isPublished),
-    getCollection('projects', ({ data }) => data.isPublished),
+    getSingelton('personal'),
+    getSingelton('socials'),
+    getCollection('career', ({ data }) => !data.hidden),
+    getCollection('education', ({ data }) => !data.hidden),
+    getCollection('projects', ({ data }) => !data.hidden),
     getCollection('skills'),
   ]);
 
   const out: string[] = [];
   const push = (...lines: string[]) => out.push(...lines);
 
-  push(`# ${person.name.full}`, '');
-  push(`> ${person.bio.long}`, '');
+  push(`# ${person.data.firstName} ${person.data.lastName}`, '');
+  push(`> ${person.data.bio.long}`, '');
 
-  push(`${person.jobTitle}.`);
+  push(`${person.data.jobTitle}.`);
   push(
-    `Based in ${[person.location.locality, person.location.region, person.location.country]
+    `Based in ${[
+      person.data.location.locality,
+      person.data.location.region,
+      person.data.location.country,
+    ]
       .filter(Boolean)
       .join(', ')}.`,
   );
-  if (person.workLocation.length) push(`Open to roles in ${person.workLocation.join(', ')}.`);
-  if (person.languages.length)
-    push(`Speaks ${person.languages.map(({ name }) => name).join(' and ')}.`);
+  if (person.data.workLocation.length)
+    push(`Open to roles in ${person.data.workLocation.join(', ')}.`);
+  if (person.data.languages.length)
+    push(`Speaks ${person.data.languages.map(({ name }) => name).join(' and ')}.`);
   push('');
 
   const named = skills.flatMap(({ data }) =>
-    data.skills.filter((skill) => skill.isPublished && skill.image).map((skill) => skill.name),
+    data.skills.filter((skill) => !skill.hidden && skill.icon).map((skill) => skill.name),
   );
   if (named.length) push(`Skills: ${named.join(', ')}.`);
   push('');
 
-  push(`Contact: ${person.email}`);
+  push(`Contact: ${person.data.email}`);
   push(`Last updated: ${getLatestModifiedDate().toISOString().slice(0, 10)}`, '');
 
   const ordered = [...projects].sort(byOrder);
@@ -93,11 +97,11 @@ export const GET: APIRoute = async ({ site }) => {
   push('');
 
   push('## Profiles', '');
-  for (const { label, href } of profiles) {
+  for (const { label, href } of profiles.data) {
     push(`- [${label}](${href})`);
   }
-  if (person.orcid) {
-    push(`- [ORCID](${person.orcid})`);
+  if (person.data.orcid) {
+    push(`- [ORCID](${person.data.orcid})`);
   }
 
   return new Response(

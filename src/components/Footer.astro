@@ -1,5 +1,5 @@
 ---
-import { getSocials } from '@utils/socials.ts';
+import { getSingelton } from '@utils/getSingelton';
 import PrideFlag from './PrideFlag/PrideFlag.astro';
 import SocialIconLink from './SocialIconLink.astro';
 
@@ -13,7 +13,7 @@ const iconModules = import.meta.glob('../assets/icons/*.svg', {
 const iconFor = (imagePath: string) =>
   iconModules[`../assets/icons/${imagePath.split('/').pop()}`];
 
-const socials = await getSocials();
+const socials = await getSingelton('socials');
 ---
 
 <footer class="col-[image]!">
@@ -30,7 +30,7 @@ const socials = await getSocials();
     <PrideFlag width={50} numberOfColumns={20} billow={0.15} />
     <ul class="flex flex-row gap-4">
       {
-        socials.map(({ href, icon, text }) => (
+        socials.data.map(({ href, icon, text }) => (
           <li>
             <SocialIconLink icon={iconFor(icon)} href={href} text={text} />
           </li>

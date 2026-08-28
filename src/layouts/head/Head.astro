@@ -1,0 +1,57 @@
+---
+import type { HeadData } from "@utils/pageMetaData";
+import Article from "./_Article.astro";
+import JsonLD from "./_JsonLD.astro";
+import OpenGraph from "./_OpenGraph.astro";
+import Twitter from "./_Twitter.astro";
+
+export interface BaseHeadData {
+  canonical: string;
+  title: string;
+  description: string;
+  author: string;
+  noIndex: boolean;
+  locale: string;
+}
+
+export interface Props {
+  meta: HeadData;
+}
+
+const { meta } = Astro.props;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#0c0a09" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={meta.canonical} />
+
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+<meta name="author" content={meta.author} />
+<meta
+  name="robots"
+  content={meta.noIndex
+    ? "noindex, follow"
+    : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"}
+/>
+
+<OpenGraph og={meta.og} />
+<Twitter />
+<Article meta={meta.article} />
+<JsonLD nodes={meta.jsonLdNodes} />
+
+{
+  import.meta.env.PROD && (
+    <script
+      async
+      is:inline
+      data-astro-rerun
+      src="https://static.chrismerck.dev/script.js"
+      data-website-id="c7c4e802-1032-40aa-9dd8-dc62b220251e"
+    />
+  )
+}

@@ -1,0 +1,14 @@
+---
+export type JsonLDNode = object
+
+interface Props {
+  nodes: JsonLDNode[];
+}
+
+const { nodes } = Astro.props;
+
+const json = JSON.stringify({ "@context": "https://schema.org", "@graph": nodes })
+  .replace(/</g, "\\u003c");
+---
+
+{nodes.length > 0 && <script type="application/ld+json" is:inline set:html={json} />}

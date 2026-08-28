@@ -39,8 +39,8 @@ const rows = categories
   .map((category) => ({
     category: category.data.category,
     skills: category.data.skills
-      .filter((skill) => skill.isPublished && skill.image)
-      .map((skill) => ({ name: skill.name, icon: iconFor(skill.image as string) }))
+      .filter((skill) => !skill.hidden && skill.icon)
+      .map((skill) => ({ name: skill.name, icon: iconFor(skill.icon as string) }))
       .filter((skill) => Boolean(skill.icon)),
   }))
   .filter(({ skills }) => skills.length > 1);

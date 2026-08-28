@@ -1,22 +1,23 @@
 import { type CollectionEntry, getEntries, getEntry } from 'astro:content';
 import { URL_MAPPINGS } from '@constants';
-import type { BaseMeta } from '@layouts/BaseLayout.astro';
-import type { ArticleMeta } from '@layouts/meta/_Article.astro';
-import type { JsonLD } from '@layouts/meta/_JsonLD.astro';
-import type { OGMeta } from '@layouts/meta/_OpenGraph.astro';
+import type { ArticleMetaData } from '@layouts/head/_Article.astro';
+import type { JsonLDNode } from '@layouts/head/_JsonLD.astro';
+import type { OpenGraphData } from '@layouts/head/_OpenGraph.astro';
+import type { BaseHeadData } from '@layouts/head/Head.astro';
 import type { DeepPartial } from '@utils/deepPartial';
 import { deepMerge } from '@utils/deepPartial';
+import { removeHtmlTags } from './sanitizeMarkdown';
 
-export type MetaData = BaseMeta & {
-  og: OGMeta;
-  article?: ArticleMeta;
-  jsonLdNodes: JsonLD;
+export type HeadData = BaseHeadData & {
+  og: OpenGraphData;
+  article?: ArticleMetaData;
+  jsonLdNodes: JsonLDNode[];
 };
 
 export async function resolveSeo(
   entity: CollectionEntry<'pages' | 'posts'>,
   url: URL,
-): Promise<MetaData> {
+): Promise<HeadData> {
   const canonical = url.href;
   const isHome = url.pathname === '/';
   const [personal, siteData] = await Promise.all([
@@ -43,7 +44,7 @@ export async function resolveSeo(
     ? undefined
     : createBreadCrumbs(url, overwrites.title ?? author, canonical);
 
-  const defaults: MetaData = {
+  const defaults: HeadData = {
     title,
     canonical,
     description,
@@ -82,10 +83,10 @@ export async function resolveSeo(
   });
 }
 
-function resolvePage(entity: CollectionEntry<'pages'>, isHome: boolean): DeepPartial<MetaData> {
+function resolvePage(entity: CollectionEntry<'pages'>, isHome: boolean): DeepPartial<HeadData> {
   return {
     title: isHome ? undefined : entity.data.title,
-    description: entity.data.description,
+    description: entity.data.description ? removeHtmlTags(entity.data.description) : undefined,
     noIndex: entity.data.noIndex || !entity.data.isPublished,
     og: {
       type: isHome ? 'profile' : 'website',
@@ -94,7 +95,7 @@ function resolvePage(entity: CollectionEntry<'pages'>, isHome: boolean): DeepPar
   };
 }
 
-async function resolvePost(entity: CollectionEntry<'posts'>): Promise<DeepPartial<MetaData>> {
+async function resolvePost(entity: CollectionEntry<'posts'>): Promise<DeepPartial<HeadData>> {
   const [tags, category] = await Promise.all([
     getEntries(entity.data.tags),
     getEntry(entity.data.category),
@@ -102,7 +103,7 @@ async function resolvePost(entity: CollectionEntry<'posts'>): Promise<DeepPartia
 
   return {
     title: entity.data.title,
-    description: entity.data.description,
+    description: entity.data.description ? removeHtmlTags(entity.data.description) : undefined,
     noIndex: !entity.data.isPublished,
     og: {
       type: 'article',

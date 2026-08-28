@@ -1,4 +1,5 @@
 import { defineCollection, reference } from 'astro:content';
+import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -7,6 +8,13 @@ const singleton =
   (text: string): Record<string, Record<string, unknown>> => ({
     [id]: JSON.parse(text),
   });
+
+const markdown = () =>
+  z
+    .string()
+    .transform(async (value) =>
+      (await createSatteriMarkdownProcessor()).render(value).then((r) => r.code),
+    );
 
 const publicationMetadata = {
   isPublished: z.boolean(),
@@ -44,7 +52,7 @@ const posts = defineCollection({
       title: z.string(),
       image: image(),
       slug: z.string(),
-      description: z.string(),
+      description: markdown(),
       relatedPosts: z.array(reference('posts')).optional(),
       tags: z.array(reference('tags')),
       category: reference('categories'),
@@ -67,7 +75,7 @@ const projects = defineCollection({
       id: z.uuid(),
       order: z.number(),
       title: z.string(),
-      description: z.string(),
+      description: markdown(),
       repositoryURL: z.url().optional(),
       deployedURL: z.url().optional(),
       relatedBlogPost: reference('posts').optional(),
@@ -90,7 +98,7 @@ const career = defineCollection({
         title: z.string(),
         startDate: z.coerce.date(),
         endDate: z.coerce.date().optional(),
-        description: z.string(),
+        description: markdown(),
         technologies: z.array(z.string()).optional(),
       }),
     ),
@@ -129,7 +137,7 @@ const education = defineCollection({
     location: z.string(),
     grade: z.number().min(1).max(6).optional(),
     hidden: z.boolean(),
-    description: z.string(),
+    description: markdown(),
   }),
 });
 

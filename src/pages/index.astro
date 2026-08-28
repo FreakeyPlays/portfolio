@@ -1,14 +1,11 @@
 ---
-import { getEntry } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
-import BaseLayout from '@layouts/BaseLayout.astro';
+import PageLayout from '@layouts/PageLayout.astro';
+import { getPage } from '@utils/getPage';
 
-const home = await getEntry('pages', 'home');
-if (!home) throw new Error('Missing content entry: src/content/pages/home.mdx');
+const home = await getPage('home')
 ---
 
-<BaseLayout
-  profileSchema
->
+<PageLayout page={home}>
   <RenderBlocks markdown={home} />
-</BaseLayout>
+</PageLayout>

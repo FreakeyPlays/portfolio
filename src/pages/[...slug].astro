@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
-import BaseLayout from '@layouts/BaseLayout.astro';
+import PageLayout from '@layouts/PageLayout.astro';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 export const getStaticPaths = (async () => {
@@ -10,26 +10,16 @@ export const getStaticPaths = (async () => {
   const pages = await getCollection('pages');
 
   return pages
-    .filter((page) => !reservedIds.includes(page.id))
+    .filter((page) => !reservedIds.includes(page.data.slug))
     .filter((page) => page.data.isPublished || import.meta.env.DEV)
-    .map((page) => ({ params: { slug: page.id }, props: { page } }));
+    .map((page) => ({ params: { slug: page.data.slug }, props: { page } }));
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props as Props;
-
-const breadcrumbs = [
-  { name: 'Home', url: '/' },
-  { name: page.data.title, url: Astro.url.pathname },
-];
 ---
 
-<BaseLayout
-  title={page.data.title}
-  description={page.data.description}
-  noindex={page.data.noIndex}
-  breadcrumbs={breadcrumbs}
->
+<PageLayout page={page}>
   <RenderBlocks markdown={page} />
-</BaseLayout>
+</PageLayout>

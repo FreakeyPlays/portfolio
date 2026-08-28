@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
+import { getEntries, render } from 'astro:content';
 import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
 import Chip from '@components/Chip.astro';
-import { formatDayMonthYear } from '@utils/date';
-import { removeHtmlTags } from '@utils/removeHtmlTags';
+import { formatDayMonthYear } from '@utils/dateFormat';
+import { removeHtmlTags } from '@utils/sanitizeMarkdown';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -13,14 +13,16 @@ interface Props {
 }
 
 const { post, wide = false } = Astro.props;
-const { image, title, tags, customSlug, publishedAt, createdAt } = post.data;
+const { image, title, tags, slug, publishedAt, createdAt } = post.data;
+
+const resolvedTags = await getEntries(tags);
 
 const processor = await createSatteriMarkdownProcessor();
 const { remarkPluginFrontmatter: { readingTime  } } = await render(post);
-const { code: intro } = await processor.render(post.data.intro);
+const { code: intro } = await processor.render(post.data.description);
 const description = removeHtmlTags(intro);
 
-const href = `/blog/${customSlug ?? post.id}`;
+const href = `/blog/${slug ?? post.id}`;
 const date = publishedAt ?? createdAt;
 ---
 
@@ -48,11 +50,11 @@ const date = publishedAt ?? createdAt;
 
   <div class="flex h-full w-full flex-col gap-2">
     {
-      tags.length > 0 && (
+      resolvedTags.length > 0 && (
         <ul class="flex flex-wrap gap-1">
-          {tags.map((tag) => (
+          {resolvedTags.map((tag) => (
             <li>
-              <Chip label={tag} />
+              <Chip label={tag.data.label} />
             </li>
           ))}
         </ul>

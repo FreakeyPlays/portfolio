@@ -1,25 +1,15 @@
 ---
+import "@styles/global.css";
 import type { CollectionEntry } from "astro:content";
 import Filter from '@components/Filter.astro';
-import { resolveSeo } from "@utils/seo";
-import Article from "./meta/_Article.astro";
-import JsonLD from "./meta/_JsonLD.astro";
-import OpenGraph from "./meta/_OpenGraph.astro";
-import Twitter from "./meta/_Twitter.astro";
+import Footer from "@components/Footer.astro";
+import Head from '@layouts/head/Head.astro';
+import { resolveSeo } from "@utils/pageMetaData";
 
 interface Props {
   entity: CollectionEntry<"pages" | "posts">;
   class?: string;
   htmlClass?: string;
-}
-
-export interface BaseMeta {
-  canonical: string;
-  title: string;
-  description: string;
-  author: string;
-  noIndex: boolean;
-  locale: string;
 }
 
 const { entity, class: className, htmlClass } = Astro.props;
@@ -29,40 +19,7 @@ const meta = await resolveSeo(entity, Astro.url);
 <!doctype html>
 <html lang={meta.locale} dir="ltr" class:list={[htmlClass]}>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0c0a09" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={meta.canonical} />
-
-    <title>{meta.title}</title>
-    <meta name="description" content={meta.description} />
-    <meta name="author" content={meta.author} />
-    <meta
-      name="robots"
-      content={meta.noIndex
-        ? "noindex, follow"
-        : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"}
-    />
-
-    <OpenGraph og={meta.og} />
-    <Twitter />
-    <Article meta={meta.article} />
-    <JsonLD graph={meta.jsonLdNodes} />
-
-    {
-      import.meta.env.PROD && (
-        <script
-          async
-          is:inline
-          data-astro-rerun
-          src="https://static.chrismerck.dev/script.js"
-          data-website-id="c7c4e802-1032-40aa-9dd8-dc62b220251e"
-        />
-      )
-    }
+    <Head meta={meta} />
 
     <slot name="head" />
   </head>
@@ -85,17 +42,11 @@ const meta = await resolveSeo(entity, Astro.url);
         )
       }
     
-      <main>
+      <main class="contents *:col-[content]">
         <slot />
       </main>
     
-      {
-        Astro.slots.has("footer") && (
-          <footer class="contents *:col-[content]">
-            <slot name="footer" />
-          </footer>
-        )
-      }
+      <Footer />
     </div>
   </body>
 </html>

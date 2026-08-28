@@ -1,20 +1,25 @@
 ---
-import { formatDayMonthYear } from '@utils/date';
+import { formatDayMonthYear } from '@utils/dateFormat';
 
-interface Props {
-  title: string;
-  intro: string;
+export type PostHero = {
   readingTime: number;
-  publishedAt?: Date;
+  wordCount: number;
+  title: string;
+  description: string;
+  publishedAt: Date;
 }
 
-const { title, intro, readingTime, publishedAt } = Astro.props;
+interface Props {
+  meta: PostHero;
+}
+
+const { title, description, readingTime, publishedAt } = Astro.props.meta;
 ---
 
 <header class="col-[extra]! text-body-large text-pretty space-y-8">
   <h1 class="xl:text-heading-00 md:text-heading-01 text-heading-02 mt-16">{title}</h1>
 
-  <Fragment set:html={intro} />
+  <Fragment set:html={description} />
 
   {publishedAt && (
     <div class="text-body-small text-stone-400">
