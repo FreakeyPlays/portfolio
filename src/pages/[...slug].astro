@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
+import { isProduction } from '@constants';
 import PageLayout from '@layouts/PageLayout.astro';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
@@ -11,7 +12,7 @@ export const getStaticPaths = (async () => {
 
   return pages
     .filter((page) => !reservedIds.includes(page.data.slug))
-    .filter((page) => page.data.isPublished || import.meta.env.DEV)
+    .filter((page) => page.data.isPublished || !isProduction)
     .map((page) => ({ params: { slug: page.data.slug }, props: { page } }));
 }) satisfies GetStaticPaths;
 

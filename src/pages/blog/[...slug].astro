@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
 import type { PostHero } from '@components/blog/Hero.astro';
+import { isProduction } from '@constants';
 import PostLayout from '@layouts/PostLayout.astro';
 import type { GetStaticPaths } from 'astro';
 
@@ -10,7 +11,7 @@ export const getStaticPaths = (async () => {
   const posts = await getCollection('posts');
   return posts
     .filter((post) => !reservedIds.includes(post.data.slug))
-    .filter((post) => post.data.isPublished || import.meta.env.DEV)
+    .filter((post) => post.data.isPublished || !isProduction)
     .map((post) => ({
       params: { slug: post.data.slug },
       props: { post },
