@@ -20,6 +20,7 @@
     "@sveltia/cms": "^0.201.1",
     "astro": "^7.2.5",
     "astro-typewriter": "^1.2.0",
+    "github-slugger": "^2.0.0",
     "reading-time": "^1.5.0",
     "satteri": "^0.10.5"
   },

@@ -1,15 +1,45 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import FAQ from "@components/blog/FAQ.astro";
+import type { PostHero } from "@components/blog/Hero.astro";
+import Hero from "@components/blog/Hero.astro";
+import TableOfContents from "@components/blog/TableOfContents.astro";
+import Navigation from "@components/Navigation.astro";
+import type { TocEntry } from "@utils/mdastTableOfContentsPlugin";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  post: CollectionEntry<"posts">;
+  entity: CollectionEntry<"posts">;
+  postMetadata: PostHero;
+  toc: TocEntry[];
   class?: string;
 }
 
-const { post, class: className } = Astro.props;
+const { entity, postMetadata, toc, class: className } = Astro.props;
 ---
 
-<BaseLayout entity={post} class={className}>
-  
+<BaseLayout entity={entity} class={className}>
+  <Navigation slot="header" />
+   
+   <article class="contents *:col-[content]">
+
+     <Hero meta={postMetadata} />
+ 
+     {
+       toc.length > 0 && (
+         <aside class="col-[aside-left]! xl:top-8 xl:row-start-3 xl:row-end-5 row-start-4 row-end-5 xl:self-start xl:sticky xl:mt-8 mt-8">
+           <TableOfContents entries={toc} />
+         </aside>
+       )
+     }
+ 
+     <Image src={entity.data.image} alt="" class="rounded-xl shadow-xl shadow-black/30 mt-8" />
+ 
+     <div class="flow disable mt-8">
+       <slot />
+     </div>
+ 
+     <FAQ class="my-8" items={entity.data.faq} />
+   </article>
 </BaseLayout>

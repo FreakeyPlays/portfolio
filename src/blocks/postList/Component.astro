@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { byOrderInverse } from '@utils/order';
+import { byOrderInverse } from '@utils/sorting';
 import PostCard from './PostCard.astro';
 
 const posts = (await getCollection(

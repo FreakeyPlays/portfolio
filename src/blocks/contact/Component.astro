@@ -1,6 +1,6 @@
 ---
 import MailIcon from '@assets/icons/mail.svg';
-import { getPerson } from '@utils/person.ts';
+import { getSingelton } from '@utils/getSingelton';
 
 interface Props {
   label?: string;
@@ -9,13 +9,13 @@ interface Props {
 
 const { label, additionalParameters = '' } = Astro.props;
 
-const { email } = await getPerson();
+const { data } = await getSingelton("personal");
 
 const query = new URLSearchParams(additionalParameters.trim().replace(/^\?/, ''))
   .toString()
   .replaceAll('+', '%20');
 
-const href = query ? `mailto:${email}?${query}` : `mailto:${email}`;
+const href = query ? `mailto:${data.email}?${query}` : `mailto:${data.email}`;
 ---
 
 <a

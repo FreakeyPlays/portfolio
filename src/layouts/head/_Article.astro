@@ -1,5 +1,5 @@
 ---
-export interface ArticleMeta {
+export interface ArticleMetaData {
   publishedAt: string;
   modifiedAt: string;
   section: string;
@@ -12,7 +12,7 @@ export interface ArticleMeta {
 }
 
 interface Props {
-  meta?: ArticleMeta;
+  meta?: ArticleMetaData;
 }
 
 const { meta } = Astro.props;

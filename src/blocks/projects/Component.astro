@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import ProjectCard from '@components/ProjectCard.astro';
-import { byOrder } from '@utils/order.ts';
+import { byOrder } from '@utils/sorting';
 
-const projects = (await getCollection('projects', ({ data }) => data.isPublished)).sort(byOrder);
+const projects = (await getCollection('projects', ({ data }) => !data.hidden)).sort(byOrder);
 ---
 
 <div class="col-[extra]!">

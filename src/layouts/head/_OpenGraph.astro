@@ -1,5 +1,5 @@
 ---
-export type OGMeta = {
+export type OpenGraphData = {
   type: "website" | "profile" | "article";
   title: string;
   description: string;
@@ -16,7 +16,7 @@ export type OGMeta = {
 };
 
 interface Props {
-  og: OGMeta;
+  og: OpenGraphData;
 }
 
 const { og } = Astro.props;

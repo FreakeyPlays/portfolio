@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
-import { toISODateTime } from '@utils/date.ts';
+import { toISODateTime } from '@utils/dateFormat';
 
 const PAGES_DIR = 'src/content/pages';
 const HOME_SLUG = 'home';

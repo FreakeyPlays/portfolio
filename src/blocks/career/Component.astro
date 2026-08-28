@@ -4,10 +4,10 @@ import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
 import Timeline from '@components/timeline/Timeline.astro';
 import TimelineItem from '@components/timeline/TimelineItem.astro';
-import { formatMonthYear, toISODate } from '@utils/date.ts';
-import { byOrder } from '@utils/order.ts';
+import { formatMonthYear, toISODate } from '@utils/dateFormat';
+import { byOrder } from '@utils/sorting';
 
-const careerCollection = (await getCollection('career', ({ data }) => data.isPublished)).sort(
+const careerCollection = (await getCollection('career', ({ data }) => !data.hidden)).sort(
   byOrder,
 );
 ---
@@ -36,7 +36,7 @@ const careerCollection = (await getCollection('career', ({ data }) => data.isPub
                   'present'
                 )}
               </p>
-              <p class="mt-2">{job.description}</p>
+              <div class="mt-2" set:html={job.description}></div>
               <ul class="flex flex-wrap gap-1 mt-2">
                 {job.technologies?.map((technology) => (
                   <li>

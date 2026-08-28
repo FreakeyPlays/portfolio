@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { getEntry } from "astro:content";
 import GitHubIcon from '@assets/icons/github.svg';
 import HighlightLink from './HighlightLink.astro';
 
@@ -12,8 +13,10 @@ const {
   project: { data: projectData },
 } = Astro.props;
 
-const readMoreURL = projectData.relatedBlogPost?.split('|').filter((url) => url.trim())[0];
-console.log(readMoreURL)
+const relatedBlogPost = projectData.relatedBlogPost ? await getEntry(projectData.relatedBlogPost) : undefined;
+
+
+const readMoreURL = relatedBlogPost ? `/blog/${relatedBlogPost.data.slug}` : undefined;
 ---
 
 <li class="rounded-lg overflow-hidden flex flex-col intersect:motion-preset-fade-md">
@@ -33,8 +36,8 @@ console.log(readMoreURL)
   <div class="bg-gradient-to-tr from-zinc-800 via-zinc-500 to-zinc-800 px-px pb-px h-full">
     <div class="bg-zinc-800 p-2 rounded-b-lg h-full flex flex-col">
       <h3 class="text-xl font-semibold font-serif">{projectData.title}</h3>
-      <p class="grow my-2">{projectData.description}</p>
-      { readMoreURL && <HighlightLink class="font-bold w-fit" href={`/blog/${readMoreURL}`}>Read More &#10140;</HighlightLink> }
+      <div class="grow my-2" set:html={projectData.description}></div>
+      { readMoreURL && <HighlightLink class="font-bold w-fit" href={readMoreURL}>Read More &#10140;</HighlightLink> }
       <hr class="border-neutral-600 my-2" />
       <div class="flex flex-row justify-between items-center">
         <div>{projectData.state}</div>

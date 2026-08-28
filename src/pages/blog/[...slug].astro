@@ -1,10 +1,8 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content';
-import { createSatteriMarkdownProcessor } from '@astrojs/markdown-satteri';
+import { getCollection, render } from 'astro:content';
 import RenderBlocks from '@blocks/RenderBlocks.astro';
+import type { PostHero } from '@components/blog/Hero.astro';
 import PostLayout from '@layouts/PostLayout.astro';
-import { buildTableOfContents } from '@utils/buildTableOfContents';
-import { removeHtmlTags } from '@utils/removeHtmlTags';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths = (async () => {
@@ -14,48 +12,22 @@ export const getStaticPaths = (async () => {
     .filter((post) => !reservedIds.includes(post.data.slug))
     .filter((post) => post.data.isPublished || import.meta.env.DEV)
     .map((post) => ({
-      params: { slug: post.data.customSlug ?? post.data.slug },
+      params: { slug: post.data.slug },
       props: { post },
     }));
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
-const { headings, Content, remarkPluginFrontmatter } = await render(post);
-const toc = buildTableOfContents(headings);
-const readingTime = remarkPluginFrontmatter.readingTime as number;
-const processor = await createSatteriMarkdownProcessor();
-
-const { code: intro } = await processor.render(post.data.intro);
-const description = removeHtmlTags(intro);
-
-const blogPage = await getEntry('pages', 'blog');
-const breadcrumbs = [
-  { name: 'Home', url: '/' },
-  { name: blogPage?.data.title ?? 'Blog', url: '/blog/' },
-  { name: post.data.title, url: Astro.url.pathname },
-];
-
-const faq = await Promise.all(
-  post.data.faq.map(async ({ question, answer }) => ({
-    question,
-    answer: (await processor.render(answer)).code,
-  })),
-);
+const { Content, remarkPluginFrontmatter } = await render(post);
+const postMetadata: PostHero = {
+  title: post.data.title,
+  description: post.data.description,
+  readingTime: remarkPluginFrontmatter.readingTime,
+  wordCount: remarkPluginFrontmatter.wordCount,
+  publishedAt: post.data.publishedAt ?? post.data.updatedAt,
+}
 ---
 
-<PostLayout
-  title={post.data.title}
-  intro={intro}
-  image={post.data.image}
-  description={description}
-  faq={faq}
-  toc={toc}
-  readingTime={readingTime}
-  publishedAt={post.data.publishedAt}
-  updatedAt={post.data.updatedAt}
-  tags={post.data.tags}
-  category={post.data.category}
-  breadcrumbs={breadcrumbs}
->
+<PostLayout entity={post} toc={remarkPluginFrontmatter.toc} postMetadata={postMetadata}>
   <RenderBlocks markdown={Content} />
 </PostLayout>
