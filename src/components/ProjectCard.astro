@@ -33,7 +33,7 @@ const readMoreURL = relatedBlogPost ? `/blog/${relatedBlogPost.data.slug}` : und
       )
     }
   </div>
-  <div class="bg-gradient-to-tr from-zinc-800 via-zinc-500 to-zinc-800 px-px pb-px h-full">
+  <div class="bg-linear-to-tr from-zinc-800 via-zinc-500 to-zinc-800 px-px pb-px h-full">
     <div class="bg-zinc-800 p-2 rounded-b-lg h-full flex flex-col">
       <h3 class="text-xl font-semibold font-serif">{projectData.title}</h3>
       <div class="grow my-2" set:html={projectData.description}></div>

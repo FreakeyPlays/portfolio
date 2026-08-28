@@ -25,7 +25,7 @@ const isCurrent = (page: Page) => !isHome && !page.homeSection && page.url.repla
   </div>
 
   <a
-    class="bg-gradient-to-tr z-10 from-lime-400 to-green-600 w-24 h-12 rounded-full"
+    class="bg-linear-to-tr z-10 from-lime-400 to-green-600 w-24 h-12 rounded-full"
     href="/"
     aria-label="Home"
   >
@@ -57,8 +57,8 @@ const isCurrent = (page: Page) => !isHome && !page.homeSection && page.url.repla
         <li
           class:list={[
             'w-fit mx-auto',
-            'has-[.active-nav-link]:bg-gradient-to-br has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text',
-            "relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-br after:from-lime-400 after:to-green-600 after:transition-transform after:scale-x-0 after:origin-center hover:after:scale-x-100",
+            'has-[.active-nav-link]:bg-linear-to-b has-[.active-nav-link]:from-lime-400 has-[.active-nav-link]:to-green-600 has-[.active-nav-link]:text-transparent has-[.active-nav-link]:bg-clip-text',
+            "relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:bg-linear-to-br after:from-lime-400 after:to-green-600 after:transition-transform after:scale-x-0 after:origin-center hover:after:scale-x-100",
           ]}
         >
           <a
