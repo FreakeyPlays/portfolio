@@ -15,7 +15,7 @@ const isSection = id !== undefined && sectionIds.includes(id);
 	id={id}
 	class:list={[
 		isSection &&
-			'font-extrabold bg-gradient-to-br from-lime-400 to-green-600 bg-clip-text text-transparent scroll-m-32',
+			'font-extrabold bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent scroll-m-32',
 	]}
 >
 	{isSection && <span class="text-white" aria-hidden="true">/</span>}<slot />
