@@ -17,7 +17,7 @@ export type HeadData = BaseHeadData & {
 
 const LOCALE = 'en';
 
-/** `urlSlug` of the page that lists all blog posts. */
+/** `slug` of the page that lists all blog posts. */
 const BLOG_SLUG = 'blog';
 
 /** Google drops articles whose `headline` exceeds this length. */
@@ -152,7 +152,7 @@ async function resolvePage(
   context: SeoContext,
 ): Promise<DeepPartial<HeadData>> {
   const { isHome, ids, site } = context;
-  const isBlogIndex = entity.data.urlSlug === BLOG_SLUG;
+  const isBlogIndex = entity.data.slug === BLOG_SLUG;
   const title = isHome ? undefined : entity.data.title;
   const description = entity.data.description
     ? removeHtmlTags(entity.data.description)
