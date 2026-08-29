@@ -15,14 +15,6 @@ export type HeadData = BaseHeadData & {
   jsonLdNodes: JsonLDNode[];
 };
 
-const LOCALE = 'en';
-
-/** `slug` of the page that lists all blog posts. */
-const BLOG_SLUG = 'blog';
-
-/** Google drops articles whose `headline` exceeds this length. */
-const MAX_HEADLINE_LENGTH = 110;
-
 /**
  * Every node lives in a single `@graph` (see `_JsonLD.astro`), so nodes are
  * declared once and referenced everywhere else by `@id`. Site wide ids are
@@ -60,7 +52,7 @@ const createIds = (origin: string, canonical: string) => ({
   person: `${origin}/#person`,
   personImage: `${origin}/#personimage`,
   website: `${origin}/#website`,
-  blog: `${pageUrl(origin, BLOG_SLUG)}#blog`,
+  blog: `${pageUrl(origin, 'blog')}#blog`,
   webPage: `${canonical}#webpage`,
   primaryImage: `${canonical}#primaryimage`,
   article: `${canonical}#article`,
@@ -102,7 +94,7 @@ export async function resolveSeo(
     : `${author} - ${personal.data.tagline}`;
   const description = overwrites.description ?? site.data.description;
   const image = site.data.socialPreview.image;
-  const breadcrumbs = isHome ? undefined : createBreadCrumbs(context, overwrites.title ?? author);
+  const breadcrumbs = isHome ? undefined : createBreadCrumbs(url, title, canonical);
 
   const defaults: HeadData = {
     title,
@@ -152,7 +144,7 @@ async function resolvePage(
   context: SeoContext,
 ): Promise<DeepPartial<HeadData>> {
   const { isHome, ids, site } = context;
-  const isBlogIndex = entity.data.slug === BLOG_SLUG;
+  const isBlogIndex = entity.data.slug === 'blog';
   const title = isHome ? undefined : entity.data.title;
   const description = entity.data.description
     ? removeHtmlTags(entity.data.description)
@@ -222,7 +214,7 @@ async function resolvePost(
     url: context.canonical,
     mainEntityOfPage: ref(ids.webPage),
     isPartOf: ref(ids.blog),
-    headline: truncate(entity.data.title, MAX_HEADLINE_LENGTH),
+    headline: entity.data.title,
     name: entity.data.title,
     description,
     image: ref(ids.primaryImage),
@@ -235,7 +227,7 @@ async function resolvePost(
     copyrightYear: publishedAt.getFullYear(),
     articleSection: category.data.label,
     keywords: tags.map((tag) => tag.data.label),
-    inLanguage: LOCALE,
+    inLanguage: 'en',
   };
 
   return {
@@ -271,7 +263,7 @@ function createWebSite(context: SeoContext): JsonLDNode {
     url: pageUrl(origin, '/'),
     name: author,
     description: site.description,
-    inLanguage: LOCALE,
+    inLanguage: 'en',
     publisher: ref(ids.person),
     copyrightHolder: ref(ids.person),
     copyrightYear: site.launchedAt.getFullYear(),
@@ -368,9 +360,9 @@ function createBlog(context: SeoContext): JsonLDNode {
   return {
     '@type': 'Blog',
     '@id': ids.blog,
-    url: pageUrl(origin, BLOG_SLUG),
+    url: pageUrl(origin, 'blog'),
     name: `${author} - Blog`,
-    inLanguage: LOCALE,
+    inLanguage: 'en',
     isPartOf: ref(ids.website),
     author: ref(ids.person),
     publisher: ref(ids.person),
@@ -401,9 +393,10 @@ function createWebPage(
     primaryImageOfPage: ref(ids.primaryImage),
     image: ref(ids.primaryImage),
     ...(isHome ? {} : { breadcrumb: ref(ids.breadcrumb) }),
+    dateCreated: entity.data.createdAt.toISOString(),
     datePublished: (entity.data.publishedAt ?? entity.data.createdAt).toISOString(),
     dateModified: entity.data.updatedAt.toISOString(),
-    inLanguage: LOCALE,
+    inLanguage: 'en',
     ...(mainEntity !== undefined && { mainEntity }),
     ...(about !== undefined && { about }),
   };
@@ -429,43 +422,24 @@ function createImage(
   };
 }
 
-function createBreadCrumbs(context: SeoContext, heading: string): JsonLDNode | undefined {
-  const { origin, url } = context;
-  const segments = url.pathname.split('/').filter(Boolean);
-  if (segments.length === 0) return undefined;
-
-  const crumbs = [{ name: URL_MAPPINGS['/'] ?? 'Home', item: pageUrl(origin, '/') }];
-  let path = '';
-
-  segments.forEach((segment, index) => {
-    path += `/${segment}`;
-    const isLast = index === segments.length - 1;
-    crumbs.push({
-      name: isLast ? heading : (URL_MAPPINGS[path] ?? humanize(segment)),
-      item: pageUrl(origin, path),
-    });
-  });
+function createBreadCrumbs(url: URL, heading: string, canonical: string) {
+  const segments = url.pathname.split('/').map((segment) => `/${segment}`);
+  if (segments.length <= 1) return undefined;
 
   return {
     '@type': 'BreadcrumbList',
-    '@id': context.ids.breadcrumb,
-    itemListElement: crumbs.map(({ name, item }, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name,
-      item,
-    })),
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: segments.map((segment, index) => {
+      const last = index === segments.length - 1;
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: last ? heading : URL_MAPPINGS[segment],
+        item: `${url.origin}${segments
+          .slice(0, index + 1)
+          .join('')
+          .replace('//', '/')}`,
+      };
+    }),
   };
 }
-
-const humanize = (segment: string) =>
-  segment
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
-const truncate = (text: string, max: number) => {
-  if (text.length <= max) return text;
-  const cut = text.lastIndexOf(' ', max - 1);
-  return `${text.slice(0, cut > 0 ? cut : max - 1)}…`;
-};
