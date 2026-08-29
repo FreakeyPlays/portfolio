@@ -15,11 +15,6 @@ export type HeadData = BaseHeadData & {
   jsonLdNodes: JsonLDNode[];
 };
 
-/**
- * Every node lives in a single `@graph` (see `_JsonLD.astro`), so nodes are
- * declared once and referenced everywhere else by `@id`. Site wide ids are
- * anchored on the origin, page level ids on the canonical url.
- */
 type SchemaIds = ReturnType<typeof createIds>;
 
 type SeoContext = {
@@ -34,7 +29,6 @@ type SeoContext = {
   socials: CollectionEntry<'socials'>['data'];
 };
 
-/** A `{ "@id": "..." }` pointer to another node in the graph. */
 const ref = (id: string) => ({ '@id': id });
 
 const absoluteUrl = (path: string, origin: string) => new URL(path, origin).href;
@@ -157,8 +151,6 @@ async function resolvePage(
     type: isHome ? 'ProfilePage' : isBlogIndex ? 'CollectionPage' : 'WebPage',
     name: title ?? context.author,
     description,
-    // ProfilePage: the profile is *about* the person, so they are the main
-    // entity. The blog index points at the Blog node instead.
     mainEntity: isHome ? ref(ids.person) : isBlogIndex ? ref(ids.blog) : undefined,
     about: isHome ? undefined : ref(ids.person),
   });
@@ -200,8 +192,6 @@ async function resolvePost(
   }));
 
   const webPage = createWebPage(entity, context, {
-    // The FAQ is rendered on the page, so the page itself qualifies as an
-    // FAQPage in addition to being the article's landing page.
     type: questions.length > 0 ? ['WebPage', 'FAQPage'] : 'WebPage',
     name: entity.data.title,
     description,
@@ -271,11 +261,7 @@ function createWebSite(context: SeoContext): JsonLDNode {
   };
 }
 
-/**
- * The identity node the whole graph hangs off. `detailed` adds employment,
- * education and expertise, which only earns its bytes on the profile page.
- */
-async function createPerson(context: SeoContext, detailed: boolean): Promise<JsonLDNode> {
+async function createPersonNodes(context: SeoContext, detailed: boolean): Promise<JsonLDNode[]> {
   const { author, ids, origin, personal, socials } = context;
   const { location } = personal;
 
