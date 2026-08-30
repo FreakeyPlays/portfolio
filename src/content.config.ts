@@ -60,7 +60,7 @@ const posts = defineCollection({
         .array(
           z.object({
             question: z.string(),
-            answer: z.string(),
+            answer: markdown(),
           }),
         )
         .optional(),
@@ -211,7 +211,6 @@ const socials = defineCollection({
   loader: file('src/data/socials.json', { parser: singleton('socials') }),
   schema: z.array(
     z.object({
-      order: z.number(),
       label: z.string(),
       text: z.string(),
       href: z.url(),
