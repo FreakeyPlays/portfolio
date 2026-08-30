@@ -145,7 +145,7 @@ collections:
     folder: src/content/posts
     extension: mdx
     reorder: true
-    preview_path: "/blog/{{slug}}"
+    preview_path: "/blog/{{fields.slug}}"
     identifier_field: title
     summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
     slug: "post-{{order}}-{{slug}}"
