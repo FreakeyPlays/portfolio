@@ -93,7 +93,9 @@ export async function resolveSeo(
     : `${author} - ${personal.data.tagline}`;
   const description = overwrites.description ?? site.data.description;
   const image = site.data.socialPreview.image;
-  const breadcrumbs = isHome ? undefined : createBreadCrumbs(url, title, canonical);
+  const breadcrumbs = isHome
+    ? undefined
+    : createBreadCrumbs(url, overwrites.title ?? author, canonical);
 
   const defaults: HeadData = {
     title,
@@ -432,23 +434,25 @@ function createImage(
   };
 }
 
+const humanize = (segment: string) =>
+  segment.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+
 function createBreadCrumbs(url: URL, heading: string, canonical: string) {
-  const segments = url.pathname.split('/').map((segment) => `/${segment}`);
-  if (segments.length <= 1) return undefined;
+  const segments = url.pathname.split('/').filter(Boolean);
+  if (segments.length === 0) return undefined;
+
+  const trail = ['/', ...segments.map((_, index) => `/${segments.slice(0, index + 1).join('/')}`)];
 
   return {
     '@type': 'BreadcrumbList',
     '@id': `${canonical}#breadcrumb`,
-    itemListElement: segments.map((segment, index) => {
-      const last = index === segments.length - 1;
+    itemListElement: trail.map((path, index) => {
+      const last = index === trail.length - 1;
       return {
         '@type': 'ListItem',
         position: index + 1,
-        name: last ? heading : URL_MAPPINGS[segment],
-        item: `${url.origin}${segments
-          .slice(0, index + 1)
-          .join('')
-          .replace('//', '/')}`,
+        name: last ? heading : (URL_MAPPINGS[path] ?? humanize(path.split('/').pop() ?? '')),
+        item: pageUrl(url.origin, path),
       };
     }),
   };
