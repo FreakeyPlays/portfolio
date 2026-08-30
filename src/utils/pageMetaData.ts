@@ -1,5 +1,5 @@
 import { type CollectionEntry, getCollection, getEntries, getEntry } from 'astro:content';
-import { URL_MAPPINGS } from '@constants';
+import { isProduction, URL_MAPPINGS } from '@constants';
 import type { ArticleMetaData } from '@layouts/head/_Article.astro';
 import type { JsonLDNode } from '@layouts/head/_JsonLD.astro';
 import type { OpenGraphData } from '@layouts/head/_OpenGraph.astro';
@@ -7,6 +7,7 @@ import type { BaseHeadData } from '@layouts/head/Head.astro';
 import type { DeepPartial } from '@utils/deepPartial';
 import { deepMerge } from '@utils/deepPartial';
 import { getSingelton } from '@utils/getSingelton';
+import { byOrderInverse } from '@utils/sorting';
 import { removeHtmlTags } from './sanitizeMarkdown';
 
 export type HeadData = BaseHeadData & {
@@ -33,10 +34,14 @@ const ref = (id: string) => ({ '@id': id });
 
 const absoluteUrl = (path: string, origin: string) => new URL(path, origin).href;
 
-/**
- * Astro's default `directory` build format serves every page under a trailing
- * slash, so urls built by hand have to match the canonical to stay one url.
- */
+const ogImage = (image: ImageMetadata, alt: string, origin: string): OpenGraphData['image'] => ({
+  url: absoluteUrl(image.src, origin),
+  alt,
+  type: `image/${image.format}`,
+  width: image.width,
+  height: image.height,
+});
+
 const pageUrl = (origin: string, path: string) => {
   const segments = path.replace(/^\/+|\/+$/g, '');
   return segments ? `${origin}/${segments}/` : `${origin}/`;
@@ -104,17 +109,11 @@ export async function resolveSeo(
       locale: 'en',
       url: canonical,
       siteName: author,
-      image: {
-        url: image.src.src,
-        alt: image.alt,
-        type: `image/${image.src.format}`,
-        width: image.src.width,
-        height: image.src.height,
-      },
+      image: ogImage(image.src, image.alt, context.origin),
     },
     jsonLdNodes: [
       createWebSite(context),
-      await createPerson(context, isHome),
+      ...(await createPersonNodes(context, isHome)),
       ...(breadcrumbs ? [breadcrumbs] : []),
     ],
   };
@@ -162,7 +161,11 @@ async function resolvePage(
     og: {
       type: isHome ? 'profile' : 'website',
     },
-    jsonLdNodes: [primaryImage, webPage, ...(isBlogIndex ? [createBlog(context)] : [])],
+    jsonLdNodes: [
+      primaryImage,
+      webPage,
+      ...(isBlogIndex ? [createBlog(context, await getListedPosts())] : []),
+    ],
   };
 }
 
@@ -226,13 +229,7 @@ async function resolvePost(
     noIndex: !entity.data.isPublished,
     og: {
       type: 'article',
-      image: {
-        url: entity.data.image.src,
-        alt: entity.data.title,
-        type: `image/${entity.data.image.format}`,
-        width: entity.data.image.width,
-        height: entity.data.image.height,
-      },
+      image: ogImage(entity.data.image, entity.data.title, context.origin),
     },
     article: {
       publishedAt: publishedAt.toISOString(),
@@ -269,7 +266,7 @@ async function createPersonNodes(context: SeoContext, detailed: boolean): Promis
     (href): href is string => Boolean(href),
   );
 
-  return {
+  const person: JsonLDNode = {
     '@type': 'Person',
     '@id': ids.person,
     name: author,
@@ -300,6 +297,10 @@ async function createPersonNodes(context: SeoContext, detailed: boolean): Promis
     ...(sameAs.length > 0 && { sameAs }),
     ...(detailed ? await createPersonDetails() : {}),
   };
+
+  return personal.image
+    ? [createImage(ids.personImage, personal.image, context, author), person]
+    : [person];
 }
 
 async function createPersonDetails(): Promise<Record<string, unknown>> {
@@ -340,7 +341,29 @@ async function createPersonDetails(): Promise<Record<string, unknown>> {
   };
 }
 
-function createBlog(context: SeoContext): JsonLDNode {
+const getListedPosts = async () =>
+  (await getCollection('posts', ({ data }) => data.isPublished || !isProduction)).sort(
+    byOrderInverse,
+  );
+
+function createPostStub(post: CollectionEntry<'posts'>, context: SeoContext): JsonLDNode {
+  const { ids, origin } = context;
+  const url = pageUrl(origin, `blog/${post.data.slug}`);
+
+  return {
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    url,
+    headline: post.data.title,
+    description: removeHtmlTags(post.data.description),
+    image: absoluteUrl(post.data.image.src, origin),
+    datePublished: (post.data.publishedAt ?? post.data.createdAt).toISOString(),
+    dateModified: post.data.updatedAt.toISOString(),
+    author: ref(ids.person),
+  };
+}
+
+function createBlog(context: SeoContext, posts: CollectionEntry<'posts'>[] = []): JsonLDNode {
   const { author, ids, origin } = context;
 
   return {
@@ -352,6 +375,7 @@ function createBlog(context: SeoContext): JsonLDNode {
     isPartOf: ref(ids.website),
     author: ref(ids.person),
     publisher: ref(ids.person),
+    ...(posts.length > 0 && { blogPost: posts.map((post) => createPostStub(post, context)) }),
   };
 }
 
