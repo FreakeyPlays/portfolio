@@ -4,4 +4,4 @@ export const URL_MAPPINGS: Record<string, string> = {
 };
 
 export const isProduction =
-  process.env.CF_PAGES !== '1' || process.env.CF_PAGES_BRANCH === 'master';
+  process.env.CF_PAGES === '1' && process.env.CF_PAGES_BRANCH === 'master';
