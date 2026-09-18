@@ -148,7 +148,9 @@ collections:
     preview_path: "/blog/{{fields.slug}}"
     identifier_field: title
     summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
-    slug: "post-{{order}}-{{slug}}"
+    # `order` comes from `reorder` and is set before the slug is built. The default only
+    # stops the config validator from flagging it as an undefined field.
+    slug: "post-{{order | default('0')}}-{{slug}}"
     fields:
       - name: id
         widget: hidden

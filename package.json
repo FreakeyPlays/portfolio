@@ -16,9 +16,9 @@
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.3.8",
     "@astrojs/mdx": "^7.0.8",
-    "@astrojs/sitemap": "^3.7.3",
-    "@sveltia/cms": "^0.203.1",
-    "astro": "^7.2.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "@sveltia/cms": "^0.215.0",
+    "astro": "^7.3.3",
     "astro-typewriter": "^1.2.0",
     "github-slugger": "^2.0.0",
     "reading-time": "^1.5.0",
@@ -28,8 +28,9 @@
     "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "2.5.6",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/mdast": "^4.0.4",
     "husky": "^9.1.7",
-    "lint-staged": "^17.3.0",
+    "lint-staged": "^17.5.1",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
