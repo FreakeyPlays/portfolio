@@ -8,6 +8,7 @@
     {
       "title": "Software Engineer",
       "startDate": "2024-06-01",
+      "endDate": "2026-08-31",
       "description": "I was responsible for rebuilding the Company website, including the migration to a new CMS so the team manages content themselves instead of sending a developer a ticket. Alongside that I contribute to the internal ERP system the company's daily operations rely on.",
       "technologies": [
         "PayloadCMS",
