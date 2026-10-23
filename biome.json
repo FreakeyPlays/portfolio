@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.2/schema.json",
+  "files": {
+    "includes": ["**", "!pnpm-lock.yaml", "!.agents/skills"]
+  },
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2,
