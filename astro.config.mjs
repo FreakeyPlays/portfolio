@@ -7,11 +7,17 @@ import tailwindcss from '@tailwindcss/vite';
 import { getModifiedDateForURL, isListedInSitemap } from '@utils/buildTimePageMeta.ts';
 import { mdastReadingTimePlugin } from '@utils/mdastReadTimePlugin';
 import { mdastTableOfContentsPlugin } from '@utils/mdastTableOfContentsPlugin';
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import copyCmsAssets from 'scripts/copy-cms-assets';
 
 export default defineConfig({
   site: 'https://chrismerck.dev',
+
+  env: {
+    schema: {
+      PUBLIC_UMAMI_SHARE_URL: envField.string({ context: 'client', access: 'public', optional: true, url: true }),
+    },
+  },
 
   fonts: [
     {
