@@ -41,7 +41,7 @@
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
 			import { indexNow } from "@hooks/indexNow"
-			import { updateTimestamps } from "@hooks/updateTimestamps"
+			import { stampPublishedAtOnFirstPublish } from "@hooks/stampPublishedAt"
 			import CMS from '@sveltia/cms';
 			import { PUBLIC_UMAMI_SHARE_URL } from 'astro:env/client';
 
@@ -54,7 +54,7 @@
 			CMS.registerEditorComponent(projectsConfig)
 			CMS.registerEditorComponent(postListConfig)
 			
-			CMS.registerEventListener(updateTimestamps)
+			CMS.registerEventListener(stampPublishedAtOnFirstPublish)
 			CMS.registerEventListener(indexNow)
 
 			if (PUBLIC_UMAMI_SHARE_URL) {

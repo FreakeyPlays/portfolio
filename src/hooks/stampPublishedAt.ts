@@ -4,14 +4,12 @@ const COLLECTIONS = ['pages', 'posts'];
 
 const cmsDatetime = () => new Date().toJSON().replace(/\d+\.\d+Z$/, '00.000Z');
 
-export const updateTimestamps: AppEventListener = {
+export const stampPublishedAtOnFirstPublish: AppEventListener = {
   name: 'preSave',
   handler: ({ entry }) => {
     if (!COLLECTIONS.includes(entry.get('collection'))) return;
-    if (!entry.getIn(['data', 'publishedAt']) && entry.getIn(['data', 'isPublished'])) {
-      entry = entry.setIn(['data', 'publishedAt'], cmsDatetime());
-    }
+    if (entry.getIn(['data', 'publishedAt']) || !entry.getIn(['data', 'isPublished'])) return;
 
-    return entry.setIn(['data', 'updatedAt'], cmsDatetime());
+    return entry.setIn(['data', 'publishedAt'], cmsDatetime());
   },
 };
