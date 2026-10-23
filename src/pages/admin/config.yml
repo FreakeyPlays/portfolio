@@ -238,22 +238,20 @@ collections:
       - name: tags
         label: Tags
         widget: relation
-        collection: meta
-        file: tags
+        collection: tags
         multiple: true
         min: 1
-        value_field: "{{tags.*.id}}"
-        display_fields: ["{{tags.*.label}}"]
-        search_fields: ["{{tags.*.label}}"]
+        value_field: id
+        display_fields: [label]
+        search_fields: [label]
         dropdown_threshold: 0
       - name: category
         label: Category
         widget: relation
-        collection: meta
-        file: categories
-        value_field: "{{categories.*.id}}"
-        display_fields: ["{{categories.*.label}}"]
-        search_fields: ["{{categories.*.label}}"]
+        collection: categories
+        value_field: id
+        display_fields: [label]
+        search_fields: [label]
         dropdown_threshold: 0
       - name: isPublished
         label: Is Published
@@ -491,47 +489,49 @@ collections:
         widget: boolean
         default: true
 
+  - name: tags
+    label: Tags
+    label_singular: Tag
+    icon: sell
+    file: src/data/meta/tags.json
+    publish_mode: simple
+    identifier_field: label
+    summary: "{{label}}"
+    fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
+      - name: label
+        label: Label
+        widget: string
+        unique: true
+      - name: slug
+        widget: compute
+        value: "{{fields.label | default('undefined') | slugify}}"
+
+  - name: categories
+    label: Categories
+    label_singular: Category
+    icon: category
+    file: src/data/meta/categories.json
+    publish_mode: simple
+    identifier_field: label
+    summary: "{{label}}"
+    fields:
+      - name: id
+        widget: hidden
+        default: "{{uuid}}"
+      - name: label
+        label: Label
+        widget: string
+        unique: true
+      - name: slug
+        widget: compute
+        value: "{{fields.label | default('undefined') | slugify}}"
+
   - name: meta
     label: Meta
     files:
-      - name: tags
-        label: Tags
-        file: src/data/meta/tags.json
-        fields:
-          - name: tags
-            label: Tags
-            widget: list
-            root: true
-            fields:
-              - name: id
-                widget: hidden
-                default: "{{uuid}}"
-              - name: label
-                label: Label
-                widget: string
-              - name: slug
-                widget: compute
-                value: "{{label | default('undefined') | slugify}}"
-
-      - name: categories
-        label: Categories
-        file: src/data/meta/categories.json
-        fields:
-          - name: categories
-            label: Categories
-            widget: list
-            root: true
-            fields:
-              - name: id
-                widget: hidden
-                default: "{{uuid}}"
-              - name: label
-                label: Label
-                widget: string
-              - name: slug
-                widget: compute
-                value: "{{label | default('undefined') | slugify}}"
-
       - name: headers
         label: Headers
         file: public/_headers
