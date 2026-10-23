@@ -43,6 +43,7 @@
 			import { indexNow } from "@hooks/indexNow"
 			import { updateTimestamps } from "@hooks/updateTimestamps"
 			import CMS from '@sveltia/cms';
+			import { PUBLIC_UMAMI_SHARE_URL } from 'astro:env/client';
 
 			CMS.registerEditorComponent(typewriterConfig)
 			CMS.registerEditorComponent(contactConfig)
@@ -55,6 +56,15 @@
 			
 			CMS.registerEventListener(updateTimestamps)
 			CMS.registerEventListener(indexNow)
+
+			if (PUBLIC_UMAMI_SHARE_URL) {
+				CMS.registerCustomPage({
+					id: 'analytics',
+					label: 'Analytics',
+					icon: 'monitoring',
+					url: PUBLIC_UMAMI_SHARE_URL,
+				})
+			}
 
 			CMS.init();
 		</script>
