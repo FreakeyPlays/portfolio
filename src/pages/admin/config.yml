@@ -156,7 +156,9 @@ collections:
     summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
     # `order` comes from `reorder` and is set before the slug is built. The default only
     # stops the config validator from flagging it as an undefined field.
-    slug: "post-{{order | default('0')}}-{{slug}}"
+    slug:
+      template: "post-{{order | default('0')}}-{{slug}}"
+      editable: false
     fields:
       - name: id
         widget: hidden
