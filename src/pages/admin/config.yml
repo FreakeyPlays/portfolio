@@ -1,7 +1,9 @@
 # yaml-language-server: $schema=../../../node_modules/@sveltia/cms/schema/sveltia-cms.json
 
 app_title: Portfolio CMS
-publish_mode: editorial_workflow
+publish_mode:
+  type: preview
+  direct_publish: true
 
 editor:
   preview: false
@@ -61,6 +63,7 @@ collections:
     folder: src/content/pages
     extension: mdx
     reorder: true
+    bulk_edit: true
     preview_path: "/{{fields.slug}}"
     identifier_field: title
     summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
@@ -113,11 +116,13 @@ collections:
         widget: boolean
         default: false
       - name: createdAt
-        widget: hidden
-        default: "{{datetime}}"
+        label: Created
+        widget: datetime
+        auto_now: [create]
       - name: updatedAt
-        widget: hidden
-        default: "{{datetime}}"
+        label: Last Updated
+        widget: datetime
+        auto_now: true
       - name: publishedAt
         widget: hidden
       - name: noIndex
@@ -145,6 +150,7 @@ collections:
     folder: src/content/posts
     extension: mdx
     reorder: true
+    bulk_edit: true
     preview_path: "/blog/{{fields.slug}}"
     identifier_field: title
     summary: "{{isPublished | ternary('', '(DRAFT) - ')}}{{title}}"
@@ -165,6 +171,7 @@ collections:
         label: Slug
         widget: string
         before_input: .com/blog/
+        unique: true
         pattern:
           - ^[a-z0-9]*(?:-[a-z0-9]+)*$
           - String must be lowercase letters and may contain hyphens. No other special characters are allowed.
@@ -178,7 +185,7 @@ collections:
       - name: body
         label: Body
         widget: markdown
-        editor_components: [image, code-block]
+        editor_components: [image, code-block, table, hr]
         buttons:
           [
             heading-two,
@@ -251,11 +258,13 @@ collections:
         widget: boolean
         default: false
       - name: createdAt
-        widget: hidden
-        default: "{{datetime}}"
+        label: Created
+        widget: datetime
+        auto_now: [create]
       - name: updatedAt
-        widget: hidden
-        default: "{{datetime}}"
+        label: Last Updated
+        widget: datetime
+        auto_now: true
       - name: publishedAt
         widget: hidden
 
@@ -266,6 +275,7 @@ collections:
     folder: src/data/skills
     format: json
     reorder: true
+    bulk_edit: true
     identifier_field: category
     summary: "{{category}}"
     slug: "{{category | slugify}}"
@@ -308,6 +318,7 @@ collections:
     folder: src/data/career
     format: json
     reorder: true
+    bulk_edit: true
     identifier_field: company
     summary: "{{company}}"
     slug: "{{year}}-{{company | slugify}}"
@@ -365,6 +376,7 @@ collections:
     folder: src/data/education
     format: json
     reorder: true
+    bulk_edit: true
     identifier_field: institution
     summary: "{{level}} – {{institution}}"
     slug: "{{level | slugify}}-{{institution | slugify}}"
@@ -425,6 +437,7 @@ collections:
     folder: src/data/projects
     format: json
     reorder: true
+    bulk_edit: true
     identifier_field: title
     summary: "{{title}}"
     slug: "{{title | slugify}}"

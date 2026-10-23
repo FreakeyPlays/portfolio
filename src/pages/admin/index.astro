@@ -41,7 +41,7 @@
 			import { projectsConfig } from "@blocks/projects/config"
 			import { typewriterConfig } from "@blocks/typewriter/config"
 			import { indexNow } from "@hooks/indexNow"
-			import { updateTimestamps } from "@hooks/updateTimestamps"
+			import { stampPublishedAtOnFirstPublish } from "@hooks/stampPublishedAt"
 			import CMS from '@sveltia/cms';
 
 			CMS.registerEditorComponent(typewriterConfig)
@@ -53,7 +53,7 @@
 			CMS.registerEditorComponent(projectsConfig)
 			CMS.registerEditorComponent(postListConfig)
 			
-			CMS.registerEventListener(updateTimestamps)
+			CMS.registerEventListener(stampPublishedAtOnFirstPublish)
 			CMS.registerEventListener(indexNow)
 
 			CMS.init();
