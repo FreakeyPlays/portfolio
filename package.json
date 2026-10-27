@@ -17,7 +17,7 @@
     "@astrojs/markdown-satteri": "^0.4.5",
     "@astrojs/mdx": "^8.1.1",
     "@astrojs/sitemap": "^3.7.4",
-    "@sveltia/cms": "^0.250.2",
+    "@sveltia/cms": "^0.253.0",
     "astro": "^7.4.2",
     "astro-typewriter": "^1.2.0",
     "github-slugger": "^2.0.0",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
-    "@biomejs/biome": "2.6.2",
+    "@biomejs/biome": "2.6.3",
     "@tailwindcss/vite": "^4.3.3",
     "@types/mdast": "^4.0.4",
     "husky": "^9.1.7",
