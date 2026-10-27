@@ -1,12 +1,5 @@
-[
-  {
-    "id": "553a46fe-dbc2-459b-af0f-2fc19cb0d61b",
-    "label": "AI",
-    "slug": "ai"
-  },
-  {
-    "id": "97301cd8-f4bf-49da-8b93-fbb02522aab4",
-    "label": "Projects",
-    "slug": "projects"
-  }
-]
+{
+  "id": "e3389692-f17a-402e-b771-1f328c0c26fc",
+  "label": "cat test",
+  "slug": "cat-test"
+}
