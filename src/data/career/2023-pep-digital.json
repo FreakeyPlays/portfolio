@@ -1,7 +1,7 @@
 {
-  "order": 1,
+  "order": 2,
   "id": "60131072-523f-4824-bb56-3f9babc4095c",
-  "company": "pep.digital",
+  "company": "pep.digital GmbH",
   "url": "https://pep.digital",
   "location": "Esslingen, Germany",
   "jobs": [
@@ -9,35 +9,22 @@
       "title": "Software Engineer",
       "startDate": "2024-06-01",
       "endDate": "2026-08-31",
-      "description": "I was responsible for rebuilding the Company website, including the migration to a new CMS so the team manages content themselves instead of sending a developer a ticket. Alongside that I contribute to the internal ERP system the company's daily operations rely on.",
-      "technologies": [
-        "PayloadCMS",
-        "NextJS",
-        "TailwindCSS",
-        "Python"
-      ]
+      "description": "The company website needed a rebuild and a new CMS, so the team could manage content themselves instead of sending a developer a ticket. I took that on and, alongside it, contributed to the internal ERP system the company's daily operations rely on.",
+      "technologies": ["PayloadCMS", "NextJS", "TailwindCSS", "Python"]
     },
     {
       "title": "Bachelor Thesis",
       "startDate": "2024-03-01",
       "endDate": "2024-06-01",
-      "description": "For my Bachelor Thesis I explored the capabilities of Astro by building a video streaming application as a Progressive Web App. The focus was on how a framework built for static sites handles dynamic functionality and real-time features, and where that stops working.",
-      "technologies": [
-        "Astro",
-        "PWA",
-        "WebRTC"
-      ]
+      "description": "How far can a framework built for static sites go? To find out, I built a video streaming application with Astro as a Progressive Web App and tested how it handles dynamic functionality and real-time features, and where that stops working.",
+      "technologies": ["Astro", "PWA", "WebRTC"]
     },
     {
       "title": "Internship Semester",
       "startDate": "2023-09-01",
       "endDate": "2024-03-01",
-      "description": "My first task was exploring and integrating Storybook into a live client project. After that I built an internal theme generator for the Angular Material library, and spent the remaining time helping implement a brand new customer portal for an enterprise client.",
-      "technologies": [
-        "Angular",
-        "Storybook",
-        "TypeScript"
-      ]
+      "description": "Storybook was my starting point, integrated into a live client project. Next came an internal theme generator for the Angular Material library, and for the rest of the semester I helped build a new customer portal for an enterprise client.",
+      "technologies": ["Angular", "Storybook", "TypeScript"]
     }
   ],
   "hidden": false
