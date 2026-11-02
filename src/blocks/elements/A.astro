@@ -33,10 +33,11 @@ const relTokens = [...(rel ?? '').split(' '), ...(isExternal ? ['noopener', 'nor
   .filter((token, index, all) => token && all.indexOf(token) === index);
 ---
 
+<!-- Same per-line hover underline as components/HighlightLink.astro. -->
 <a
 	class:list={[
-		'bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent relative',
-		'after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:bg-linear-to-br after:from-lime-400 after:to-green-600 after:transition-transform after:scale-x-0 after:origin-center hover:after:scale-x-100',
+		'bg-linear-to-br from-lime-400 to-green-600 bg-no-repeat bg-bottom box-decoration-clone',
+		'bg-size-[0%_2px] hover:bg-size-[100%_2px] transition-[background-size] duration-150 ease-in-out motion-reduce:transition-none',
 		className,
 	]}
 	href={href}
@@ -46,5 +47,5 @@ const relTokens = [...(rel ?? '').split(' '), ...(isExternal ? ['noopener', 'nor
 	data-umami-event-url={isExternal ? href : undefined}
 	{...rest}
 >
-	<slot />
+	<span class="bg-linear-to-br from-lime-400 to-green-600 bg-clip-text text-transparent"><slot /></span>
 </a>

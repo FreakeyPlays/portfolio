@@ -1,4 +1,8 @@
 ---
+// Timeline of career entries. Each role is a <details>: closed, it shows title,
+// dates and the first line of its description; open, the full description and
+// technology chips. The most recent role (first job of the first company) is
+// always expanded and not collapsible, so it renders as a plain block instead.
 import { getCollection } from 'astro:content';
 import Chip from '@components/Chip.astro';
 import HighlightLink from '@components/HighlightLink.astro';
@@ -12,42 +16,97 @@ const careerCollection = (await getCollection('career', ({ data }) => !data.hidd
 );
 ---
 
-<div class="space-y-16 col-[extra]!">
+<div class="space-y-12 col-[extra]!">
   {
-    careerCollection.map((career) => (
-      <Timeline>
-        <Fragment slot="left">
-          <h3 class="text-2xl font-bold">
-            <HighlightLink target="_blank" rel="noopener noreferrer" href={career.data.url}>
-              {career.data.company}
-            </HighlightLink>
-          </h3>
-          <p class="text-lg">{career.data.location}</p>
-        </Fragment>
-        <Fragment slot="right">
-          {career.data.jobs.map((job) => (
-            <TimelineItem>
-              <h4 class="text-xl font-bold">{job.title}</h4>
-              <p class="text-sm text-gray-400 uppercase">
-                <time datetime={toISODate(job.startDate)}>{formatMonthYear(job.startDate)}</time> -{' '}
-                {job.endDate ? (
-                  <time datetime={toISODate(job.endDate)}>{formatMonthYear(job.endDate)}</time>
-                ) : (
-                  'present'
-                )}
-              </p>
-              <div class="mt-2" set:html={job.description}></div>
-              <ul class="flex flex-wrap gap-1 mt-2">
-                {job.technologies?.map((technology) => (
-                  <li>
-                    <Chip label={technology} />
-                  </li>
-                ))}
-              </ul>
-            </TimelineItem>
-          ))}
-        </Fragment>
-      </Timeline>
+    careerCollection.map((career, companyIndex) => (
+        <Timeline>
+          <Fragment slot="left">
+            <h3 class="text-2xl font-bold">
+              <HighlightLink target="_blank" rel="noopener noreferrer" href={career.data.url}>
+                {career.data.company}
+              </HighlightLink>
+            </h3>
+            <p class="text-lg">{career.data.location}</p>
+          </Fragment>
+          <Fragment slot="right">
+            {career.data.jobs.map((job, jobIndex) => {
+              const isLatest = companyIndex === 0 && jobIndex === 0;
+              const Role = isLatest ? 'div' : 'details';
+              const RoleHeader = isLatest ? 'div' : 'summary';
+              return (
+              <TimelineItem>
+                <Role
+                  class:list={[
+                    'group/role',
+                    // Slide the chips (the details content) open and closed, like Education does.
+                    !isLatest && [
+                      'details-content:grid details-content:grid-rows-[0fr] open:details-content:grid-rows-[1fr]',
+                      'details-content:transition-[content-visibility,grid-template-rows] details-content:transition-discrete details-content:duration-300 details-content:ease-in-out',
+                      'motion-reduce:details-content:transition-none',
+                    ],
+                  ]}
+                >
+                  <RoleHeader class:list={[!isLatest && 'list-none cursor-pointer']}>
+                    <div class="flex items-baseline justify-between gap-4">
+                      <h4 class="text-xl font-bold">{job.title}</h4>
+                      {!isLatest && (
+                      <svg
+                        class="size-5 shrink-0 self-center text-lime-400 transition-transform group-open/role:rotate-180"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                      )}
+                    </div>
+                    <p class="text-sm text-gray-400 uppercase">
+                      <time datetime={toISODate(job.startDate)}>{formatMonthYear(job.startDate)}</time> -{' '}
+                      {job.endDate ? (
+                        <time datetime={toISODate(job.endDate)}>{formatMonthYear(job.endDate)}</time>
+                      ) : (
+                        'present'
+                      )}
+                    </p>
+                    <div
+                      class:list={[
+                        'mt-2 text-gray-300',
+                        // Grow from one line to full height. interpolate-size lets height
+                        // animate to `auto` (Chromium only; other browsers jump instantly).
+                        // When closing, the one-line clamp waits until the height has shrunk
+                        // (delay = duration), otherwise the text would collapse at once.
+                        // overflow-hidden! overrides line-clamp-none's overflow: visible so the
+                        // shrinking text never spills over the next role.
+                        !isLatest && [
+                          'line-clamp-1 group-open/role:line-clamp-none overflow-hidden! h-lh group-open/role:h-auto [interpolate-size:allow-keywords]',
+                          'transition-[height,display,-webkit-line-clamp] transition-discrete duration-300 ease-in-out',
+                          '[transition-delay:0s,300ms,300ms] group-open/role:delay-0 motion-reduce:transition-none',
+                        ],
+                      ]}
+                      set:html={job.description}
+                    />
+                  </RoleHeader>
+                  {job.technologies && (
+                    <div class="min-h-0 overflow-hidden">
+                      <ul class="flex flex-wrap gap-1 mt-2">
+                        {job.technologies.map((technology) => (
+                          <li>
+                            <Chip label={technology} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </Role>
+              </TimelineItem>
+              );
+            })}
+          </Fragment>
+        </Timeline>
     ))
   }
 </div>

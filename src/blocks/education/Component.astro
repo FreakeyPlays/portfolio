@@ -43,7 +43,7 @@ const entries = (await getCollection('education', ({ data }) => !data.hidden)).s
         <div class="flex flex-row gap-8 max-md:mt-10">
           <div class="grow">
             <h3 class="text-heading-04">{entry.data.degree}</h3>
-            <HighlightLink class="mt-2 inline-block text-body-large font-bold after:bottom-1" target="_blank" rel="noopener noreferrer" href={entry.data.url}>@{entry.data.institution}</HighlightLink>
+            <HighlightLink class="mt-2 inline-block text-body-large font-bold" target="_blank" rel="noopener noreferrer" href={entry.data.url}>@{entry.data.institution}</HighlightLink>
             <p class="-mt-2 text-gray-400">{entry.data.location}</p>
           </div>
           <div>
